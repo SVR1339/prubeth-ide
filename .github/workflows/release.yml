@@ -1,0 +1,270 @@
+name: Release SO NAIVE IDE
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  # --------------------------------------------------------------------------
+  # 1. WINDOWS BUILD MATRIX (Setup.exe + Portable ZIP)
+  # --------------------------------------------------------------------------
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install PyQt5 QScintilla requests pyinstaller pytest
+
+      - name: Generate High-Res Logo and Icons
+        run: python generate_assets.py
+
+      - name: Run Quality Verification Tests
+        run: pytest tests/ -v
+
+      - name: Build Standalone Application Distribution
+        run: python build_installer.py
+
+      - name: Compile Inno Setup Windows Installer
+        run: |
+          & "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" installer/installer.iss
+
+      - name: Compile Standalone Setup Wizard Executable
+        run: python build_setup_exe.py
+
+      - name: Archive Windows Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-release
+          path: |
+            dist/SoNaive-v3.0.0-Setup.exe
+            dist/setup.exe
+            dist/SoNaive-v3.0.0-Windows-Portable.zip
+
+  # --------------------------------------------------------------------------
+  # 2. APPLE MACOS BUILD MATRIX (.dmg + .zip)
+  # --------------------------------------------------------------------------
+  build-macos:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install PyQt5 QScintilla requests pyinstaller pytest
+
+      - name: Generate Assets
+        run: python generate_assets.py
+
+      - name: Run Tests
+        run: pytest tests/ -v
+
+      - name: Build macOS App Bundle
+        run: |
+          pyinstaller --name "SoNaive" \
+            --windowed \
+            --noconfirm \
+            --clean \
+            --icon "assets/logo.png" \
+            --add-data "assets:assets" \
+            local_ai_studio_pro.py
+
+      - name: Package macOS DMG & ZIP
+        run: |
+          cd dist
+          zip -r SoNaive-v3.0.0-macOS.zip SoNaive.app
+          # Create DMG using hdiutil
+          hdiutil create -volname "SO NAIVE IDE" -srcfolder SoNaive.app -ov -format UDZO SoNaive-v3.0.0-macOS.dmg
+
+      - name: Archive macOS Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: macos-release
+          path: |
+            dist/SoNaive-v3.0.0-macOS.dmg
+            dist/SoNaive-v3.0.0-macOS.zip
+
+  # --------------------------------------------------------------------------
+  # 3. UBUNTU LINUX BUILD MATRIX (.AppImage + .deb + .tar.gz)
+  # --------------------------------------------------------------------------
+  build-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install System Libraries
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgl1-mesa-glx libegl1-mesa libxkbcommon-x11-0 libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-randr0 libxcb-render-util0 libxcb-xinerama0
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install PyQt5 QScintilla requests pyinstaller pytest
+
+      - name: Generate Assets
+        run: python generate_assets.py
+
+      - name: Run Tests
+        run: pytest tests/ -v
+
+      - name: Build Linux Binary
+        run: |
+          pyinstaller --name "so-naive" \
+            --onedir \
+            --noconfirm \
+            --clean \
+            --add-data "assets:assets" \
+            local_ai_studio_pro.py
+
+      - name: Package Linux Tarball
+        run: |
+          cd dist
+          tar -czvf SoNaive-v3.0.0-Linux-x86_64.tar.gz so-naive/
+
+      - name: Build Debian Package
+        run: |
+          mkdir -p deb-pkg/DEBIAN deb-pkg/usr/bin deb-pkg/opt/so-naive deb-pkg/usr/share/applications deb-pkg/usr/share/pixmaps
+          cp -r dist/so-naive/* deb-pkg/opt/so-naive/
+          cp assets/logo.png deb-pkg/usr/share/pixmaps/so-naive.png
+          
+          # Create launcher symlink script
+          cat << 'EOF' > deb-pkg/usr/bin/so-naive
+          #!/bin/sh
+          exec /opt/so-naive/so-naive "$@"
+          EOF
+          chmod +x deb-pkg/usr/bin/so-naive
+          
+          # Create Desktop Entry
+          cat << 'EOF' > deb-pkg/usr/share/applications/so-naive.desktop
+          [Desktop Entry]
+          Name=SO NAIVE IDE
+          Comment=Next-Gen Agentic AI IDE (Antigravity Architecture)
+          Exec=/usr/bin/so-naive
+          Icon=so-naive
+          Terminal=false
+          Type=Application
+          Categories=Development;IDE;
+          EOF
+
+          # Control file
+          cat << 'EOF' > deb-pkg/DEBIAN/control
+          Package: so-naive-ide
+          Version: 3.0.0
+          Section: devel
+          Priority: optional
+          Architecture: amd64
+          Maintainer: BSVR Technologies <support@bsvr.work>
+          Description: SO NAIVE IDE - Next-Gen Agentic AI IDE with Intelligent Multi-Model Cascade
+          EOF
+
+          dpkg-deb --build deb-pkg dist/SoNaive-v3.0.0-Linux.deb
+
+      - name: Archive Linux Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux-release
+          path: |
+            dist/SoNaive-v3.0.0-Linux-x86_64.tar.gz
+            dist/SoNaive-v3.0.0-Linux.deb
+
+  # --------------------------------------------------------------------------
+  # 4. PUBLISH MULTI-PLATFORM GITHUB RELEASE
+  # --------------------------------------------------------------------------
+  publish-release:
+    needs: [build-windows, build-macos, build-linux]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Download Windows Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: windows-release
+          path: release-assets/
+
+      - name: Download macOS Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: macos-release
+          path: release-assets/
+
+      - name: Download Linux Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: linux-release
+          path: release-assets/
+
+      - name: Generate Checksums
+        run: |
+          cd release-assets
+          sha256sum * > SHA256SUMS.txt
+          cat SHA256SUMS.txt
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          name: "SO NAIVE IDE v3.0.0 (Horizon Edition)"
+          body: |
+            # 🚀 SO NAIVE IDE v3.0.0 — Next-Gen Agentic AI IDE (Horizon Edition)
+            > **"So Naive, It Solves Everything — 1M Context & Local CUDA Speed"**
+            
+            Official Website & Live Showcase: **https://www.bsvr.work/**  
+            Project Overview & Extension Hub: **https://www.bsvr.work/#projects**
+
+            ---
+
+            ### 📦 Universal Downloads by Platform
+
+            | Operating System | Package Type | Download Link |
+            | :--- | :--- | :--- |
+            | **Windows (10/11)** | Official Installer (`.exe`) | [`SoNaive-v3.0.0-Setup.exe`](https://github.com/${{ github.repository }}/releases/download/${{ github.ref_name }}/SoNaive-v3.0.0-Setup.exe) |
+            | **Windows (10/11)** | Quick Installer (`setup.exe`) | [`setup.exe`](https://github.com/${{ github.repository }}/releases/download/${{ github.ref_name }}/setup.exe) |
+            | **Windows Portable** | Standalone Archive (`.zip`) | [`SoNaive-v3.0.0-Windows-Portable.zip`](https://github.com/${{ github.repository }}/releases/download/${{ github.ref_name }}/SoNaive-v3.0.0-Windows-Portable.zip) |
+            | **macOS (Apple Silicon & Intel)** | Disk Image (`.dmg`) | [`SoNaive-v3.0.0-macOS.dmg`](https://github.com/${{ github.repository }}/releases/download/${{ github.ref_name }}/SoNaive-v3.0.0-macOS.dmg) |
+            | **macOS** | Portable Bundle (`.zip`) | [`SoNaive-v3.0.0-macOS.zip`](https://github.com/${{ github.repository }}/releases/download/${{ github.ref_name }}/SoNaive-v3.0.0-macOS.zip) |
+            | **Ubuntu / Debian Linux** | Debian Package (`.deb`) | [`SoNaive-v3.0.0-Linux.deb`](https://github.com/${{ github.repository }}/releases/download/${{ github.ref_name }}/SoNaive-v3.0.0-Linux.deb) |
+            | **Linux Universal** | Tarball (`.tar.gz`) | [`SoNaive-v3.0.0-Linux-x86_64.tar.gz`](https://github.com/${{ github.repository }}/releases/download/${{ github.ref_name }}/SoNaive-v3.0.0-Linux-x86_64.tar.gz) |
+
+            ---
+
+            ### ✨ Key Innovations in v3.0.0
+            - **Intelligent Model Router:** Priority cascade across Gemini 3.8 Flash (1M tokens), Gemini 3.5 Flash, and local Ollama GPU (GTX 1050 Ti CUDA acceleration).
+            - **Blinking Cybernetic AI Beacon:** Animated pulsing visual indicator for real-time inference and self-healing states.
+            - **Self-Healing Traceback Auto-Fix:** Instant 1-click AST fix on runtime crashes and pytest errors.
+            - **Inline AI Quick Edit (`Ctrl+K`):** Floating surgical editor directly on your cursor.
+            - **Visual Diff Review:** Side-by-side colorized diff inspector with one-click disk persistence.
+            - **Polyglot Lexers:** Precision QScintilla syntax highlighting for Python, JS/TS, C++, Rust, HTML, CSS, JSON, SQL, and Shell.
+
+            For updates, extensions, and commercial inquiries, visit [https://www.bsvr.work/](https://www.bsvr.work/).
+          files: |
+            release-assets/*

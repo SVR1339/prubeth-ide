@@ -1,0 +1,55 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "so-naive-ide"
+version = "3.0.0"
+description = "SO NAIVE IDE — Next-Gen Agentic AI IDE with Intelligent Multi-Model Cascade and Instant Local CUDA Self-Healing"
+readme = "README.md"
+license = { text = "MIT / Apache-2.0 (BSVR Permissive Open Developer Terms)" }
+authors = [
+  { name = "BSVR Technologies", email = "support@bsvr.work" }
+]
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Environment :: X11 Applications :: Qt",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Software Development :: Build Tools",
+  "Topic :: Text Editors :: Integrated Development Environments (IDE)"
+]
+requires-python = ">=3.10"
+dependencies = [
+  "PyQt5>=5.15.10",
+  "QScintilla>=2.14.1",
+  "requests>=2.31.0"
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0.0",
+  "pyinstaller>=6.5.0"
+]
+gpu = [
+  "torch>=2.2.0"
+]
+
+[project.urls]
+Homepage = "https://www.bsvr.work/"
+Documentation = "https://www.bsvr.work/#projects"
+Repository = "https://github.com/bsvr/so-naive"
+Changelog = "https://github.com/bsvr/so-naive/blob/main/CHANGELOG.md"
+
+[project.scripts]
+so-naive = "local_ai_studio_pro:main"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+norecursedirs = ["scratch", ".venv", "dist", "build", ".git"]

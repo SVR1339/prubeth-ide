@@ -1,0 +1,8 @@
+# Core IDE Dependencies for SO NAIVE IDE v3.0.0
+PyQt5>=5.15.10
+QScintilla>=2.14.1
+requests>=2.31.0
+
+# Optional Developer & Testing Dependencies
+pytest>=8.0.0
+pyinstaller>=6.5.0

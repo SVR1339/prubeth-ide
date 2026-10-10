@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SO NAIVE IDE — Next-Gen Agentic AI IDE | BSVR Projects</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0a0a0f;
+      --card-bg: #12121a;
+      --card-border: #232332;
+      --accent-cyan: #00F0FF;
+      --accent-purple: #A855F7;
+      --accent-pink: #FF007A;
+      --text-main: #F3F4F6;
+      --text-muted: #9CA3AF;
+      --pill-bg: #F3F4F6;
+      --pill-text: #0B0F17;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 24px;
+    }
+
+    /* Header & Badge */
+    .hero-header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0, 240, 255, 0.08);
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      padding: 6px 16px;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--accent-cyan);
+      margin-bottom: 24px;
+      letter-spacing: 0.5px;
+    }
+
+    /* Cybernetic Blinking Beacon */
+    .blinking-beacon {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent-cyan);
+      box-shadow: 0 0 12px var(--accent-cyan);
+      animation: cyberBlink 1.8s infinite ease-in-out;
+    }
+
+    @keyframes cyberBlink {
+      0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+        box-shadow: 0 0 14px var(--accent-cyan);
+      }
+      50% {
+        opacity: 0.3;
+        transform: scale(0.75);
+        box-shadow: 0 0 4px var(--accent-cyan);
+      }
+    }
+
+    .hero-title {
+      font-size: 3.5rem;
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+      margin-bottom: 18px;
+      background: linear-gradient(135deg, #FFFFFF 0%, #E2E8F0 50%, var(--accent-cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-tagline {
+      font-size: 1.35rem;
+      color: var(--text-muted);
+      max-width: 760px;
+      margin: 0 auto 36px;
+    }
+
+    .hero-tagline b {
+      color: var(--text-main);
+    }
+
+    /* Download Pill CTA (User Requested Style) */
+    .cta-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 60px;
+    }
+
+    .download-pill-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background-color: var(--pill-bg);
+      color: var(--pill-text);
+      font-size: 1.15rem;
+      font-weight: 600;
+      padding: 16px 38px;
+      border-radius: 9999px;
+      text-decoration: none;
+      box-shadow: 0 10px 25px -5px rgba(255, 255, 255, 0.12), 0 8px 10px -6px rgba(0, 0, 0, 0.4);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      cursor: pointer;
+    }
+
+    .download-pill-btn:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 18px 30px -5px rgba(0, 240, 255, 0.25);
+      background-color: #FFFFFF;
+    }
+
+    .download-pill-btn:active {
+      transform: translateY(1px) scale(0.98);
+    }
+
+    .download-pill-btn svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+
+    .os-meta {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .other-platforms-toggle {
+      color: var(--accent-cyan);
+      text-decoration: underline;
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    /* Platform Grid */
+    .platform-selector {
+      display: none;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 20px;
+      margin-top: 12px;
+      max-width: 600px;
+      width: 100%;
+    }
+
+    .platform-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+    }
+
+    .platform-card {
+      background: #181824;
+      border: 1px solid #28283a;
+      border-radius: 10px;
+      padding: 12px;
+      text-align: center;
+      text-decoration: none;
+      color: var(--text-main);
+      transition: all 0.2s ease;
+    }
+
+    .platform-card:hover {
+      border-color: var(--accent-cyan);
+      background: #202030;
+      transform: translateY(-2px);
+    }
+
+    .platform-card strong {
+      display: block;
+      font-size: 0.95rem;
+      margin-bottom: 4px;
+    }
+
+    .platform-card span {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    /* Interactive IDE Preview Canvas */
+    .ide-preview-wrapper {
+      background: #0F111A;
+      border: 1px solid #232838;
+      border-radius: 18px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+      overflow: hidden;
+      margin-bottom: 80px;
+    }
+
+    .ide-titlebar {
+      background: #161926;
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #232838;
+    }
+
+    .ide-dots {
+      display: flex;
+      gap: 8px;
+    }
+
+    .ide-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+    .dot-red { background: #FF5F56; }
+    .dot-yellow { background: #FFBD2E; }
+    .dot-green { background: #27C93F; }
+
+    .ide-title-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      color: #94A3B8;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .ide-content-split {
+      display: grid;
+      grid-template-columns: 2fr 1.4fr;
+      min-height: 420px;
+    }
+
+    @media (max-width: 868px) {
+      .ide-content-split {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .ide-code-pane {
+      background: #0B0D14;
+      padding: 24px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      color: #E2E8F0;
+      line-height: 1.7;
+      overflow-x: auto;
+      border-right: 1px solid #232838;
+    }
+
+    .code-comment { color: #64748B; font-style: italic; }
+    .code-keyword { color: #C084FC; font-weight: bold; }
+    .code-func { color: #38BDF8; }
+    .code-string { color: #34D399; }
+    .code-highlight {
+      background: rgba(0, 240, 255, 0.1);
+      border-left: 3px solid var(--accent-cyan);
+      display: block;
+      margin: 4px -24px;
+      padding: 2px 21px;
+    }
+
+    .ide-agent-pane {
+      background: #121420;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .agent-chat-bubble {
+      background: #1A1E2E;
+      border: 1px solid #282E46;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+
+    .agent-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .agent-autofix-badge {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid #10B981;
+      color: #34D399;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+    }
+
+    /* Key Features Grid */
+    .section-heading {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .section-heading h2 {
+      font-size: 2.4rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 28px;
+      margin-bottom: 80px;
+    }
+
+    .feature-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 32px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(0, 240, 255, 0.4);
+      box-shadow: 0 15px 30px -10px rgba(0, 240, 255, 0.15);
+    }
+
+    .feature-icon {
+      font-size: 2rem;
+      margin-bottom: 16px;
+      display: inline-block;
+    }
+
+    .feature-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--text-main);
+    }
+
+    .feature-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    /* Comparison Table vs Antigravity & Cursor */
+    .table-container {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 28px;
+      overflow-x: auto;
+      margin-bottom: 80px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    th, td {
+      padding: 16px 20px;
+      border-bottom: 1px solid #1E2232;
+    }
+
+    th {
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+    }
+
+    td {
+      font-size: 0.95rem;
+    }
+
+    .highlight-col {
+      color: var(--accent-cyan);
+      font-weight: 700;
+    }
+
+    /* Monetization & Commercial Tiers */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-bottom: 80px;
+    }
+
+    .price-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .price-card.featured {
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 25px rgba(0, 240, 255, 0.15);
+      position: relative;
+    }
+
+    .featured-tag {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: var(--accent-cyan);
+      color: #000;
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: 9999px;
+    }
+
+    .price-num {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin: 16px 0 8px;
+      color: var(--text-main);
+    }
+
+    .price-period {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .price-card ul {
+      list-style: none;
+      margin: 24px 0;
+    }
+
+    .price-card li {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .price-card li::before {
+      content: "✓";
+      color: var(--accent-cyan);
+      font-weight: bold;
+    }
+
+    .price-btn {
+      display: block;
+      text-align: center;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .price-btn-primary {
+      background: var(--accent-cyan);
+      color: #000;
+    }
+
+    .price-btn-secondary {
+      background: #1C1F2E;
+      color: var(--text-main);
+      border: 1px solid #2B3046;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 40px 0;
+      border-top: 1px solid #1E2232;
+      color: var(--text-muted);
+      font-size: 0.875rem;
+    }
+
+    .footer a {
+      color: var(--accent-cyan);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Header Section -->
+    <header class="hero-header">
+      <div class="badge-pill">
+        <span class="blinking-beacon"></span>
+        SO NAIVE IDE · HORIZON EDITION v3.0.0
+      </div>
+      <h1 class="hero-title">SO NAIVE IDE</h1>
+      <p class="hero-tagline">
+        <b>"So Naive, It Solves Everything."</b> Next-generation Agentic AI IDE engineered with an 
+        Intelligent Multi-Model Router, 1M Context SSE Streaming, and Instant Local CUDA Self-Healing.
+      </p>
+
+      <!-- Pill Download Action (Dynamic OS Detection) -->
+      <div class="cta-container">
+        <a id="main-download-btn" href="https://github.com/bsvr/so-naive/releases/latest/download/SoNaive-v3.0.0-Setup.exe" class="download-pill-btn">
+          <span id="btn-icon">
+            <!-- Windows Icon (Default) -->
+            <svg viewBox="0 0 88 88" width="18" height="18">
+              <path d="M0 12.402l35.687-4.86.016 34.423-35.67.203zm35.67 33.529l.029 34.453-35.699-4.88v-29.77zm4.326-39.043l47.996-6.888v41.902l-47.996.257zm47.996 39.516v41.996l-47.996-6.758v-35.035z"/>
+            </svg>
+          </span>
+          <span id="btn-text">Download for Windows</span>
+          <span>&darr;</span>
+        </a>
+
+        <div class="os-meta">
+          <span id="os-subtext">v3.0.0 Horizon · Windows 10/11 (64-bit)</span>
+          <span>·</span>
+          <span class="other-platforms-toggle" onclick="togglePlatforms()">Other platforms &amp; mirrors</span>
+        </div>
+
+        <!-- Hidden / Expandable Platform Selector -->
+        <div id="platform-menu" class="platform-selector">
+          <div class="platform-grid">
+            <a href="https://github.com/bsvr/so-naive/releases/latest/download/SoNaive-v3.0.0-Setup.exe" class="platform-card">
+              <strong>🪟 Windows Setup</strong>
+              <span>Installer (.exe) · 64-bit</span>
+            </a>
+            <a href="https://github.com/bsvr/so-naive/releases/latest/download/SoNaive-v3.0.0-Windows-Portable.zip" class="platform-card">
+              <strong>🪟 Windows Portable</strong>
+              <span>Standalone Archive (.zip)</span>
+            </a>
+            <a href="https://github.com/bsvr/so-naive/releases/latest/download/SoNaive-v3.0.0-macOS.dmg" class="platform-card">
+              <strong>🍎 Apple macOS</strong>
+              <span>DMG Image (Universal / M1 / M2 / M3 / Intel)</span>
+            </a>
+            <a href="https://github.com/bsvr/so-naive/releases/latest/download/SoNaive-v3.0.0-Linux.deb" class="platform-card">
+              <strong>🐧 Ubuntu / Debian</strong>
+              <span>Package (.deb)</span>
+            </a>
+            <a href="https://github.com/bsvr/so-naive/releases/latest/download/SoNaive-v3.0.0-Linux-x86_64.tar.gz" class="platform-card">
+              <strong>🐧 Linux Universal</strong>
+              <span>Tarball (.tar.gz)</span>
+            </a>
+            <a href="https://github.com/bsvr/so-naive" class="platform-card">
+              <strong>📦 GitHub Source</strong>
+              <span>Clone &amp; Build Locally</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Interactive IDE Preview -->
+    <section class="ide-preview-wrapper">
+      <div class="ide-titlebar">
+        <div class="ide-dots">
+          <div class="ide-dot dot-red"></div>
+          <div class="ide-dot dot-yellow"></div>
+          <div class="ide-dot dot-green"></div>
+        </div>
+        <div class="ide-title-text">
+          <span class="blinking-beacon" style="width:8px; height:8px;"></span>
+          SO NAIVE IDE — local_ai_studio_pro.py · [GTX 1050 Ti · CUDA 12.6]
+        </div>
+        <div style="font-size:0.75rem; color:#64748B;">Gemini 3.8 Flash (SSE)</div>
+      </div>
+
+      <div class="ide-content-split">
+        <div class="ide-code-pane">
+<pre><span class="code-comment"># SO NAIVE IDE — Autonomous Model Cascade &amp; AST Engine</span>
+<span class="code-keyword">from</span> local_ai_studio_pro <span class="code-keyword">import</span> IntelligentModelRouter, AgentToolEngine
+
+<span class="code-keyword">def</span> <span class="code-func">execute_developer_mission</span>(prompt: <span class="code-keyword">str</span>):
+    router = IntelligentModelRouter()
+    <span class="code-comment"># Tier 1: Gemini 3.8 Flash (1M Tokens)</span>
+    <span class="code-comment"># Tier 2: Local GPU Ollama (GTX 1050 Ti Acceleration)</span>
+    cascade = router.get_execution_plan(active_provider=<span class="code-string">"⚡ Auto-Router"</span>)
+    
+<span class="code-highlight">    plan = cascade.resolve_fastest_path(max_speed=<span class="code-keyword">True</span>)</span>
+    <span class="code-keyword">return</span> plan.execute_with_autofix(self_healing=<span class="code-keyword">True</span>)
+</pre>
+        </div>
+        <div class="ide-agent-pane">
+          <div>
+            <div class="agent-chat-bubble">
+              <div class="agent-header">
+                <span style="color:#C084FC;">✦ SO NAIVE Copilot</span>
+                <span class="agent-autofix-badge">⚡ Auto-Fix Verified</span>
+              </div>
+              <p style="font-size:0.85rem; color:#CBD5E1;">
+                Traceback detected in <code>test_model_cascade.py:42</code>. Identified index error in fallback tuple.
+                Surgically applied patch and verified 10/10 tests passing in 0.98s.
+              </p>
+            </div>
+          </div>
+          <div style="font-size: 0.8rem; color: #64748B; text-align: center;">
+            ✦ Blinking Core: Active Stream (128 tok/s · 42ms ping)
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key Architectural Capabilities Grid -->
+    <section>
+      <div class="section-heading">
+        <h2>Built for Uncompromising Velocity</h2>
+        <p style="color:var(--text-muted); font-size:1.1rem;">Engineered from ground up to compete with Antigravity, Cursor, and Windsurf.</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <h3 class="feature-title">Intelligent Model Router</h3>
+          <p class="feature-desc">
+            Dynamic priority cascade evaluates models in real-time. Leverages Gemini 3.8 Flash for massive 1M-token reasoning,
+            failing over seamlessly to local GPU Ollama without losing conversation state.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🛡️</div>
+          <h3 class="feature-title">Self-Healing Traceback Auto-Fix</h3>
+          <p class="feature-desc">
+            One-click <code>⚡ Auto-Fix</code> inspects execution tracebacks and pytest failures, pinpoints buggy AST nodes,
+            generates side-by-side colorized diffs, and re-executes tests automatically.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">👁️</div>
+          <h3 class="feature-title">Blinking Cybernetic Core</h3>
+          <p class="feature-desc">
+            Animated visual beacon signals live agent states (Breathing Online, Chromatic Blink for Inference, Emerald Strobe for Auto-Fix),
+            giving developers instant peripheral feedback.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🪄</div>
+          <h3 class="feature-title">Inline Quick Edit (Ctrl+K)</h3>
+          <p class="feature-desc">
+            Highlight code anywhere and summon the floating intent palette. Stream changes directly into visual diff inspector
+            with instant one-click disk persistence.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🚀</div>
+          <h3 class="feature-title">Zero-Latency Local GPU Inference</h3>
+          <p class="feature-desc">
+            Direct NVIDIA CUDA 12.6 integration (GTX 1050 Ti &amp; RTX supported). Run offline 7B GGUF models locally with zero cloud dependencies
+            and absolute source privacy.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🎨</div>
+          <h3 class="feature-title">Polyglot QScintilla Lexers</h3>
+          <p class="feature-desc">
+            High-precision syntax highlighting for Python, JS/TS, C++, Rust, HTML, CSS, JSON, SQL, and Shell. Obsidian Dark theme with zero UI jitter.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Platform Comparison -->
+    <section>
+      <div class="section-heading">
+        <h2>Comparison Matrix</h2>
+        <p style="color:var(--text-muted); font-size:1.1rem;">Why developers are migrating to SO NAIVE IDE.</p>
+      </div>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th class="highlight-col">SO NAIVE IDE</th>
+              <th>Google Antigravity</th>
+              <th>Cursor</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Dynamic Multi-Model Auto-Failover</td>
+              <td class="highlight-col">✓ Included (Cloud + Local GPU)</td>
+              <td>Cloud Only</td>
+              <td>Cloud Only</td>
+            </tr>
+            <tr>
+              <td>Air-Gapped Offline Local Mode</td>
+              <td class="highlight-col">✓ Native CUDA Ollama</td>
+              <td>✗ No</td>
+              <td>✗ No</td>
+            </tr>
+            <tr>
+              <td>Self-Healing Traceback Auto-Fix</td>
+              <td class="highlight-col">✓ 1-Click Surgical AST Fix</td>
+              <td>✓ Multi-turn chat</td>
+              <td>✓ Chat prompt</td>
+            </tr>
+            <tr>
+              <td>Inline Quick Edit (Ctrl+K)</td>
+              <td class="highlight-col">✓ Floating Visual Diff</td>
+              <td>✓ Side pane</td>
+              <td>✓ Inline widget</td>
+            </tr>
+            <tr>
+              <td>Universal Cross-Platform Installer</td>
+              <td class="highlight-col">✓ Windows .exe, Mac .dmg, Linux</td>
+              <td>Web / Cloud Preview</td>
+              <td>Desktop App</td>
+            </tr>
+            <tr>
+              <td>License &amp; Self-Hosting</td>
+              <td class="highlight-col">✓ Full Control &amp; BYOK</td>
+              <td>Proprietary</td>
+              <td>SaaS Subscription</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Monetization & Commercial Tiers -->
+    <section>
+      <div class="section-heading">
+        <h2>Commercial Licensing &amp; Editions</h2>
+        <p style="color:var(--text-muted); font-size:1.1rem;">Empower individual developers and enterprise engineering teams.</p>
+      </div>
+
+      <div class="pricing-grid">
+        <div class="price-card">
+          <div>
+            <h3>Community Edition</h3>
+            <p style="color:var(--text-muted); font-size:0.85rem;">For open-source builders &amp; hobbyists</p>
+            <div class="price-num">$0</div>
+            <div class="price-period">Free forever · Bring Your Own Key</div>
+            <ul>
+              <li>Full IDE &amp; QScintilla Lexers</li>
+              <li>Local Ollama GPU Inference</li>
+              <li>Bring Your Own Gemini / OpenAI Key</li>
+              <li>Community GitHub Updates</li>
+            </ul>
+          </div>
+          <a href="https://github.com/bsvr/so-naive" class="price-btn price-btn-secondary">Download Free</a>
+        </div>
+
+        <div class="price-card featured">
+          <div class="featured-tag">POPULAR</div>
+          <div>
+            <h3>Pro Developer</h3>
+            <p style="color:var(--text-muted); font-size:0.85rem;">For professional software engineers</p>
+            <div class="price-num">$19 <span style="font-size:1rem; font-weight:normal; color:var(--text-muted);">/ mo</span></div>
+            <div class="price-period">or $190 lifetime license</div>
+            <ul>
+              <li>Everything in Community</li>
+              <li>Uncapped Gemini 3.8 Flash Cloud Speed</li>
+              <li>Automated Self-Healing Loop</li>
+              <li>Priority Feature Requests &amp; Radar Sync</li>
+            </ul>
+          </div>
+          <a href="https://www.bsvr.work/#contact" class="price-btn price-btn-primary">Get Pro License</a>
+        </div>
+
+        <div class="price-card">
+          <div>
+            <h3>Enterprise Suite</h3>
+            <p style="color:var(--text-muted); font-size:0.85rem;">For security-conscious organizations</p>
+            <div class="price-num">$199 <span style="font-size:1rem; font-weight:normal; color:var(--text-muted);">/ seat</span></div>
+            <div class="price-period">Billed annually · Dedicated Support</div>
+            <ul>
+              <li>100% Air-Gapped Local Model Weights</li>
+              <li>Custom Model Integration (DeepSeek, Llama 3)</li>
+              <li>SOC2 / HIPAA Compliance Compatibility</li>
+              <li>Dedicated SLA &amp; Integration Consulting</li>
+            </ul>
+          </div>
+          <a href="https://www.bsvr.work/#contact" class="price-btn price-btn-secondary">Contact BSVR Sales</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>© 2026 BSVR Technologies. All rights reserved.</p>
+      <p style="margin-top: 6px;">
+        Explore more projects at <a href="https://www.bsvr.work/">bsvr.work</a> · 
+        Documentation &amp; Source on <a href="https://github.com/bsvr/so-naive">GitHub</a>
+      </p>
+    </footer>
+  </div>
+
+  <script>
+    // Dynamic OS Detection Script
+    function detectVisitorOS() {
+      const userAgent = window.navigator.userAgent || "";
+      const platform = window.navigator.platform || "";
+      const btn = document.getElementById("main-download-btn");
+      const btnText = document.getElementById("btn-text");
+      const btnIcon = document.getElementById("btn-icon");
+      const subText = document.getElementById("os-subtext");
+
+      const isMac = /Macintosh|MacIntel|MacPPC|Mac68K/i.test(userAgent) || /Mac/i.test(platform);
+      const isWindows = /Win32|Win64|Windows|WinCE/i.test(userAgent) || /Win/i.test(platform);
+      const isLinux = /Linux/i.test(userAgent) || /Linux/i.test(platform);
+
+      if (isMac) {
+        btnText.innerText = "Download for macOS";
+        btn.href = "https://github.com/bsvr/so-naive/releases/latest/download/SoNaive-v3.0.0-macOS.dmg";
+        subText.innerText = "v3.0.0 Horizon · macOS Universal (Apple Silicon & Intel)";
+        btnIcon.innerHTML = `<svg viewBox="0 0 170 170" width="18" height="18" fill="currentColor"><path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.69-3.04-7.6-7.85-11.75-14.44-6.3-9.98-11.22-21.2-14.76-33.65-3.53-12.45-5.3-24.12-5.3-35.03 0-14.35 3.65-26.17 10.95-35.47 7.3-9.3 16.32-14.07 27.06-14.33 4.58 0 9.87 1.25 15.86 3.75 5.99 2.5 9.83 3.82 11.53 3.96 1.34-.14 5.3-1.46 11.89-3.96 6.58-2.5 11.75-3.69 15.51-3.57 11.77.67 21.24 5.09 28.43 13.25-10.32 6.27-15.34 14.86-15.06 25.77.29 8.52 3.62 15.62 10.01 21.32 6.39 5.7 13.97 9.03 22.75 10-2.45 7.42-5.54 14.93-9.27 22.53zM119.22 33.72c0-7.39 2.68-14.12 8.04-20.19 5.36-6.07 12.06-9.87 20.1-11.41.24 1.15.36 2.3.36 3.46 0 7.39-2.73 14.28-8.19 20.67-5.46 6.39-12.21 10.23-20.25 11.52-.06-1.35-.06-2.7-.06-4.05z"/></svg>`;
+      } else if (isLinux) {
+        btnText.innerText = "Download for Linux";
+        btn.href = "https://github.com/bsvr/so-naive/releases/latest/download/SoNaive-v3.0.0-Linux.deb";
+        subText.innerText = "v3.0.0 Horizon · Ubuntu / Debian (.deb) & Universal (.tar.gz)";
+        btnIcon.innerHTML = `<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12.003 2c-3.14 0-5.702 2.56-5.702 5.702 0 1.57.64 2.99 1.67 4.02l-1.07 1.85c-.32.55-.13 1.25.42 1.57.55.32 1.25.13 1.57-.42l1.07-1.85c.65.34 1.38.53 2.042.53s1.392-.19 2.042-.53l1.07 1.85c.32.55 1.02.74 1.57.42.55-.32.74-1.02.42-1.57l-1.07-1.85c1.03-1.03 1.67-2.45 1.67-4.02C17.705 4.56 15.143 2 12.003 2z"/></svg>`;
+      } else {
+        // Windows (Default)
+        btnText.innerText = "Download for Windows";
+        btn.href = "https://github.com/bsvr/so-naive/releases/latest/download/SoNaive-v3.0.0-Setup.exe";
+        subText.innerText = "v3.0.0 Horizon · Windows 10/11 (64-bit)";
+      }
+    }
+
+    function togglePlatforms() {
+      const menu = document.getElementById("platform-menu");
+      if (menu.style.display === "block") {
+        menu.style.display = "none";
+      } else {
+        menu.style.display = "block";
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", detectVisitorOS);
+  </script>
+</body>
+</html>

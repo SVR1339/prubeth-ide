@@ -1,0 +1,1989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sai Vardhan Reddy Banda (SVR313) | AI Systems Architect & Evaluation Engineer</title>
+  <meta name="description" content="Portfolio of Sai Vardhan Reddy Banda (SVR313) - AI Systems Architect, Evaluation Engineer & Computer Systems Engineering Graduate (2:1 Honours). Creator of SO NAIVE IDE.">
+
+  <!-- Security Headers & Metadata -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+
+  <!-- Google Fonts: Outfit (Headings), Inter (Body), Space Mono (Code) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       DESIGN SYSTEM & DESIGN TOKENS (Synced Dark Obsidian & Cyber-Glass Palette)
+       ========================================================================== */
+    :root {
+      --bg-base: #080c14;
+      --bg-surface: #0e1422;
+      --bg-surface-elevated: #141c2e;
+      --card-bg: rgba(14, 20, 34, 0.75);
+      --card-hover: rgba(20, 28, 48, 0.85);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --card-border-hover: rgba(0, 240, 255, 0.4);
+      --accent: #00F0FF;
+      --accent-glow: rgba(0, 240, 255, 0.25);
+      --accent-indigo: #6366F1;
+      --accent-emerald: #10B981;
+      --text-primary: #F8FAFC;
+      --text-secondary: #94A3B8;
+      --text-muted: #64748B;
+      --font-heading: 'Outfit', -apple-system, sans-serif;
+      --font-body: 'Inter', -apple-system, sans-serif;
+      --font-mono: 'Space Mono', Consolas, monospace;
+      --transition-smooth: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg-base);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      overflow-x: hidden;
+      overflow-y: scroll;
+    }
+
+    body {
+      min-height: 100vh;
+      background-color: var(--bg-base);
+      background-image: 
+        radial-gradient(circle at 50% 0%, rgba(0, 240, 255, 0.07) 0%, transparent 60%),
+        radial-gradient(circle at 10% 40%, rgba(99, 102, 241, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 90% 70%, rgba(16, 185, 129, 0.04) 0%, transparent 50%);
+      background-attachment: fixed;
+      color: var(--text-primary);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      line-height: 1.6;
+    }
+
+    /* Scroll progress bar at top */
+    .scroll-progress-line {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      width: 0%;
+      background: linear-gradient(90deg, #00F0FF, #6366F1);
+      z-index: 1000;
+      transition: width 0.1s ease-out;
+    }
+
+    /* ==========================================================================
+       SYNCED TOP NAVIGATION BAR
+       ========================================================================== */
+    .site-header {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      z-index: 900;
+      background: rgba(8, 12, 20, 0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--card-border);
+      transition: var(--transition-smooth);
+    }
+
+    .navbar-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .brand-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: rgba(0, 240, 255, 0.1);
+      border: 1px solid rgba(0, 240, 255, 0.35);
+      color: var(--accent);
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 1rem;
+      letter-spacing: -0.5px;
+      box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+    }
+
+    .brand-text h1 {
+      font-family: var(--font-heading);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.3px;
+      margin: 0;
+    }
+
+    .brand-text span {
+      font-size: 0.76rem;
+      color: var(--text-secondary);
+      display: block;
+      margin-top: -2px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      list-style: none;
+    }
+
+    .nav-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 500;
+      padding: 8px 14px;
+      border-radius: 8px;
+      transition: var(--transition-smooth);
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: var(--text-primary);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(0, 240, 255, 0.12);
+      border: 1px solid rgba(0, 240, 255, 0.4);
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.86rem;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 8px;
+      transition: var(--transition-smooth);
+      box-shadow: 0 0 12px rgba(0, 240, 255, 0.15);
+    }
+
+    .btn-nav-cta:hover {
+      background: var(--accent);
+      color: #040810;
+      border-color: var(--accent);
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+      transform: translateY(-1px);
+    }
+
+    .hamburger-btn {
+      display: none;
+      background: transparent;
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      color: var(--text-primary);
+      padding: 8px 12px;
+      cursor: pointer;
+      font-size: 1.1rem;
+    }
+
+    /* Mobile drawer */
+    .mobile-drawer {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 280px;
+      height: 100vh;
+      background: #0b101c;
+      border-left: 1px solid var(--card-border);
+      z-index: 1000;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+    }
+
+    .mobile-drawer.open {
+      right: 0;
+    }
+
+    .mobile-drawer-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 14px;
+    }
+
+    .mobile-drawer-close {
+      background: transparent;
+      border: none;
+      color: var(--text-primary);
+      font-size: 1.3rem;
+      cursor: pointer;
+    }
+
+    .mobile-drawer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .mobile-drawer-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 500;
+      padding: 8px 12px;
+      border-radius: 6px;
+      display: block;
+    }
+
+    .mobile-drawer-links a:hover {
+      color: var(--accent);
+      background: rgba(0, 240, 255, 0.08);
+    }
+
+    .mobile-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(4px);
+      z-index: 999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .mobile-backdrop.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* ==========================================================================
+       MAIN CONTENT CONTAINER & TYPOGRAPHY
+       ========================================================================== */
+    .page-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 32px 24px 80px;
+    }
+
+    .glass-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: 36px;
+      margin-bottom: 32px;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      transition: var(--transition-smooth);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    }
+
+    .glass-card:hover {
+      border-color: rgba(255, 255, 255, 0.14);
+    }
+
+    .section-header {
+      margin-bottom: 28px;
+    }
+
+    .section-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--accent);
+      background: rgba(0, 240, 255, 0.08);
+      border: 1px solid rgba(0, 240, 255, 0.25);
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      letter-spacing: -0.5px;
+      line-height: 1.25;
+    }
+
+    .section-subtitle {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      margin-top: 6px;
+      max-width: 800px;
+    }
+
+    /* ==========================================================================
+       HERO EXECUTIVE BANNER
+       ========================================================================== */
+    .hero-container {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 40px;
+      align-items: center;
+      margin-bottom: 32px;
+    }
+
+    .hero-text-col {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .hero-status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #34D399;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      padding: 5px 14px;
+      border-radius: 20px;
+      width: fit-content;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10B981;
+      box-shadow: 0 0 8px #10B981;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.9); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    .hero-name {
+      font-family: var(--font-heading);
+      font-size: 3.1rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      line-height: 1.1;
+      color: #FFFFFF;
+    }
+
+    .hero-name span {
+      color: var(--accent);
+      background: linear-gradient(135deg, #00F0FF, #6366F1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-title-tag {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #CBD5E1;
+      line-height: 1.4;
+    }
+
+    .hero-bio {
+      color: var(--text-secondary);
+      font-size: 1.02rem;
+      line-height: 1.65;
+    }
+
+    .hero-actions-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #00F0FF, #00B8D4);
+      color: #040810;
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 12px 24px;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: var(--transition-smooth);
+      box-shadow: 0 4px 20px rgba(0, 240, 255, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 26px rgba(0, 240, 255, 0.5);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border);
+      color: var(--text-primary);
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 12px 22px;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: var(--transition-smooth);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .hero-photo-card {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+      aspect-ratio: 4/5;
+    }
+
+    .hero-photo-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .hero-photo-card:hover img {
+      transform: scale(1.03);
+    }
+
+    .hero-photo-badge {
+      position: absolute;
+      bottom: 14px;
+      left: 14px;
+      right: 14px;
+      background: rgba(8, 12, 20, 0.88);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--card-border);
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: 0.82rem;
+      font-family: var(--font-mono);
+      color: #E2E8F0;
+      text-align: center;
+    }
+
+    /* Contact badges pill cloud */
+    .contact-pills-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .pill-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border);
+      color: var(--text-secondary);
+      font-size: 0.84rem;
+      font-weight: 500;
+      padding: 6px 14px;
+      border-radius: 20px;
+      text-decoration: none;
+      transition: var(--transition-smooth);
+    }
+
+    .pill-item:hover {
+      color: var(--text-primary);
+      border-color: var(--accent);
+      background: rgba(0, 240, 255, 0.08);
+      transform: translateY(-1px);
+    }
+
+    /* ==========================================================================
+       FLAGSHIP WORKSTATION: SO NAIVE IDE CASE STUDY
+       ========================================================================== */
+    .case-study-hero {
+      background: linear-gradient(180deg, rgba(14, 20, 36, 0.9) 0%, rgba(10, 14, 24, 0.95) 100%);
+      border: 1px solid rgba(0, 240, 255, 0.25);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .case-study-hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(0, 240, 255, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .workstation-header-grid {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 20px;
+      align-items: start;
+      margin-bottom: 20px;
+    }
+
+    .workstation-title {
+      font-family: var(--font-heading);
+      font-size: 2.3rem;
+      font-weight: 900;
+      color: #FFFFFF;
+      letter-spacing: -0.5px;
+    }
+
+    .workstation-title span {
+      color: var(--accent);
+    }
+
+    .workstation-tagline {
+      font-size: 1.05rem;
+      color: #CBD5E1;
+      margin-top: 6px;
+      max-width: 820px;
+      line-height: 1.55;
+    }
+
+    .workstation-meta-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0, 240, 255, 0.1);
+      border: 1px solid rgba(0, 240, 255, 0.35);
+      color: var(--accent);
+      padding: 8px 16px;
+      border-radius: 12px;
+      font-family: var(--font-mono);
+      font-size: 0.84rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    /* Unified, Perfectly Symmetrical Action Bar */
+    .workstation-action-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin: 26px 0;
+    }
+
+    .ws-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 18px;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: var(--transition-smooth);
+      text-align: center;
+      border: 1px solid var(--card-border);
+    }
+
+    .ws-btn-primary {
+      background: linear-gradient(135deg, #00F0FF, #0284C7);
+      color: #040810;
+      font-weight: 700;
+      border-color: #00F0FF;
+      box-shadow: 0 4px 18px rgba(0, 240, 255, 0.25);
+    }
+
+    .ws-btn-primary:hover {
+      box-shadow: 0 6px 25px rgba(0, 240, 255, 0.45);
+      transform: translateY(-2px);
+    }
+
+    .ws-btn-secondary {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .ws-btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.09);
+      border-color: rgba(255, 255, 255, 0.25);
+      transform: translateY(-2px);
+    }
+
+    .ws-btn-label {
+      font-size: 0.96rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .ws-btn-sub {
+      font-size: 0.76rem;
+      opacity: 0.8;
+      margin-top: 3px;
+      font-family: var(--font-mono);
+    }
+
+    /* Terminal / Architecture Live Mockup */
+    .terminal-mockup {
+      background: #060910;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 28px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .terminal-titlebar {
+      background: #0d121c;
+      padding: 10px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+    }
+
+    .terminal-dots {
+      display: flex;
+      gap: 7px;
+    }
+
+    .t-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .t-red { background: #EF4444; }
+    .t-yellow { background: #F59E0B; }
+    .t-green { background: #10B981; }
+
+    .terminal-body {
+      padding: 22px;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      background: #060910;
+    }
+
+    .t-cyan { color: #00F0FF; }
+    .t-white { color: #FFFFFF; font-weight: 600; }
+    .t-green-text { color: #34D399; }
+    .t-dim { color: #475569; }
+
+    /* Architecture Features Grid */
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+    }
+
+    .pillar-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 24px;
+      transition: var(--transition-smooth);
+    }
+
+    .pillar-card:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(0, 240, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .pillar-icon {
+      font-size: 1.6rem;
+      margin-bottom: 12px;
+    }
+
+    .pillar-title {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin-bottom: 8px;
+    }
+
+    .pillar-desc {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    /* ==========================================================================
+       TECHNICAL SKILLS & COMPETENCIES
+       ========================================================================== */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+
+    .skill-box {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 24px;
+    }
+
+    .skill-box-title {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tag-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tech-tag {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #E2E8F0;
+      font-size: 0.84rem;
+      font-weight: 500;
+      padding: 5px 12px;
+      border-radius: 8px;
+      transition: var(--transition-smooth);
+    }
+
+    .tech-tag:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(0, 240, 255, 0.06);
+    }
+
+    /* ==========================================================================
+       CREATIVE & ANALYTICAL MINDSET
+       ========================================================================== */
+    .mindset-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .mindset-card {
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.02);
+      transition: var(--transition-smooth);
+    }
+
+    .mindset-card:hover {
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .mindset-img-wrap {
+      width: 100%;
+      height: 240px;
+      overflow: hidden;
+    }
+
+    .mindset-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .mindset-card:hover .mindset-img-wrap img {
+      transform: scale(1.04);
+    }
+
+    .mindset-text {
+      padding: 22px;
+    }
+
+    .mindset-text h3 {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin-bottom: 8px;
+    }
+
+    .mindset-text p {
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+
+    /* ==========================================================================
+       FRONTIER AI RESEARCH & MODEL EVALUATION BENCHMARKS
+       ========================================================================== */
+    .metrics-bar-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .metric-item {
+      background: rgba(0, 240, 255, 0.03);
+      border: 1px solid rgba(0, 240, 255, 0.15);
+      border-radius: 12px;
+      padding: 18px;
+      text-align: center;
+    }
+
+    .metric-val {
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    .metric-lbl {
+      color: var(--text-secondary);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 4px;
+    }
+
+    .research-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+    }
+
+    .research-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 24px;
+      transition: var(--transition-smooth);
+    }
+
+    .research-card:hover {
+      border-color: rgba(99, 102, 241, 0.4);
+      background: rgba(99, 102, 241, 0.04);
+    }
+
+    .research-tag {
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      color: #818CF8;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .research-title {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin-bottom: 8px;
+    }
+
+    .research-desc {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    /* ==========================================================================
+       WORK EXPERIENCE & ACADEMIC EDUCATION
+       ========================================================================== */
+    .exp-item {
+      padding: 24px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      margin-bottom: 16px;
+    }
+
+    .exp-top-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .exp-role {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #FFFFFF;
+    }
+
+    .exp-org {
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    .exp-period {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.05);
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+
+    .exp-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .exp-bullets li {
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+      padding-left: 20px;
+      position: relative;
+    }
+
+    .exp-bullets li::before {
+      content: '▹';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+
+    /* ==========================================================================
+       CERTIFICATES & VERIFIED CREDENTIALS
+       ========================================================================== */
+    .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .cert-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 18px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      transition: var(--transition-smooth);
+    }
+
+    .cert-card:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(0, 240, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .cert-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 0.88rem;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .cert-title {
+      font-weight: 600;
+      font-size: 0.92rem;
+      color: #FFFFFF;
+      line-height: 1.3;
+    }
+
+    .cert-org {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      margin-top: 2px;
+    }
+
+    /* ==========================================================================
+       EXECUTIVE CONTACT SECTION & VALIDATED FORM
+       ========================================================================== */
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+
+    .contact-details-col {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .contact-card-box {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 20px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      transition: var(--transition-smooth);
+    }
+
+    .contact-card-box:hover {
+      border-color: rgba(0, 240, 255, 0.3);
+      background: rgba(0, 240, 255, 0.02);
+    }
+
+    .contact-icon-bubble {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: rgba(0, 240, 255, 0.1);
+      border: 1px solid rgba(0, 240, 255, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .contact-text-wrap h4 {
+      font-size: 0.82rem;
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .contact-main-link {
+      color: #FFFFFF;
+      font-weight: 700;
+      font-size: 1.05rem;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .contact-main-link:hover {
+      color: var(--accent);
+    }
+
+    .contact-sub-text {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      margin-top: 4px;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #E2E8F0;
+    }
+
+    .form-input, .form-textarea, .form-select {
+      background: rgba(6, 9, 16, 0.8);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 12px 16px;
+      color: #FFFFFF;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .form-input:focus, .form-textarea:focus, .form-select:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 14px rgba(0, 240, 255, 0.2);
+    }
+
+    .form-submit-btn {
+      background: linear-gradient(135deg, #00F0FF, #00B8D4);
+      color: #040810;
+      border: none;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 14px 28px;
+      border-radius: 10px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: var(--transition-smooth);
+      box-shadow: 0 4px 18px rgba(0, 240, 255, 0.25);
+    }
+
+    .form-submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 26px rgba(0, 240, 255, 0.45);
+    }
+
+    /* ==========================================================================
+       SITE FOOTER
+       ========================================================================== */
+    .site-footer {
+      border-top: 1px solid var(--card-border);
+      padding: 40px 24px;
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .footer-brand {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #FFFFFF;
+      margin-bottom: 8px;
+    }
+
+    .footer-tagline {
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+      margin-bottom: 18px;
+    }
+
+    .footer-pills {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .footer-copy {
+      color: var(--text-muted);
+      font-size: 0.8rem;
+    }
+
+    /* Toast Notification */
+    .toast-popup {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #0f172a;
+      border: 1px solid var(--accent);
+      color: #F8FAFC;
+      padding: 14px 22px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+      font-size: 0.9rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 1100;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
+    }
+
+    .toast-popup.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    /* ==========================================================================
+       RESPONSIVE DESIGN (Tablets, Laptops, Phones)
+       ========================================================================== */
+    @media (max-width: 960px) {
+      .hero-container {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+      .hero-photo-card {
+        max-width: 320px;
+        margin: 0 auto;
+      }
+      .mindset-grid {
+        grid-template-columns: 1fr;
+      }
+      .metrics-bar-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .contact-layout {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+      .nav-links {
+        display: none;
+      }
+      .hamburger-btn {
+        display: block;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page-wrapper {
+        padding: 16px 14px 60px;
+      }
+      .glass-card {
+        padding: 22px 18px;
+        border-radius: 14px;
+      }
+      .hero-name {
+        font-size: 2.3rem;
+      }
+      .section-title {
+        font-size: 1.6rem;
+      }
+      .workstation-title {
+        font-size: 1.8rem;
+      }
+      .workstation-action-bar {
+        grid-template-columns: 1fr;
+      }
+      .metrics-bar-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Top Scroll Progress Line -->
+  <div class="scroll-progress-line" id="scroll-progress"></div>
+
+  <!-- Synced Sticky Navigation Bar -->
+  <header class="site-header">
+    <div class="navbar-container">
+      <a href="#" class="brand-group">
+        <div class="brand-badge">SVR</div>
+        <div class="brand-text">
+          <h1>Sai Vardhan Reddy</h1>
+          <span>SVR313 · AI Systems & Evaluation</span>
+        </div>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#workstation" class="nav-link">Workstation</a></li>
+        <li><a href="#skills" class="nav-link">Skills</a></li>
+        <li><a href="#mindset" class="nav-link">Mindset</a></li>
+        <li><a href="#research" class="nav-link">AI Research</a></li>
+        <li><a href="#experience" class="nav-link">Experience</a></li>
+        <li><a href="#education" class="nav-link">Education</a></li>
+        <li><a href="#certificates" class="nav-link">Certificates</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="#contact" class="btn-nav-cta">Executive Inquiries</a>
+        <button class="hamburger-btn" onclick="toggleMenu()" aria-label="Toggle Navigation">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-backdrop" id="backdrop" onclick="toggleMenu()"></div>
+  <aside class="mobile-drawer" id="drawer">
+    <div class="mobile-drawer-header">
+      <span style="font-weight:700; color:#fff; font-family:var(--font-heading);">SVR313 NAVIGATION</span>
+      <button class="mobile-drawer-close" onclick="toggleMenu()">✕</button>
+    </div>
+    <ul class="mobile-drawer-links">
+      <li><a href="#about" onclick="toggleMenu()">👤 About Profile</a></li>
+      <li><a href="#workstation" onclick="toggleMenu()">⚡ SO NAIVE IDE</a></li>
+      <li><a href="#skills" onclick="toggleMenu()">🛠️ Technical Skills</a></li>
+      <li><a href="#mindset" onclick="toggleMenu()">🧠 Creative Mindset</a></li>
+      <li><a href="#research" onclick="toggleMenu()">🔬 AI Model Research</a></li>
+      <li><a href="#experience" onclick="toggleMenu()">💼 Work Experience</a></li>
+      <li><a href="#education" onclick="toggleMenu()">🎓 Academic Honors</a></li>
+      <li><a href="#certificates" onclick="toggleMenu()">📜 Verified Credentials</a></li>
+      <li><a href="#contact" onclick="toggleMenu()">✉ Executive Contact</a></li>
+    </ul>
+  </aside>
+
+  <!-- Main Scrollable Area -->
+  <main class="page-wrapper">
+
+    <!-- HERO SECTION -->
+    <section class="glass-card hero-container" id="hero">
+      <div class="hero-text-col">
+        <div class="hero-status-pill">
+          <span class="status-dot"></span>
+          <span>Open to AI Model Evaluation & Systems Roles</span>
+        </div>
+
+        <h1 class="hero-name">Sai Vardhan <span>Reddy Banda</span></h1>
+
+        <p class="hero-title-tag">
+          AI Systems Architect &amp; Model Evaluation Candidate · 2:1 Honours Computer Systems Engineering
+        </p>
+
+        <p class="hero-bio">
+          Engineering graduate with high-caliber Quality Engineering industry experience at Arla Foods Ltd. Specialized in Python, SQL, empirical data validation, structured prompt engineering, and deterministic root-cause analysis (8D / 5-Whys). Architect of <strong>SO NAIVE IDE</strong>, an autonomous agentic development platform for frontier LLM routing and local CUDA execution.
+        </p>
+
+        <div class="hero-actions-row">
+          <a href="#workstation" class="btn-primary">Explore Workstation ➔</a>
+          <a href="#contact" class="btn-secondary">Get In Touch</a>
+          <a href="https://github.com/imyouiamyou" target="_blank" rel="noopener" class="btn-secondary">GitHub (imyouiamyou) ↗</a>
+        </div>
+
+        <div class="contact-pills-row">
+          <a href="mailto:contact@bsvr.work" class="pill-item" data-email="primary">✉ contact@bsvr.work</a>
+          <a href="tel:+918886244999" class="pill-item" data-phone="direct">📞 +91 88862 44999</a>
+          <span class="pill-item">📍 Hyderabad, India · London, UK</span>
+          <span class="pill-item">🗣️ English (C2) · Hindi (C2) · French (B1)</span>
+        </div>
+      </div>
+
+      <div class="hero-photo-card">
+        <img src="profile_hero_red.jpg" alt="Sai Vardhan Reddy Banda - SVR313">
+        <div class="hero-photo-badge">
+          SVR313 · AI SYSTEMS SPECIALIST
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section class="glass-card" id="about">
+      <div class="section-header">
+        <span class="section-eyebrow">Professional Profile</span>
+        <h2 class="section-title">Engineering Mindset &amp; AI Quality Alignment</h2>
+        <p class="section-subtitle">Combining industrial rigorous standards with modern frontier LLM evaluation frameworks.</p>
+      </div>
+
+      <p style="color:var(--text-secondary); font-size:1.05rem; line-height:1.75; margin-bottom: 18px;">
+        As a Computer Systems Engineering graduate (2:1 Honours) from the University of Bedfordshire, I bridge deep computer systems architecture with operational quality assurance. My experience at Arla Foods Ltd instilled rigorous data validation, audit documentation, and systemic defect elimination principles.
+      </p>
+      <p style="color:var(--text-secondary); font-size:1.05rem; line-height:1.75;">
+        In the frontier AI landscape, I apply these exact engineering controls to LLM chain-of-thought trajectories, RLHF/DPO preference scoring, model hallucination mitigation, and multi-modal autonomous tool systems.
+      </p>
+    </section>
+
+    <!-- FLAGSHIP CASE STUDY: SO NAIVE IDE -->
+    <section class="glass-card case-study-hero" id="workstation">
+      <div class="workstation-header-grid">
+        <div>
+          <span class="section-eyebrow">Flagship Engineering Case Study</span>
+          <h2 class="workstation-title">SO NAIVE <span>IDE</span></h2>
+          <p class="workstation-tagline">
+            Next-Gen Autonomous Agentic IDE featuring 1M Token Context Cascade, NavyAI Frontier Hub, and Local NVIDIA CUDA Acceleration with Zero-Downtime Failover.
+          </p>
+        </div>
+        <div class="workstation-meta-badge">
+          v3.0.0 Horizon · 24/24 Tests Passing
+        </div>
+      </div>
+
+      <!-- Symmetrical, Perfectly Positioned Actions -->
+      <div class="workstation-action-bar">
+        <a href="/setup.exe" download="setup.exe" class="ws-btn ws-btn-primary">
+          <div class="ws-btn-label">⤓ Download for Windows</div>
+          <div class="ws-btn-sub">setup.exe · 38.2 MB Installer</div>
+        </a>
+
+        <a href="/local_ai_studio_pro.py" download="local_ai_studio_pro.py" class="ws-btn ws-btn-secondary">
+          <div class="ws-btn-label">📄 Production Python Source</div>
+          <div class="ws-btn-sub">local_ai_studio_pro.py (259 KB)</div>
+        </a>
+
+        <a href="/SoNaive-v3.0.0-Universal-Portable.zip" download="SoNaive-v3.0.0-Universal-Portable.zip" class="ws-btn ws-btn-secondary">
+          <div class="ws-btn-label">📦 Universal Portable ZIP</div>
+          <div class="ws-btn-sub">Cross-Platform Bundle (226 KB)</div>
+        </a>
+
+        <a href="https://github.com/imyouiamyou/WORLD-WIDE-" target="_blank" rel="noopener" class="ws-btn ws-btn-secondary">
+          <div class="ws-btn-label">↗ GitHub Repository</div>
+          <div class="ws-btn-sub">Open Source Architecture</div>
+        </a>
+      </div>
+
+      <!-- Live Terminal / Architectural Inspector Mockup -->
+      <div class="terminal-mockup">
+        <div class="terminal-titlebar">
+          <div class="terminal-dots">
+            <span class="t-dot t-red"></span>
+            <span class="t-dot t-yellow"></span>
+            <span class="t-dot t-green"></span>
+          </div>
+          <div style="color:#CBD5E1;">SO NAIVE IDE — local_ai_studio_pro.py · [NVIDIA CUDA 12.6]</div>
+          <div style="color:#00F0FF;">Gemini 3.8 Flash (1M Context)</div>
+        </div>
+        <div class="terminal-body">
+          <p><span class="t-cyan">[ROUTER]</span> Dynamic Cascade: <span class="t-white">Google Gemini 3.8 Flash</span> (Cloud) ➔ <span class="t-white">NavyAI Gateway</span> ➔ <span class="t-white">Local Ollama CUDA</span> (Instant Fallback)</p>
+          <p><span class="t-cyan">[ACCOUNTS]</span> GitHub PAT, Google AI Studio (1M Context Enabled), Hugging Face Hub Authenticated.</p>
+          <p><span class="t-cyan">[EXTENSIONS]</span> VS Code / Cursor IPC Bridge, Antigravity Subagents, Multi-Modal Vision Inspector Active.</p>
+          <p><span class="t-green-text">[TESTS]</span> 24/24 Automated Pytest Suite specifications verified in 2.47s (100% Pass Rate).</p>
+          <p class="t-dim">&gt;&gt; Ready for rapid developer inference with zero refusal friction and deterministic self-healing.</p>
+        </div>
+      </div>
+
+      <!-- Core Architectural Pillars -->
+      <div class="pillars-grid">
+        <div class="pillar-card">
+          <div class="pillar-icon">⚡</div>
+          <h3 class="pillar-title">1M Token Frontier Context</h3>
+          <p class="pillar-desc">Native SSE streaming with Gemini 3.8 Flash and Claude 3.7 Sonnet for repository-scale context analysis without token truncation.</p>
+        </div>
+
+        <div class="pillar-card">
+          <div class="pillar-icon">🚀</div>
+          <h3 class="pillar-title">NavyAI Unified Hub</h3>
+          <p class="pillar-desc">Integrated gateway connecting 140+ next-gen frontier models (GPT-5.6 Luna, DeepSeek V3, SchizoGPT) via high-speed endpoints.</p>
+        </div>
+
+        <div class="pillar-card">
+          <div class="pillar-icon">💻</div>
+          <h3 class="pillar-title">Local CUDA GPU Failover</h3>
+          <p class="pillar-desc">Zero-downtime offline fallback to local NVIDIA CUDA GPU Ollama and direct GGUF/SafeTensors header verification with zero cloud latency.</p>
+        </div>
+
+        <div class="pillar-card">
+          <div class="pillar-icon">🛠️</div>
+          <h3 class="pillar-title">Self-Healing Traceback Compiler</h3>
+          <p class="pillar-desc">Automatic runtime exception interception, root-cause diagnosis, colorized side-by-side diff review, and re-test verification.</p>
+        </div>
+
+        <div class="pillar-card">
+          <div class="pillar-icon">🔗</div>
+          <h3 class="pillar-title">Unified Account Linkups</h3>
+          <p class="pillar-desc">Secure account management for GitHub PAT, Google Cloud ADC, and Hugging Face tokens for gated model downloads.</p>
+        </div>
+
+        <div class="pillar-card">
+          <div class="pillar-icon">🧩</div>
+          <h3 class="pillar-title">Searchable Extension Catalog</h3>
+          <p class="pillar-desc">Real-time searchable plugin marketplace for external IDE bridges (VS Code, Cursor), autonomous subagents, and private vLLM clusters.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TECHNICAL SKILLS -->
+    <section class="glass-card" id="skills">
+      <div class="section-header">
+        <span class="section-eyebrow">Core Competencies</span>
+        <h2 class="section-title">Technical Expertise &amp; Toolkits</h2>
+        <p class="section-subtitle">Proven technical skills spanning programming, data engineering, quality assurance, and AI system alignment.</p>
+      </div>
+
+      <div class="skills-grid">
+        <div class="skill-box">
+          <div class="skill-box-title">⚡ Programming &amp; Systems</div>
+          <div class="tag-cloud">
+            <span class="tech-tag">Python 3.12</span>
+            <span class="tech-tag">SQL &amp; Relational DBs</span>
+            <span class="tech-tag">PyQt5 / GUI Architectures</span>
+            <span class="tech-tag">QScintilla Lexers</span>
+            <span class="tech-tag">Bash / PowerShell</span>
+            <span class="tech-tag">Git / GitHub Actions</span>
+            <span class="tech-tag">CUDA &amp; PyTorch</span>
+            <span class="tech-tag">Docker / Containers</span>
+          </div>
+        </div>
+
+        <div class="skill-box">
+          <div class="skill-box-title">🧠 AI Evaluation &amp; Alignment</div>
+          <div class="tag-cloud">
+            <span class="tech-tag">Prompt Engineering</span>
+            <span class="tech-tag">Chain-of-Thought Audits</span>
+            <span class="tech-tag">RLHF &amp; DPO Rubrics</span>
+            <span class="tech-tag">Model Red-Teaming</span>
+            <span class="tech-tag">Hallucination Detection</span>
+            <span class="tech-tag">Multi-Modal Vision Evaluation</span>
+            <span class="tech-tag">GGUF Quantization</span>
+            <span class="tech-tag">Benchmark Creation</span>
+          </div>
+        </div>
+
+        <div class="skill-box">
+          <div class="skill-box-title">📊 Quality Engineering &amp; Analysis</div>
+          <div class="tag-cloud">
+            <span class="tech-tag">Root Cause Analysis (8D / 5-Whys)</span>
+            <span class="tech-tag">Quality Assurance Auditing</span>
+            <span class="tech-tag">Data Validation &amp; Cleaning</span>
+            <span class="tech-tag">Automated Testing (Pytest)</span>
+            <span class="tech-tag">Technical Documentation</span>
+            <span class="tech-tag">Workflow Optimization</span>
+            <span class="tech-tag">Microsoft Excel Advanced</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CREATIVE & ANALYTICAL MINDSET -->
+    <section class="glass-card" id="mindset">
+      <div class="section-header">
+        <span class="section-eyebrow">Beyond Code</span>
+        <h2 class="section-title">Creative &amp; Analytical Synergy</h2>
+        <p class="section-subtitle">Balancing rigorous engineering discipline with creative problem-solving intuition.</p>
+      </div>
+
+      <div class="mindset-grid">
+        <div class="mindset-card">
+          <div class="mindset-img-wrap">
+            <img src="profile_grass_relax.jpg" alt="Analytical and Adaptable Mindset">
+          </div>
+          <div class="mindset-text">
+            <h3>Analytical &amp; Adaptable Mindset</h3>
+            <p>Driven by curiosity, persistent focus, and high quality standards. A self-directed learner skilled at breaking down complex technical specifications into structured, verifiable deliverables.</p>
+          </div>
+        </div>
+
+        <div class="mindset-card">
+          <div class="mindset-img-wrap">
+            <img src="profile_guitar_creative.jpg" alt="Think. Write. Create.">
+          </div>
+          <div class="mindset-text">
+            <h3>Think. Write. Create.</h3>
+            <p>Merging mathematical logic with creative lateral thinking. Essential for crafting subtle prompt nuances, identifying non-obvious model edge cases, and composing unambiguous documentation.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AI EVALUATION RESEARCH & BENCHMARKS -->
+    <section class="glass-card" id="research">
+      <div class="section-header">
+        <span class="section-eyebrow">Frontier AI Research</span>
+        <h2 class="section-title">Model Evaluation &amp; Alignment Benchmarks</h2>
+        <p class="section-subtitle">Structured empirical methodologies applied to modern frontier language and multi-modal models.</p>
+      </div>
+
+      <div class="metrics-bar-grid">
+        <div class="metric-item">
+          <div class="metric-val">2:1</div>
+          <div class="metric-lbl">Honours Degree</div>
+        </div>
+        <div class="metric-item">
+          <div class="metric-val">16 Mos</div>
+          <div class="metric-lbl">Quality Engineering</div>
+        </div>
+        <div class="metric-item">
+          <div class="metric-val">100%</div>
+          <div class="metric-lbl">Rubric Compliance</div>
+        </div>
+        <div class="metric-item">
+          <div class="metric-val">24/24</div>
+          <div class="metric-lbl">Pytest Specifications</div>
+        </div>
+      </div>
+
+      <div class="research-grid">
+        <div class="research-card">
+          <span class="research-tag">Research Area · 2026</span>
+          <h3 class="research-title">LLM Chain-of-Thought &amp; Trajectory Audits</h3>
+          <p class="research-desc">Developing structured evaluation taxonomies for multi-turn reasoning models. Auditing edge-case logical fallacies, step-skipping, hallucinated intermediate claims, and strict constraint adherence.</p>
+        </div>
+
+        <div class="research-card">
+          <span class="research-tag">Alignment Frameworks</span>
+          <h3 class="research-title">RLHF &amp; DPO Preference Scoring Rubrics</h3>
+          <p class="research-desc">Designing multi-dimensional preference criteria for model alignment across helpfulness, factual accuracy, safety, code correctness, and tone consistency.</p>
+        </div>
+
+        <div class="research-card">
+          <span class="research-tag">Methodology Transfer</span>
+          <h3 class="research-title">Industrial Quality Controls for AI Data</h3>
+          <p class="research-desc">Translating Arla Foods root-cause analysis (8D / 5-Whys) into dataset validation: identifying systematic data corruption, distribution drift, and error propagation.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROFESSIONAL WORK EXPERIENCE -->
+    <section class="glass-card" id="experience">
+      <div class="section-header">
+        <span class="section-eyebrow">Career History</span>
+        <h2 class="section-title">Professional Experience</h2>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-top-row">
+          <div>
+            <div class="exp-role">Quality Engineering Intern</div>
+            <div class="exp-org">Arla Foods Ltd · United Kingdom</div>
+          </div>
+          <div class="exp-period">Feb 2023 – Jun 2024 (16 Months)</div>
+        </div>
+
+        <ul class="exp-bullets">
+          <li>Analyzed operational and quality datasets to identify recurring trends, bottlenecks, and efficiency opportunities across production workflows.</li>
+          <li>Executed thorough root cause analyses (5-Whys, 8D) and authored structured technical documentation to prevent defect recurrence.</li>
+          <li>Maintained high-accuracy audit records and quality documentation adhering to rigorous international engineering compliance standards.</li>
+          <li>Collaborated closely with cross-functional technical teams to streamline reporting, data validation, and operational handoffs.</li>
+          <li>Championed continuous improvement initiatives through empirical data insights and precise technical writing.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section class="glass-card" id="education">
+      <div class="section-header">
+        <span class="section-eyebrow">Academic Foundation</span>
+        <h2 class="section-title">Education &amp; Honours</h2>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-top-row">
+          <div>
+            <div class="exp-role">B.Eng. (Honours) Computer Systems Engineering</div>
+            <div class="exp-org">University of Bedfordshire · United Kingdom</div>
+          </div>
+          <div class="exp-period">Graduated 2024 · 2:1 Honours</div>
+        </div>
+
+        <p style="color:var(--text-secondary); font-size:0.95rem; margin-top:8px;">
+          Comprehensive curriculum in computer systems architecture, data engineering, database systems, software quality control, digital electronics, network protocols, and artificial intelligence foundations.
+        </p>
+      </div>
+    </section>
+
+    <!-- CERTIFICATES & CREDENTIALS -->
+    <section class="glass-card" id="certificates">
+      <div class="section-header">
+        <span class="section-eyebrow">Accreditations</span>
+        <h2 class="section-title">Certificates &amp; Verified Credentials</h2>
+        <p class="section-subtitle">Demonstrated commitment to continuous skill advancement across data, cloud, and AI domains.</p>
+      </div>
+
+      <div class="cert-grid">
+        <div class="cert-card">
+          <div class="cert-icon">IBM</div>
+          <div>
+            <div class="cert-title">Data Analysis with Python</div>
+            <div class="cert-org">IBM Certified</div>
+          </div>
+        </div>
+
+        <div class="cert-card">
+          <div class="cert-icon">IBM</div>
+          <div>
+            <div class="cert-title">SQL &amp; Relational Databases</div>
+            <div class="cert-org">IBM Certified</div>
+          </div>
+        </div>
+
+        <div class="cert-card">
+          <div class="cert-icon">AWS</div>
+          <div>
+            <div class="cert-title">Prompt Engineering</div>
+            <div class="cert-org">AWS Training &amp; Certification</div>
+          </div>
+        </div>
+
+        <div class="cert-card">
+          <div class="cert-icon">CSC</div>
+          <div>
+            <div class="cert-title">Introduction to Data Science</div>
+            <div class="cert-org">Cisco Networking Academy</div>
+          </div>
+        </div>
+
+        <div class="cert-card">
+          <div class="cert-icon">MS</div>
+          <div>
+            <div class="cert-title">Introduction to Python</div>
+            <div class="cert-org">Microsoft Certified</div>
+          </div>
+        </div>
+
+        <div class="cert-card">
+          <div class="cert-icon">DEL</div>
+          <div>
+            <div class="cert-title">Data Analytics Simulation</div>
+            <div class="cert-org">Deloitte Job Simulation</div>
+          </div>
+        </div>
+
+        <div class="cert-card">
+          <div class="cert-icon">DC</div>
+          <div>
+            <div class="cert-title">Data Engineering</div>
+            <div class="cert-org">DataCamp Certified</div>
+          </div>
+        </div>
+
+        <div class="cert-card">
+          <div class="cert-icon">🏆</div>
+          <div>
+            <div class="cert-title">Cisco NetAcad Competition</div>
+            <div class="cert-org">2nd Rank National Honor</div>
+          </div>
+        </div>
+
+        <div class="cert-card">
+          <div class="cert-icon">🔒</div>
+          <div>
+            <div class="cert-title">OpenCloud Security Audit</div>
+            <div class="cert-org">Penetration Testing Specialist</div>
+          </div>
+        </div>
+
+        <div class="cert-card">
+          <div class="cert-icon">⚡</div>
+          <div>
+            <div class="cert-title">Hackathon Engineering</div>
+            <div class="cert-org">Technical Contributor</div>
+          </div>
+        </div>
+
+        <div class="cert-card">
+          <div class="cert-icon">SIE</div>
+          <div>
+            <div class="cert-title">Operations &amp; Industrial Eng.</div>
+            <div class="cert-org">Siemens Certified</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXECUTIVE CONTACT SECTION -->
+    <section class="glass-card" id="contact">
+      <div class="section-header">
+        <span class="section-eyebrow">Connect &amp; Collaborate</span>
+        <h2 class="section-title">Get In Touch</h2>
+        <p class="section-subtitle">Open for discussions regarding AI Model Evaluation, Prompt Engineering, Systems Architecture, and technical partnerships.</p>
+      </div>
+
+      <div class="contact-layout">
+        <div class="contact-details-col">
+          <div class="contact-card-box">
+            <div class="contact-icon-bubble">✉</div>
+            <div class="contact-text-wrap">
+              <h4>Primary Enterprise Email</h4>
+              <a href="mailto:contact@bsvr.work" class="contact-main-link" data-email="primary">contact@bsvr.work</a>
+              <div class="contact-sub-text">
+                Personal / Direct: <a href="mailto:svreddy313.dev@gmail.com" style="color:#CBD5E1; text-decoration:none;" data-email="personal">svreddy313.dev@gmail.com</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-card-box">
+            <div class="contact-icon-bubble">📞</div>
+            <div class="contact-text-wrap">
+              <h4>Executive Direct Line</h4>
+              <a href="tel:+918886244999" class="contact-main-link" data-phone="direct">+91 88862 44999</a>
+              <div class="contact-sub-text">Direct phone &amp; WhatsApp communication</div>
+            </div>
+          </div>
+
+          <div class="contact-card-box">
+            <div class="contact-icon-bubble">💻</div>
+            <div class="contact-text-wrap">
+              <h4>GitHub &amp; Networks</h4>
+              <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:6px;">
+                <a href="https://github.com/imyouiamyou" target="_blank" rel="noopener" class="pill-item">GitHub (imyouiamyou) ↗</a>
+                <a href="https://x.com/Svreddy313" target="_blank" rel="noopener" class="pill-item">𝕏 Twitter (@Svreddy313) ↗</a>
+                <a href="https://www.instagram.com/svr_313/" target="_blank" rel="noopener" class="pill-item">Instagram (@svr_313) ↗</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-card-box">
+            <div class="contact-icon-bubble">📍</div>
+            <div class="contact-text-wrap">
+              <h4>Global Mobility</h4>
+              <div style="color:#FFFFFF; font-weight:600;">Hyderabad, India · London, United Kingdom</div>
+              <div class="contact-sub-text" style="color:#34D399;">● Open to Remote, Hybrid, and Onsite Deployments Worldwide</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Validated Contact Form -->
+        <form class="contact-form" id="contact-form" onsubmit="submitContactForm(event)">
+          <div class="form-group">
+            <label for="c-name" class="form-label">Full Name</label>
+            <input type="text" id="c-name" class="form-input" placeholder="e.g. Dr. Alex Morgan" required>
+          </div>
+
+          <div class="form-group">
+            <label for="c-email" class="form-label">Email Address</label>
+            <input type="email" id="c-email" class="form-input" placeholder="alex@organization.com" required>
+          </div>
+
+          <div class="form-group">
+            <label for="c-subject" class="form-label">Inquiry Subject</label>
+            <select id="c-subject" class="form-select" required>
+              <option value="AI Model Evaluation & Quality Alignment">AI Model Evaluation &amp; Quality Alignment</option>
+              <option value="SO NAIVE IDE Architecture Collaboration">SO NAIVE IDE Architecture Collaboration</option>
+              <option value="Prompt Engineering & Trajectory Auditing">Prompt Engineering &amp; Trajectory Auditing</option>
+              <option value="Senior Engineering Role Opportunity">Senior Engineering / Technical Opportunity</option>
+              <option value="Strategic Technical Partnership">Strategic Technical Partnership</option>
+              <option value="General Executive Inquiry">General Executive Inquiry</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="c-message" class="form-label">Message</label>
+            <textarea id="c-message" class="form-textarea" rows="4" placeholder="Briefly describe your project or opportunity..." required></textarea>
+          </div>
+
+          <button type="submit" class="form-submit-btn">
+            <span>Send Message • Let's Start Good Things</span> ✦
+          </button>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- SITE FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-brand">Sai Vardhan Reddy Banda (SVR313)</div>
+    <p class="footer-tagline">More good things ahead! High-performance engineering, empirical AI evaluation, and continuous quality advancement.</p>
+    
+    <div class="footer-pills">
+      <a href="mailto:contact@bsvr.work" class="pill-item" data-email="primary">✉ contact@bsvr.work</a>
+      <a href="tel:+918886244999" class="pill-item" data-phone="direct">📞 +91 88862 44999</a>
+      <a href="https://github.com/imyouiamyou" target="_blank" rel="noopener" class="pill-item">GitHub: imyouiamyou</a>
+      <a href="https://x.com/Svreddy313" target="_blank" rel="noopener" class="pill-item">𝕏 @Svreddy313</a>
+    </div>
+
+    <div class="footer-copy">
+      © 2026 Sai Vardhan Reddy Banda (SVR313) · High-Performance Obsidian Architecture · bsvr.work
+    </div>
+  </footer>
+
+  <!-- Toast Notification -->
+  <div class="toast-popup" id="toast">
+    <span style="color:#00F0FF; font-size:1.2rem;">✓</span>
+    <span id="toast-msg">Message prepared! Opening your email client...</span>
+  </div>
+
+  <!-- SCRIPT ENGINE -->
+  <script>
+    // 1. Mobile Drawer Navigation
+    function toggleMenu() {
+      const drawer = document.getElementById('drawer');
+      const backdrop = document.getElementById('backdrop');
+      drawer.classList.toggle('open');
+      backdrop.classList.toggle('open');
+    }
+
+    // 2. High-performance scroll progress tracking (Zero visual lag)
+    window.addEventListener('scroll', function() {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+      const bar = document.getElementById('scroll-progress');
+      if (bar) bar.style.width = pct + '%';
+    }, { passive: true });
+
+    // 3. Centralized Dynamic Contact Details Registry (Automatic Source Synchronization)
+    const CONTACT_REGISTRY = {
+      primaryEmail: "contact@bsvr.work",
+      personalEmail: "svreddy313.dev@gmail.com",
+      directPhone: "+91 88862 44999",
+      githubUser: "imyouiamyou",
+      twitterUser: "Svreddy313",
+      instagramUser: "svr_313"
+    };
+
+    function syncContactDetailsAcrossDOM() {
+      document.querySelectorAll('[data-email="primary"]').forEach(el => {
+        el.textContent = CONTACT_REGISTRY.primaryEmail;
+        el.setAttribute('href', 'mailto:' + CONTACT_REGISTRY.primaryEmail);
+      });
+      document.querySelectorAll('[data-email="personal"]').forEach(el => {
+        el.textContent = CONTACT_REGISTRY.personalEmail;
+        el.setAttribute('href', 'mailto:' + CONTACT_REGISTRY.personalEmail);
+      });
+      document.querySelectorAll('[data-phone="direct"]').forEach(el => {
+        el.textContent = (el.textContent.includes('📞') ? '📞 ' : '') + CONTACT_REGISTRY.directPhone;
+        el.setAttribute('href', 'tel:' + CONTACT_REGISTRY.directPhone.replace(/\s+/g, ''));
+      });
+    }
+    syncContactDetailsAcrossDOM();
+
+    // 4. Interactive Contact Form Submission & Toast
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toast-msg');
+      toastMsg.textContent = msg;
+      toast.classList.add('visible');
+      setTimeout(() => toast.classList.remove('visible'), 5000);
+    }
+
+    function submitContactForm(event) {
+      event.preventDefault();
+      const name = document.getElementById('c-name').value.trim();
+      const email = document.getElementById('c-email').value.trim();
+      const subject = document.getElementById('c-subject').value;
+      const message = document.getElementById('c-message').value.trim();
+
+      if (!name || !email || !message) {
+        showToast('Please fill out all required fields.');
+        return;
+      }
+
+      // Generate verified mailto URI
+      const mailtoUrl = `mailto:${CONTACT_REGISTRY.primaryEmail}?subject=${encodeURIComponent('[Inquiry] ' + subject + ' - from ' + name)}&body=${encodeURIComponent('From: ' + name + ' (' + email + ')\n\n' + message)}`;
+      
+      showToast('Opening your email client to send to ' + CONTACT_REGISTRY.primaryEmail + '...');
+      setTimeout(() => {
+        window.location.href = mailtoUrl;
+      }, 800);
+    }
+  </script>
+</body>
+</html>

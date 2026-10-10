@@ -1,0 +1,780 @@
+{
+  "root": "C:\\Users\\asus\\heretic-work",
+  "total_files": 91,
+  "total_raw_lines": 20639,
+  "total_sloc": 12301,
+  "categories": {
+    "Production Source": {
+      "files": 43,
+      "raw": 15191,
+      "blank": 1855,
+      "comments": 5150,
+      "sloc": 8186
+    },
+    "Tests": {
+      "files": 10,
+      "raw": 1673,
+      "blank": 352,
+      "comments": 332,
+      "sloc": 989
+    },
+    "Tooling & Scripts": {
+      "files": 5,
+      "raw": 774,
+      "blank": 120,
+      "comments": 53,
+      "sloc": 601
+    },
+    "Documentation": {
+      "files": 26,
+      "raw": 2468,
+      "blank": 391,
+      "comments": 0,
+      "sloc": 2077
+    },
+    "Config & Metadata": {
+      "files": 4,
+      "raw": 444,
+      "blank": 74,
+      "comments": 0,
+      "sloc": 370
+    },
+    "Other": {
+      "files": 3,
+      "raw": 89,
+      "blank": 11,
+      "comments": 0,
+      "sloc": 78
+    }
+  },
+  "files": [
+    {
+      "path": ".env",
+      "category": "Other",
+      "raw": 1,
+      "blank": 0,
+      "comments": 0,
+      "sloc": 1
+    },
+    {
+      "path": ".gitignore",
+      "category": "Other",
+      "raw": 36,
+      "blank": 5,
+      "comments": 0,
+      "sloc": 31
+    },
+    {
+      "path": "ARCHITECTURE.md",
+      "category": "Documentation",
+      "raw": 156,
+      "blank": 29,
+      "comments": 0,
+      "sloc": 127
+    },
+    {
+      "path": "CHANGELOG.md",
+      "category": "Documentation",
+      "raw": 43,
+      "blank": 9,
+      "comments": 0,
+      "sloc": 34
+    },
+    {
+      "path": "CONTACT_UPDATE_GUIDE.md",
+      "category": "Documentation",
+      "raw": 69,
+      "blank": 17,
+      "comments": 0,
+      "sloc": 52
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "category": "Documentation",
+      "raw": 54,
+      "blank": 12,
+      "comments": 0,
+      "sloc": 42
+    },
+    {
+      "path": "INSTALL.md",
+      "category": "Documentation",
+      "raw": 97,
+      "blank": 23,
+      "comments": 0,
+      "sloc": 74
+    },
+    {
+      "path": "LICENSE",
+      "category": "Config & Metadata",
+      "raw": 56,
+      "blank": 15,
+      "comments": 0,
+      "sloc": 41
+    },
+    {
+      "path": "README.md",
+      "category": "Documentation",
+      "raw": 168,
+      "blank": 39,
+      "comments": 0,
+      "sloc": 129
+    },
+    {
+      "path": "SELF_TESTS.md",
+      "category": "Documentation",
+      "raw": 23,
+      "blank": 4,
+      "comments": 0,
+      "sloc": 19
+    },
+    {
+      "path": "build_installer.py",
+      "category": "Tooling & Scripts",
+      "raw": 124,
+      "blank": 16,
+      "comments": 8,
+      "sloc": 100
+    },
+    {
+      "path": "build_setup_exe.py",
+      "category": "Tooling & Scripts",
+      "raw": 119,
+      "blank": 18,
+      "comments": 9,
+      "sloc": 92
+    },
+    {
+      "path": "generate_assets.py",
+      "category": "Tooling & Scripts",
+      "raw": 226,
+      "blank": 33,
+      "comments": 20,
+      "sloc": 173
+    },
+    {
+      "path": "local_ai_studio.py",
+      "category": "Production Source",
+      "raw": 883,
+      "blank": 74,
+      "comments": 25,
+      "sloc": 784
+    },
+    {
+      "path": "local_ai_studio_pro.py",
+      "category": "Production Source",
+      "raw": 5899,
+      "blank": 716,
+      "comments": 4274,
+      "sloc": 909
+    },
+    {
+      "path": "ollama_gui.py",
+      "category": "Production Source",
+      "raw": 251,
+      "blank": 45,
+      "comments": 11,
+      "sloc": 195
+    },
+    {
+      "path": "pyproject.toml",
+      "category": "Config & Metadata",
+      "raw": 55,
+      "blank": 5,
+      "comments": 0,
+      "sloc": 50
+    },
+    {
+      "path": "requirements.txt",
+      "category": "Documentation",
+      "raw": 8,
+      "blank": 1,
+      "comments": 0,
+      "sloc": 7
+    },
+    {
+      "path": "run_ide.bat",
+      "category": "Production Source",
+      "raw": 5,
+      "blank": 0,
+      "comments": 0,
+      "sloc": 5
+    },
+    {
+      "path": "run_ide.sh",
+      "category": "Production Source",
+      "raw": 39,
+      "blank": 4,
+      "comments": 5,
+      "sloc": 30
+    },
+    {
+      "path": "run_local_ai_studio_pro.bat",
+      "category": "Production Source",
+      "raw": 69,
+      "blank": 8,
+      "comments": 4,
+      "sloc": 57
+    },
+    {
+      "path": "test_ollama.py",
+      "category": "Production Source",
+      "raw": 124,
+      "blank": 15,
+      "comments": 5,
+      "sloc": 104
+    },
+    {
+      "path": ".github/workflows/release.yml",
+      "category": "Config & Metadata",
+      "raw": 270,
+      "blank": 46,
+      "comments": 0,
+      "sloc": 224
+    },
+    {
+      "path": "ai/__init__.py",
+      "category": "Production Source",
+      "raw": 4,
+      "blank": 0,
+      "comments": 4,
+      "sloc": 0
+    },
+    {
+      "path": "ai/agents/__init__.py",
+      "category": "Production Source",
+      "raw": 38,
+      "blank": 1,
+      "comments": 5,
+      "sloc": 32
+    },
+    {
+      "path": "ai/agents/critic.py",
+      "category": "Production Source",
+      "raw": 217,
+      "blank": 30,
+      "comments": 17,
+      "sloc": 170
+    },
+    {
+      "path": "ai/agents/orchestrator.py",
+      "category": "Production Source",
+      "raw": 269,
+      "blank": 33,
+      "comments": 15,
+      "sloc": 221
+    },
+    {
+      "path": "ai/agents/planner.py",
+      "category": "Production Source",
+      "raw": 210,
+      "blank": 33,
+      "comments": 14,
+      "sloc": 163
+    },
+    {
+      "path": "ai/rag/__init__.py",
+      "category": "Production Source",
+      "raw": 11,
+      "blank": 1,
+      "comments": 4,
+      "sloc": 6
+    },
+    {
+      "path": "ai/rag/code_indexer.py",
+      "category": "Production Source",
+      "raw": 229,
+      "blank": 31,
+      "comments": 13,
+      "sloc": 185
+    },
+    {
+      "path": "assets/logo.svg",
+      "category": "Other",
+      "raw": 52,
+      "blank": 6,
+      "comments": 0,
+      "sloc": 46
+    },
+    {
+      "path": "core/__init__.py",
+      "category": "Production Source",
+      "raw": 16,
+      "blank": 1,
+      "comments": 5,
+      "sloc": 10
+    },
+    {
+      "path": "core/credentials.py",
+      "category": "Production Source",
+      "raw": 331,
+      "blank": 46,
+      "comments": 22,
+      "sloc": 263
+    },
+    {
+      "path": "core/model_registry.py",
+      "category": "Production Source",
+      "raw": 206,
+      "blank": 15,
+      "comments": 8,
+      "sloc": 183
+    },
+    {
+      "path": "core/plugin_engine.py",
+      "category": "Production Source",
+      "raw": 155,
+      "blank": 20,
+      "comments": 11,
+      "sloc": 124
+    },
+    {
+      "path": "core/router.py",
+      "category": "Production Source",
+      "raw": 134,
+      "blank": 25,
+      "comments": 12,
+      "sloc": 97
+    },
+    {
+      "path": "core/task_engine.py",
+      "category": "Production Source",
+      "raw": 111,
+      "blank": 18,
+      "comments": 6,
+      "sloc": 87
+    },
+    {
+      "path": "core/tool_gateway.py",
+      "category": "Production Source",
+      "raw": 152,
+      "blank": 22,
+      "comments": 10,
+      "sloc": 120
+    },
+    {
+      "path": "core/workspace.py",
+      "category": "Production Source",
+      "raw": 148,
+      "blank": 22,
+      "comments": 12,
+      "sloc": 114
+    },
+    {
+      "path": "debugging/__init__.py",
+      "category": "Production Source",
+      "raw": 13,
+      "blank": 1,
+      "comments": 5,
+      "sloc": 7
+    },
+    {
+      "path": "debugging/dap_client.py",
+      "category": "Production Source",
+      "raw": 316,
+      "blank": 30,
+      "comments": 6,
+      "sloc": 280
+    },
+    {
+      "path": "docs/assessment/ARCHITECTURE_ASSESSMENT.md",
+      "category": "Documentation",
+      "raw": 40,
+      "blank": 8,
+      "comments": 0,
+      "sloc": 32
+    },
+    {
+      "path": "docs/assessment/DECISION_LOG.md",
+      "category": "Documentation",
+      "raw": 58,
+      "blank": 19,
+      "comments": 0,
+      "sloc": 39
+    },
+    {
+      "path": "docs/assessment/FEATURE_VERIFICATION_MATRIX.md",
+      "category": "Documentation",
+      "raw": 90,
+      "blank": 20,
+      "comments": 0,
+      "sloc": 70
+    },
+    {
+      "path": "docs/assessment/FINAL_IMPLEMENTATION_REPORT.md",
+      "category": "Documentation",
+      "raw": 71,
+      "blank": 17,
+      "comments": 0,
+      "sloc": 54
+    },
+    {
+      "path": "docs/assessment/IMPLEMENTATION_ROADMAP.md",
+      "category": "Documentation",
+      "raw": 40,
+      "blank": 4,
+      "comments": 0,
+      "sloc": 36
+    },
+    {
+      "path": "docs/assessment/PRODUCT_GAP_ANALYSIS.md",
+      "category": "Documentation",
+      "raw": 35,
+      "blank": 7,
+      "comments": 0,
+      "sloc": 28
+    },
+    {
+      "path": "docs/assessment/RELEASE_READINESS.md",
+      "category": "Documentation",
+      "raw": 25,
+      "blank": 5,
+      "comments": 0,
+      "sloc": 20
+    },
+    {
+      "path": "docs/assessment/SECURITY_FINDINGS.md",
+      "category": "Documentation",
+      "raw": 73,
+      "blank": 17,
+      "comments": 0,
+      "sloc": 56
+    },
+    {
+      "path": "docs/assessment/TEST_RESULTS.md",
+      "category": "Documentation",
+      "raw": 114,
+      "blank": 17,
+      "comments": 0,
+      "sloc": 97
+    },
+    {
+      "path": "docs/engineering/FEATURE_MATRIX.md",
+      "category": "Documentation",
+      "raw": 103,
+      "blank": 24,
+      "comments": 0,
+      "sloc": 79
+    },
+    {
+      "path": "docs/engineering/IMPLEMENTATION_ROADMAP.md",
+      "category": "Documentation",
+      "raw": 87,
+      "blank": 14,
+      "comments": 0,
+      "sloc": 73
+    },
+    {
+      "path": "docs/engineering/LINE_COUNT_LEDGER.md",
+      "category": "Documentation",
+      "raw": 58,
+      "blank": 11,
+      "comments": 0,
+      "sloc": 47
+    },
+    {
+      "path": "docs/engineering/LINE_COUNT_POLICY.md",
+      "category": "Documentation",
+      "raw": 87,
+      "blank": 25,
+      "comments": 0,
+      "sloc": 62
+    },
+    {
+      "path": "docs/engineering/MASTER_ARCHITECTURE.md",
+      "category": "Documentation",
+      "raw": 116,
+      "blank": 22,
+      "comments": 0,
+      "sloc": 94
+    },
+    {
+      "path": "docs/engineering/SECURITY_PLAN.md",
+      "category": "Documentation",
+      "raw": 56,
+      "blank": 13,
+      "comments": 0,
+      "sloc": 43
+    },
+    {
+      "path": "docs/engineering/TEST_STRATEGY.md",
+      "category": "Documentation",
+      "raw": 62,
+      "blank": 17,
+      "comments": 0,
+      "sloc": 45
+    },
+    {
+      "path": "docs/engineering/metrics_latest.json",
+      "category": "Documentation",
+      "raw": 668,
+      "blank": 0,
+      "comments": 0,
+      "sloc": 668
+    },
+    {
+      "path": "installer/installer.iss",
+      "category": "Config & Metadata",
+      "raw": 63,
+      "blank": 8,
+      "comments": 0,
+      "sloc": 55
+    },
+    {
+      "path": "installer/setup_wizard.py",
+      "category": "Production Source",
+      "raw": 514,
+      "blank": 75,
+      "comments": 213,
+      "sloc": 226
+    },
+    {
+      "path": "language_services/__init__.py",
+      "category": "Production Source",
+      "raw": 12,
+      "blank": 1,
+      "comments": 5,
+      "sloc": 6
+    },
+    {
+      "path": "language_services/lsp_client.py",
+      "category": "Production Source",
+      "raw": 283,
+      "blank": 29,
+      "comments": 17,
+      "sloc": 237
+    },
+    {
+      "path": "plugins/__init__.py",
+      "category": "Production Source",
+      "raw": 19,
+      "blank": 1,
+      "comments": 4,
+      "sloc": 14
+    },
+    {
+      "path": "plugins/hooks.py",
+      "category": "Production Source",
+      "raw": 110,
+      "blank": 15,
+      "comments": 8,
+      "sloc": 87
+    },
+    {
+      "path": "plugins/manager.py",
+      "category": "Production Source",
+      "raw": 177,
+      "blank": 27,
+      "comments": 12,
+      "sloc": 138
+    },
+    {
+      "path": "plugins/sandbox.py",
+      "category": "Production Source",
+      "raw": 115,
+      "blank": 18,
+      "comments": 9,
+      "sloc": 88
+    },
+    {
+      "path": "scripts/count_lines.py",
+      "category": "Tooling & Scripts",
+      "raw": 206,
+      "blank": 38,
+      "comments": 8,
+      "sloc": 160
+    },
+    {
+      "path": "scripts/update_contact_info.py",
+      "category": "Tooling & Scripts",
+      "raw": 99,
+      "blank": 15,
+      "comments": 8,
+      "sloc": 76
+    },
+    {
+      "path": "source_control/__init__.py",
+      "category": "Production Source",
+      "raw": 12,
+      "blank": 1,
+      "comments": 5,
+      "sloc": 6
+    },
+    {
+      "path": "source_control/git_service.py",
+      "category": "Production Source",
+      "raw": 181,
+      "blank": 29,
+      "comments": 8,
+      "sloc": 144
+    },
+    {
+      "path": "tests/__init__.py",
+      "category": "Tests",
+      "raw": 1,
+      "blank": 0,
+      "comments": 1,
+      "sloc": 0
+    },
+    {
+      "path": "tests/test_agents.py",
+      "category": "Tests",
+      "raw": 113,
+      "blank": 24,
+      "comments": 64,
+      "sloc": 25
+    },
+    {
+      "path": "tests/test_debugging.py",
+      "category": "Tests",
+      "raw": 73,
+      "blank": 12,
+      "comments": 4,
+      "sloc": 57
+    },
+    {
+      "path": "tests/test_language_services.py",
+      "category": "Tests",
+      "raw": 99,
+      "blank": 14,
+      "comments": 6,
+      "sloc": 79
+    },
+    {
+      "path": "tests/test_plugins.py",
+      "category": "Tests",
+      "raw": 121,
+      "blank": 20,
+      "comments": 40,
+      "sloc": 61
+    },
+    {
+      "path": "tests/test_rag.py",
+      "category": "Tests",
+      "raw": 70,
+      "blank": 12,
+      "comments": 34,
+      "sloc": 24
+    },
+    {
+      "path": "tests/test_source_control.py",
+      "category": "Tests",
+      "raw": 103,
+      "blank": 25,
+      "comments": 8,
+      "sloc": 70
+    },
+    {
+      "path": "tests/test_studio.py",
+      "category": "Tests",
+      "raw": 882,
+      "blank": 199,
+      "comments": 158,
+      "sloc": 525
+    },
+    {
+      "path": "tests/test_ui_widgets.py",
+      "category": "Tests",
+      "raw": 109,
+      "blank": 22,
+      "comments": 7,
+      "sloc": 80
+    },
+    {
+      "path": "tests/test_workspace.py",
+      "category": "Tests",
+      "raw": 102,
+      "blank": 24,
+      "comments": 10,
+      "sloc": 68
+    },
+    {
+      "path": "ui/__init__.py",
+      "category": "Production Source",
+      "raw": 15,
+      "blank": 1,
+      "comments": 4,
+      "sloc": 10
+    },
+    {
+      "path": "ui/checkpoints_widget.py",
+      "category": "Production Source",
+      "raw": 218,
+      "blank": 29,
+      "comments": 110,
+      "sloc": 79
+    },
+    {
+      "path": "ui/debug_widget.py",
+      "category": "Production Source",
+      "raw": 177,
+      "blank": 25,
+      "comments": 83,
+      "sloc": 69
+    },
+    {
+      "path": "ui/diagnostics_widget.py",
+      "category": "Production Source",
+      "raw": 141,
+      "blank": 24,
+      "comments": 71,
+      "sloc": 46
+    },
+    {
+      "path": "ui/git_sidebar.py",
+      "category": "Production Source",
+      "raw": 173,
+      "blank": 23,
+      "comments": 86,
+      "sloc": 64
+    },
+    {
+      "path": "website/INTEGRATION_GUIDE.md",
+      "category": "Documentation",
+      "raw": 67,
+      "blank": 17,
+      "comments": 0,
+      "sloc": 50
+    },
+    {
+      "path": "website/SoNaiveProjectSection.jsx",
+      "category": "Production Source",
+      "raw": 158,
+      "blank": 16,
+      "comments": 0,
+      "sloc": 142
+    },
+    {
+      "path": "website/index.html",
+      "category": "Production Source",
+      "raw": 1989,
+      "blank": 231,
+      "comments": 0,
+      "sloc": 1758
+    },
+    {
+      "path": "website/so_naive_project_section.html",
+      "category": "Production Source",
+      "raw": 872,
+      "blank": 91,
+      "comments": 0,
+      "sloc": 781
+    },
+    {
+      "path": "workspace/__init__.py",
+      "category": "Production Source",
+      "raw": 15,
+      "blank": 1,
+      "comments": 5,
+      "sloc": 9
+    },
+    {
+      "path": "workspace/checkpoints.py",
+      "category": "Production Source",
+      "raw": 180,
+      "blank": 27,
+      "comments": 17,
+      "sloc": 136
+    }
+  ]
+}
