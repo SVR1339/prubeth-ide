@@ -75,7 +75,7 @@ APP_TAGLINE = "PRUBETH IDE — The AI-Powered Sovereign Developer Environment"
 LEGACY_APP_NAME = "SUKHI IDE"
 WEBSITE_URL = "https://www.bsvr.work/"
 PROJECTS_URL = "https://www.bsvr.work/#projects"
-GITHUB_URL = "https://github.com/bsvr/so-naive"
+GITHUB_URL = "https://github.com/imyouiamyou/prubeth-ide"
 APP_HOME = Path.home() / ".local_ai_studio_pro"
 APP_HOME.mkdir(parents=True, exist_ok=True)
 MODEL_DROP_DIR = APP_HOME / "models"

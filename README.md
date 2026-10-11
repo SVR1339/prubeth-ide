@@ -8,13 +8,13 @@
 > **"Built for Flow. Powered by Intelligence."**  
 > An ultra-fast, local-first agentic AI IDE engineered with an **Intelligent Multi-Model Cascade**, **1M-Token SSE Reasoning**, **Hologram Cybernetic Glassmorphic UI**, **Zero-Plaintext Credential Security**, and **Instant Local CUDA Self-Healing**.
 
-[![Release](https://img.shields.io/badge/Release-v3.0.0--Horizon-00F0FF?style=for-the-badge&logo=rocket)](https://github.com/bsvr/prubeth/releases)
+[![Release](https://img.shields.io/badge/Release-v3.0.0--Horizon-00F0FF?style=for-the-badge&logo=rocket)](https://github.com/imyouiamyou/prubeth-ide/releases/tag/v3.0.0)
 [![Website](https://img.shields.io/badge/Website-bsvr.work-A855F7?style=for-the-badge&logo=google-chrome)](https://www.bsvr.work/)
 [![Python](https://img.shields.io/badge/Python-3.12%2B-blue?style=for-the-badge&logo=python)](https://python.org)
 [![CUDA](https://img.shields.io/badge/CUDA-12.6%20Active-76B900?style=for-the-badge&logo=nvidia)](https://developer.nvidia.com/cuda-toolkit)
 [![License](https://img.shields.io/badge/License-MIT%20Commercial-brightgreen?style=for-the-badge)](LICENSE)
 
-[**🌐 Official Website**](https://www.bsvr.work/) · [**🚀 Download Releases**](https://www.bsvr.work/#projects) · [**📖 Architecture**](ARCHITECTURE.md) · [**🛠️ Installation**](INSTALL.md) · [**🔒 Security Findings**](docs/assessment/SECURITY_FINDINGS.md)
+[**🌐 Official Website**](https://www.bsvr.work/) · [**🚀 Download Releases (GitHub v3.0.0)**](https://github.com/imyouiamyou/prubeth-ide/releases/tag/v3.0.0) · [**📖 Architecture**](ARCHITECTURE.md) · [**🛠️ Installation**](INSTALL.md) · [**🔒 Security Findings**](docs/assessment/SECURITY_FINDINGS.md)
 
 </div>
 
