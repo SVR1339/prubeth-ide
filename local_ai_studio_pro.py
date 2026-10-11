@@ -76,7 +76,10 @@ from PyQt5.Qsci import (
     QsciLexerXML,
     QsciLexerDiff,
     QsciLexerJava,
-    QsciLexerCSharp
+    QsciLexerCSharp,
+    QsciLexerLua,
+    QsciLexerPerl,
+    QsciLexerRuby
 )
 
 APP_NAME = "PRUBETH IDE"
@@ -600,6 +603,26 @@ class LexerFactory:
             return lexer
         elif ext in {".diff", ".patch"}:
             lexer = QsciLexerDiff(parent)
+            cls._apply_common_styles(lexer)
+            return lexer
+        elif ext in {".lua"}:
+            lexer = QsciLexerLua(parent)
+            cls._apply_common_styles(lexer)
+            return lexer
+        elif ext in {".pl", ".pm"}:
+            lexer = QsciLexerPerl(parent)
+            cls._apply_common_styles(lexer)
+            return lexer
+        elif ext in {".rb", ".rake"}:
+            lexer = QsciLexerRuby(parent)
+            cls._apply_common_styles(lexer)
+            return lexer
+        elif ext in {".ps1", ".psm1", ".psd1"}:
+            lexer = QsciLexerBatch(parent)
+            cls._apply_common_styles(lexer)
+            return lexer
+        elif ext in {".rs", ".go", ".kt", ".kts", ".swift", ".dart", ".scala", ".jl", ".r", ".wat"}:
+            lexer = QsciLexerCPP(parent)
             cls._apply_common_styles(lexer)
             return lexer
 

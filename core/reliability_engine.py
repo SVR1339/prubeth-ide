@@ -51,6 +51,7 @@ class ReliabilityProfile(str, enum.Enum):
     SECURITY = "Security"
     ENDURANCE = "Endurance"
     RELEASE_CANDIDATE = "Release Candidate"
+    UNIVERSAL_POLYGLOT = "Universal Polyglot"
 
 
 class ScenarioStatus(str, enum.Enum):
@@ -187,6 +188,29 @@ class ReliabilityEngine:
                 self._sc_sec_reserved_devices,
                 self._sc_sec_quota_enforcement
             ]
+        elif profile == ReliabilityProfile.UNIVERSAL_POLYGLOT:
+            from core.polyglot_assurance_engine import UniversalPolyglotAssuranceEngine, AssuranceScenarioStatus
+            poly_engine = UniversalPolyglotAssuranceEngine(self.workspace_root)
+            poly_report = poly_engine.run_full_assurance_cycle()
+            results: List[ScenarioResult] = []
+            defects: List[DefectRecord] = []
+            for pres in poly_report.scenario_results:
+                st = ScenarioStatus.PASSED if pres.status == AssuranceScenarioStatus.PASSED else (
+                    ScenarioStatus.FAILED if pres.status == AssuranceScenarioStatus.FAILED else ScenarioStatus.BLOCKED
+                )
+                res = ScenarioResult(
+                    scenario_id=pres.scenario_id,
+                    name=pres.name,
+                    category=pres.category,
+                    status=st,
+                    duration_seconds=pres.duration_seconds,
+                    details=pres.details,
+                    error=pres.error,
+                    telemetry=pres.telemetry
+                )
+                results.append(res)
+                self._notify(res)
+            scenarios_to_run = []
         else:  # STANDARD
             scenarios_to_run = [
                 self._sc_smoke_startup,
@@ -196,8 +220,9 @@ class ReliabilityEngine:
                 self._sc_sec_path_traversal
             ]
 
-        results: List[ScenarioResult] = []
-        defects: List[DefectRecord] = []
+        if profile != ReliabilityProfile.UNIVERSAL_POLYGLOT:
+            results: List[ScenarioResult] = []
+            defects: List[DefectRecord] = []
 
         for fn in scenarios_to_run:
             if self._stop_requested:
