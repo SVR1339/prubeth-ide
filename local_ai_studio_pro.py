@@ -3710,6 +3710,10 @@ class Studio(QMainWindow):
             ("Ctrl+I", self.open_composer),
             ("Ctrl+Shift+M", self.open_mission_control),
             ("Ctrl+Shift+A", self.open_artifact_inspector),
+            ("F12", self.open_developer_tools),
+            ("Ctrl+Shift+D", self.open_developer_tools),
+            ("Ctrl+Shift+H", self.run_hardware_autotune),
+            ("Ctrl+,", self.open_settings_center),
             ("Ctrl+Enter", self.send_prompt),
             ("Ctrl+`", self.toggle_terminal),
         ]
@@ -3759,8 +3763,22 @@ class Studio(QMainWindow):
             act.triggered.connect(fn)
             ai_menu.addAction(act)
 
+        view_menu = menu_bar.addMenu("View")
+        preset_menu = view_menu.addMenu("📐 Named Layout Presets")
+        for preset_name in ["Coding", "Agent Workspace", "Debugging", "Code Review", "Research", "Minimal"]:
+            preset_menu.addAction(QAction(preset_name, self, triggered=lambda checked, name=preset_name: self.apply_layout_preset(name)))
+        view_menu.addSeparator()
+        view_menu.addAction(QAction("🚀 Toggle Mission Control (Ctrl+Shift+M)", self, triggered=self.open_mission_control))
+        view_menu.addAction(QAction("📜 Toggle Artifacts Inspector (Ctrl+Shift+A)", self, triggered=self.open_artifact_inspector))
+        view_menu.addAction(QAction("✨ Toggle Multi-File Composer (Ctrl+I)", self, triggered=self.open_composer))
+        view_menu.addAction(QAction("💻 Toggle Integrated Terminal (Ctrl+`)", self, triggered=self.toggle_terminal))
+        view_menu.addAction(QAction("🛠 Developer Tools Inspector (F12)", self, triggered=self.open_developer_tools))
+
         tools_menu = menu_bar.addMenu("Tools")
         for label, fn in [
+            ("⚡ Auto-Tune My Device Hardware (GTX/CPU)", self.run_hardware_autotune),
+            ("🛠 Developer Tools & Subsystem Inspector (Level C)", self.open_developer_tools),
+            ("⚙️ Settings Center (14 Categories)", self.open_settings_center),
             ("Performance Radar & Matrix", self.open_performance_radar),
             ("Toggle Embedded Terminal", self.toggle_terminal),
             ("Run Tests (pytest)", self.run_tests),
@@ -4279,6 +4297,49 @@ class Studio(QMainWindow):
         if hasattr(self, "tabs"):
             self.tabs.setFocus()
             self.statusBar().showMessage("Synchronous Surface (Editor View) Active", 3000)
+
+    def open_developer_tools(self):
+        from ui.developer_tools_dialog import DeveloperToolsDialog
+        dlg = DeveloperToolsDialog(self)
+        dlg.exec_()
+
+    def open_settings_center(self):
+        from ui.settings_center import SettingsCenterDialog, SettingsStore
+        store = SettingsStore(path=SETTINGS_PATH)
+        dlg = SettingsCenterDialog(store=store, parent=self)
+        if dlg.exec_() == QDialog.Accepted:
+            self.settings = store.data
+            self.save_settings()
+            self.populate_providers_combo()
+            self.refresh_models()
+            self.statusBar().showMessage("PRUBETH Settings Center Config Applied", 3000)
+
+    def run_hardware_autotune(self):
+        from horizon_engine.hardware_autotuner import HardwareAutoTuner
+        res = HardwareAutoTuner.synthesize_tuning()
+        self.settings = HardwareAutoTuner.apply_to_settings(self.settings, res)
+        write_json(SETTINGS_PATH, self.settings)
+        msg = (
+            f"Hardware Auto-Tuned Successfully!\n\n"
+            f"Detected Tier: {res.suggested_tier}\n"
+            f"CPU Threads: {res.profile.cpu_threads}\n"
+            f"RAM: {res.profile.ram_total_mb} MB\n"
+            f"GPU: {res.profile.gpu_name} ({res.profile.vram_total_mb} MB VRAM)\n\n"
+            f"Configuration: {res.diagnostic_summary}"
+        )
+        QMessageBox.information(self, "Hardware Auto-Tuner", msg)
+        self.statusBar().showMessage(f"Hardware Auto-Tuned: {res.suggested_tier} ({res.profile.gpu_name})", 5000)
+
+    def apply_layout_preset(self, preset_name: str):
+        from ui.panel_registry import PanelRegistry
+        preset = PanelRegistry.get_instance().get_preset(preset_name)
+        if not preset:
+            return
+        if preset.active_surface == "mission_control":
+            self.open_mission_control()
+        else:
+            self.show_editor_view()
+        self.statusBar().showMessage(f"Applied Layout Preset: {preset.name}", 3000)
 
     def run_tests(self):
         self.bottom_tabs.setCurrentIndex(0)
