@@ -1,6 +1,6 @@
 """
 PRUBETH IDE — Visual Activity Bar Widget
-Provides a vertical 48px navigation rail inspired by VS Code and Antigravity IDE.
+Provides a vertical 48px navigation rail for PRUBETH Horizon IDE.
 """
 from PyQt5.QtCore import Qt, pyqtSignal, QSize
 from PyQt5.QtWidgets import (
@@ -10,7 +10,7 @@ from PyQt5.QtGui import QFont, QCursor
 
 
 class ActivityBarButton(QPushButton):
-    """Custom icon button for the VS Code / Antigravity style Activity Bar."""
+    """Custom icon button for the Horizon visual Activity Bar."""
     def __init__(self, icon_text: str, tooltip: str, parent=None):
         super().__init__(icon_text, parent)
         self.setToolTip(tooltip)

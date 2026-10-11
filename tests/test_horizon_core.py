@@ -1,5 +1,5 @@
 """
-Comprehensive Unit & Integration Test Suite for Antigravity Core Subsystems.
+Comprehensive Unit & Integration Test Suite for PRUBETH Horizon Core Subsystems.
 Validates:
 1. PRINCE2 Stage-Gate governance & ReAct reasoning/action trace loops
 2. Artifact Engine & Google-Docs-style inline commenting loops
@@ -13,12 +13,12 @@ import json
 import pytest
 from pathlib import Path
 
-from antigravity.stage_gate import StageGateEngine, StageStatus
-from antigravity.artifacts import ArtifactEngine, ArtifactType
-from antigravity.worktree_sandbox import WorktreeSandboxManager
-from antigravity.skills import SkillsEngine, SkillManifest
-from antigravity.browser_verifier import BrowserVerificationRunner
-from antigravity.mission_control import MissionControlOrchestrator, SubagentMission
+from horizon_engine.stage_gate import StageGateEngine, StageStatus
+from horizon_engine.artifacts import ArtifactEngine, ArtifactType
+from horizon_engine.worktree_sandbox import WorktreeSandboxManager
+from horizon_engine.skills import SkillsEngine, SkillManifest
+from horizon_engine.browser_verifier import BrowserVerificationRunner
+from horizon_engine.mission_control import MissionControlOrchestrator, SubagentMission
 
 
 def test_stage_gate_engine_transitions_and_governance():
@@ -78,7 +78,7 @@ def test_artifact_engine_and_inline_commenting_loop(tmp_path):
     )
     assert plan.artifact_id.startswith("plan-")
     assert plan.artifact_type == ArtifactType.IMPLEMENTATION_PLAN
-    assert (tmp_path / ".antigravity" / "artifacts" / "task-auth" / "implementation_plan.md").exists()
+    assert (tmp_path / ".horizon" / "artifacts" / "task-auth" / "implementation_plan.md").exists()
 
     # 2. Add inline comment (Google Docs style mid-flight feedback)
     comment = engine.add_inline_comment(

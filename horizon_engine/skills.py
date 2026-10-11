@@ -1,5 +1,5 @@
 """
-PRUBETH IDE — Antigravity Reusable Skill Protocol (SKILL.md) & Progressive Disclosure
+PRUBETH IDE — PRUBETH Horizon Reusable Skill Protocol (SKILL.md) & Progressive Disclosure
 Solves LLM Token Dilution & Budget Exhaustion:
 1. On-Demand Discovery: Skills packaged in directories containing a SKILL.md manifest.
 2. Progressive Disclosure: The orchestrator keeps ONLY compact skill signatures in memory
@@ -49,7 +49,7 @@ class SkillsEngine:
         self.search_paths: List[Path] = [
             self.workspace_root / ".skills",
             self.workspace_root / "skills",
-            self.workspace_root / "antigravity" / "skills",
+            self.workspace_root / "horizon_engine" / "skills",
         ]
         if extra_search_paths:
             self.search_paths.extend([Path(p).resolve() for p in extra_search_paths])
@@ -128,7 +128,7 @@ class SkillsEngine:
         )
 
     def _register_default_builtin_skills(self):
-        """Registers built-in Antigravity core skills."""
+        """Registers built-in PRUBETH Horizon core skills."""
         builtins = [
             SkillManifest(
                 name="browser-verification",

@@ -1,5 +1,5 @@
 """
-PRUBETH IDE — Antigravity Browser-Aware Autonomous Verification Loop (/browser)
+PRUBETH IDE — PRUBETH Horizon Browser-Aware Autonomous Verification Loop (/browser)
 Synthesizes findings from Multimodal Web & Computer-Use Agent Studies (Mind2Web, WebArena):
 Instead of guessing whether frontend code works, the agent:
 1. Opens the target page or local dev server URL
@@ -55,7 +55,7 @@ class BrowserVerificationRunner:
     """
 
     def __init__(self, artifacts_dir: Optional[Path] = None):
-        self.artifacts_dir = artifacts_dir or Path(".antigravity/artifacts")
+        self.artifacts_dir = artifacts_dir or Path(".horizon/artifacts")
         self.artifacts_dir.mkdir(parents=True, exist_ok=True)
 
     def verify_local_url(self, url: str, expected_selectors: Optional[List[str]] = None,
@@ -78,7 +78,7 @@ class BrowserVerificationRunner:
         try:
             req = urllib.request.Request(
                 url,
-                headers={"User-Agent": "PRUBETH-Antigravity-Headless-Verifier/3.0"}
+                headers={"User-Agent": "PRUBETH-PRUBETH Horizon-Headless-Verifier/3.0"}
             )
             with urllib.request.urlopen(req, timeout=10) as response:
                 status_code = response.getcode()
@@ -163,7 +163,7 @@ class BrowserVerificationRunner:
             img = Image.new("RGB", (800, 600), color=(17, 18, 24))
             draw = ImageDraw.Draw(img)
             draw.rectangle([10, 10, 790, 590], outline=(0, 240, 255), width=2)
-            draw.text((30, 30), f"Antigravity Headless Verification: {title}", fill=(240, 240, 240))
+            draw.text((30, 30), f"Horizon Autonomous Verification: {title}", fill=(240, 240, 240))
             y = 70
             for el in elements[:10]:
                 draw.text((40, y), f"✓ Verified Element: {el}", fill=(0, 255, 128))

@@ -6,7 +6,7 @@ import time
 import threading
 import pytest
 from pathlib import Path
-from antigravity.dag_scheduler import (
+from horizon_engine.dag_scheduler import (
     TaskDAG, DAGNode, DAGNodeStatus, DAGEdge, DAGEdgeType,
     CycleDetectedError, DAGCheckpointer, DAGScheduler, ParallelExecutor
 )

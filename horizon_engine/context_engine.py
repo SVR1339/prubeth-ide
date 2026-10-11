@@ -1,5 +1,5 @@
 """
-PRUBETH IDE — Antigravity AST-Aware Context Window Manager
+PRUBETH IDE — PRUBETH Horizon AST-Aware Context Window Manager
 Solves the Token Budget & Context Pollution problem for long-running agentic tasks.
 
 Research Foundation:

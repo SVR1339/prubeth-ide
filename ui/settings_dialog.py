@@ -62,7 +62,7 @@ DEFAULT_EXTENSIONS = [
         "name": "VS Code Extension Bridge",
         "category": "IDE Bridges",
         "version": "1.4.0",
-        "author": "Antigravity Systems",
+        "author": "PRUBETH Systems",
         "description": "Bi-directional bridge allowing direct import of VS Code extensions, keybindings, and themes.",
         "icon": "⚡",
         "installed": True,

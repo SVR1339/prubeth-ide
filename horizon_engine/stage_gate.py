@@ -1,5 +1,5 @@
 """
-PRUBETH IDE — Antigravity Stage-Gate Engine (PRINCE2 & ReAct Framework)
+PRUBETH IDE — PRUBETH Horizon Stage-Gate Engine (PRINCE2 & ReAct Framework)
 Synthesizes:
 1. ReAct: Synergizing Reasoning and Acting in Language Models (Yao et al., 2022)
    - Thought: Structured reasoning step

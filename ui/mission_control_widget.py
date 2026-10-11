@@ -13,8 +13,8 @@ from PyQt5.QtWidgets import (
 from PyQt5.QtCore import Qt, pyqtSignal, QTimer
 from PyQt5.QtGui import QFont, QColor
 
-from antigravity.mission_control import MissionControlOrchestrator, SubagentMission
-from antigravity.stage_gate import StageStatus
+from horizon_engine.mission_control import MissionControlOrchestrator, SubagentMission
+from horizon_engine.stage_gate import StageStatus
 
 
 class SpawnMissionDialog(QDialog):

@@ -1,5 +1,5 @@
 ; Inno Setup 6 Script for PRUBETH IDE
-; Codename: PRUBETH Horizon (Antigravity Architecture)
+; Codename: PRUBETH Horizon Autonomous Edition
 ; Official Website: https://www.bsvr.work/
 
 #define MyAppName "PRUBETH IDE"

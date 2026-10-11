@@ -1,5 +1,5 @@
 """
-PRUBETH IDE — Antigravity Persistent Agent Memory Store
+PRUBETH IDE — PRUBETH Horizon Persistent Agent Memory Store
 Solves the "Context Amnesia" problem: long-running agents lose context across sessions.
 
 Research Foundation:

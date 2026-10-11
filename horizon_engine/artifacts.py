@@ -1,5 +1,5 @@
 """
-PRUBETH IDE — Antigravity Artifact Engine & Mid-Flight Review System
+PRUBETH IDE — PRUBETH Horizon Artifact Engine & Mid-Flight Review System
 Solves the HCI "Trust Gap" via Verifiable, Inspectable Output:
 1. Implementation Plans & Task Checklists: Structured roadmaps generated before code execution.
 2. Interactive Diffs: Unified visual hunks highlighting modifications before physical disk writes.
@@ -81,7 +81,7 @@ class ArtifactEngine:
 
     def __init__(self, workspace_root: Path):
         self.workspace_root = Path(workspace_root).resolve()
-        self.artifacts_dir = self.workspace_root / ".antigravity" / "artifacts"
+        self.artifacts_dir = self.workspace_root / ".horizon" / "artifacts"
         self.artifacts_dir.mkdir(parents=True, exist_ok=True)
         self.artifacts: Dict[str, Artifact] = {}
         self._load_cached_artifacts()

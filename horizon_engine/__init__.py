@@ -1,5 +1,5 @@
 """
-Google Antigravity Architecture Core Subsystem for PRUBETH IDE.
+PRUBETH Horizon Autonomous Architecture Core Subsystem.
 Synthesizes ReAct reasoning-acting loops, SWE-bench autonomous issue resolution,
 multimodal browser verification, PRINCE2 stage-gate governance, and
 Dual-Surface (Editor View vs Mission Control) operations.

@@ -4,7 +4,7 @@ Tests: ASTSkeletonizer, SemanticChunker, ContextWindow, and ContextAssembler.
 """
 import time
 import pytest
-from antigravity.context_engine import (
+from horizon_engine.context_engine import (
     ASTSkeletonizer, SemanticChunker, ContextWindow, ContextEntry, ContextAssembler
 )
 

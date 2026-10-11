@@ -14,7 +14,7 @@ from PyQt5.QtWidgets import (
 from PyQt5.QtCore import Qt, pyqtSignal
 from PyQt5.QtGui import QFont, QColor
 
-from antigravity.artifacts import ArtifactEngine, Artifact, ArtifactComment, ArtifactType
+from horizon_engine.artifacts import ArtifactEngine, Artifact, ArtifactComment, ArtifactType
 
 
 class ArtifactViewerWidget(QWidget):

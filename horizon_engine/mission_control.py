@@ -1,5 +1,5 @@
 """
-PRUBETH IDE — Antigravity Agent Manager & Mission Control Orchestrator (DAG Engine)
+PRUBETH IDE — PRUBETH Horizon Agent Manager & Mission Control Orchestrator (DAG Engine)
 Implements:
 1. Dual-Track Agile / Commander-Crew Operating Model:
    - Decoupled interface: Editor View (Synchronous) vs Mission Control (Asynchronous)
@@ -16,11 +16,11 @@ from pathlib import Path
 from dataclasses import dataclass, field, asdict
 from typing import Dict, List, Optional, Any, Callable
 
-from antigravity.stage_gate import StageGateEngine, StageStatus, ReActTraceStep
-from antigravity.artifacts import ArtifactEngine, Artifact, ArtifactType
-from antigravity.worktree_sandbox import WorktreeSandboxManager, SandboxSession
-from antigravity.skills import SkillsEngine
-from antigravity.browser_verifier import BrowserVerificationRunner, BrowserVerificationReport
+from horizon_engine.stage_gate import StageGateEngine, StageStatus, ReActTraceStep
+from horizon_engine.artifacts import ArtifactEngine, Artifact, ArtifactType
+from horizon_engine.worktree_sandbox import WorktreeSandboxManager, SandboxSession
+from horizon_engine.skills import SkillsEngine
+from horizon_engine.browser_verifier import BrowserVerificationRunner, BrowserVerificationReport
 
 
 @dataclass

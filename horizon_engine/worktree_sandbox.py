@@ -1,5 +1,5 @@
 """
-PRUBETH IDE — Antigravity Multi-Tenant Sandbox & Git Worktree Isolation
+PRUBETH IDE — PRUBETH Horizon Multi-Tenant Sandbox & Git Worktree Isolation
 Provides Zero-Interference Execution:
 Each long-running subagent operates within an isolated Git worktree or shadow staging directory.
 Subagents can install temporary dependencies, run destructive commands, and execute unit tests
@@ -30,7 +30,7 @@ class WorktreeSandboxManager:
 
     def __init__(self, workspace_root: Path):
         self.workspace_root = Path(workspace_root).resolve()
-        self.sandboxes_root = self.workspace_root / ".antigravity" / "sandboxes"
+        self.sandboxes_root = self.workspace_root / ".horizon" / "sandboxes"
         self.sandboxes_root.mkdir(parents=True, exist_ok=True)
         self.active_sandboxes: Dict[str, SandboxSession] = {}
 
@@ -95,10 +95,10 @@ class WorktreeSandboxManager:
 
         # Fallback: Copy workspace into isolated shadow staging directory
         sandbox_path.mkdir(parents=True, exist_ok=True)
-        ignore_patterns = shutil.ignore_patterns(".git", ".antigravity", ".venv", "venv", "__pycache__", "node_modules")
+        ignore_patterns = shutil.ignore_patterns(".git", ".horizon", ".venv", "venv", "__pycache__", "node_modules")
 
         for item in self.workspace_root.iterdir():
-            if item.name in {".git", ".antigravity", ".venv", "venv", "__pycache__", "node_modules"}:
+            if item.name in {".git", ".horizon", ".venv", "venv", "__pycache__", "node_modules"}:
                 continue
             dest = sandbox_path / item.name
             try:

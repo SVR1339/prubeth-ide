@@ -5,7 +5,7 @@ Tests: WorkingMemory, EpisodicMemoryStore, SemanticSearch, and AgentMemory faça
 import time
 import pytest
 from pathlib import Path
-from antigravity.memory_store import (
+from horizon_engine.memory_store import (
     WorkingMemory, EpisodicMemoryStore, MemoryEntry, AgentMemory
 )
 

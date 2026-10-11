@@ -1,5 +1,5 @@
 """
-PRUBETH IDE — Antigravity Structured Tool Dispatcher
+PRUBETH IDE — PRUBETH Horizon Structured Tool Dispatcher
 Bridges the ReAct `Action` step to real tool execution with schema validation and audit.
 
 Research Foundation:

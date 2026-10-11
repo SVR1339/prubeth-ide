@@ -22,8 +22,8 @@ from PyQt5.QtWidgets import QApplication
 from PyQt5.QtCore import Qt
 
 from local_ai_studio_pro import Studio
-from antigravity.mission_control import MissionControlOrchestrator
-from antigravity.artifacts import ArtifactEngine
+from horizon_engine.mission_control import MissionControlOrchestrator
+from horizon_engine.artifacts import ArtifactEngine
 from code_oss.composer.engine import ComposerEngine
 from code_oss.context.codebase_indexer import CodebaseIndexer
 from code_oss.extension_host.open_vsx_client import OpenVsxClient
@@ -66,9 +66,9 @@ def test_full_application_crash_and_stress(tmp_path):
     sample_file.write_text("def hello():\n    return 'world'\n", encoding="utf-8")
 
     composer = ComposerEngine(workspace_root=tmp_path)
-    plan = composer.plan_file_change("hello.py", "def hello():\n    return 'antigravity'\n")
+    plan = composer.plan_file_change("hello.py", "def hello():\n    return 'horizon_engine'\n")
     assert plan.file_path == "hello.py"
-    assert "antigravity" in plan.unified_diff
+    assert "horizon_engine" in plan.unified_diff
     print("[OK] Composer unified diff generated cleanly")
 
     # 4. Test Mission Control Subagent DAG Spawning & ReAct Trace Stream

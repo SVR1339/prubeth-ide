@@ -1,11 +1,11 @@
 """
-Local AI Studio Pro — Next-Gen Agentic AI IDE (Antigravity Edition)
+Local AI Studio Pro — Next-Gen Agentic AI IDE (PRUBETH Horizon Edition)
 v2.4.0 — High-Performance Intelligent Multi-Model Router & Self-Healing IDE
 
 Key Features:
   - Intelligent Model Router: Priority Cascade across Gemini 3.8 Flash, Gemini 3.5 Flash, and Local Ollama GPU
   - Zero-Downtime Auto-Failover: Automatic failover from Cloud to Local CUDA GPU without losing context
-  - Antigravity UI Experience: Obsidian Dark Aesthetic, Step Cards, Live Task Drawer, Speed Metrics
+  - PRUBETH Horizon UI Experience: Obsidian Dark Aesthetic, Step Cards, Live Task Drawer, Speed Metrics
   - Instant Auto-Fix Engine: Automatic traceback diagnosis, surgical patching, and re-test verification
   - Polyglot Syntax Highlighting: QScintilla Lexers (Python, JS/TS, C++, Rust, HTML, CSS, JSON, SQL, YAML)
   - Autonomous Multi-Step Tool Engine: Read, Write, Patch, Search, Terminal, Tests
@@ -107,11 +107,11 @@ DEFAULT_EXTENSIONS = [
         "port": 7432,
     },
     {
-        "id": "ext-antigravity-agent",
-        "name": "Antigravity Autonomous Subagent Team",
+        "id": "ext-horizon-agent",
+        "name": "PRUBETH Autonomous Subagent Team",
         "category": "AI Agents",
         "version": "2.2.0",
-        "author": "DeepMind / AGY",
+        "author": "PRUBETH Systems",
         "description": "Spawns parallel background subagents (Researcher, Code Architect, Test Fixer) with multi-turn task queues.",
         "icon": "🚀",
         "installed": True,
@@ -305,7 +305,7 @@ def log_error(source: str, error_msg: str, traceback_str: str = ""):
 
 
 def format_collapsible_thought(text: str) -> str:
-    """Formats <thought> or <thinking> blocks as Antigravity/Cursor collapsible summary blocks."""
+    """Formats <thought> or <thinking> blocks as PRUBETH Horizon/Cursor collapsible summary blocks."""
     def _repl(match):
         thought_body = match.group(1).strip()
         return (
@@ -626,7 +626,7 @@ class LexerFactory:
 # Editor Component
 # ==============================================================================
 class Editor(QsciScintilla):
-    """Antigravity Scintilla editor with polyglot highlighting & Ctrl+K quick edit."""
+    """PRUBETH Horizon Scintilla editor with polyglot highlighting & Ctrl+K quick edit."""
 
     quick_edit_triggered = pyqtSignal()
 
@@ -984,7 +984,7 @@ class CommandPaletteDialog(QDialog):
 # Quick Edit Dialog (Ctrl+K)
 # ==============================================================================
 class QuickEditDialog(QDialog):
-    """Inline AI code transform bar (Cursor/Antigravity style)."""
+    """Inline AI code transform bar (Cursor/PRUBETH Horizon style)."""
 
     def __init__(self, target_label="Current Selection", parent=None):
         super().__init__(parent)
@@ -1525,7 +1525,7 @@ class ToolExecutionWorker(QThread):
 
 
 class AgentToolEngine:
-    """Parses and executes autonomous tool actions (Antigravity-level agent loop)."""
+    """Parses and executes autonomous tool actions (PRUBETH Horizon-level agent loop)."""
 
     def __init__(self, workspace_root, settings=None, approval_hook=None):
         self.root = Path(workspace_root).resolve()
@@ -2583,7 +2583,7 @@ class AccessoryItemWidget(QWidget):
 
 class AccessoryPopup(QDialog):
     """
-    Accessory & Tool Picker popup menu matching SO NAIVE / Antigravity design.
+    Accessory & Tool Picker popup menu matching SO NAIVE / PRUBETH Horizon design.
     """
     def __init__(self, studio, parent=None):
         super().__init__(parent, Qt.Popup | Qt.FramelessWindowHint)
@@ -2670,7 +2670,7 @@ class AccessoryPopup(QDialog):
 # ==============================================================================
 class SessionInspectorWidget(QWidget):
     """
-    Inspector Panel matching Antigravity & SO NAIVE IDE design.
+    Inspector Panel matching PRUBETH Horizon & SO NAIVE IDE design.
     """
     def __init__(self, studio, parent=None):
         super().__init__(parent)
@@ -2954,7 +2954,7 @@ class CustomizationsDialog(QDialog):
 
 
 # ==============================================================================
-# Main Studio Window (Antigravity UI Experience)
+# Main Studio Window (PRUBETH Horizon UI Experience)
 # ==============================================================================
 class Studio(QMainWindow):
     """Flagship Local AI Studio Pro window."""
@@ -3242,7 +3242,7 @@ class Studio(QMainWindow):
         ll.setContentsMargins(6, 6, 6, 6)
         ll.setSpacing(6)
 
-        # 1. Top Brand & Antigravity Navigation (media_1791535076635_85d66222)
+        # 1. Top Brand & PRUBETH Horizon Navigation (media_1791535076635_85d66222)
         top_nav = QVBoxLayout()
         top_nav.setSpacing(4)
 
@@ -3404,12 +3404,12 @@ class Studio(QMainWindow):
         except Exception:
             self.open_vsx_widget = None
 
-        # Tab 8: Antigravity Mission Control (Agent Manager)
+        # Tab 8: PRUBETH Horizon Mission Control (Agent Manager)
         try:
-            from antigravity.mission_control import MissionControlOrchestrator
+            from horizon_engine.mission_control import MissionControlOrchestrator
             from ui.mission_control_widget import MissionControlWidget
-            self.antigravity_orchestrator = MissionControlOrchestrator(self.root)
-            self.mission_control_widget = MissionControlWidget(self.antigravity_orchestrator, parent=self)
+            self.horizon_orchestrator = MissionControlOrchestrator(self.root)
+            self.mission_control_widget = MissionControlWidget(self.horizon_orchestrator, parent=self)
             self.mission_control_widget.switchToEditorRequested.connect(self.show_editor_view)
             self.left_tabs.addTab(self.mission_control_widget, "🚀 Mission Control")
         except Exception:
@@ -3418,8 +3418,8 @@ class Studio(QMainWindow):
         # Tab 9: Verifiable Artifact Inspector
         try:
             from ui.artifact_viewer_widget import ArtifactViewerWidget
-            if hasattr(self, "antigravity_orchestrator") and self.antigravity_orchestrator:
-                self.artifact_viewer_widget = ArtifactViewerWidget(self.antigravity_orchestrator.artifact_engine, parent=self)
+            if hasattr(self, "horizon_orchestrator") and self.horizon_orchestrator:
+                self.artifact_viewer_widget = ArtifactViewerWidget(self.horizon_orchestrator.artifact_engine, parent=self)
                 self.left_tabs.addTab(self.artifact_viewer_widget, "📜 Artifacts")
         except Exception:
             self.artifact_viewer_widget = None
@@ -3645,7 +3645,7 @@ class Studio(QMainWindow):
             }
         """)
 
-        # Left status indicators (VS Code / Antigravity style)
+        # Left status indicators (VS Code / PRUBETH Horizon style)
         self.git_stat_label = QLabel("🌿 master [Clean]")
         self.git_stat_label.setStyleSheet("color: #38bdf8; font-weight: bold;")
         self.statusBar().addWidget(self.git_stat_label)
@@ -3658,7 +3658,7 @@ class Studio(QMainWindow):
         self.problems_stat_label.setStyleSheet("color: #10b981; font-weight: bold;")
         self.statusBar().addWidget(self.problems_stat_label)
 
-        self.copilot_stat_label = QLabel("⚡ Antigravity Copilot: IDLE")
+        self.copilot_stat_label = QLabel("⚡ PRUBETH Copilot: IDLE")
         self.copilot_stat_label.setStyleSheet("color: #00F0FF; font-weight: bold;")
         self.statusBar().addWidget(self.copilot_stat_label)
 
@@ -4266,14 +4266,14 @@ class Studio(QMainWindow):
             self.left_tabs.setCurrentWidget(self.mission_control_widget)
             if not self.left_tabs.isVisible():
                 self.left_tabs.show()
-            self.statusBar().showMessage("Antigravity Mission Control (Agent Manager) Active", 3000)
+            self.statusBar().showMessage("PRUBETH Horizon Mission Control (Agent Manager) Active", 3000)
 
     def open_artifact_inspector(self):
         if hasattr(self, "artifact_viewer_widget") and self.artifact_viewer_widget and hasattr(self, "left_tabs"):
             self.left_tabs.setCurrentWidget(self.artifact_viewer_widget)
             if not self.left_tabs.isVisible():
                 self.left_tabs.show()
-            self.statusBar().showMessage("Antigravity Verifiable Artifact Inspector Active", 3000)
+            self.statusBar().showMessage("PRUBETH Verifiable Artifact Inspector Active", 3000)
 
     def show_editor_view(self):
         if hasattr(self, "tabs"):
@@ -5037,7 +5037,7 @@ class Studio(QMainWindow):
         if not self.chat.toPlainText():
             self.chat.setHtml(
                 f"<h3>{APP_NAME} v{APP_VERSION}</h3>"
-                f"<p>Antigravity Intelligent Edition is active.<br>"
+                f"<p>PRUBETH Horizon Intelligent Edition is active.<br>"
                 f"• <b>⚡ Dynamic Cascade:</b> Automatically routes tasks to Gemini 3.8 Flash with instant Local GPU failover.<br>"
                 f"• <b>⚡ Automated Auto-Fix:</b> Repairs runtime errors & tracebacks in 1 click.<br>"
                 f"• <b>Ctrl+K:</b> Inline Quick Edit | <b>Ctrl+P:</b> Quick Open | <b>Ctrl+Shift+P:</b> Command Palette.<br>"

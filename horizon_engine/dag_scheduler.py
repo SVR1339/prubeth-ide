@@ -1,5 +1,5 @@
 """
-PRUBETH IDE — Antigravity Parallel DAG Task Scheduler
+PRUBETH IDE — PRUBETH Horizon Parallel DAG Task Scheduler
 Upgrades MissionControl from sequential to truly parallel subagent DAG execution.
 
 Research Foundation:

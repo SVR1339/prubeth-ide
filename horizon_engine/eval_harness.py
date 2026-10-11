@@ -1,5 +1,5 @@
 """
-PRUBETH IDE — Antigravity SWE-Bench Style Evaluation Harness
+PRUBETH IDE — PRUBETH Horizon SWE-Bench Style Evaluation Harness
 Evidence-based acceptance testing for autonomous coding agents (PRINCE2 Acceptance Stage).
 
 Research Foundation:
@@ -216,7 +216,7 @@ class TestRunnerConfig:
     python_executable: str = sys.executable
     timeout_seconds: float = 120.0
     collect_coverage: bool = False
-    coverage_source_dirs: List[str] = field(default_factory=lambda: ["antigravity/", "core/", "ai/"])
+    coverage_source_dirs: List[str] = field(default_factory=lambda: ["horizon_engine/", "core/", "ai/"])
     extra_pytest_args: List[str] = field(default_factory=list)
     working_dir: Optional[str] = None
     environment_vars: Dict[str, str] = field(default_factory=dict)

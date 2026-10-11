@@ -3,7 +3,7 @@ Gate 16: Structured Tool Dispatcher — Integration Tests
 Tests: ToolSchema, ToolRegistry, ActionParser, ToolDispatcher, and approval gate.
 """
 import pytest
-from antigravity.tool_dispatcher import (
+from horizon_engine.tool_dispatcher import (
     ToolSchema, ToolParameter, ToolRegistry, ToolDispatcher,
     ActionParser, ToolCallResult, DuplicateToolError, UnknownToolError
 )
