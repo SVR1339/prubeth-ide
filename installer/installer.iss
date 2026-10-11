@@ -3,7 +3,7 @@
 ; Official Website: https://www.bsvr.work/
 
 #define MyAppName "PRUBETH IDE"
-#define MyAppVersion "3.0.0"
+#define MyAppVersion "1.12.0"
 #define MyAppPublisher "BSVR Technologies"
 #define MyAppURL "https://www.bsvr.work/"
 #define MyAppExeName "PrubethIDE.exe"
@@ -22,7 +22,7 @@ DefaultGroupName={#MyAppName}
 AllowNoIcons=yes
 LicenseFile=..\LICENSE
 OutputDir=..\dist
-OutputBaseFilename=PrubethIDE-v3.0.0-Setup
+OutputBaseFilename=PrubethIDE-v1.12-Setup
 SetupIconFile=..\assets\icon.ico
 Compression=lzma2/ultra64
 SolidCompression=yes
@@ -30,10 +30,10 @@ WizardStyle=modern
 PrivilegesRequired=lowest
 DisableProgramGroupPage=yes
 UninstallDisplayIcon={app}\{#MyAppExeName}
-VersionInfoVersion=3.0.0.0
+VersionInfoVersion=1.12.0.0
 VersionInfoCompany={#MyAppPublisher}
 VersionInfoDescription={#MyAppName} Setup
-VersionInfoProductVersion=3.0.0.0
+VersionInfoProductVersion=1.12.0.0
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"

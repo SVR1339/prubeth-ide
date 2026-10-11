@@ -1,7 +1,8 @@
-# Core IDE Dependencies for SO NAIVE IDE v3.0.0
+# Core IDE Dependencies for PRUBETH IDE v1.12.0 (Horizon Edition)
 PyQt5>=5.15.10
 QScintilla>=2.14.1
 requests>=2.31.0
+cryptography>=42.0.0
 
 # Optional Developer & Testing Dependencies
 pytest>=8.0.0

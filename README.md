@@ -3,20 +3,20 @@
 <img src="assets/brand_banner.png" alt="PRUBETH IDE Banner" width="650" />
 
 # PRUBETH IDE
-### Bloom, ideas unfolding · Sovereign Agentic Developer Workstation (v3.0.0)
+### Bloom, ideas unfolding · Sovereign Agentic Developer Workstation (v1.12.0 / v1.12)
 
 > **"Bloom, ideas unfolding."**  
 > An ultra-fast, local-first agentic developer workstation engineered with a **Premium Dark Design System**, **Intelligent Multi-Model Cascade**, **1M-Token SSE Reasoning**, **Horizon Hardware Scaling Engine**, **Zero-Plaintext Credential Security**, and **Instant Local CUDA Self-Healing**.
 
-[![Release](https://img.shields.io/badge/Release-v3.0.0--Bloom-9485FF?style=for-the-badge&logo=rocket)](https://github.com/imyouiamyou/prubeth-ide/releases/tag/v3.0.0)
-[![Tests Passing](https://img.shields.io/badge/Tests-287%20%2F%20287%20Passed%20(100%25)-70D6A0?style=for-the-badge&logo=pytest)](FINAL_RELEASE_VERIFICATION.md)
+[![Release](https://img.shields.io/badge/Release-v1.12--Horizon-9485FF?style=for-the-badge&logo=rocket)](https://github.com/imyouiamyou/prubeth-ide/releases/tag/v1.12)
+[![Tests Passing](https://img.shields.io/badge/Tests-303%20%2F%20303%20Passed%20(100%25)-70D6A0?style=for-the-badge&logo=pytest)](FINAL_RELEASE_VERIFICATION.md)
 [![Design](https://img.shields.io/badge/Design%20System-Dark%20Workstation-1D2028?style=for-the-badge)](ui/design_system.py)
 [![Python](https://img.shields.io/badge/Python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue?style=for-the-badge&logo=python)](https://python.org)
 [![CUDA](https://img.shields.io/badge/CUDA-12.6%20Accelerated-76B900?style=for-the-badge&logo=nvidia)](https://developer.nvidia.com/cuda-toolkit)
 [![Platforms](https://img.shields.io/badge/Platforms-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey?style=for-the-badge)](INSTALL.md)
 [![License](https://img.shields.io/badge/License-MIT%20Commercial-70D6A0?style=for-the-badge)](LICENSE)
 
-[**🌐 Official Website**](https://www.bsvr.work/) · [**🚀 Releases (GitHub v3.0.0)**](https://github.com/imyouiamyou/prubeth-ide/releases/tag/v3.0.0) · [**📖 Architecture**](ARCHITECTURE.md) · [**🗺️ Architecture Map**](docs/ARCHITECTURE_MAP.md) · [**⚖️ Reference-IDE Comparison**](docs/REFERENCE_IDE_COMPARISON.md) · [**🛠️ Installation**](INSTALL.md) · [**🧩 Developer Guide**](DEVELOPER_EXTENSIONS_GUIDE.md)
+[**🌐 Official Website**](https://www.bsvr.work/) · [**🚀 Releases (GitHub v1.12)**](https://github.com/imyouiamyou/prubeth-ide/releases/tag/v1.12) · [**📖 Architecture**](ARCHITECTURE.md) · [**🗺️ Architecture Map**](docs/ARCHITECTURE_MAP.md) · [**⚖️ Reference-IDE Comparison**](docs/REFERENCE_IDE_COMPARISON.md) · [**🛠️ Installation**](INSTALL.md) · [**🧩 Developer Guide**](DEVELOPER_EXTENSIONS_GUIDE.md)
 
 </div>
 
@@ -262,22 +262,22 @@ Add custom OpenAI-compatible inference servers (vLLM, LocalAI, LM Studio) in `~/
 | :--- | :--- | :--- |
 | **Local GPU Ollama Throughput** | **30.99 tok/s** | NVIDIA GeForce GTX 1050 Ti (CUDA 12.6) |
 | **Gemini 3.8 Flash Cloud Stream** | **128.4 tok/s** | Google Generative Language SSE |
-| **Automated Test Suite Execution** | **301 / 301 Passing (100%)** | 21 Subsystems across Reliability, Concurrency, Security & Packaging |
+| **Automated Test Suite Execution** | **303 / 303 Passing (100%)** | 22 Subsystems across Reliability, Concurrency, Ed25519 Security & Packaging |
 | **Reliability, Chaos & Meta-Testing** | **69 / 69 Passing (100%)** | Out-of-Process Supervisor, Polyglot Sandboxes & Meta-Harness |
-| **GitHub Bootstrap Installer Suite** | **20 / 20 Passing (100%)** | 70 MiB Threshold, Mode A/B, Range Resume & Security Inspection |
+| **GitHub Bootstrap Installer Suite** | **22 / 22 Passing (100%)** | 70 MiB Threshold, Mode A/B, Range Resume, Ed25519 Signing & Strict TLS Context |
 | **Memory Footprint (Idle)** | **148 MB** | PyQt5 QScintilla Engine |
 | **Preflight & Doctor Status** | **0 Exit Code (Clean Pass)** | Fully verified system dependencies and configuration |
 
 ### Running the Test Suite & Verification CLI
 ```powershell
-# Run full automated test suite (301 tests)
+# Run full automated test suite (303 tests)
 pytest tests/ -v
 
 # Run reliability, polyglot and meta-testing suite (69 tests)
 pytest tests/reliability/ -v
 
-# Run GitHub Bootstrap Installer test suite (20 tests)
-pytest tests/installer/ tests/test_installer_modes.py tests/test_installer_github_download.py -v
+# Run GitHub Bootstrap Installer test suite (22 tests)
+pytest tests/installer/ tests/test_installer_modes.py tests/test_installer_github_download.py tests/test_gate12_release_audit_packaging.py -v
 
 # Run Horizon Continuous Verification Doctor
 python local_ai_studio_pro.py --verify doctor

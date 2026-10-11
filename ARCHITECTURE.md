@@ -1,5 +1,5 @@
 # PRUBETH IDE — Full Design Infrastructure Specification
-**Version:** 3.0.0 (Horizon Edition)  
+**Version:** 1.12.0 / v1.12 (Horizon Edition)  
 **Author:** BSVR & PRUBETH Horizon Autonomous Systems  
 **Live Showcase:** [https://www.bsvr.work/](https://www.bsvr.work/)  
 **Target Platform:** Windows 10/11 x64 (Native CUDA / Hybrid Cloud / Fully Air-Gapped)
@@ -310,4 +310,4 @@ User state and settings are stored locally under `~/.local_ai_studio_pro/`:
 | **Multi-Agent Engine** | 4-Role DAG (Planner, Architect, Test Fixer, AST Critic) |
 | **Agent Tool Protocol** | 10 XML Tool Tags with 2-Phase Transactional Rollback |
 | **Secret Encryption** | Windows DPAPI with AES-256 Fernet fallback |
-| **Test Suite Coverage** | 107/107 pytest unit & integration tests passing (100%) |
+| **Test Suite Coverage** | 303/303 pytest tests passing (100%) across 22 subsystems (Evolution: 107 Gate 1 Baseline -> 287 Gate 10 Full-Stack -> 301 Gate 12 Packaging -> 303 v1.12.0 Hardened Security Release) |

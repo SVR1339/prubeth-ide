@@ -14,7 +14,8 @@ from typing import Dict, Any, Tuple, Optional
 APP_NAME = "PRUBETH"
 APP_DISPLAY_NAME = "PRUBETH IDE — Horizon Edition"
 APP_TAGLINE = "Bloom, ideas unfolding"
-APP_VERSION = "3.0.0"
+APP_VERSION = "1.12.0"
+APP_TAG = "v1.12"
 PUBLISHER = "BSVR Technologies"
 WEBSITE_URL = "https://www.bsvr.work/"
 GITHUB_REPO = "imyouiamyou/prubeth-ide"
@@ -36,13 +37,14 @@ MODE_ONLINE = "online"    # Mode A: Lightweight bootstrap installer (< 70 MiB ru
 MODE_OFFLINE = "offline"  # Mode B: Full standalone installer with embedded payload
 MODE_AUTO = "auto"        # Automatically select based on package size threshold
 
-# --- Cryptographic Trust Anchor ---
-# Trusted public verification anchor embedded into the bootstrapper.
-# In production release signing, manifests are signed using HMAC-SHA256 with the
-# release signing authority key, or verified against this cryptographic trust digest.
-TRUSTED_RELEASE_SIGNER_ID = "BSVR-PRUBETH-RELEASE-SIGNING-AUTHORITY-v3"
+# --- Cryptographic Trust Anchor (Asymmetric Ed25519) ---
+# In accordance with external security audit directive (Finding 3), asymmetric Ed25519 is used.
+# The private signing key is strictly kept OUTSIDE the repository and binaries.
+# Only the public verification key (32 bytes = 64 hex characters) is embedded in the installer.
+# Any prior symmetric HMAC signing key is revoked and invalidated.
+TRUSTED_RELEASE_SIGNER_ID = "BSVR-PRUBETH-RELEASE-AUTHORITY-ED25519-v1"
 TRUSTED_PUBLIC_VERIFICATION_KEY = (
-    "9f8a3c5e7b1d4f2a8e6c0b3d5a7f9e1c2b4d6a8f0e2c4a6b8d0e2f4a6b8c0d2e"
+    "4290a6bf8ef8045d53657eddfcc7839bbf08b3ee2ecc83eedc64d32f54d63129"
 )
 
 # Documented Exit Codes for Automation
@@ -119,12 +121,66 @@ def compute_sha256(file_path: Path) -> str:
     return hasher.hexdigest()
 
 
-def compute_manifest_signature(manifest_bytes: bytes, signing_key: str = TRUSTED_PUBLIC_VERIFICATION_KEY) -> str:
-    """Generates a cryptographic HMAC-SHA256 signature for the manifest bytes."""
-    return hmac.new(signing_key.encode("utf-8"), manifest_bytes, hashlib.sha256).hexdigest()
+def compute_manifest_signature(
+    manifest_bytes: bytes,
+    private_key_hex_or_bytes: Optional[Any] = None
+) -> str:
+    """
+    Generates an asymmetric Ed25519 digital signature for release manifest bytes.
+    The private key is strictly kept OUTSIDE released binaries.
+    Resolves private key from explicit argument, PRUBETH_RELEASE_SIGNING_PRIVATE_KEY env,
+    or local release_signing.key file.
+    Returns 128-hex-character (64-byte) Ed25519 signature.
+    """
+    from cryptography.hazmat.primitives.asymmetric import ed25519
+
+    priv_raw: Optional[bytes] = None
+    if private_key_hex_or_bytes:
+        if isinstance(private_key_hex_or_bytes, bytes):
+            priv_raw = private_key_hex_or_bytes
+        elif isinstance(private_key_hex_or_bytes, str):
+            priv_raw = bytes.fromhex(private_key_hex_or_bytes.strip())
+    else:
+        env_key = os.environ.get("PRUBETH_RELEASE_SIGNING_PRIVATE_KEY")
+        if env_key:
+            priv_raw = bytes.fromhex(env_key.strip())
+        else:
+            key_file = Path(__file__).resolve().parent.parent / "release_signing.key"
+            if key_file.exists():
+                priv_raw = bytes.fromhex(key_file.read_text(encoding="utf-8").strip())
+
+    if not priv_raw:
+        raise ValueError(
+            "Private release signing key not found. Set PRUBETH_RELEASE_SIGNING_PRIVATE_KEY "
+            "or provide a valid release_signing.key outside git."
+        )
+
+    priv_key = ed25519.Ed25519PrivateKey.from_private_bytes(priv_raw)
+    sig_bytes = priv_key.sign(manifest_bytes)
+    return sig_bytes.hex()
 
 
-def verify_manifest_signature(manifest_bytes: bytes, signature_hex: str, verification_key: str = TRUSTED_PUBLIC_VERIFICATION_KEY) -> bool:
-    """Cryptographically verifies that the manifest was issued by the trusted authority."""
-    expected = compute_manifest_signature(manifest_bytes, verification_key)
-    return hmac.compare_digest(expected.lower(), signature_hex.strip().lower())
+def verify_manifest_signature(
+    manifest_bytes: bytes,
+    signature_hex: str,
+    verification_key: str = TRUSTED_PUBLIC_VERIFICATION_KEY
+) -> bool:
+    """
+    Cryptographically verifies an asymmetric Ed25519 signature against the trusted public key.
+    Fails closed: returns True only if the signature is authentic and unaltered;
+    returns False on any error, tampering, or key mismatch.
+    """
+    try:
+        from cryptography.hazmat.primitives.asymmetric import ed25519
+        from cryptography.exceptions import InvalidSignature
+
+        pub_bytes = bytes.fromhex(verification_key.strip())
+        sig_bytes = bytes.fromhex(signature_hex.strip())
+        if len(pub_bytes) != 32 or len(sig_bytes) != 64:
+            return False
+
+        pub_key = ed25519.Ed25519PublicKey.from_public_bytes(pub_bytes)
+        pub_key.verify(sig_bytes, manifest_bytes)
+        return True
+    except Exception:
+        return False

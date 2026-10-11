@@ -55,7 +55,7 @@ def build_installer_executable(mode: str = MODE_ONLINE, threshold_mib: float = D
     payload_zip = INSTALLER_DIR / "app_payload.zip"
 
     # Configure PyInstaller arguments
-    exe_name = "Prubeth-Setup-3.0.0" if effective_mode == MODE_ONLINE else "Prubeth-Offline-Setup-3.0.0"
+    exe_name = f"Prubeth-Setup-{APP_VERSION}" if effective_mode == MODE_ONLINE else f"Prubeth-Offline-Setup-{APP_VERSION}"
     cmd = [
         sys.executable, "-m", "PyInstaller",
         f"--name={exe_name}",
@@ -74,6 +74,8 @@ def build_installer_executable(mode: str = MODE_ONLINE, threshold_mib: float = D
         "--hidden-import=PyQt5.QtCore",
         "--hidden-import=PyQt5.QtGui",
         "--hidden-import=PyQt5.QtWidgets",
+        "--hidden-import=cryptography",
+        "--hidden-import=cryptography.hazmat.primitives.asymmetric.ed25519",
         "--hidden-import=installer.release_config",
         "--hidden-import=installer.manifest_schema",
         "--hidden-import=installer.disk_manager",

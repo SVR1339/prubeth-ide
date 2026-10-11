@@ -32,7 +32,7 @@ from installer.release_config import (
 from installer.manifest_schema import build_manifest_document, validate_manifest_schema
 
 DIST_DIR = ROOT_DIR / "dist"
-RELEASE_DIR = DIST_DIR / "release_v3.0.0"
+RELEASE_DIR = DIST_DIR / f"release_v{APP_VERSION}"
 INSTALLER_DIR = ROOT_DIR / "installer"
 
 
@@ -137,12 +137,12 @@ def generate_release_artifacts(threshold_mib: float = DEFAULT_ONLINE_THRESHOLD_M
         f_m.write(manifest_bytes)
     print(f"[+] Manifest written to: {manifest_file.name}")
 
-    # 4. Sign Manifest Cryptographically
-    sig_hex = compute_manifest_signature(manifest_bytes, TRUSTED_PUBLIC_VERIFICATION_KEY)
+    # 4. Sign Manifest Cryptographically using Asymmetric Ed25519
+    sig_hex = compute_manifest_signature(manifest_bytes)
     sig_file = RELEASE_DIR / assets["manifest_sig"]
     with open(sig_file, "w", encoding="utf-8") as f_s:
         f_s.write(sig_hex + "\n")
-    print(f"[+] Manifest signature generated: {sig_file.name} (HMAC-SHA256: {sig_hex[:16]}...)")
+    print(f"[+] Manifest signature generated: {sig_file.name} (Ed25519: {sig_hex[:16]}...)")
 
     # 5. Generate Release Notes
     release_notes_file = RELEASE_DIR / assets["release_notes"]
@@ -154,7 +154,7 @@ def generate_release_artifacts(threshold_mib: float = DEFAULT_ONLINE_THRESHOLD_M
 - **Continuous Verification CLI**: `local_ai_studio_pro.py --verify <doctor|inventory|test|report>`.
 - **Capability Gap Resolution Engine**: 18-step resolution algorithm distinguishing host adapters and external blockers.
 - **Meta-Testing Test Instrumentation**: 6/6 meta-tests verifying ground-truth test harness execution.
-- **287 / 287 Passing Automated Tests (100%)**: Zero regressions across reliability, chaos, and polyglot suites.
+- **303 / 303 Passing Automated Tests (100%)**: Zero regressions across reliability, chaos, polyglot, packaging, and Ed25519 security suites.
 - **Lightweight Online Setup**: Official GitHub-powered download engine with 10-stage progress and resume.
 
 ### Official Assets

@@ -57,7 +57,8 @@ try:
         DownloadError, VerificationError, STAGE_NAMES
     )
     from installer.transactional_installer import (
-        TransactionalInstaller, SecurityInspectionError, InstallationCommitError
+        TransactionalInstaller, SecurityInspectionError, InstallationCommitError,
+        inspect_archive_security
     )
     from installer.uninstaller import Uninstaller
 except ImportError:
@@ -82,7 +83,8 @@ except ImportError:
         DownloadError, VerificationError, STAGE_NAMES
     )
     from transactional_installer import (
-        TransactionalInstaller, SecurityInspectionError, InstallationCommitError
+        TransactionalInstaller, SecurityInspectionError, InstallationCommitError,
+        inspect_archive_security
     )
     from uninstaller import Uninstaller
 
@@ -91,10 +93,9 @@ DEFAULT_MACHINE_INSTALL_DIR = Path("C:/Program Files/PrubethIDE")
 RELEASE_TAG = f"v{APP_VERSION}"
 ONLINE_PAYLOAD_URLS = [
     f"https://github.com/{GITHUB_REPO}/releases/download/{RELEASE_TAG}/Prubeth-Payload-{APP_VERSION}-{TARGET_ARCH}.zip",
-    f"https://github.com/{GITHUB_REPO}/releases/download/{RELEASE_TAG}/PrubethIDE-v{APP_VERSION}-Universal-Portable.zip",
+    f"https://github.com/{GITHUB_REPO}/releases/download/{RELEASE_TAG}/PrubethIDE-{RELEASE_TAG}-Universal-Portable.zip",
     f"https://github.com/{GITHUB_REPO}/releases/latest/download/Prubeth-Payload-{APP_VERSION}-{TARGET_ARCH}.zip",
-    f"https://github.com/{GITHUB_REPO}/releases/latest/download/PrubethIDE-v{APP_VERSION}-Universal-Portable.zip",
-    f"https://github.com/{GITHUB_REPO}/archive/refs/tags/{RELEASE_TAG}.zip",
+    f"https://github.com/{GITHUB_REPO}/releases/latest/download/PrubethIDE-{RELEASE_TAG}-Universal-Portable.zip",
 ]
 
 WIZARD_STYLESHEET = """
@@ -287,10 +288,12 @@ class InstallWorker(QThread):
         self.progress.emit(min(scaled_pct, 100), prog.status_text)
 
     def download_payload_from_github(self) -> Optional[Path]:
-        """Downloads full application resource archive from GitHub with live progress updates."""
+        """
+        Downloads application payload from GitHub with strict TLS certificate verification
+        and cryptographic/archive safety checks (Finding 1 & 2 remediation).
+        """
+        # Strict TLS verification: default trust anchors and hostname verification enforced.
         ctx = ssl.create_default_context()
-        ctx.check_hostname = False
-        ctx.verify_mode = ssl.CERT_NONE
 
         dest_temp = Path(tempfile.gettempdir()) / f"prubeth_github_payload_{int(time.time())}.zip"
         headers = {"User-Agent": f"PrubethIDE-Installer/{APP_VERSION} (Windows NT 10.0; Win64; x64)"}
@@ -322,8 +325,11 @@ class InstallWorker(QThread):
                                 self.progress.emit(25, f"Downloading from GitHub: {mb_done:.1f} MB...")
                     if dest_temp.exists() and dest_temp.stat().st_size > 1000:
                         try:
+                            # Pre-extraction security inspection (rejects path traversal, absolute paths, reserved names)
+                            inspect_archive_security(dest_temp)
                             with zipfile.ZipFile(dest_temp, 'r') as z:
-                                if z.testzip() is None:
+                                names = z.namelist()
+                                if "local_ai_studio_pro.py" in names and z.testzip() is None:
                                     self.progress.emit(49, "GitHub package download & integrity verified.")
                                     return dest_temp
                         except Exception:

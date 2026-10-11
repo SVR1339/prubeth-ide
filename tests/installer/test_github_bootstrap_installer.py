@@ -77,10 +77,10 @@ def test_delivery_mode_threshold_evaluation():
 
 
 def test_manifest_schema_validation_and_signature():
-    """Verify manifest schema validation and cryptographic HMAC-SHA256 signature."""
+    """Verify manifest schema validation and cryptographic Ed25519 asymmetric signature."""
     doc = build_manifest_document(
-        version="3.0.0",
-        payload_filename="Prubeth-Payload-3.0.0-windows-x64.zip",
+        version="1.12.0",
+        payload_filename="Prubeth-Payload-1.12.0-windows-x64.zip",
         payload_sha256="a" * 64,
         payload_size_bytes=20000000,
         min_required_disk_bytes=60000000,
@@ -90,15 +90,17 @@ def test_manifest_schema_validation_and_signature():
     assert is_valid is True
     assert err is None
 
-    # Sign manifest
+    # Sign manifest using Ed25519 asymmetric signature
     doc_bytes = json.dumps(doc).encode("utf-8")
-    sig = compute_manifest_signature(doc_bytes, TRUSTED_PUBLIC_VERIFICATION_KEY)
-    assert len(sig) == 64
+    sig = compute_manifest_signature(doc_bytes)
+    assert len(sig) == 128  # 64 bytes = 128 hex chars in Ed25519
 
-    # Verify signature
+    # Verify signature against public verification key
     assert verify_manifest_signature(doc_bytes, sig, TRUSTED_PUBLIC_VERIFICATION_KEY) is True
     # Forged signature must fail
-    assert verify_manifest_signature(doc_bytes, "0" * 64, TRUSTED_PUBLIC_VERIFICATION_KEY) is False
+    assert verify_manifest_signature(doc_bytes, "0" * 128, TRUSTED_PUBLIC_VERIFICATION_KEY) is False
+    # Tampered bytes must fail
+    assert verify_manifest_signature(b'{"tampered": true}', sig, TRUSTED_PUBLIC_VERIFICATION_KEY) is False
 
 
 def test_manifest_version_mismatch_rejected():
@@ -111,7 +113,7 @@ def test_manifest_version_mismatch_rejected():
         min_required_disk_bytes=60000000,
         required_files=["local_ai_studio_pro.py"]
     )
-    is_compat, err = verify_manifest_compatibility(doc, expected_version="3.0.0")
+    is_compat, err = verify_manifest_compatibility(doc, expected_version="1.12.0")
     assert is_compat is False
     assert "Version mismatch" in err
 
@@ -417,3 +419,79 @@ def test_uninstaller_preserves_user_projects_and_models(tmp_path):
 def compute_sha256_bytes(data: bytes) -> str:
     import hashlib
     return hashlib.sha256(data).hexdigest()
+
+
+# =====================================================================
+# 4. EXTERNAL AUDIT SECURITY REMEDIATION TESTS (Findings 1 & 2)
+# =====================================================================
+
+def test_tls_verification_enforced_and_invalid_cert_fails_closed(tmp_path):
+    """
+    Finding 1 Remediation Test:
+    Verify that SecureDownloadEngine and ReleaseMetadataResolver enforce strict TLS verification
+    (check_hostname=True, verify_mode=CERT_REQUIRED) and fail closed on certificate/hostname errors.
+    """
+    import ssl
+    resolver = ReleaseMetadataResolver()
+    assert resolver.ssl_context.check_hostname is True
+    assert resolver.ssl_context.verify_mode == ssl.CERT_REQUIRED
+
+    downloader = SecureDownloadEngine()
+    assert downloader.ssl_context.check_hostname is True
+    assert downloader.ssl_context.verify_mode == ssl.CERT_REQUIRED
+
+    # Simulate SSL certificate verification failure
+    with patch("urllib.request.urlopen", side_effect=ssl.SSLCertVerificationError("Certificate verify failed: self signed certificate")):
+        with pytest.raises(DownloadError) as exc_info:
+            downloader.download_payload(
+                payload_url="https://github.com/imyouiamyou/prubeth-ide/releases/download/v1.12.0/payload.zip",
+                expected_sha256="0" * 64,
+                expected_size_bytes=1024,
+                destination_dir=tmp_path
+            )
+        assert "Certificate verify failed" in str(exc_info.value) or "SSL" in str(exc_info.value) or "Download interrupted" in str(exc_info.value)
+
+    # Ensure no partial files leaked into destination
+    leftover_files = list(tmp_path.glob("*.zip"))
+    assert len(leftover_files) == 0
+
+
+def test_unauthenticated_download_rejected_fails_closed(tmp_path):
+    """
+    Finding 2 Remediation Test:
+    Verify that downloaded archives with invalid or unverified manifests/signatures
+    fail closed and cannot be staged or installed.
+    """
+    # Create fake archive
+    fake_zip = tmp_path / "unauthenticated.zip"
+    with zipfile.ZipFile(fake_zip, 'w') as z:
+        z.writestr("local_ai_studio_pro.py", "# malicious or untrusted code\n")
+
+    fake_bytes = fake_zip.read_bytes()
+    expected_sha = compute_sha256_bytes(fake_bytes)
+
+    # Manifest with forged signature
+    manifest = {
+        "schema_version": "1.0",
+        "product": APP_NAME,
+        "version": APP_VERSION,
+        "channel": "stable",
+        "architecture": "windows-x64",
+        "payload_filename": "unauthenticated.zip",
+        "payload_sha256": expected_sha,
+        "payload_size_bytes": len(fake_bytes),
+        "min_required_disk_bytes": 1000000,
+        "required_files": ["local_ai_studio_pro.py"]
+    }
+    manifest_bytes = json.dumps(manifest).encode("utf-8")
+    forged_sig = "f" * 128
+
+    assert verify_manifest_signature(manifest_bytes, forged_sig, TRUSTED_PUBLIC_VERIFICATION_KEY) is False
+
+    # Resolver must reject the forged release
+    resolver = ReleaseMetadataResolver()
+    with patch.object(resolver, "_fetch_url_bytes", side_effect=[manifest_bytes, forged_sig.encode("utf-8")]):
+        with pytest.raises(VerificationError) as exc_info:
+            resolver.resolve_release()
+        assert "authenticity verification failed" in str(exc_info.value).lower() or "signature does not match" in str(exc_info.value).lower()
+

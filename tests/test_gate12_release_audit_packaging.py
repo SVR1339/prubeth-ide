@@ -18,13 +18,13 @@ from build_setup_exe import create_payload_archive, ROOT_DIR, INSTALLER_DIR
 
 
 def test_release_manifest_metadata_and_versioning():
-    """Verify consistent version 3.0.0 across all release manifests."""
-    assert core.__version__ == "3.0.0"
+    """Verify consistent version 1.12.0 across all release manifests."""
+    assert core.__version__ == "1.12.0"
 
     pyproject_file = ROOT_DIR / "pyproject.toml"
     assert pyproject_file.exists()
     pyproject_text = pyproject_file.read_text(encoding="utf-8")
-    assert 'version = "3.0.0"' in pyproject_text or 'version = "3.0"' in pyproject_text or "3.0.0" in pyproject_text
+    assert 'version = "1.12.0"' in pyproject_text or 'version = "1.12"' in pyproject_text or "1.12.0" in pyproject_text
 
     readme_file = ROOT_DIR / "README.md"
     assert readme_file.exists()
@@ -88,7 +88,7 @@ def test_inno_setup_installer_script():
     assert iss_file.exists()
     iss_content = iss_file.read_text(encoding="utf-8")
 
-    assert '#define MyAppVersion "3.0.0"' in iss_content
+    assert '#define MyAppVersion "1.12.0"' in iss_content or '#define MyAppVersion "1.12"' in iss_content
     assert "DefaultDirName=" in iss_content
     assert "UninstallDisplayIcon=" in iss_content
     assert "OutputBaseFilename=" in iss_content

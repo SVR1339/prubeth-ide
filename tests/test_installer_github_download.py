@@ -25,7 +25,7 @@ def test_online_payload_urls_configured():
     """Verify that multiple redundant GitHub mirrors are configured."""
     assert len(ONLINE_PAYLOAD_URLS) >= 3
     assert any("github.com/imyouiamyou/prubeth-ide" in url for url in ONLINE_PAYLOAD_URLS)
-    assert any("releases/download/v3.0.0" in url for url in ONLINE_PAYLOAD_URLS)
+    assert any(f"releases/download/v{APP_VERSION}" in url or "releases/download/v1.12" in url for url in ONLINE_PAYLOAD_URLS)
     assert any("releases/latest/download" in url for url in ONLINE_PAYLOAD_URLS)
 
 
@@ -48,7 +48,8 @@ def test_installer_downloads_from_github_when_no_local_payload(tmp_path):
         target_dir=str(target_install),
         create_desktop=False,
         create_startmenu=False,
-        payload_zip=None
+        payload_zip=None,
+        mode="online"
     )
 
     # Mock urllib.request.urlopen returning the mock zip payload
