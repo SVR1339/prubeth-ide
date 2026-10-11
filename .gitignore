@@ -34,3 +34,5 @@ installer/app_payload.zip
 
 # Scratch scripts (temporary experiment artifacts)
 scratch/
+
+.github/
