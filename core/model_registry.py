@@ -83,6 +83,32 @@ class ModelRegistry:
             last_tested_status="verified"
         ),
         ModelCapability(
+            model_id="redsage-8b",
+            provider="Ollama",
+            display_name="RedSage 8B Cybersecurity (Local Unrestricted)",
+            is_local=True,
+            supports_streaming=True,
+            supports_tools=True,
+            supports_vision=False,
+            context_window=8192,
+            privacy_tier="local_offline",
+            approx_latency_ms=75.0,
+            last_tested_status="verified"
+        ),
+        ModelCapability(
+            model_id="redsage-8b:latest",
+            provider="Ollama",
+            display_name="RedSage 8B Cybersecurity (Local Unrestricted)",
+            is_local=True,
+            supports_streaming=True,
+            supports_tools=True,
+            supports_vision=False,
+            context_window=8192,
+            privacy_tier="local_offline",
+            approx_latency_ms=75.0,
+            last_tested_status="verified"
+        ),
+        ModelCapability(
             model_id="gpt-4o",
             provider="OpenAI",
             display_name="GPT-4o Omnimodal",
@@ -124,11 +150,11 @@ class ModelRegistry:
     ]
 
     DEFAULT_TASK_FALLBACKS = {
-        "code_generation": ["gemini-3.8-flash", "qwen2.5:1.5b", "gpt-4o"],
+        "code_generation": ["gemini-3.8-flash", "qwen2.5:1.5b", "redsage-8b", "gpt-4o"],
         "quick_edit": ["gemini-3.8-flash", "qwen2.5:1.5b", "llama-3.3-70b-versatile"],
-        "fast_chat": ["qwen2.5:1.5b", "gemini-3.8-flash", "llama-3.3-70b-versatile"],
-        "planning": ["claude-3-7-sonnet-20250219", "gemini-3.8-flash", "deepseek-r1:7b"],
-        "troubleshooting": ["gemini-3.8-flash", "qwen2.5:1.5b", "gpt-4o"]
+        "fast_chat": ["qwen2.5:1.5b", "redsage-8b", "gemini-3.8-flash", "llama-3.3-70b-versatile"],
+        "planning": ["claude-3-7-sonnet-20250219", "gemini-3.8-flash", "deepseek-r1:7b", "redsage-8b"],
+        "troubleshooting": ["gemini-3.8-flash", "redsage-8b", "qwen2.5:1.5b", "gpt-4o"]
     }
 
     def __init__(self, config_dir: Optional[Path] = None):
