@@ -5233,6 +5233,19 @@ class Studio(QMainWindow):
 
 
 def main():
+    if len(sys.argv) > 1 and sys.argv[1] == "--verify":
+        from core.universal_cli_runner import UniversalCliRunner
+        runner = UniversalCliRunner()
+        subcmd = sys.argv[2] if len(sys.argv) > 2 else "doctor"
+        if subcmd == "doctor":
+            sys.exit(runner.execute_doctor())
+        elif subcmd == "inventory":
+            sys.exit(runner.execute_inventory())
+        elif subcmd == "report":
+            sys.exit(runner.execute_report())
+        else:
+            sys.exit(runner.execute_test(subcmd))
+
     try:
         from core.startup import AuthoritativeLauncher
         launcher = AuthoritativeLauncher()

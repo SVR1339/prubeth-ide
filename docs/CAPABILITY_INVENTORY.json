@@ -1,0 +1,451 @@
+{
+  "timestamp": 1791736989.6017468,
+  "total_capabilities": 12,
+  "verified_count": 12,
+  "implemented_count": 0,
+  "degraded_count": 0,
+  "missing_count": 0,
+  "blocked_count": 0,
+  "capabilities": [
+    {
+      "id": "CAP-GUI-01",
+      "name": "PyQt5 Desktop Main Window & Staged Startup",
+      "subsystem": "Application Lifecycle & GUI",
+      "module": "local_ai_studio_pro",
+      "entry_point": "local_ai_studio_pro:Studio",
+      "dependency_chain": [
+        "PyQt5.QtWidgets",
+        "PyQt5.QtCore",
+        "PyQt5.QtGui"
+      ],
+      "public_interface": "Studio.show(), Studio.close()",
+      "configuration": {
+        "theme": "dark",
+        "layout": "default"
+      },
+      "required_permissions": [
+        "local_display"
+      ],
+      "supported_platforms": [
+        "Windows",
+        "Linux",
+        "macOS"
+      ],
+      "required_external_tools": [],
+      "health_check_method": "local_ai_studio_pro.py --preflight",
+      "test_suite": "tests/test_startup_lifecycle.py",
+      "failure_recovery_behavior": "Auto-fallback to safe mode and clean default layout",
+      "evidence_location": "tests/test_startup_lifecycle.py",
+      "status": "VERIFIED"
+    },
+    {
+      "id": "CAP-EDT-01",
+      "name": "QScintilla 25-Language Polyglot Code Editor",
+      "subsystem": "Code Editor",
+      "module": "local_ai_studio_pro",
+      "entry_point": "local_ai_studio_pro:EditorTabWidget",
+      "dependency_chain": [
+        "PyQt5.Qsci.QsciScintilla",
+        "core.polyglot_assurance_engine"
+      ],
+      "public_interface": "EditorTabWidget.create_lexer(path)",
+      "configuration": {
+        "font": "Cascadia Code",
+        "tab_size": 4
+      },
+      "required_permissions": [],
+      "supported_platforms": [
+        "Windows",
+        "Linux",
+        "macOS"
+      ],
+      "required_external_tools": [],
+      "health_check_method": "UniversalPolyglotAssuranceEngine.test_all_lexers_resilience()",
+      "test_suite": "tests/reliability/test_polyglot_assurance_engine.py",
+      "failure_recovery_behavior": "Fallback to QsciLexerPython or plaintext editor on unknown syntax",
+      "evidence_location": "tests/reliability/test_polyglot_assurance_engine.py",
+      "status": "VERIFIED"
+    },
+    {
+      "id": "CAP-WKS-01",
+      "name": "WorkspaceGuard Atomic Persistence & Traversal Jail",
+      "subsystem": "Workspace & Filesystem",
+      "module": "core.workspace",
+      "entry_point": "core.workspace:WorkspaceGuard",
+      "dependency_chain": [
+        "pathlib",
+        "threading",
+        "shutil"
+      ],
+      "public_interface": "WorkspaceGuard.safe_write(), safe_read(), canonicalize()",
+      "configuration": {
+        "max_workspace_bytes": 1073741824,
+        "backup": true
+      },
+      "required_permissions": [
+        "filesystem_read_write"
+      ],
+      "supported_platforms": [
+        "Windows",
+        "Linux",
+        "macOS"
+      ],
+      "required_external_tools": [],
+      "health_check_method": "WorkspaceGuard.canonicalize('.')",
+      "test_suite": "tests/test_workspace.py",
+      "failure_recovery_behavior": "Automatic rollback to .bak snapshot on write failure",
+      "evidence_location": "tests/test_workspace.py",
+      "status": "VERIFIED"
+    },
+    {
+      "id": "CAP-SCM-01",
+      "name": "Git Source Control Service & Working Tree Integrity",
+      "subsystem": "Source Control",
+      "module": "source_control.git_service",
+      "entry_point": "source_control.git_service:GitService",
+      "dependency_chain": [
+        "subprocess",
+        "shutil"
+      ],
+      "public_interface": "GitService.status(), stage(), commit(), diff(), branch()",
+      "configuration": {
+        "git_executable": "git"
+      },
+      "required_permissions": [
+        "subprocess_exec"
+      ],
+      "supported_platforms": [
+        "Windows",
+        "Linux",
+        "macOS"
+      ],
+      "required_external_tools": [
+        "git"
+      ],
+      "health_check_method": "git --version",
+      "test_suite": "tests/test_source_control.py",
+      "failure_recovery_behavior": "Read-only status refresh, stale lock recovery, and uncommitted edit preservation",
+      "evidence_location": "tests/test_source_control.py",
+      "status": "VERIFIED"
+    },
+    {
+      "id": "CAP-AGT-01",
+      "name": "TaskEngine & DAG Scheduler Concurrency Guard",
+      "subsystem": "AI Agents & Orchestration",
+      "module": "core.task_engine",
+      "entry_point": "core.task_engine:TaskEngine",
+      "dependency_chain": [
+        "sqlite3",
+        "concurrent.futures",
+        "horizon_engine.dag_scheduler"
+      ],
+      "public_interface": "TaskEngine.create_task(), start_task(), transition_state()",
+      "configuration": {
+        "db_path": "tasks.db",
+        "max_workers": 8
+      },
+      "required_permissions": [
+        "sqlite_wal"
+      ],
+      "supported_platforms": [
+        "Windows",
+        "Linux",
+        "macOS"
+      ],
+      "required_external_tools": [],
+      "health_check_method": "TaskEngine.get_tasks()",
+      "test_suite": "tests/test_gate5_and_6_workers_and_persistence.py",
+      "failure_recovery_behavior": "SQLite WAL journal checkpoint recovery, rollback to previous task state",
+      "evidence_location": "tests/test_gate5_and_6_workers_and_persistence.py",
+      "status": "VERIFIED"
+    },
+    {
+      "id": "CAP-LSP-01",
+      "name": "Language Server Protocol (LSP) JSON-RPC 2.0 Engine",
+      "subsystem": "Language Services",
+      "module": "language_services.lsp_client",
+      "entry_point": "language_services.lsp_client:LspClient",
+      "dependency_chain": [
+        "subprocess",
+        "json",
+        "threading",
+        "queue"
+      ],
+      "public_interface": "LspClient.start(), get_definition(), get_diagnostics()",
+      "configuration": {
+        "timeout_seconds": 10
+      },
+      "required_permissions": [
+        "subprocess_exec"
+      ],
+      "supported_platforms": [
+        "Windows",
+        "Linux",
+        "macOS"
+      ],
+      "required_external_tools": [
+        "pylsp",
+        "pyright"
+      ],
+      "health_check_method": "LspClient.start()",
+      "test_suite": "tests/test_language_services.py",
+      "failure_recovery_behavior": "Graceful restart of server process; fallback to regex tokenization",
+      "evidence_location": "tests/test_language_services.py",
+      "status": "VERIFIED"
+    },
+    {
+      "id": "CAP-DAP-01",
+      "name": "Debug Adapter Protocol (DAP) Client Engine",
+      "subsystem": "Debugging",
+      "module": "debugging.dap_client",
+      "entry_point": "debugging.dap_client:DapClient",
+      "dependency_chain": [
+        "subprocess",
+        "json",
+        "threading",
+        "queue"
+      ],
+      "public_interface": "DapClient.start(), set_breakpoint(), launch()",
+      "configuration": {
+        "timeout_seconds": 10
+      },
+      "required_permissions": [
+        "subprocess_exec"
+      ],
+      "supported_platforms": [
+        "Windows",
+        "Linux",
+        "macOS"
+      ],
+      "required_external_tools": [
+        "debugpy"
+      ],
+      "health_check_method": "DapClient.start()",
+      "test_suite": "tests/test_debugging.py",
+      "failure_recovery_behavior": "Disconnect containment without crashing IDE GUI process",
+      "evidence_location": "tests/test_debugging.py",
+      "status": "VERIFIED"
+    },
+    {
+      "id": "CAP-EXT-01",
+      "name": "Plugin Manager & Host Process Isolation Sandbox",
+      "subsystem": "Extensions & Plugins",
+      "module": "plugins.manager",
+      "entry_point": "plugins.manager:PluginManager",
+      "dependency_chain": [
+        "plugins.sandbox",
+        "plugins.hooks"
+      ],
+      "public_interface": "PluginManager.load_plugin(), invoke_hook()",
+      "configuration": {
+        "plugin_dir": "plugins/"
+      },
+      "required_permissions": [
+        "module_import"
+      ],
+      "supported_platforms": [
+        "Windows",
+        "Linux",
+        "macOS"
+      ],
+      "required_external_tools": [],
+      "health_check_method": "PluginManager.list_plugins()",
+      "test_suite": "tests/test_plugins.py",
+      "failure_recovery_behavior": "Isolate plugin crashes; disable misbehaving plugin; preserve IDE state",
+      "evidence_location": "tests/test_plugins.py",
+      "status": "VERIFIED"
+    },
+    {
+      "id": "CAP-HW-01",
+      "name": "Horizon Hardware Autotuner & Dynamic GPU Scaling",
+      "subsystem": "Hardware & Performance Scaling",
+      "module": "horizon_engine.hardware_autotuner",
+      "entry_point": "horizon_engine.hardware_autotuner:HardwareAutotuner",
+      "dependency_chain": [
+        "torch",
+        "psutil"
+      ],
+      "public_interface": "HardwareAutotuner.detect_hardware(), get_tier()",
+      "configuration": {
+        "reserved_os_headroom_mb": 2048
+      },
+      "required_permissions": [],
+      "supported_platforms": [
+        "Windows",
+        "Linux",
+        "macOS"
+      ],
+      "required_external_tools": [],
+      "health_check_method": "HardwareAutotuner.detect_hardware()",
+      "test_suite": "tests/test_hardware_scaling_engine.py",
+      "failure_recovery_behavior": "Graceful degradation from CUDA to DirectML to CPU SIMD",
+      "evidence_location": "tests/test_hardware_scaling_engine.py",
+      "status": "VERIFIED"
+    },
+    {
+      "id": "CAP-SET-01",
+      "name": "Hierarchical Settings & DPAPI Credential Vault",
+      "subsystem": "Configuration & Security",
+      "module": "core.settings",
+      "entry_point": "core.settings:SettingsStore",
+      "dependency_chain": [
+        "json",
+        "ctypes.windll.crypt32"
+      ],
+      "public_interface": "SettingsStore.get(), set(), get_secret(), store_secret()",
+      "configuration": {
+        "config_path": "settings.json"
+      },
+      "required_permissions": [
+        "windows_dpapi"
+      ],
+      "supported_platforms": [
+        "Windows",
+        "Linux",
+        "macOS"
+      ],
+      "required_external_tools": [],
+      "health_check_method": "SettingsStore.get('theme')",
+      "test_suite": "tests/test_settings_center.py",
+      "failure_recovery_behavior": "Recover from 0-byte or corrupted JSON to default safe schema",
+      "evidence_location": "tests/test_settings_center.py",
+      "status": "VERIFIED"
+    },
+    {
+      "id": "CAP-SUP-01",
+      "name": "Out-of-Process Crash Supervisor & Exit Code Watchdog",
+      "subsystem": "Reliability & Supervision",
+      "module": "core.crash_supervisor",
+      "entry_point": "core.crash_supervisor:CrashSupervisor",
+      "dependency_chain": [
+        "subprocess",
+        "psutil",
+        "json"
+      ],
+      "public_interface": "CrashSupervisor.run_supervised()",
+      "configuration": {
+        "max_restarts": 3,
+        "window_seconds": 600
+      },
+      "required_permissions": [
+        "process_spawn"
+      ],
+      "supported_platforms": [
+        "Windows",
+        "Linux",
+        "macOS"
+      ],
+      "required_external_tools": [],
+      "health_check_method": "CrashSupervisor.interpret_exit_code(0)",
+      "test_suite": "tests/reliability/test_crash_supervisor.py",
+      "failure_recovery_behavior": "Enforce bounded restarts; escalate to --safe-mode; persist crash reports",
+      "evidence_location": "tests/reliability/test_crash_supervisor.py",
+      "status": "VERIFIED"
+    },
+    {
+      "id": "CAP-PLY-01",
+      "name": "Universal Polyglot Assurance Engine (25 Languages)",
+      "subsystem": "Polyglot Engineering",
+      "module": "core.polyglot_assurance_engine",
+      "entry_point": "core.polyglot_assurance_engine:UniversalPolyglotAssuranceEngine",
+      "dependency_chain": [
+        "core.workspace",
+        "subprocess",
+        "shutil"
+      ],
+      "public_interface": "UniversalPolyglotAssuranceEngine.run_full_assurance_cycle()",
+      "configuration": {
+        "language_count": 25
+      },
+      "required_permissions": [
+        "subprocess_exec"
+      ],
+      "supported_platforms": [
+        "Windows",
+        "Linux",
+        "macOS"
+      ],
+      "required_external_tools": [],
+      "health_check_method": "UniversalPolyglotAssuranceEngine.discover_toolchains()",
+      "test_suite": "tests/reliability/test_polyglot_assurance_engine.py",
+      "failure_recovery_behavior": "Sanitized environment sandboxing; graceful skip of missing toolchains",
+      "evidence_location": "tests/reliability/test_polyglot_assurance_engine.py",
+      "status": "VERIFIED"
+    }
+  ],
+  "baseline_telemetry": {
+    "timestamp": 1791736989.6017468,
+    "os_platform": "win32",
+    "os_release": "nt",
+    "python_version": "3.12.2",
+    "cpu_count_logical": 8,
+    "cpu_count_physical": 4,
+    "total_ram_mb": 20322.30078125,
+    "available_ram_mb": 6506.5,
+    "disk_free_mb": 88105.14453125,
+    "process_rss_mb": 20.859375,
+    "installed_toolchains": {
+      "git": "E:\\Git\\cmd\\git.EXE",
+      "python": "C:\\Python312\\python.EXE",
+      "node": "C:\\Program Files\\nodejs\\node.EXE",
+      "npm": "C:\\Program Files\\nodejs\\npm.CMD",
+      "dotnet": "C:\\Program Files\\dotnet\\dotnet.EXE",
+      "rustc": null,
+      "cargo": null,
+      "go": null,
+      "java": null,
+      "powershell": "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.EXE"
+    }
+  },
+  "dependency_graph": {
+    "CAP-GUI-01": [
+      "CAP-EDT-01",
+      "CAP-WKS-01",
+      "CAP-SET-01",
+      "CAP-SUP-01"
+    ],
+    "CAP-EDT-01": [
+      "CAP-PLY-01",
+      "CAP-LSP-01"
+    ],
+    "CAP-SCM-01": [
+      "CAP-WKS-01"
+    ],
+    "CAP-AGT-01": [
+      "CAP-WKS-01",
+      "CAP-SET-01"
+    ],
+    "CAP-LSP-01": [
+      "CAP-EDT-01"
+    ],
+    "CAP-DAP-01": [
+      "CAP-EDT-01"
+    ],
+    "CAP-EXT-01": [
+      "CAP-WKS-01"
+    ],
+    "CAP-HW-01": [
+      "CAP-SET-01"
+    ],
+    "CAP-SUP-01": [
+      "CAP-GUI-01"
+    ]
+  },
+  "single_points_of_failure": [
+    {
+      "subsystem": "Workspace Persistence",
+      "risk": "Filesystem write failure could lose active buffer",
+      "mitigation": "Atomic replace with unique tempfile, path lock, and automatic .bak backup"
+    },
+    {
+      "subsystem": "Settings Storage",
+      "risk": "Corrupted settings JSON could prevent IDE launch",
+      "mitigation": "Schema validator with fallback to default safe settings and recovery warning"
+    },
+    {
+      "subsystem": "Model Connectivity",
+      "risk": "Remote cloud model API quota exhaustion or network drop",
+      "mitigation": "Zero-downtime cascade with local Ollama / CUDA GPU auto-failover"
+    }
+  ]
+}

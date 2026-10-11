@@ -9,14 +9,14 @@
 > An ultra-fast, local-first agentic developer workstation engineered with a **Premium Dark Design System**, **Intelligent Multi-Model Cascade**, **1M-Token SSE Reasoning**, **Horizon Hardware Scaling Engine**, **Zero-Plaintext Credential Security**, and **Instant Local CUDA Self-Healing**.
 
 [![Release](https://img.shields.io/badge/Release-v3.0.0--Bloom-9485FF?style=for-the-badge&logo=rocket)](https://github.com/imyouiamyou/prubeth-ide/releases/tag/v3.0.0)
-[![Tests Passing](https://img.shields.io/badge/Tests-281%20%2F%20281%20Passed%20(100%25)-70D6A0?style=for-the-badge&logo=pytest)](FINAL_RELEASE_VERIFICATION.md)
+[![Tests Passing](https://img.shields.io/badge/Tests-287%20%2F%20287%20Passed%20(100%25)-70D6A0?style=for-the-badge&logo=pytest)](FINAL_RELEASE_VERIFICATION.md)
 [![Design](https://img.shields.io/badge/Design%20System-Dark%20Workstation-1D2028?style=for-the-badge)](ui/design_system.py)
 [![Python](https://img.shields.io/badge/Python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue?style=for-the-badge&logo=python)](https://python.org)
 [![CUDA](https://img.shields.io/badge/CUDA-12.6%20Accelerated-76B900?style=for-the-badge&logo=nvidia)](https://developer.nvidia.com/cuda-toolkit)
 [![Platforms](https://img.shields.io/badge/Platforms-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey?style=for-the-badge)](INSTALL.md)
 [![License](https://img.shields.io/badge/License-MIT%20Commercial-70D6A0?style=for-the-badge)](LICENSE)
 
-[**🌐 Official Website**](https://www.bsvr.work/) · [**🚀 Releases (GitHub v3.0.0)**](https://github.com/imyouiamyou/prubeth-ide/releases/tag/v3.0.0) · [**📖 Architecture**](ARCHITECTURE.md) · [**🛠️ Installation**](INSTALL.md) · [**🧩 Developer & Extension Guide**](DEVELOPER_EXTENSIONS_GUIDE.md) · [**🔒 Security Findings**](docs/assessment/SECURITY_FINDINGS.md)
+[**🌐 Official Website**](https://www.bsvr.work/) · [**🚀 Releases (GitHub v3.0.0)**](https://github.com/imyouiamyou/prubeth-ide/releases/tag/v3.0.0) · [**📖 Architecture**](ARCHITECTURE.md) · [**🗺️ Architecture Map**](docs/ARCHITECTURE_MAP.md) · [**⚖️ Reference-IDE Comparison**](docs/REFERENCE_IDE_COMPARISON.md) · [**🛠️ Installation**](INSTALL.md) · [**🧩 Developer Guide**](DEVELOPER_EXTENSIONS_GUIDE.md)
 
 </div>
 
@@ -124,6 +124,20 @@ Engineered for inevitable powerful projects, large enterprise repositories, and 
 - **PRINCE2 7 Reliability Assurance Engine (`core/reliability_engine.py`):** 10 configurable workload test profiles (`Smoke`, `Standard`, `Large Project`, `Stress`, `Fault Injection`, `Recovery`, `Security`, `Endurance`, `Release Candidate`, `Universal Polyglot`) with SHA-256 data integrity tracking and stage-gate approvals.
 - **Universal Polyglot Assurance Engine (`core/polyglot_assurance_engine.py`):** Multi-language engineering validation covering **25 programming languages** (Python, JS, TS, Java, C, C++, C#, Go, Rust, Kotlin, Swift, PHP, Ruby, Dart, R, Julia, Scala, Lua, Perl, Shell, PowerShell, SQL, HTML, CSS, WebAssembly) with real host toolchain discovery, QScintilla lexer resilience, sanitized runtime execution, and manifest security audits.
 - **Native Live Reliability Center (`ui/reliability_dashboard_widget.py`):** Integrated bottom tab GUI dashboard showing live test progress, peak memory telemetry, pass/fail metrics, and one-click JSON report exports.
+
+### 10. 🛰️ Horizon Universal Integrity & Continuous Verification CLI
+Engineered to guarantee capability transparency, zero hidden assumptions, and repeatable self-audit:
+- **Universal Inventory Engine (`core/universal_inventory.py`):** Machine-readable catalog (`docs/CAPABILITY_INVENTORY.json`) and architecture graph (`docs/ARCHITECTURE_MAP.md`) mapping all 12 core subsystems, dependency chains, and SPOF mitigations.
+- **Continuous Verification CLI Runner (`core/universal_cli_runner.py`):** Execute preflight health checks and automated verification from any terminal:
+  ```powershell
+  python local_ai_studio_pro.py --verify doctor      # Subsystem health & runtime dependencies
+  python local_ai_studio_pro.py --verify inventory   # Regenerate capability inventory & architecture map
+  python local_ai_studio_pro.py --verify test all    # Run automated test suites with ground-truth capture
+  python local_ai_studio_pro.py --verify report      # Export release audit and test telemetry
+  ```
+- **Capability Gap Resolution Engine (`core/capability_gap_engine.py`):** 18-step resolution engine distinguishing internal code, host toolchain adapters, and external platform blockers.
+- **Meta-Testing Ground Truth (`tests/reliability/test_meta_test_instrumentation.py`):** Self-verifying test instrumentation validating non-zero exit code propagation, hanging process timeouts, and corrupted fixture recovery.
+- **Reference-IDE Benchmark Matrix (`docs/REFERENCE_IDE_COMPARISON.md`):** Complete 20-dimension comparison alongside VS Code, Cursor IDE, and Google Antigravity 2.9.1.
 
 ---
 
@@ -248,14 +262,21 @@ Add custom OpenAI-compatible inference servers (vLLM, LocalAI, LM Studio) in `~/
 | :--- | :--- | :--- |
 | **Local GPU Ollama Throughput** | **30.99 tok/s** | NVIDIA GeForce GTX 1050 Ti (CUDA 12.6) |
 | **Gemini 3.8 Flash Cloud Stream** | **128.4 tok/s** | Google Generative Language SSE |
-| **Automated Test Suite Execution** | **258 / 258 Passing (100%)** | 17 Verification Subsystems across Reliability, Concurrency & Security |
+| **Automated Test Suite Execution** | **287 / 287 Passing (100%)** | 20 Verification Subsystems across Reliability, Concurrency & Security |
+| **Reliability, Chaos & Meta-Testing** | **69 / 69 Passing (100%)** | Out-of-Process Supervisor, Polyglot Sandboxes & Meta-Harness |
 | **Memory Footprint (Idle)** | **148 MB** | PyQt5 QScintilla Engine |
-| **Preflight Diagnostics Status** | **0 Exit Code (Clean Pass)** | Fully verified system dependencies and configuration |
+| **Preflight & Doctor Status** | **0 Exit Code (Clean Pass)** | Fully verified system dependencies and configuration |
 
-### Running the Test Suite
+### Running the Test Suite & Verification CLI
 ```powershell
-# Execute full automated test suite
+# Run full automated test suite (287 tests)
 pytest tests/ -v
+
+# Run reliability, polyglot and meta-testing suite (69 tests)
+pytest tests/reliability/ -v
+
+# Run Horizon Continuous Verification Doctor
+python local_ai_studio_pro.py --verify doctor
 ```
 
 ---
