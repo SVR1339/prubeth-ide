@@ -1,47 +1,101 @@
 """
-PRUBETH IDE — Graphical Setup Wizard (Windows Installer).
-Installs PRUBETH IDE into %LOCALAPPDATA%\\Programs\\PrubethIDE,
-supports Full (Recommended) and Custom installation modes,
-configures Desktop & Start Menu shortcuts, User PATH integration,
-and registers in Windows Control Panel.
+PRUBETH IDE — Official Graphical Setup Wizard & Command-Line Installer.
+Supports Mode A (Lightweight Online Bootstrapper) and Mode B (Full Offline Installer).
+Implements 10-stage progress reporting, GitHub release resolution, cryptographic signature checks,
+multi-volume disk space validation, transactional staging, rollback recovery, and CLI automation.
 Official Website: https://www.bsvr.work/
 """
 import os
 import sys
+import ssl
+import urllib.request
+import urllib.error
 import shutil
 import subprocess
 import zipfile
 import time
 import tempfile
-import urllib.request
-import ssl
+import argparse
+import logging
 from pathlib import Path
+from typing import Optional, Dict, Any, List
 
 from PyQt5.QtCore import Qt, QThread, pyqtSignal
 from PyQt5.QtGui import QIcon, QPixmap, QFont
 from PyQt5.QtWidgets import (
     QApplication, QWizard, QWizardPage, QVBoxLayout, QHBoxLayout,
     QLabel, QLineEdit, QPushButton, QCheckBox, QRadioButton,
-    QProgressBar, QGroupBox, QFileDialog, QMessageBox, QFrame
+    QProgressBar, QGroupBox, QFileDialog, QMessageBox, QFrame, QTextEdit
 )
 
-APP_NAME = "PRUBETH"
-APP_DISPLAY_NAME = "PRUBETH IDE — Bloom Edition"
-APP_TAGLINE = "Bloom, ideas unfolding"
-APP_VERSION = "3.0.0"
-PUBLISHER = "BSVR Technologies"
-WEBSITE_URL = "https://www.bsvr.work/"
-PROJECTS_URL = "https://www.bsvr.work/#projects"
-GITHUB_REPO = "imyouiamyou/prubeth-ide"
-GITHUB_REPO_URL = f"https://github.com/{GITHUB_REPO}"
-RELEASE_TAG = "v3.0.0"
+# Core installer subsystems resolution
+_INSTALLER_DIR = Path(__file__).resolve().parent
+_REPO_ROOT = _INSTALLER_DIR.parent
+for _p in [str(_REPO_ROOT), str(_INSTALLER_DIR)]:
+    if _p not in sys.path:
+        sys.path.insert(0, _p)
+
+try:
+    from installer.release_config import (
+        APP_NAME, APP_DISPLAY_NAME, APP_TAGLINE, APP_VERSION, PUBLISHER,
+        WEBSITE_URL, GITHUB_REPO, GITHUB_REPO_URL, DEFAULT_CHANNEL,
+        TARGET_ARCH, DEFAULT_ONLINE_THRESHOLD_MIB, ONLINE_THRESHOLD_BYTES,
+        MODE_ONLINE, MODE_OFFLINE, MODE_AUTO,
+        EXIT_SUCCESS, EXIT_GENERAL_ERROR, EXIT_INVALID_ARGS, EXIT_NETWORK_ERROR,
+        EXIT_VERIFICATION_FAILED, EXIT_INSUFFICIENT_SPACE, EXIT_USER_CANCELLED,
+        evaluate_delivery_mode, compute_sha256, verify_manifest_signature,
+        TRUSTED_PUBLIC_VERIFICATION_KEY
+    )
+    from installer.manifest_schema import (
+        validate_manifest_schema, verify_manifest_compatibility, ManifestValidationError
+    )
+    from installer.disk_manager import (
+        verify_disk_space, DiskSpaceCheckResult
+    )
+    from installer.download_engine import (
+        ReleaseMetadataResolver, SecureDownloadEngine, DownloadProgress,
+        DownloadError, VerificationError, STAGE_NAMES
+    )
+    from installer.transactional_installer import (
+        TransactionalInstaller, SecurityInspectionError, InstallationCommitError
+    )
+    from installer.uninstaller import Uninstaller
+except ImportError:
+    from release_config import (
+        APP_NAME, APP_DISPLAY_NAME, APP_TAGLINE, APP_VERSION, PUBLISHER,
+        WEBSITE_URL, GITHUB_REPO, GITHUB_REPO_URL, DEFAULT_CHANNEL,
+        TARGET_ARCH, DEFAULT_ONLINE_THRESHOLD_MIB, ONLINE_THRESHOLD_BYTES,
+        MODE_ONLINE, MODE_OFFLINE, MODE_AUTO,
+        EXIT_SUCCESS, EXIT_GENERAL_ERROR, EXIT_INVALID_ARGS, EXIT_NETWORK_ERROR,
+        EXIT_VERIFICATION_FAILED, EXIT_INSUFFICIENT_SPACE, EXIT_USER_CANCELLED,
+        evaluate_delivery_mode, compute_sha256, verify_manifest_signature,
+        TRUSTED_PUBLIC_VERIFICATION_KEY
+    )
+    from manifest_schema import (
+        validate_manifest_schema, verify_manifest_compatibility, ManifestValidationError
+    )
+    from disk_manager import (
+        verify_disk_space, DiskSpaceCheckResult
+    )
+    from download_engine import (
+        ReleaseMetadataResolver, SecureDownloadEngine, DownloadProgress,
+        DownloadError, VerificationError, STAGE_NAMES
+    )
+    from transactional_installer import (
+        TransactionalInstaller, SecurityInspectionError, InstallationCommitError
+    )
+    from uninstaller import Uninstaller
+
+DEFAULT_USER_INSTALL_DIR = Path.home() / "AppData" / "Local" / "Programs" / "PrubethIDE"
+DEFAULT_MACHINE_INSTALL_DIR = Path("C:/Program Files/PrubethIDE")
+RELEASE_TAG = f"v{APP_VERSION}"
 ONLINE_PAYLOAD_URLS = [
-    f"https://github.com/{GITHUB_REPO}/releases/download/{RELEASE_TAG}/PrubethIDE-v3.0.0-Universal-Portable.zip",
-    f"https://github.com/{GITHUB_REPO}/releases/latest/download/PrubethIDE-v3.0.0-Universal-Portable.zip",
+    f"https://github.com/{GITHUB_REPO}/releases/download/{RELEASE_TAG}/Prubeth-Payload-{APP_VERSION}-{TARGET_ARCH}.zip",
+    f"https://github.com/{GITHUB_REPO}/releases/download/{RELEASE_TAG}/PrubethIDE-v{APP_VERSION}-Universal-Portable.zip",
+    f"https://github.com/{GITHUB_REPO}/releases/latest/download/Prubeth-Payload-{APP_VERSION}-{TARGET_ARCH}.zip",
+    f"https://github.com/{GITHUB_REPO}/releases/latest/download/PrubethIDE-v{APP_VERSION}-Universal-Portable.zip",
     f"https://github.com/{GITHUB_REPO}/archive/refs/tags/{RELEASE_TAG}.zip",
-    f"https://github.com/{GITHUB_REPO}/archive/refs/heads/master.zip",
 ]
-DEFAULT_INSTALL_DIR = Path.home() / "AppData" / "Local" / "Programs" / "PrubethIDE"
 
 WIZARD_STYLESHEET = """
 QWizard, QWizardPage, QWizard > QWidget, QWizardPage > QWidget {
@@ -97,7 +151,7 @@ QProgressBar {
     border-radius: 4px;
     text-align: center;
     background: #191C23;
-    height: 20px;
+    height: 22px;
     color: #E8EAF0;
     font-weight: bold;
     font-size: 9pt;
@@ -106,47 +160,26 @@ QProgressBar::chunk {
     background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #9485FF, stop:1 #62D4E5);
     border-radius: 3px;
 }
-QCheckBox {
+QCheckBox, QRadioButton {
     color: #E8EAF0;
     spacing: 8px;
     font-size: 9.5pt;
     background: transparent;
 }
-QCheckBox::indicator {
+QCheckBox::indicator, QRadioButton::indicator {
     width: 16px;
     height: 16px;
     border: 1px solid #343A49;
     background: #191C23;
     border-radius: 3px;
 }
-QCheckBox::indicator:hover {
-    border-color: #9485FF;
-}
-QCheckBox::indicator:checked {
-    background-color: #9485FF;
-    border-color: #9485FF;
-}
-QCheckBox::indicator:disabled {
-    background: #252934;
-    border-color: #343A49;
-}
-QRadioButton {
-    color: #E8EAF0;
-    spacing: 8px;
-    font-size: 10pt;
-    background: transparent;
-}
 QRadioButton::indicator {
-    width: 16px;
-    height: 16px;
-    border: 1px solid #343A49;
-    background: #191C23;
     border-radius: 8px;
 }
-QRadioButton::indicator:hover {
+QCheckBox::indicator:hover, QRadioButton::indicator:hover {
     border-color: #9485FF;
 }
-QRadioButton::indicator:checked {
+QCheckBox::indicator:checked, QRadioButton::indicator:checked {
     background-color: #9485FF;
     border-color: #9485FF;
 }
@@ -184,7 +217,7 @@ def get_resource_dir() -> Path:
 
 
 def get_source_dir() -> Path:
-    """Returns the repository source directory if running in development mode."""
+    """Returns repository root directory if running in development mode."""
     if getattr(sys, 'frozen', False):
         return Path(getattr(sys, '_MEIPASS', Path(sys.executable).parent))
     return Path(__file__).resolve().parent.parent
@@ -196,28 +229,64 @@ class InstallWorker(QThread):
 
     def __init__(
         self,
-        target_dir,
-        create_desktop=True,
-        create_startmenu=True,
-        payload_zip=None,
-        install_type="full",
-        install_lexers=True,
-        install_models=True,
-        add_to_path=True,
-        register_uninstaller=True
+        target_dir: Path,
+        mode: str = MODE_AUTO,
+        channel: str = DEFAULT_CHANNEL,
+        scope: str = "user",
+        create_desktop: bool = True,
+        create_startmenu: bool = True,
+        add_to_path: bool = True,
+        install_lexers: bool = True,
+        install_models: bool = True,
+        skip_ai: bool = False,
+        register_uninstaller: bool = True,
+        payload_zip: Optional[Path] = None,
+        staging_dir: Optional[Path] = None
     ):
         super().__init__()
         self.target_dir = Path(target_dir)
+        self.mode = mode
+        self.channel = channel
+        self.scope = scope
         self.create_desktop = create_desktop
         self.create_startmenu = create_startmenu
-        self.payload_zip = payload_zip
-        self.install_type = install_type
+        self.add_to_path = add_to_path
         self.install_lexers = install_lexers
         self.install_models = install_models
-        self.add_to_path = add_to_path
+        self.skip_ai = skip_ai
         self.register_uninstaller = register_uninstaller
+        self.payload_zip = Path(payload_zip) if payload_zip else None
+        self.staging_dir = Path(staging_dir) if staging_dir else Path(tempfile.gettempdir())
 
-    def download_payload_from_github(self) -> Path:
+        self.downloader = SecureDownloadEngine()
+        self.is_cancelled = False
+
+    def cancel(self):
+        self.is_cancelled = True
+        self.downloader.cancel()
+
+    def _progress_bridge(self, prog: DownloadProgress):
+        pct = int(prog.percent) if prog.percent is not None else 0
+        if prog.stage == 1:
+            scaled_pct = 5
+        elif prog.stage in (2, 3, 4):
+            scaled_pct = 10 + (prog.stage * 3)
+        elif prog.stage == 5:
+            scaled_pct = 20 + int(pct * 0.45)
+        elif prog.stage == 6:
+            scaled_pct = 68
+        elif prog.stage == 7:
+            scaled_pct = 70 + int(pct * 0.15)
+        elif prog.stage == 8:
+            scaled_pct = 88
+        elif prog.stage == 9:
+            scaled_pct = 95
+        else:
+            scaled_pct = 100
+
+        self.progress.emit(min(scaled_pct, 100), prog.status_text)
+
+    def download_payload_from_github(self) -> Optional[Path]:
         """Downloads full application resource archive from GitHub with live progress updates."""
         ctx = ssl.create_default_context()
         ctx.check_hostname = False
@@ -265,191 +334,156 @@ class InstallWorker(QThread):
 
     def run(self):
         try:
-            self.progress.emit(8, "Preparing destination directory...")
-            self.target_dir.mkdir(parents=True, exist_ok=True)
+            # 1. Stage 1: Checking system compatibility & disk headroom
+            self.progress.emit(5, "Stage 1/10: Checking system compatibility and disk space...")
 
-            res_dir = get_resource_dir()
-            src_dir = get_source_dir()
-            installed_anything = False
-
-            # 1. Determine payload archive
-            effective_payload = None
-            if self.payload_zip and Path(self.payload_zip).exists():
-                effective_payload = Path(self.payload_zip)
-            else:
+            # Determine local payload if present
+            effective_payload = self.payload_zip
+            if not effective_payload:
+                res_dir = get_resource_dir()
+                src_dir = get_source_dir()
                 for cand in [
                     res_dir / "app_payload.zip",
                     res_dir / "installer" / "app_payload.zip",
-                    res_dir / "PrubethIDE-v3.0.0-Universal-Portable.zip",
-                    src_dir / "app_payload.zip",
                     src_dir / "installer" / "app_payload.zip",
-                    src_dir / "PrubethIDE-v3.0.0-Universal-Portable.zip",
-                    src_dir / "dist" / "PrubethIDE-v3.0.0-Universal-Portable.zip",
+                    src_dir / "app_payload.zip"
                 ]:
                     if cand.exists() and cand.is_file() and cand.stat().st_size > 50000:
                         effective_payload = cand
                         break
 
-            # 2. If no valid local payload exists and we're not running from full source tree, fetch from GitHub
-            if not effective_payload and not (src_dir / "local_ai_studio_pro.py").exists():
-                self.progress.emit(12, "Standalone setup detected. Downloading complete payload from GitHub...")
-                downloaded = self.download_payload_from_github()
-                if downloaded:
-                    effective_payload = downloaded
+            # Decide delivery mode
+            is_online = (self.mode == MODE_ONLINE) or (self.mode == MODE_AUTO and not effective_payload)
 
-            # 3. Extract payload archive if available
-            if effective_payload and effective_payload.exists():
-                self.progress.emit(30, f"Extracting workstation payload ({effective_payload.name})...")
-                with zipfile.ZipFile(effective_payload, 'r') as z:
-                    names = z.namelist()
-                    top_prefix = None
-                    dirs = [n for n in names if '/' in n]
-                    if dirs:
-                        first_top = dirs[0].split('/')[0] + '/'
-                        if all(n.startswith(first_top) for n in names if n != first_top):
-                            top_prefix = first_top
-
-                    total_items = len(names)
-                    for idx, member in enumerate(z.infolist()):
-                        rel = member.filename[len(top_prefix):] if (top_prefix and member.filename.startswith(top_prefix)) else member.filename
-                        if not rel:
-                            continue
-
-                        # Custom component filtering
-                        if not self.install_lexers and rel.startswith("language_services") and "syntax" in rel:
-                            continue
-                        if not self.install_models and rel.startswith(".local_ai_studio_pro/models"):
-                            continue
-
-                        out_p = self.target_dir / rel
-                        if member.is_dir():
-                            out_p.mkdir(parents=True, exist_ok=True)
-                        else:
-                            out_p.parent.mkdir(parents=True, exist_ok=True)
-                            with z.open(member) as src_m, open(out_p, "wb") as dst_m:
-                                shutil.copyfileobj(src_m, dst_m)
-
-                        if idx % 50 == 0:
-                            pct = int(30 + (idx / max(total_items, 1)) * 35)
-                            self.progress.emit(pct, f"Extracting: {rel[:35]}... ({idx}/{total_items})")
-                installed_anything = True
-            else:
-                # 4. Fall back to copying from available source/resource bases
-                for cand in [src_dir / "dist" / "PrubethIDE", src_dir / "dist" / "SukhiIDE", src_dir / "dist" / "SoNaive"]:
-                    if cand.exists() and cand.is_dir():
-                        self.progress.emit(35, "Deploying standalone application binaries...")
-                        shutil.copytree(cand, self.target_dir, dirs_exist_ok=True)
-                        installed_anything = True
-                        break
-
-                search_bases = [src_dir, res_dir]
-                core_files = [
-                    "local_ai_studio_pro.py",
-                    "README.md",
-                    "LICENSE",
-                    "ARCHITECTURE.md",
-                    "CHANGELOG.md",
-                    "INSTALL.md",
-                    "DEVELOPER_EXTENSIONS_GUIDE.md",
-                    "install.ps1",
-                    "install.sh",
-                    "requirements.txt",
-                    "run_local_ai_studio_pro.bat",
-                    "pyproject.toml",
-                    "FINAL_RELEASE_VERIFICATION.md"
-                ]
-
-                self.progress.emit(45, "Verifying and synchronizing core workstation modules...")
-                for f in core_files:
-                    for base in search_bases:
-                        candidate = base / f
-                        if candidate.exists() and candidate.is_file():
-                            dest = self.target_dir / f
-                            if not dest.exists():
-                                shutil.copy2(candidate, dest)
-                                installed_anything = True
-                            break
-
-                sub_dirs = [
-                    "core", "workspace", "source_control", "language_services",
-                    "debugging", "ai", "ui", "plugins", "assets", "tests",
-                    "horizon_engine", "security_research"
-                ]
-                for sub in sub_dirs:
-                    if not self.install_lexers and sub == "language_services":
-                        continue
-                    for base in search_bases:
-                        sub_src = base / sub
-                        if sub_src.exists() and sub_src.is_dir():
-                            shutil.copytree(sub_src, self.target_dir / sub, dirs_exist_ok=True)
-                            break
-
-            # 5. Strict verification of installed payload
-            has_exe = (
-                (self.target_dir / "PrubethIDE.exe").exists() or
-                (self.target_dir / "SukhiIDE.exe").exists() or
-                (self.target_dir / "SoNaive.exe").exists()
+            estimated_payload_bytes = effective_payload.stat().st_size if (effective_payload and effective_payload.exists()) else (22 * 1024 * 1024)
+            space_check = verify_disk_space(
+                target_dir=self.target_dir,
+                payload_size_bytes=estimated_payload_bytes,
+                staging_dir=self.staging_dir,
+                is_upgrade=self.target_dir.exists() and any(self.target_dir.iterdir())
             )
-            has_py = (self.target_dir / "local_ai_studio_pro.py").exists()
 
-            if not (has_exe or has_py):
-                raise RuntimeError(
-                    f"Installation integrity verification failed: neither 'PrubethIDE.exe' nor 'local_ai_studio_pro.py' "
-                    f"could be installed to '{self.target_dir}'."
-                )
+            if not space_check.is_sufficient:
+                raise RuntimeError(space_check.insufficient_reason or "Insufficient disk space.")
 
-            # 6. Initialize local models cache if enabled
-            if self.install_models:
-                self.progress.emit(68, "Configuring local AI profiles and models cache...")
+            # 2. Retrieve Payload
+            downloaded_zip: Optional[Path] = None
+            required_files = ["local_ai_studio_pro.py"]
+
+            if is_online:
+                downloaded_zip = self.download_payload_from_github()
+                if not downloaded_zip:
+                    # Fallback to resolver & download engine if direct download did not resolve
+                    try:
+                        resolver = ReleaseMetadataResolver(
+                            repo=GITHUB_REPO,
+                            version=APP_VERSION,
+                            channel=self.channel,
+                            arch=TARGET_ARCH
+                        )
+                        release_info = resolver.resolve_release(progress_callback=self._progress_bridge)
+                        if self.is_cancelled:
+                            raise DownloadError("Installation cancelled by user.")
+
+                        downloaded_zip = self.downloader.download_payload(
+                            payload_url=release_info["payload_url"],
+                            expected_sha256=release_info["payload_sha256"],
+                            expected_size_bytes=release_info["payload_size_bytes"],
+                            destination_dir=self.staging_dir,
+                            progress_callback=self._progress_bridge
+                        )
+                    except Exception as ex_resolver:
+                        raise DownloadError(f"Failed to retrieve release payload from GitHub: {ex_resolver}")
+
+                if not downloaded_zip or not downloaded_zip.exists():
+                    raise DownloadError("Could not retrieve valid application payload archive from GitHub.")
+
+                effective_payload = downloaded_zip
+            else:
+                # Mode B: Full Offline Installer with verified local payload
+                self.progress.emit(15, "Stage 2/10: Mode B Offline Installer active. Using local verified payload...")
+                if not effective_payload or not effective_payload.exists():
+                    raise FileNotFoundError(f"Offline installer payload archive not found.")
+
+            if self.is_cancelled:
+                raise DownloadError("Installation cancelled by user.")
+
+            # 3. Stage 7-9: Transactional Staging, Atomic Commit & Health Check
+            installer = TransactionalInstaller(
+                target_dir=self.target_dir,
+                staging_dir=self.staging_dir
+            )
+            installer.execute_transaction(
+                payload_zip=effective_payload,
+                required_files=required_files,
+                is_upgrade=self.target_dir.exists(),
+                progress_callback=self._progress_bridge
+            )
+
+            # 4. Configure Runtime Launcher
+            self._write_launchers()
+
+            # 5. Create Shortcuts & Integrations
+            if self.create_desktop:
+                self._create_desktop_shortcut()
+            if self.create_startmenu:
+                self._create_startmenu_shortcut()
+            if self.add_to_path:
+                self._add_to_path()
+            if self.register_uninstaller:
+                self._register_uninstaller()
+
+            # 6. Initialize local models cache if not skipped
+            if not self.skip_ai and self.install_models:
                 (self.target_dir / "models").mkdir(parents=True, exist_ok=True)
                 (self.target_dir / ".local_ai_studio_pro").mkdir(parents=True, exist_ok=True)
 
-            # 7. Configure robust self-healing runtime launcher
-            self.progress.emit(72, "Configuring runtime launcher and diagnostic wrappers...")
-            launcher_prubeth = self.target_dir / "PrubethIDE.bat"
-            launcher_sukhi = self.target_dir / "SukhiIDE.bat"
-            launcher_bat = self.target_dir / "SoNaive.bat"
+            # Cleanup downloaded zip if temporary
+            if downloaded_zip and downloaded_zip.exists():
+                try:
+                    downloaded_zip.unlink()
+                except OSError:
+                    pass
 
-            launcher_content = f"""@echo off
+            self.progress.emit(100, "Stage 10/10: Setup completed successfully!")
+            self.finished.emit(True, "Success")
+
+        except Exception as ex:
+            if self.is_cancelled:
+                self.finished.emit(False, "Installation cancelled by user.")
+            else:
+                msg = str(ex)
+                if isinstance(ex, InstallationCommitError) or "Required application component missing" in msg:
+                    self.finished.emit(False, f"Installation integrity verification failed: {msg}")
+                else:
+                    self.finished.emit(False, msg)
+
+    def _write_launchers(self):
+        launcher_bat = self.target_dir / "PrubethIDE.bat"
+        launcher_content = f"""@echo off
 setlocal enabledelayedexpansion
 title {APP_DISPLAY_NAME} Launcher
 cd /d "%~dp0"
 
-:: 1. If standalone executable is installed, launch it directly
+:: 1. Launch standalone executable if installed
 if exist "PrubethIDE.exe" (
     start "" "PrubethIDE.exe" %*
-    exit /b 0
-)
-if exist "SukhiIDE.exe" (
-    start "" "SukhiIDE.exe" %*
-    exit /b 0
-)
-if exist "SoNaive.exe" (
-    start "" "SoNaive.exe" %*
     exit /b 0
 )
 
 :: 2. Locate available Python runtime
 set "PY_CMD="
-set "PY_CON="
-
 if exist ".venv\\Scripts\\pythonw.exe" (
     set "PY_CMD=.venv\\Scripts\\pythonw.exe"
-    set "PY_CON=.venv\\Scripts\\python.exe"
 ) else if exist "..\\.venv\\Scripts\\pythonw.exe" (
     set "PY_CMD=..\\.venv\\Scripts\\pythonw.exe"
-    set "PY_CON=..\\.venv\\Scripts\\python.exe"
 ) else (
     where pythonw.exe >nul 2>&1
     if !errorlevel! equ 0 (
         set "PY_CMD=pythonw.exe"
-        set "PY_CON=python.exe"
     ) else (
         where python.exe >nul 2>&1
-        if !errorlevel! equ 0 (
-            set "PY_CMD=python.exe"
-            set "PY_CON=python.exe"
-        )
+        if !errorlevel! equ 0 set "PY_CMD=python.exe"
     )
 )
 
@@ -457,64 +491,47 @@ if "!PY_CMD!"=="" (
     echo [ERROR] Python 3 was not detected on your system.
     echo Please install Python 3.10+ from https://python.org/
     mshta "javascript:alert('{APP_NAME} Launcher Error:\\n\\nPython 3 is not installed or not in PATH.\\nPlease install Python 3.10+ from https://python.org');close();"
-    pause
     exit /b 1
 )
 
-:: 3. Verify application file existence
-if not exist "local_ai_studio_pro.py" (
-    echo [ERROR] local_ai_studio_pro.py was not found in %~dp0
-    mshta "javascript:alert('{APP_NAME} Launcher Error:\\n\\nApplication core file (local_ai_studio_pro.py) was not found in installation folder.');close();"
-    pause
-    exit /b 1
-)
-
-:: 4. Launch application
 start "" "!PY_CMD!" local_ai_studio_pro.py %*
 exit /b 0
 """
-            launcher_prubeth.write_text(launcher_content, encoding="utf-8")
-            launcher_sukhi.write_text(launcher_content, encoding="utf-8")
-            launcher_bat.write_text(launcher_content, encoding="utf-8")
+        launcher_bat.write_text(launcher_content, encoding="utf-8")
+        (self.target_dir / "SukhiIDE.bat").write_text(launcher_content, encoding="utf-8")
+        (self.target_dir / "SoNaive.bat").write_text(launcher_content, encoding="utf-8")
 
-            target_exe = self.target_dir / "PrubethIDE.exe"
-            if not target_exe.exists():
-                target_exe = self.target_dir / "SukhiIDE.exe"
-            if not target_exe.exists():
-                target_exe = self.target_dir / "SoNaive.exe"
-            target_path = str(target_exe if target_exe.exists() else launcher_prubeth)
-            icon_path = str(self.target_dir / "assets" / "icon.ico")
+    def _create_desktop_shortcut(self):
+        desktop = Path.home() / "Desktop" / f"{APP_NAME} IDE.lnk"
+        target = self.target_dir / "PrubethIDE.bat"
+        icon = self.target_dir / "assets" / "icon.ico"
+        self._create_windows_shortcut(str(desktop), str(target), str(icon))
 
-            # 8. Shortcuts
-            if self.create_desktop:
-                self.progress.emit(82, "Creating Desktop shortcut...")
-                desktop = Path.home() / "Desktop" / f"{APP_NAME} IDE.lnk"
-                self.create_windows_shortcut(str(desktop), target_path, icon_path)
+    def _create_startmenu_shortcut(self):
+        programs = Path.home() / "AppData" / "Roaming" / "Microsoft" / "Windows" / "Start Menu" / "Programs" / f"{APP_NAME} IDE"
+        programs.mkdir(parents=True, exist_ok=True)
+        lnk = programs / f"{APP_NAME} IDE.lnk"
+        target = self.target_dir / "PrubethIDE.bat"
+        icon = self.target_dir / "assets" / "icon.ico"
+        self._create_windows_shortcut(str(lnk), str(target), str(icon))
 
-            if self.create_startmenu:
-                self.progress.emit(88, "Creating Start Menu program group...")
-                programs = Path.home() / "AppData" / "Roaming" / "Microsoft" / "Windows" / "Start Menu" / "Programs" / f"{APP_NAME} IDE"
-                programs.mkdir(parents=True, exist_ok=True)
-                lnk = programs / f"{APP_NAME} IDE.lnk"
-                self.create_windows_shortcut(str(lnk), target_path, icon_path)
+    def _create_windows_shortcut(self, lnk_path: str, target_path: str, icon_path: str):
+        ps_cmd = f"""
+$WshShell = New-Object -comObject WScript.Shell
+$Shortcut = $WshShell.CreateShortcut('{lnk_path}')
+$Shortcut.TargetPath = '{target_path}'
+$Shortcut.WorkingDirectory = '{self.target_dir}'
+$Shortcut.WindowStyle = 7
+if (Test-Path '{icon_path}') {{ $Shortcut.IconLocation = '{icon_path}' }}
+$Shortcut.Description = '{APP_DISPLAY_NAME}'
+$Shortcut.Save()
+"""
+        try:
+            subprocess.run(["powershell", "-NoProfile", "-Command", ps_cmd], capture_output=True, timeout=10)
+        except Exception:
+            pass
 
-            # 9. PATH Environment Integration
-            if self.add_to_path:
-                self.progress.emit(92, "Registering PRUBETH IDE in User PATH...")
-                self.add_to_user_path()
-
-            # 10. Windows Control Panel Uninstaller registration
-            if self.register_uninstaller:
-                self.progress.emit(96, "Registering Windows Uninstall hooks...")
-                self.register_uninstaller_hook()
-
-            self.progress.emit(100, "Installation complete!")
-            self.finished.emit(True, "Success")
-        except Exception as e:
-            self.finished.emit(False, str(e))
-
-    def add_to_user_path(self):
-        """Safely appends target_dir to HKCU:\\Environment\\Path without duplicate entries."""
+    def _add_to_path(self):
         target_str = str(self.target_dir)
         ps_cmd = f"""
 $current = [System.Environment]::GetEnvironmentVariable('Path', 'User')
@@ -528,32 +545,11 @@ if ($current -notlike '*{target_str}*') {{
         except Exception:
             pass
 
-    def create_windows_shortcut(self, lnk_path, target_path, icon_path):
-        is_bat = target_path.lower().endswith(".bat")
-        window_style = "7" if is_bat else "1"
-        ps_cmd = f"""
-$WshShell = New-Object -comObject WScript.Shell
-$Shortcut = $WshShell.CreateShortcut('{lnk_path}')
-$Shortcut.TargetPath = '{target_path}'
-$Shortcut.WorkingDirectory = '{self.target_dir}'
-$Shortcut.WindowStyle = {window_style}
-if (Test-Path '{icon_path}') {{
-    $Shortcut.IconLocation = '{icon_path}'
-}}
-$Shortcut.Description = '{APP_DISPLAY_NAME}'
-$Shortcut.Save()
-"""
-        try:
-            subprocess.run(["powershell", "-NoProfile", "-Command", ps_cmd], capture_output=True, timeout=10)
-        except Exception:
-            pass
-
-    def register_uninstaller_hook(self):
+    def _register_uninstaller(self):
         uninst_bat = self.target_dir / "Uninstall.bat"
         uninst_content = f"""@echo off
 title Uninstall {APP_DISPLAY_NAME}
 echo Removing {APP_DISPLAY_NAME}...
-timeout /t 2 /nobreak >nul
 del /q "%USERPROFILE%\\Desktop\\{APP_NAME} IDE.lnk" 2>nul
 rmdir /s /q "%APPDATA%\\Microsoft\\Windows\\Start Menu\\Programs\\{APP_NAME} IDE" 2>nul
 reg delete "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\PrubethIDE" /f 2>nul
@@ -573,7 +569,6 @@ Set-ItemProperty -Path $key -Name 'Publisher' -Value '{PUBLISHER}'
 Set-ItemProperty -Path $key -Name 'UninstallString' -Value '"{self.target_dir}\\Uninstall.bat"'
 Set-ItemProperty -Path $key -Name 'DisplayIcon' -Value '{self.target_dir}\\assets\\icon.ico'
 Set-ItemProperty -Path $key -Name 'URLInfoAbout' -Value '{WEBSITE_URL}'
-Set-ItemProperty -Path $key -Name 'HelpLink' -Value '{PROJECTS_URL}'
 """
         try:
             subprocess.run(["powershell", "-NoProfile", "-Command", reg_cmd], capture_output=True, timeout=10)
@@ -582,8 +577,9 @@ Set-ItemProperty -Path $key -Name 'HelpLink' -Value '{PROJECTS_URL}'
 
 
 class WelcomePage(QWizardPage):
-    def __init__(self):
+    def __init__(self, mode: str = MODE_AUTO):
         super().__init__()
+        self.mode = mode
         self.setTitle(f"Welcome to {APP_NAME} IDE Setup")
         layout = QVBoxLayout(self)
         layout.setContentsMargins(20, 20, 20, 20)
@@ -592,7 +588,7 @@ class WelcomePage(QWizardPage):
         logo_lbl = QLabel()
         logo_path = get_resource_dir() / "assets" / "logo.png"
         if not logo_path.exists():
-            logo_path = Path(__file__).resolve().parent.parent / "assets" / "logo.png"
+            logo_path = get_source_dir() / "assets" / "logo.png"
         if logo_path.exists():
             pix = QPixmap(str(logo_path)).scaled(112, 112, Qt.KeepAspectRatio, Qt.SmoothTransformation)
             logo_lbl.setPixmap(pix)
@@ -603,10 +599,12 @@ class WelcomePage(QWizardPage):
         title.setAlignment(Qt.AlignCenter)
         layout.addWidget(title)
 
+        delivery_badge = "🌐 <b>Mode A (Online Bootstrapper)</b>: Downloads verified v3.0.0 release from GitHub." if self.mode == MODE_ONLINE else "📦 <b>Offline Installer</b>: Embedded standalone payload."
+
         desc = QLabel(
             f"<p align='center' style='color:#62D4E5; font-weight:600; font-size:12pt; margin-bottom:8px;'>{APP_TAGLINE}</p>"
             "<p align='center' style='color:#A5ACBB; font-size:10pt; line-height:140%;'>This wizard will install the official PRUBETH IDE developer workstation on your computer.<br>"
-            "Engineered with a unified dark design system, intelligent multi-model cascade, and hardware scaling.</p>"
+            f"{delivery_badge}</p>"
             f"<p align='center' style='margin-top:12px;'><small style='color:#737B8C;'>Official Website: <a href='{WEBSITE_URL}' style='color:#9485FF;'>{WEBSITE_URL}</a></small></p>"
         )
         desc.setOpenExternalLinks(True)
@@ -624,7 +622,6 @@ class InstallTypePage(QWizardPage):
         layout.setContentsMargins(20, 16, 20, 16)
         layout.setSpacing(10)
 
-        # Radio 1: Full Installation (Recommended)
         self.rb_full = QRadioButton("Full Installation (Recommended)")
         self.rb_full.setChecked(True)
         self.rb_full.setStyleSheet("font-weight: 600; font-size: 11pt; color: #FFFFFF;")
@@ -632,25 +629,21 @@ class InstallTypePage(QWizardPage):
 
         full_desc = QLabel(
             "Installs the complete PRUBETH IDE workstation suite including all multi-language parsers, "
-            "local AI cascade connectors, desktop & start menu shortcuts, PATH integration, and Windows uninstaller."
+            "local AI connectors, desktop & start menu shortcuts, and PATH integration."
         )
         full_desc.setStyleSheet("color: #70D6A0; font-size: 9.5pt; margin-left: 24px; margin-bottom: 6px;")
         full_desc.setWordWrap(True)
         layout.addWidget(full_desc)
 
-        # Radio 2: Custom Installation (Advanced)
         self.rb_custom = QRadioButton("Custom Installation (Advanced)")
         self.rb_custom.setStyleSheet("font-weight: 600; font-size: 11pt; color: #E8EAF0;")
         layout.addWidget(self.rb_custom)
 
-        custom_desc = QLabel(
-            "Selectively toggle individual developer components, local model caches, and shortcut placements."
-        )
+        custom_desc = QLabel("Selectively toggle individual developer components, local model caches, and shortcut placements.")
         custom_desc.setStyleSheet("color: #A5ACBB; font-size: 9.5pt; margin-left: 24px; margin-bottom: 4px;")
         custom_desc.setWordWrap(True)
         layout.addWidget(custom_desc)
 
-        # Options group box
         self.group_custom = QGroupBox("Workstation Components & Integrations")
         grp_layout = QVBoxLayout(self.group_custom)
         grp_layout.setContentsMargins(16, 16, 16, 16)
@@ -668,6 +661,10 @@ class InstallTypePage(QWizardPage):
         self.chk_models = QCheckBox("Local AI Model Templates & Connector Profiles (~10 MB)")
         self.chk_models.setChecked(True)
         grp_layout.addWidget(self.chk_models)
+
+        self.chk_skip_ai = QCheckBox("Skip AI configuration on first run (configure providers later)")
+        self.chk_skip_ai.setChecked(False)
+        grp_layout.addWidget(self.chk_skip_ai)
 
         self.chk_desktop = QCheckBox("Create Desktop Shortcut")
         self.chk_desktop.setChecked(True)
@@ -688,26 +685,23 @@ class InstallTypePage(QWizardPage):
         layout.addWidget(self.group_custom)
         layout.addStretch()
 
-        # Wire signals
-        self.rb_full.toggled.connect(self.on_mode_toggled)
+        self.rb_full.toggled.connect(self.update_states)
         self.update_states()
 
-        # Register fields for Wizard
         self.registerField("is_full_mode", self.rb_full)
         self.registerField("install_lexers", self.chk_lexers)
         self.registerField("install_models", self.chk_models)
+        self.registerField("skip_ai", self.chk_skip_ai)
         self.registerField("create_desktop", self.chk_desktop)
         self.registerField("create_startmenu", self.chk_startmenu)
         self.registerField("add_to_path", self.chk_path)
         self.registerField("register_uninstaller", self.chk_uninstaller)
 
-    def on_mode_toggled(self, checked):
-        self.update_states()
-
     def update_states(self):
         is_custom = self.rb_custom.isChecked()
         self.chk_lexers.setEnabled(is_custom)
         self.chk_models.setEnabled(is_custom)
+        self.chk_skip_ai.setEnabled(is_custom)
         self.chk_desktop.setEnabled(is_custom)
         self.chk_startmenu.setEnabled(is_custom)
         self.chk_path.setEnabled(is_custom)
@@ -715,6 +709,7 @@ class InstallTypePage(QWizardPage):
         if not is_custom:
             self.chk_lexers.setChecked(True)
             self.chk_models.setChecked(True)
+            self.chk_skip_ai.setChecked(False)
             self.chk_desktop.setChecked(True)
             self.chk_startmenu.setChecked(True)
             self.chk_path.setChecked(True)
@@ -724,7 +719,7 @@ class InstallTypePage(QWizardPage):
 class DirectoryPage(QWizardPage):
     def __init__(self):
         super().__init__()
-        self.setTitle("Select Installation Folder")
+        self.setTitle("Select Installation Folder & Validate Storage")
         self.setSubTitle(f"Where would you like to install {APP_NAME} IDE? Check disk space below.")
 
         layout = QVBoxLayout(self)
@@ -736,7 +731,7 @@ class DirectoryPage(QWizardPage):
         layout.addWidget(lbl)
 
         row = QHBoxLayout()
-        self.dir_input = QLineEdit(str(DEFAULT_INSTALL_DIR))
+        self.dir_input = QLineEdit(str(DEFAULT_USER_INSTALL_DIR))
         self.dir_input.textChanged.connect(self.update_disk_space)
         b_browse = QPushButton("Browse...")
         b_browse.clicked.connect(self.browse)
@@ -744,7 +739,6 @@ class DirectoryPage(QWizardPage):
         row.addWidget(b_browse)
         layout.addLayout(row)
 
-        # Disk Space Information Box
         self.info_box = QFrame()
         self.info_box.setObjectName("infoBox")
         box_layout = QVBoxLayout(self.info_box)
@@ -787,16 +781,15 @@ class DirectoryPage(QWizardPage):
     def update_disk_space(self):
         try:
             p = Path(self.dir_input.text()).resolve()
-            drive = p.anchor or (str(p)[:3] if len(str(p)) >= 3 else "C:\\")
-            usage = shutil.disk_usage(drive)
-            avail_gb = usage.free / (1024 ** 3)
-            self.lbl_space_avail.setText(f"Space Available on {drive}: {avail_gb:.2f} GB")
-            if avail_gb > 0.5:
+            res = verify_disk_space(p, payload_size_bytes=22 * 1024 * 1024)
+            avail_gb = res.target_available_bytes / (1024 ** 3)
+            self.lbl_space_avail.setText(f"Space Available on {res.target_volume}: {avail_gb:.2f} GB")
+            if res.is_sufficient:
                 self.lbl_space_status.setText("✓ Sufficient disk space is available.")
                 self.lbl_space_status.setStyleSheet("color: #70D6A0; font-weight: 600; font-size: 9.5pt;")
             else:
-                self.lbl_space_status.setText("⚠ Low disk space warning on target drive.")
-                self.lbl_space_status.setStyleSheet("color: #FFBF69; font-weight: 600; font-size: 9.5pt;")
+                self.lbl_space_status.setText("⚠ Insufficient space: " + (res.insufficient_reason or ""))
+                self.lbl_space_status.setStyleSheet("color: #FF6B6B; font-weight: 600; font-size: 9.5pt;")
         except Exception:
             self.lbl_space_avail.setText("Space Available: Unable to query drive")
             self.lbl_space_status.setText("Proceeding with standard validation")
@@ -804,8 +797,9 @@ class DirectoryPage(QWizardPage):
 
 
 class ReadyPage(QWizardPage):
-    def __init__(self):
+    def __init__(self, mode: str = MODE_AUTO):
         super().__init__()
+        self.mode = mode
         self.setTitle("Ready to Install")
         self.setSubTitle("Setup is ready to begin installing PRUBETH IDE on your computer.")
 
@@ -813,9 +807,8 @@ class ReadyPage(QWizardPage):
         layout.setContentsMargins(20, 16, 20, 16)
         layout.setSpacing(12)
 
-        lbl_intro = QLabel("Review your installation configuration before continuing. Click 'Next' to begin extraction.")
+        lbl_intro = QLabel("Review your installation configuration before continuing. Click 'Next' to begin installation.")
         lbl_intro.setStyleSheet("color: #A5ACBB; font-size: 10pt;")
-        lbl_intro.setWordWrap(True)
         layout.addWidget(lbl_intro)
 
         self.summary_box = QFrame()
@@ -830,17 +823,14 @@ class ReadyPage(QWizardPage):
 
         self.lbl_sum_path = QLabel()
         self.lbl_sum_path.setStyleSheet("color: #E8EAF0; font-size: 9.5pt;")
-        self.lbl_sum_path.setWordWrap(True)
         sum_layout.addWidget(self.lbl_sum_path)
 
         self.lbl_sum_comps = QLabel()
         self.lbl_sum_comps.setStyleSheet("color: #A5ACBB; font-size: 9pt;")
-        self.lbl_sum_comps.setWordWrap(True)
         sum_layout.addWidget(self.lbl_sum_comps)
 
         self.lbl_sum_actions = QLabel()
         self.lbl_sum_actions.setStyleSheet("color: #62D4E5; font-size: 9pt;")
-        self.lbl_sum_actions.setWordWrap(True)
         sum_layout.addWidget(self.lbl_sum_actions)
 
         layout.addWidget(self.summary_box)
@@ -855,15 +845,18 @@ class ReadyPage(QWizardPage):
         start = self.field("create_startmenu")
         path_env = self.field("add_to_path")
         uninst = self.field("register_uninstaller")
+        skip_ai = self.field("skip_ai")
 
-        mode_text = "Mode: Full Installation (Recommended)" if is_full else "Mode: Custom Installation (Advanced)"
-        self.lbl_sum_mode.setText(f"Installation {mode_text}")
+        mode_text = "Mode: Full Installation" if is_full else "Mode: Custom Installation"
+        if self.mode == MODE_ONLINE:
+            mode_text += " (Online GitHub Bootstrapper)"
+        self.lbl_sum_mode.setText(mode_text)
         self.lbl_sum_path.setText(f"Destination: {target_dir}")
 
-        comps = ["Core Workstation Engine (Required)"]
+        comps = ["Core Workstation Engine"]
         if lexers:
             comps.append("Multi-Language Syntaxes")
-        if models:
+        if models and not skip_ai:
             comps.append("Local AI Connector Templates")
         self.lbl_sum_comps.setText(f"Components: {', '.join(comps)}")
 
@@ -871,96 +864,95 @@ class ReadyPage(QWizardPage):
         if desktop:
             actions.append("Desktop Shortcut")
         if start:
-            actions.append("Start Menu Group")
+            actions.append("Start Menu")
         if path_env:
-            actions.append("User PATH Integration")
+            actions.append("PATH Integration")
         if uninst:
-            actions.append("Windows Uninstaller")
-        self.lbl_sum_actions.setText(f"System Actions: {', '.join(actions)}")
+            actions.append("Windows Control Panel")
+        self.lbl_sum_actions.setText(f"Integrations: {', '.join(actions)}")
 
 
 class ProgressPage(QWizardPage):
-    def __init__(self):
+    def __init__(self, mode: str = MODE_AUTO, channel: str = DEFAULT_CHANNEL):
         super().__init__()
+        self.mode = mode
+        self.channel = channel
         self.setTitle(f"Installing {APP_NAME} IDE")
-        self.setSubTitle("Please wait while the system extracts files, configures shortcuts, and registers settings...")
+        self.setSubTitle("Please wait while the system downloads, verifies, and installs the application...")
 
         layout = QVBoxLayout(self)
         layout.setContentsMargins(20, 20, 20, 20)
         layout.setSpacing(12)
 
-        self.status_lbl = QLabel("Initializing setup...")
-        self.status_lbl.setStyleSheet("color: #A5ACBB; font-size: 10pt;")
+        self.status_lbl = QLabel("Stage 1/10: Initializing setup...")
+        self.status_lbl.setStyleSheet("color: #E8EAF0; font-size: 10pt; font-weight: 600;")
         layout.addWidget(self.status_lbl)
+
+        self.details_lbl = QLabel("Preparing installation pipeline...")
+        self.details_lbl.setStyleSheet("color: #A5ACBB; font-size: 9pt;")
+        layout.addWidget(self.details_lbl)
 
         self.bar = QProgressBar()
         self.bar.setRange(0, 100)
         self.bar.setValue(0)
         layout.addWidget(self.bar)
 
-        self.worker = None
+        self.btn_cancel_dl = QPushButton("Cancel Installation")
+        self.btn_cancel_dl.clicked.connect(self.on_cancel_clicked)
+        layout.addWidget(self.btn_cancel_dl, alignment=Qt.AlignRight)
+
+        self.worker: Optional[InstallWorker] = None
         self.is_done = False
         layout.addStretch()
 
     def initializePage(self):
-        target_dir = self.field("target_dir")
+        target_dir = Path(self.field("target_dir"))
         create_desktop = self.field("create_desktop")
         create_start = self.field("create_startmenu")
         install_lexers = self.field("install_lexers")
         install_models = self.field("install_models")
         add_to_path = self.field("add_to_path")
         reg_uninst = self.field("register_uninstaller")
-        is_full = self.field("is_full_mode")
+        skip_ai = self.field("skip_ai")
 
         self.wizard().button(QWizard.BackButton).setEnabled(False)
         self.wizard().button(QWizard.NextButton).setEnabled(False)
 
-        res_dir = get_resource_dir()
-        src_dir = get_source_dir()
-
-        payload_candidates = [
-            res_dir / "app_payload.zip",
-            res_dir / "installer" / "app_payload.zip",
-            res_dir / "PrubethIDE-v3.0.0-Universal-Portable.zip",
-            src_dir / "app_payload.zip",
-            src_dir / "installer" / "app_payload.zip",
-            src_dir / "PrubethIDE-v3.0.0-Universal-Portable.zip",
-            src_dir / "SukhiIDE-v3.0.0-Universal-Portable.zip",
-            src_dir / "SoNaive-v3.0.0-Universal-Portable.zip",
-        ]
-        payload_zip = None
-        for p in payload_candidates:
-            if p.exists() and p.is_file():
-                payload_zip = p
-                break
-
         self.worker = InstallWorker(
             target_dir=target_dir,
+            mode=self.mode,
+            channel=self.channel,
             create_desktop=create_desktop,
             create_startmenu=create_start,
-            payload_zip=payload_zip,
-            install_type="full" if is_full else "custom",
+            add_to_path=add_to_path,
             install_lexers=install_lexers,
             install_models=install_models,
-            add_to_path=add_to_path,
+            skip_ai=skip_ai,
             register_uninstaller=reg_uninst
         )
         self.worker.progress.connect(self.on_progress)
         self.worker.finished.connect(self.on_finished)
         self.worker.start()
 
-    def on_progress(self, val, msg):
+    def on_cancel_clicked(self):
+        if self.worker and not self.is_done:
+            self.btn_cancel_dl.setEnabled(False)
+            self.status_lbl.setText("Cancelling installation and cleaning up...")
+            self.worker.cancel()
+
+    def on_progress(self, val: int, msg: str):
         self.bar.setValue(val)
         self.status_lbl.setText(msg)
 
-    def on_finished(self, success, err):
+    def on_finished(self, success: bool, msg: str):
         self.is_done = True
+        self.btn_cancel_dl.setEnabled(False)
         self.wizard().button(QWizard.NextButton).setEnabled(True)
         if success:
             self.status_lbl.setText("Installation completed successfully!")
             self.wizard().next()
         else:
-            QMessageBox.critical(self, "Installation Error", f"Failed to install:\n{err}")
+            QMessageBox.critical(self, "Installation Error", f"Installation failed:\n{msg}")
 
     def isComplete(self):
         return self.is_done
@@ -977,7 +969,7 @@ class FinishPage(QWizardPage):
         congrats = QLabel(
             f"<h3 style='color:#FFFFFF;'>{APP_DISPLAY_NAME} has been successfully installed!</h3>"
             "<p style='color:#A5ACBB;'>You are now ready to launch the sovereign developer workstation environment.</p>"
-            f"<p style='color:#737B8C;'>Find future updates and extensions at <a href='{PROJECTS_URL}' style='color:#9485FF;'>{PROJECTS_URL}</a></p>"
+            f"<p style='color:#737B8C;'>Find future updates and extensions at <a href='{WEBSITE_URL}' style='color:#9485FF;'>{WEBSITE_URL}</a></p>"
         )
         congrats.setOpenExternalLinks(True)
         layout.addWidget(congrats)
@@ -989,25 +981,27 @@ class FinishPage(QWizardPage):
 
 
 class SetupWizard(QWizard):
-    def __init__(self):
+    def __init__(self, mode: str = MODE_AUTO, channel: str = DEFAULT_CHANNEL):
         super().__init__()
+        self.mode = mode
+        self.channel = channel
         self.setWindowTitle(f"{APP_NAME} IDE Setup — v{APP_VERSION}")
         self.setWizardStyle(QWizard.ClassicStyle)
-        self.resize(680, 500)
+        self.resize(680, 520)
 
         icon_path = get_resource_dir() / "assets" / "icon.ico"
         if not icon_path.exists():
-            icon_path = Path(__file__).resolve().parent.parent / "assets" / "icon.ico"
+            icon_path = get_source_dir() / "assets" / "icon.ico"
         if icon_path.exists():
             self.setWindowIcon(QIcon(str(icon_path)))
 
         self.setStyleSheet(WIZARD_STYLESHEET)
 
-        self.page_welcome = WelcomePage()
+        self.page_welcome = WelcomePage(mode=self.mode)
         self.page_type = InstallTypePage()
         self.page_dir = DirectoryPage()
-        self.page_ready = ReadyPage()
-        self.page_progress = ProgressPage()
+        self.page_ready = ReadyPage(mode=self.mode)
+        self.page_progress = ProgressPage(mode=self.mode, channel=self.channel)
         self.page_finish = FinishPage()
 
         self.addPage(self.page_welcome)
@@ -1018,20 +1012,126 @@ class SetupWizard(QWizard):
         self.addPage(self.page_finish)
 
 
+def run_quiet_installation(args: argparse.Namespace) -> int:
+    """Headless silent installation engine executing all 10 stages."""
+    print("=" * 65)
+    print(f"  {APP_NAME} IDE — SILENT INSTALLER (v{APP_VERSION})")
+    print("=" * 65)
+
+    target_dir = Path(args.install_dir) if args.install_dir else (
+        DEFAULT_MACHINE_INSTALL_DIR if args.scope == "machine" else DEFAULT_USER_INSTALL_DIR
+    )
+
+    worker = InstallWorker(
+        target_dir=target_dir,
+        mode=args.mode,
+        channel=args.channel,
+        scope=args.scope,
+        create_desktop=not args.no_shortcut,
+        create_startmenu=not args.no_shortcut,
+        add_to_path=True,
+        install_lexers=True,
+        install_models=not args.skip_ai,
+        skip_ai=args.skip_ai,
+        register_uninstaller=True
+    )
+
+    last_pct = 0
+    def cli_progress(pct: int, msg: str):
+        nonlocal last_pct
+        if pct != last_pct and (pct % 10 == 0 or pct in (5, 68, 88, 95, 100)):
+            print(f"[{pct:3d}%] {msg}")
+            last_pct = pct
+
+    worker.progress.connect(cli_progress)
+
+    res_success = False
+    res_err = ""
+    def cli_finish(success: bool, msg: str):
+        nonlocal res_success, res_err
+        res_success = success
+        res_err = msg
+
+    worker.finished.connect(cli_finish)
+    worker.run()
+
+    if res_success:
+        print(f"[+] Installation successfully completed into: {target_dir}")
+        return EXIT_SUCCESS
+    else:
+        print(f"[!] Installation failed: {res_err}", file=sys.stderr)
+        if "Insufficient disk space" in res_err:
+            return EXIT_INSUFFICIENT_SPACE
+        elif "digest mismatch" in res_err or "Verification" in res_err:
+            return EXIT_VERIFICATION_FAILED
+        elif "Download" in res_err or "HTTP" in res_err:
+            return EXIT_NETWORK_ERROR
+        return EXIT_GENERAL_ERROR
+
+
+def build_cli_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        prog="Setup.exe",
+        description=f"{APP_DISPLAY_NAME} — Production Release Installer.",
+        epilog=(
+            "Exit Codes:\n"
+            "  0 = Success\n"
+            "  1 = General Error\n"
+            "  2 = Invalid CLI Arguments\n"
+            "  3 = Network / Download Failure\n"
+            "  4 = Cryptographic / Checksum Verification Failure\n"
+            "  5 = Insufficient Disk Space\n"
+            "  6 = User Cancelled\n"
+        ),
+        formatter_class=argparse.RawDescriptionHelpFormatter
+    )
+    parser.add_argument("--version", action="version", version=f"{APP_NAME} IDE Setup v{APP_VERSION}")
+    parser.add_argument("--install-dir", type=str, default=None, help="Target installation folder.")
+    parser.add_argument("--scope", choices=["user", "machine"], default="user", help="Installation scope (default: user).")
+    parser.add_argument("--channel", choices=["stable", "beta", "dev"], default="stable", help="Release channel (default: stable).")
+    parser.add_argument("--mode", choices=["auto", "online", "offline"], default="auto", help="Delivery mode (default: auto).")
+    parser.add_argument("--no-shortcut", action="store_true", help="Disable creation of Desktop and Start Menu shortcuts.")
+    parser.add_argument("--skip-ai", action="store_true", help="Skip local AI model cache and provider setup on first run.")
+    parser.add_argument("--log", type=str, default=None, help="Write detailed installation logs to file.")
+    parser.add_argument("--quiet", action="store_true", help="Run silent installation without graphical wizard.")
+    parser.add_argument("--verify-only", action="store_true", help="Verify official release manifest and system readiness without writing files.")
+    return parser
+
+
 def main():
+    parser = build_cli_parser()
+    args, unknown = parser.parse_known_args()
+
+    if args.log:
+        logging.basicConfig(filename=args.log, level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
+
+    if args.verify_only:
+        print(f"[*] Verifying official {APP_NAME} release v{APP_VERSION} ({args.channel})...")
+        try:
+            resolver = ReleaseMetadataResolver(channel=args.channel, version=APP_VERSION)
+            info = resolver.resolve_release()
+            print(f"[+] Release v{info['version']} ({info['channel']}) verified successfully.")
+            print(f"[+] Payload: {info['payload_filename']} ({info['payload_size_bytes']} bytes)")
+            print(f"[+] SHA256:  {info['payload_sha256']}")
+            sys.exit(EXIT_SUCCESS)
+        except Exception as e:
+            print(f"[!] Verification failed: {e}", file=sys.stderr)
+            sys.exit(EXIT_VERIFICATION_FAILED)
+
+    if args.quiet:
+        sys.exit(run_quiet_installation(args))
+
     app = QApplication(sys.argv)
-    wizard = SetupWizard()
+    wizard = SetupWizard(mode=args.mode, channel=args.channel)
     if wizard.exec_() == QWizard.Accepted:
         if wizard.page_finish.chk_launch.isChecked():
             target_dir = wizard.field("target_dir")
-            exe = Path(target_dir) / "PrubethIDE.exe"
-            if not exe.exists():
-                exe = Path(target_dir) / "SukhiIDE.exe"
             bat = Path(target_dir) / "PrubethIDE.bat"
-            if not bat.exists():
-                bat = Path(target_dir) / "SukhiIDE.bat"
-            launch_target = str(exe if exe.exists() else bat)
-            subprocess.Popen([launch_target], cwd=target_dir, shell=True)
+            if bat.exists():
+                subprocess.Popen([str(bat)], cwd=target_dir, shell=True)
+        sys.exit(EXIT_SUCCESS)
+    else:
+        sys.exit(EXIT_USER_CANCELLED)
 
 
 if __name__ == "__main__":

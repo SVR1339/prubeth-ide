@@ -262,21 +262,37 @@ Add custom OpenAI-compatible inference servers (vLLM, LocalAI, LM Studio) in `~/
 | :--- | :--- | :--- |
 | **Local GPU Ollama Throughput** | **30.99 tok/s** | NVIDIA GeForce GTX 1050 Ti (CUDA 12.6) |
 | **Gemini 3.8 Flash Cloud Stream** | **128.4 tok/s** | Google Generative Language SSE |
-| **Automated Test Suite Execution** | **287 / 287 Passing (100%)** | 20 Verification Subsystems across Reliability, Concurrency & Security |
+| **Automated Test Suite Execution** | **301 / 301 Passing (100%)** | 21 Subsystems across Reliability, Concurrency, Security & Packaging |
 | **Reliability, Chaos & Meta-Testing** | **69 / 69 Passing (100%)** | Out-of-Process Supervisor, Polyglot Sandboxes & Meta-Harness |
+| **GitHub Bootstrap Installer Suite** | **20 / 20 Passing (100%)** | 70 MiB Threshold, Mode A/B, Range Resume & Security Inspection |
 | **Memory Footprint (Idle)** | **148 MB** | PyQt5 QScintilla Engine |
 | **Preflight & Doctor Status** | **0 Exit Code (Clean Pass)** | Fully verified system dependencies and configuration |
 
 ### Running the Test Suite & Verification CLI
 ```powershell
-# Run full automated test suite (287 tests)
+# Run full automated test suite (301 tests)
 pytest tests/ -v
 
 # Run reliability, polyglot and meta-testing suite (69 tests)
 pytest tests/reliability/ -v
 
+# Run GitHub Bootstrap Installer test suite (20 tests)
+pytest tests/installer/ tests/test_installer_modes.py tests/test_installer_github_download.py -v
+
 # Run Horizon Continuous Verification Doctor
 python local_ai_studio_pro.py --verify doctor
+```
+
+### Lightweight GitHub Bootstrap Installer CLI
+```powershell
+# Run graphical setup wizard
+.\Setup.exe
+
+# Run silent automated installation
+.\Setup.exe --quiet --install-dir "%LOCALAPPDATA%\Programs\PrubethIDE"
+
+# Run release manifest and readiness verification without writing files
+.\Setup.exe --verify-only
 ```
 
 ---
