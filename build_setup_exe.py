@@ -30,10 +30,8 @@ def create_payload_archive() -> Path:
         "INSTALL.md",
         "requirements.txt",
         "run_local_ai_studio_pro.bat",
-        "run_ide.bat",
-        "run_ide.sh",
-        "test_ollama.py",
-        "pyproject.toml"
+        "pyproject.toml",
+        "FINAL_RELEASE_VERIFICATION.md"
     ]
 
     with zipfile.ZipFile(payload_zip, 'w', compression=zipfile.ZIP_DEFLATED) as z:

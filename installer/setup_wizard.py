@@ -193,10 +193,8 @@ class InstallWorker(QThread):
                     "INSTALL.md",
                     "requirements.txt",
                     "run_local_ai_studio_pro.bat",
-                    "run_ide.bat",
-                    "run_ide.sh",
-                    "test_ollama.py",
-                    "pyproject.toml"
+                    "pyproject.toml",
+                    "FINAL_RELEASE_VERIFICATION.md"
                 ]
 
                 self.progress.emit(45, "Verifying and synchronizing core modules...")
@@ -211,7 +209,11 @@ class InstallWorker(QThread):
                             break
 
                 # Copy subsystem directories
-                sub_dirs = ["core", "workspace", "source_control", "language_services", "debugging", "ai", "ui", "plugins", "assets", "tests"]
+                sub_dirs = [
+                    "core", "workspace", "source_control", "language_services",
+                    "debugging", "ai", "ui", "plugins", "assets", "tests",
+                    "horizon_engine", "security_research"
+                ]
                 for sub in sub_dirs:
                     for base in search_bases:
                         sub_src = base / sub

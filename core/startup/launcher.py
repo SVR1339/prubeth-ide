@@ -80,7 +80,7 @@ class AuthoritativeLauncher:
             print(f"Overall Status: {report.overall_status.value}")
             print(f"Summary:        {report.summary}\n")
             for it in report.items:
-                mark = "✓" if it.status == CheckStatus.PASS else ("⚠" if it.status == CheckStatus.WARN else "✗")
+                mark = "PASS" if it.status == CheckStatus.PASS else ("WARN" if it.status == CheckStatus.WARN else "FAIL")
                 print(f"[{mark}] [{it.category.upper()}] {it.name}: {it.message}")
                 if it.remediation_guidance:
                     print(f"    Guidance: {it.remediation_guidance}")

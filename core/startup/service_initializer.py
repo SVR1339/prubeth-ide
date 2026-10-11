@@ -99,7 +99,7 @@ class ServiceInitializer:
                 desc.status = ServiceStatus.READY
                 desc.duration_ms = (time.time() - start_t) * 1000.0
                 if self._logger:
-                    self._logger.info(f"✓ Initialized {s_name} in {desc.duration_ms:.1f}ms")
+                    self._logger.info(f"[OK] Initialized {s_name} in {desc.duration_ms:.1f}ms")
             except Exception as ex:
                 desc.duration_ms = (time.time() - start_t) * 1000.0
                 desc.error_message = str(ex)
@@ -108,7 +108,7 @@ class ServiceInitializer:
                 if is_mandatory:
                     desc.status = ServiceStatus.FAILED
                     if self._logger:
-                        self._logger.error(f"✗ MANDATORY SERVICE FAILED: {s_name} - {ex}\n{desc.diagnostics['traceback']}")
+                        self._logger.error(f"[FAIL] MANDATORY SERVICE FAILED: {s_name} - {ex}\n{desc.diagnostics['traceback']}")
                     self.state_machine.transition_to(
                         StartupState.FAILED,
                         error_message=f"Mandatory service '{s_name}' failed: {ex}"
