@@ -79,12 +79,12 @@ from PyQt5.Qsci import (
     QsciLexerCSharp
 )
 
-APP_NAME = "PRUBETH IDE"
-APP_BRAND = "PRUBETH"
-APP_VERSION = "3.0.0 (Horizon Edition)"
-APP_CODENAME = "PRUBETH"
-APP_TAGLINE = "PRUBETH IDE — The AI-Powered Sovereign Developer Environment"
-LEGACY_APP_NAME = "SUKHI IDE"
+APP_NAME = "PRUBETH / Prudeth IDE"
+APP_BRAND = "Prudeth"
+APP_VERSION = "3.0.0 (Bloom Edition)"
+APP_CODENAME = "Prudeth"
+APP_TAGLINE = "Bloom, ideas unfolding"
+LEGACY_APP_NAME = "PRUBETH / SUKHI IDE"
 WEBSITE_URL = "https://www.bsvr.work/"
 PROJECTS_URL = "https://www.bsvr.work/#projects"
 GITHUB_URL = "https://github.com/imyouiamyou/prubeth-ide"
@@ -521,18 +521,19 @@ class IntelligentModelRouter:
 class LexerFactory:
     """Manages syntax highlighters for multiple languages with a unified dark palette."""
 
-    BG_COLOR = QColor("#0c1017")
-    PAPER_COLOR = QColor("#0c1017")
-    FG_COLOR = QColor("#dce5f5")
-    MARGIN_BG = QColor("#121722")
-    MARGIN_FG = QColor("#5d718f")
-    KEYWORD_COLOR = QColor("#c792ea")
-    STRING_COLOR = QColor("#ecc48d")
-    COMMENT_COLOR = QColor("#61748f")
-    FUNC_COLOR = QColor("#82aaff")
-    CLASS_COLOR = QColor("#ffcb6b")
-    NUMBER_COLOR = QColor("#f78c6c")
-    OPERATOR_COLOR = QColor("#89ddff")
+    BG_COLOR = QColor("#15171D")
+    PAPER_COLOR = QColor("#15171D")
+    FG_COLOR = QColor("#E8EAF0")
+    MARGIN_BG = QColor("#1D2028")
+    MARGIN_FG = QColor("#727B8D")
+    KEYWORD_COLOR = QColor("#C4A1FF")
+    STRING_COLOR = QColor("#9DD9A8")
+    COMMENT_COLOR = QColor("#8995A7")
+    FUNC_COLOR = QColor("#83BDF5")
+    CLASS_COLOR = QColor("#83BDF5")
+    NUMBER_COLOR = QColor("#F1C27D")
+    OPERATOR_COLOR = QColor("#62D4E5")
+    ERROR_COLOR = QColor("#FF7D86")
 
     @classmethod
     def create_lexer(cls, file_path, parent):
@@ -652,17 +653,17 @@ class Editor(QsciScintilla):
         self.setMarginType(0, QsciScintilla.NumberMargin)
         self.setMarginLineNumbers(0, True)
         self.setMarginWidth(0, "00000")
-        self.setMarginsBackgroundColor(QColor("#11151f"))
-        self.setMarginsForegroundColor(QColor("#546884"))
+        self.setMarginsBackgroundColor(QColor("#1D2028"))
+        self.setMarginsForegroundColor(QColor("#727B8D"))
 
-        self.setPaper(QColor("#0c1017"))
-        self.setColor(QColor("#dce5f5"))
-        self.setCaretForegroundColor(QColor("#5aa7ff"))
+        self.setPaper(QColor("#15171D"))
+        self.setColor(QColor("#E8EAF0"))
+        self.setCaretForegroundColor(QColor("#9485FF"))
         self.setCaretWidth(2)
         self.setCaretLineVisible(True)
-        self.setCaretLineBackgroundColor(QColor("#151b27"))
-        self.setSelectionBackgroundColor(QColor("#243854"))
-        self.setSelectionForegroundColor(QColor("#ffffff"))
+        self.setCaretLineBackgroundColor(QColor("#1D2028"))
+        self.setSelectionBackgroundColor(QColor("#383650"))
+        self.setSelectionForegroundColor(QColor("#FFFFFF"))
 
         self.setBraceMatching(QsciScintilla.SloppyBraceMatch)
         self.setAutoIndent(True)
@@ -676,7 +677,7 @@ class Editor(QsciScintilla):
 
         self.setEdgeMode(QsciScintilla.EdgeLine)
         self.setEdgeColumn(100)
-        self.setEdgeColor(QColor("#1d2638"))
+        self.setEdgeColor(QColor("#343A49"))
 
         self.apply_lexer(path)
 
@@ -3067,123 +3068,10 @@ class Studio(QMainWindow):
         return self.settings.get("ollama_url", "http://localhost:11434")
 
     def build_ui(self):
-        self.setStyleSheet("""
-            QMainWindow, QWidget {
-                background: #050811;
-                color: #FFFFFF;
-                font-family: 'Segoe UI', -apple-system, sans-serif;
-                font-size: 10pt;
-            }
-            QMenuBar, QMenu, QToolBar {
-                background: #090E1B;
-                color: #FFFFFF;
-                border: 0;
-                spacing: 5px;
-            }
-            QMenuBar::item { padding: 7px 12px; }
-            QMenuBar::item:selected, QMenu::item:selected {
-                background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 rgba(0, 240, 255, 0.2), stop:1 rgba(217, 70, 239, 0.2));
-                color: #00F0FF;
-            }
-            QToolBar {
-                padding: 6px;
-                spacing: 6px;
-                border-bottom: 1px solid #141E33;
-                background: #080C17;
-            }
-            QToolButton {
-                background: #0D1424;
-                border: 1px solid #1B2945;
-                padding: 6px 12px;
-                border-radius: 6px;
-                font-weight: 600;
-                color: #F1F5F9;
-            }
-            QToolButton:hover {
-                background: #141F36;
-                border-color: #00F0FF;
-                color: #00F0FF;
-            }
-            QTreeView, QTabWidget::pane, QTabBar::tab {
-                background: #060913;
-                color: #F8FAFC;
-                border: 1px solid #141E33;
-            }
-            QTreeView {
-                alternate-background-color: #090E1C;
-                show-decoration-selected: 1;
-            }
-            QTreeView::item {
-                padding: 5px;
-                border-radius: 4px;
-            }
-            QTreeView::item:selected, QTabBar::tab:selected {
-                background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 rgba(0, 240, 255, 0.25), stop:1 rgba(217, 70, 239, 0.25));
-                color: #FFFFFF;
-                border-bottom: 2px solid #00F0FF;
-            }
-            QTabBar::tab {
-                padding: 8px 14px;
-                margin-right: 2px;
-            }
-            QPushButton {
-                background: #0E1626;
-                color: #FFFFFF;
-                border: 1px solid #1E2D4A;
-                padding: 7px 12px;
-                border-radius: 6px;
-                font-weight: 600;
-            }
-            QPushButton:hover {
-                background: #16223B;
-                border-color: #00F0FF;
-                color: #00F0FF;
-            }
-            QPushButton:pressed { background: #0A101C; }
-            QPushButton:disabled { color: #475569; background: #0A0F1A; border-color: #141E33; }
-            QTextEdit, QPlainTextEdit, QLineEdit, QComboBox {
-                background: #070B16;
-                color: #FFFFFF;
-                border: 1px solid #18243C;
-                padding: 6px;
-                selection-background-color: #0284C7;
-                border-radius: 5px;
-            }
-            QTextEdit:focus, QPlainTextEdit:focus, QLineEdit:focus, QComboBox:focus {
-                border: 1px solid #00F0FF;
-            }
-            QComboBox QAbstractItemView {
-                background: #090E1C;
-                selection-background-color: #0284C7;
-                color: #FFFFFF;
-            }
-            QStatusBar {
-                background: #060913;
-                color: #94A3B8;
-                border-top: 1px solid #141E33;
-            }
-            QSplitter::handle { background: #141E33; }
-            QProgressBar {
-                border: 1px solid #1B2945;
-                border-radius: 4px;
-                text-align: center;
-                background: #070B16;
-                height: 8px;
-                color: #FFFFFF;
-            }
-            QProgressBar::chunk {
-                background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #00F0FF, stop:0.5 #3B82F6, stop:1 #D946EF);
-                border-radius: 3px;
-            }
-            QGroupBox {
-                border: 1px solid #18243C;
-                border-radius: 8px;
-                margin-top: 10px;
-                padding-top: 8px;
-                color: #00F0FF;
-                font-weight: 600;
-            }
-        """)
+        from ui.design_system import get_application_stylesheet
+        theme_name = self.settings.get("theme", "dark")
+        custom_accent = self.settings.get("custom_accent", None)
+        self.setStyleSheet(get_application_stylesheet(theme_name, custom_accent))
 
         central = QWidget()
         layout = QVBoxLayout(central)

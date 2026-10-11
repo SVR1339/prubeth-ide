@@ -23,8 +23,9 @@ from PyQt5.QtWidgets import (
     QFileDialog, QMessageBox, QFrame
 )
 
-APP_NAME = "PRUBETH"
-APP_DISPLAY_NAME = "PRUBETH IDE — Horizon Edition"
+APP_NAME = "Prudeth"
+APP_DISPLAY_NAME = "Prudeth IDE — Bloom Edition"
+APP_TAGLINE = "Bloom, ideas unfolding"
 APP_VERSION = "3.0.0"
 PUBLISHER = "BSVR Technologies"
 WEBSITE_URL = "https://www.bsvr.work/"
@@ -38,7 +39,7 @@ ONLINE_PAYLOAD_URLS = [
     f"https://github.com/{GITHUB_REPO}/archive/refs/tags/{RELEASE_TAG}.zip",
     f"https://github.com/{GITHUB_REPO}/archive/refs/heads/master.zip",
 ]
-DEFAULT_INSTALL_DIR = Path.home() / "AppData" / "Local" / "Programs" / "PrubethIDE"
+DEFAULT_INSTALL_DIR = Path.home() / "AppData" / "Local" / "Programs" / "PrudethIDE"
 
 
 def get_resource_dir() -> Path:
@@ -403,26 +404,28 @@ class WelcomePage(QWizardPage):
         super().__init__()
         self.setTitle(f"Welcome to {APP_NAME} IDE Setup")
         layout = QVBoxLayout(self)
+        layout.setContentsMargins(20, 20, 20, 20)
+        layout.setSpacing(12)
 
         logo_lbl = QLabel()
         logo_path = get_resource_dir() / "assets" / "logo.png"
         if not logo_path.exists():
             logo_path = Path(__file__).resolve().parent.parent / "assets" / "logo.png"
         if logo_path.exists():
-            pix = QPixmap(str(logo_path)).scaled(96, 96, Qt.KeepAspectRatio, Qt.SmoothTransformation)
+            pix = QPixmap(str(logo_path)).scaled(112, 112, Qt.KeepAspectRatio, Qt.SmoothTransformation)
             logo_lbl.setPixmap(pix)
             logo_lbl.setAlignment(Qt.AlignCenter)
         layout.addWidget(logo_lbl)
 
-        title = QLabel(f"<h2>{APP_DISPLAY_NAME} <span style='color:#00F0FF;'>v{APP_VERSION}</span></h2>")
+        title = QLabel(f"<h2 style='color:#E8EAF0; margin-top:6px;'>Prudeth IDE <span style='color:#9485FF;'>v{APP_VERSION}</span></h2>")
         title.setAlignment(Qt.AlignCenter)
         layout.addWidget(title)
 
         desc = QLabel(
-            "<p align='center' style='color:#00F0FF; font-weight:bold;'>Sovereign Agentic Developer Studio · Classic Windmill Horizon Edition</p>"
-            "<p align='center'>This wizard will install the official PRUBETH IDE distribution on your computer.<br>"
-            "Engineered with Hologram Cybernetic Design, Intelligent Multi-Model Cascade, and Instant Local CUDA Self-Healing.</p>"
-            f"<p align='center'><small>Official Website: <a href='{WEBSITE_URL}'>{WEBSITE_URL}</a></small></p>"
+            f"<p align='center' style='color:#62D4E5; font-weight:600; font-size:12pt; margin-bottom:8px;'>{APP_TAGLINE}</p>"
+            "<p align='center' style='color:#A5ACBB; font-size:10pt; line-height:140%;'>This wizard will install the official Prudeth IDE developer workstation on your computer.<br>"
+            "Engineered with a unified dark design system, intelligent multi-model cascade, and hardware scaling.</p>"
+            f"<p align='center' style='margin-top:12px;'><small style='color:#737B8C;'>Official Website: <a href='{WEBSITE_URL}' style='color:#9485FF;'>{WEBSITE_URL}</a></small></p>"
         )
         desc.setOpenExternalLinks(True)
         layout.addWidget(desc)
@@ -436,7 +439,10 @@ class DirectoryPage(QWizardPage):
         self.setSubTitle(f"Where would you like to install {APP_NAME} IDE?")
 
         layout = QVBoxLayout(self)
-        layout.addWidget(QLabel("Destination Directory:"))
+        layout.setContentsMargins(20, 20, 20, 20)
+        lbl = QLabel("Destination Directory:")
+        lbl.setStyleSheet("color: #E8EAF0; font-weight: 600;")
+        layout.addWidget(lbl)
 
         row = QHBoxLayout()
         self.dir_input = QLineEdit(str(DEFAULT_INSTALL_DIR))
@@ -473,7 +479,9 @@ class ProgressPage(QWizardPage):
         self.setSubTitle("Please wait while the system installs files, assets, and shortcuts...")
 
         layout = QVBoxLayout(self)
+        layout.setContentsMargins(20, 20, 20, 20)
         self.status_lbl = QLabel("Initializing setup...")
+        self.status_lbl.setStyleSheet("color: #A5ACBB;")
         layout.addWidget(self.status_lbl)
 
         self.bar = QProgressBar()
@@ -539,11 +547,13 @@ class FinishPage(QWizardPage):
         super().__init__()
         self.setTitle("Installation Complete!")
         layout = QVBoxLayout(self)
+        layout.setContentsMargins(20, 20, 20, 20)
+        layout.setSpacing(12)
 
         congrats = QLabel(
-            f"<h3>{APP_DISPLAY_NAME} has been successfully installed!</h3>"
-            "<p>You are now ready to launch the sovereign agentic developer environment.</p>"
-            f"<p>Find future updates and extensions at <a href='{PROJECTS_URL}'>{PROJECTS_URL}</a></p>"
+            f"<h3 style='color:#E8EAF0;'>{APP_DISPLAY_NAME} has been successfully installed!</h3>"
+            "<p style='color:#A5ACBB;'>You are now ready to launch the sovereign developer workstation environment.</p>"
+            f"<p style='color:#737B8C;'>Find future updates and extensions at <a href='{PROJECTS_URL}' style='color:#9485FF;'>{PROJECTS_URL}</a></p>"
         )
         congrats.setOpenExternalLinks(True)
         layout.addWidget(congrats)
@@ -558,8 +568,8 @@ class SetupWizard(QWizard):
     def __init__(self):
         super().__init__()
         self.setWindowTitle(f"{APP_NAME} IDE Setup — v{APP_VERSION}")
-        self.setWizardStyle(QWizard.ModernStyle)
-        self.resize(620, 430)
+        self.setWizardStyle(QWizard.ClassicStyle)
+        self.resize(650, 450)
 
         icon_path = get_resource_dir() / "assets" / "icon.ico"
         if not icon_path.exists():
@@ -568,47 +578,86 @@ class SetupWizard(QWizard):
             self.setWindowIcon(QIcon(str(icon_path)))
 
         self.setStyleSheet("""
-            QWizard {
-                background: #050811;
-                color: #FFFFFF;
-                font-family: 'Segoe UI', sans-serif;
+            QWizard, QWizardPage, QWizard > QWidget, QWizardPage > QWidget {
+                background-color: #15171D;
+                color: #E8EAF0;
+                font-family: 'Segoe UI', -apple-system, sans-serif;
             }
-            QLabel { color: #E2E8F0; font-size: 10pt; }
+            QWizard::header {
+                background-color: #1D2028;
+                border-bottom: 1px solid #343A49;
+            }
+            QLabel {
+                color: #E8EAF0;
+                font-size: 10pt;
+                background: transparent;
+            }
             QLineEdit {
-                background: #090E1C;
-                color: #FFFFFF;
-                border: 1px solid #1E2D4A;
-                padding: 6px;
+                background: #191C23;
+                color: #E8EAF0;
+                border: 1px solid #343A49;
+                padding: 7px 10px;
                 border-radius: 4px;
+                font-size: 10pt;
             }
             QLineEdit:focus {
-                border-color: #00F0FF;
+                border-color: #B4A9FF;
             }
             QPushButton {
-                background: #0E1626;
-                color: #FFFFFF;
-                border: 1px solid #1E2D4A;
-                padding: 6px 14px;
+                background: #252934;
+                color: #E8EAF0;
+                border: 1px solid #343A49;
+                padding: 7px 18px;
                 border-radius: 4px;
-                font-weight: bold;
+                font-weight: 600;
+                font-size: 10pt;
             }
             QPushButton:hover {
-                background: #16223B;
-                border-color: #00F0FF;
-                color: #00F0FF;
+                background: #343A49;
+                border-color: #9485FF;
+                color: #FFFFFF;
+            }
+            QPushButton:pressed {
+                background: #191C23;
+            }
+            QPushButton:disabled {
+                background: #15171D;
+                color: #737B8C;
+                border-color: #252934;
             }
             QProgressBar {
-                border: 1px solid #1E2D4A;
+                border: 1px solid #343A49;
                 border-radius: 4px;
                 text-align: center;
-                background: #090E1C;
+                background: #191C23;
                 height: 18px;
+                color: #E8EAF0;
+                font-weight: bold;
+                font-size: 9pt;
             }
             QProgressBar::chunk {
-                background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #00F0FF, stop:1 #D946EF);
+                background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #9485FF, stop:1 #62D4E5);
                 border-radius: 3px;
             }
-            QCheckBox { color: #E2E8F0; spacing: 8px; }
+            QCheckBox {
+                color: #E8EAF0;
+                spacing: 8px;
+                background: transparent;
+            }
+            QCheckBox::indicator {
+                width: 16px;
+                height: 16px;
+                border: 1px solid #343A49;
+                background: #191C23;
+                border-radius: 3px;
+            }
+            QCheckBox::indicator:hover {
+                border-color: #9485FF;
+            }
+            QCheckBox::indicator:checked {
+                background-color: #9485FF;
+                border-color: #9485FF;
+            }
         """)
 
         self.page_welcome = WelcomePage()

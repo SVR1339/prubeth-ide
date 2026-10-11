@@ -155,12 +155,12 @@ class ComposerWidget(QWidget):
         # Commit & Rollback Bottom Bar
         footer = QHBoxLayout()
         self.btn_accept = QPushButton("✓ Accept All (Ctrl+Enter)", self)
-        self.btn_accept.setStyleSheet("background: #186036; color: #ffffff;")
+        self.btn_accept.setStyleSheet("background: #1D3D2A; color: #70D6A0; border: 1px solid #285A3E; border-radius: 4px; padding: 5px 12px; font-weight: 600;")
         self.btn_accept.clicked.connect(self._on_accept_clicked)
         footer.addWidget(self.btn_accept)
 
         self.btn_rollback = QPushButton("✕ Reject / Rollback", self)
-        self.btn_rollback.setStyleSheet("background: #7f1d1d; color: #ffffff;")
+        self.btn_rollback.setStyleSheet("background: #381E24; color: #FF7D86; border: 1px solid #5A2732; border-radius: 4px; padding: 5px 12px; font-weight: 600;")
         self.btn_rollback.clicked.connect(self._on_rollback_clicked)
         footer.addWidget(self.btn_rollback)
 

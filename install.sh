@@ -1,21 +1,23 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# PRUBETH IDE — Unified Linux & macOS Automated Installer
+# Prudeth IDE — Unified Linux & macOS Automated Installer
+# Bloom, ideas unfolding
 # https://github.com/imyouiamyou/prubeth-ide
 # ==============================================================================
 
 set -e
 
+MAGENTA='\033[0;35m'
 CYAN='\033[0;36m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 RED='\033[0;31m'
 NC='\033[0m' # No Color
 
-echo -e "${CYAN}================================================================${NC}"
-echo -e "${CYAN}             PRUBETH IDE — HORIZON EDITION (v3.0.0)             ${NC}"
-echo -e "${CYAN}         Universal AI-Native Developer Environment              ${NC}"
-echo -e "${CYAN}================================================================${NC}"
+echo -e "${MAGENTA}================================================================${NC}"
+echo -e "${MAGENTA}             PRUDETH IDE — BLOOM EDITION (v3.0.0)              ${NC}"
+echo -e "${CYAN}                   Bloom, ideas unfolding                       ${NC}"
+echo -e "${MAGENTA}================================================================${NC}"
 
 # Detect OS
 OS_TYPE="$(uname -s)"

@@ -26,7 +26,7 @@ from core.startup.preflight import PreflightChecker, CheckStatus, PreflightRepor
 from core.startup.service_initializer import ServiceInitializer
 from core.startup.recovery_dialog import StartupRecoveryHandler
 
-APP_NAME = "PRUBETH IDE"
+APP_NAME = "Prudeth IDE"
 APP_VERSION = "3.0.0"
 
 

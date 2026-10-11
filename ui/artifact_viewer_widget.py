@@ -38,7 +38,7 @@ class ArtifactViewerWidget(QWidget):
         header = QHBoxLayout()
         self.title_label = QLabel("ARTIFACT INSPECTOR // VERIFIABLE DELIVERABLES")
         self.title_label.setFont(QFont("Segoe UI", 11, QFont.Bold))
-        self.title_label.setStyleSheet("color: #00F0FF;")
+        self.title_label.setStyleSheet("color: #9485FF;")
         header.addWidget(self.title_label)
 
         header.addStretch()
@@ -46,10 +46,10 @@ class ArtifactViewerWidget(QWidget):
         self.refresh_btn = QPushButton("↻ Refresh Artifacts")
         self.refresh_btn.setStyleSheet("""
             QPushButton {
-                background-color: #161722; color: #FFFFFF; border: 1px solid #282A3A;
+                background-color: #252934; color: #E8EAF0; border: 1px solid #343A49;
                 border-radius: 4px; padding: 4px 10px; font-size: 11px;
             }
-            QPushButton:hover { border-color: #00F0FF; color: #00F0FF; }
+            QPushButton:hover { border-color: #9485FF; color: #9485FF; }
         """)
         self.refresh_btn.clicked.connect(self.reload_artifacts_list)
         header.addWidget(self.refresh_btn)
@@ -64,16 +64,16 @@ class ArtifactViewerWidget(QWidget):
         left_lay = QVBoxLayout(left_box)
         left_lay.setContentsMargins(0, 0, 0, 0)
         left_lbl = QLabel("DELIVERABLES:")
-        left_lbl.setStyleSheet("color: #8F93A2; font-size: 10px; font-weight: bold;")
+        left_lbl.setStyleSheet("color: #A5ACBB; font-size: 10px; font-weight: bold;")
         left_lay.addWidget(left_lbl)
 
         self.artifacts_list = QListWidget()
         self.artifacts_list.setStyleSheet("""
             QListWidget {
-                background-color: #111218; border: 1px solid #1E202C;
-                color: #FFFFFF; border-radius: 4px;
+                background-color: #191C23; border: 1px solid #343A49;
+                color: #E8EAF0; border-radius: 4px;
             }
-            QListWidget::item:selected { background-color: #1F2233; color: #00F0FF; }
+            QListWidget::item:selected { background-color: #383650; color: #FFFFFF; }
         """)
         self.artifacts_list.currentRowChanged.connect(self._on_artifact_selected)
         left_lay.addWidget(self.artifacts_list)

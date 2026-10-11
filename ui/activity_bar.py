@@ -24,10 +24,10 @@ class ActivityBarButton(QPushButton):
         if checked:
             self.setStyleSheet("""
                 QPushButton {
-                    background: #1c2230;
-                    color: #00F0FF;
+                    background: #252934;
+                    color: #9485FF;
                     border: none;
-                    border-left: 3px solid #00F0FF;
+                    border-left: 3px solid #9485FF;
                     border-radius: 0px;
                     padding-left: 2px;
                 }
@@ -36,15 +36,15 @@ class ActivityBarButton(QPushButton):
             self.setStyleSheet("""
                 QPushButton {
                     background: transparent;
-                    color: #8b9bb4;
+                    color: #A5ACBB;
                     border: none;
                     border-left: 3px solid transparent;
                     border-radius: 0px;
                     padding-left: 2px;
                 }
                 QPushButton:hover {
-                    background: #171b26;
-                    color: #ffffff;
+                    background: #1D2028;
+                    color: #E8EAF0;
                 }
             """)
 
@@ -69,7 +69,7 @@ class ActivityBarWidget(QWidget):
         self._init_ui()
 
     def _init_ui(self):
-        self.setStyleSheet("background: #0d1017; border-right: 1px solid #1e2433;")
+        self.setStyleSheet("background: #111318; border-right: 1px solid #343A49;")
         layout = QVBoxLayout(self)
         layout.setContentsMargins(2, 6, 2, 6)
         layout.setSpacing(4)

@@ -103,7 +103,9 @@ def build_setup_executable():
         setup_copy = DIST_DIR / "setup.exe"
         shutil.copy2(out_exe, setup_copy)
 
-        # Copy to backward compatible aliases
+        # Copy to Prudeth and backward compatible aliases
+        prudeth_copy = DIST_DIR / "PrudethIDE-v3.0.0-Setup.exe"
+        shutil.copy2(out_exe, prudeth_copy)
         sukhi_copy = DIST_DIR / "SukhiIDE-v3.0.0-Setup.exe"
         shutil.copy2(out_exe, sukhi_copy)
         legacy_copy = DIST_DIR / "SoNaive-v3.0.0-Setup.exe"
@@ -111,6 +113,7 @@ def build_setup_executable():
 
         print(f"[+] Setup executables created successfully:")
         print(f"    - {out_exe} ({out_exe.stat().st_size / (1024*1024):.2f} MB)")
+        print(f"    - {prudeth_copy} ({prudeth_copy.stat().st_size / (1024*1024):.2f} MB)")
         print(f"    - {setup_copy} ({setup_copy.stat().st_size / (1024*1024):.2f} MB)")
         print(f"    - {sukhi_copy} ({sukhi_copy.stat().st_size / (1024*1024):.2f} MB)")
         print(f"    - {legacy_copy} ({legacy_copy.stat().st_size / (1024*1024):.2f} MB)")

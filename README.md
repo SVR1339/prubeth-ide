@@ -1,20 +1,20 @@
 <div align="center">
 
-<img src="assets/logo.png" alt="PRUBETH IDE Logo" width="180" />
+<img src="assets/brand_banner.png" alt="Prudeth IDE Banner" width="650" />
 
-# PRUBETH IDE
-### Next-Gen Sovereign Agentic AI Developer Environment · Horizon Edition (v3.0.0)
+# Prudeth IDE
+### Bloom, ideas unfolding · Sovereign Agentic Developer Workstation (v3.0.0)
 
-> **"Built for Flow. Powered by Intelligence."**  
-> An ultra-fast, local-first agentic AI IDE engineered with an **Intelligent Multi-Model Cascade**, **1M-Token SSE Reasoning**, **Hologram Cybernetic Glassmorphic UI**, **Zero-Plaintext Credential Security**, **Horizon Hardware Scaling Engine**, and **Instant Local CUDA Self-Healing**.
+> **"Bloom, ideas unfolding."**  
+> An ultra-fast, local-first agentic developer workstation engineered with a **Premium Dark Design System**, **Intelligent Multi-Model Cascade**, **1M-Token SSE Reasoning**, **Horizon Hardware Scaling Engine**, **Zero-Plaintext Credential Security**, and **Instant Local CUDA Self-Healing**.
 
-[![Release](https://img.shields.io/badge/Release-v3.0.0--Horizon-00F0FF?style=for-the-badge&logo=rocket)](https://github.com/imyouiamyou/prubeth-ide/releases/tag/v3.0.0)
-[![Tests Passing](https://img.shields.io/badge/Tests-254%20%2F%20254%20Passed%20(100%25)-brightgreen?style=for-the-badge&logo=pytest)](FINAL_RELEASE_VERIFICATION.md)
-[![Website](https://img.shields.io/badge/Website-bsvr.work-A855F7?style=for-the-badge&logo=google-chrome)](https://www.bsvr.work/)
+[![Release](https://img.shields.io/badge/Release-v3.0.0--Bloom-9485FF?style=for-the-badge&logo=rocket)](https://github.com/imyouiamyou/prubeth-ide/releases/tag/v3.0.0)
+[![Tests Passing](https://img.shields.io/badge/Tests-254%20%2F%20254%20Passed%20(100%25)-70D6A0?style=for-the-badge&logo=pytest)](FINAL_RELEASE_VERIFICATION.md)
+[![Design](https://img.shields.io/badge/Design%20System-Dark%20Workstation-1D2028?style=for-the-badge)](ui/design_system.py)
 [![Python](https://img.shields.io/badge/Python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue?style=for-the-badge&logo=python)](https://python.org)
 [![CUDA](https://img.shields.io/badge/CUDA-12.6%20Accelerated-76B900?style=for-the-badge&logo=nvidia)](https://developer.nvidia.com/cuda-toolkit)
 [![Platforms](https://img.shields.io/badge/Platforms-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey?style=for-the-badge)](INSTALL.md)
-[![License](https://img.shields.io/badge/License-MIT%20Commercial-brightgreen?style=for-the-badge)](LICENSE)
+[![License](https://img.shields.io/badge/License-MIT%20Commercial-70D6A0?style=for-the-badge)](LICENSE)
 
 [**🌐 Official Website**](https://www.bsvr.work/) · [**🚀 Releases (GitHub v3.0.0)**](https://github.com/imyouiamyou/prubeth-ide/releases/tag/v3.0.0) · [**📖 Architecture**](ARCHITECTURE.md) · [**🛠️ Installation**](INSTALL.md) · [**🧩 Developer & Extension Guide**](DEVELOPER_EXTENSIONS_GUIDE.md) · [**🔒 Security Findings**](docs/assessment/SECURITY_FINDINGS.md)
 

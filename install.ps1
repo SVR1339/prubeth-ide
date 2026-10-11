@@ -1,8 +1,9 @@
 <#
 .SYNOPSIS
-    PRUBETH IDE — Unified Windows PowerShell Automated Installer
+    Prudeth IDE — Unified Windows PowerShell Automated Installer
 .DESCRIPTION
-    Installs and configures PRUBETH IDE on Windows 10/11.
+    Installs and configures Prudeth IDE on Windows 10/11.
+    Tagline: Bloom, ideas unfolding
     Supports both standalone setup executable deployment and automated source environment bootstrapping.
 .EXAMPLE
     irm https://raw.githubusercontent.com/imyouiamyou/prubeth-ide/master/install.ps1 | iex
@@ -15,17 +16,17 @@ param(
     [switch]$Silent,
     [switch]$NoLaunch,
     [switch]$SourceOnly,
-    [string]$InstallDir = "$env:LOCALAPPDATA\Programs\PrubethIDE"
+    [string]$InstallDir = "$env:LOCALAPPDATA\Programs\PrudethIDE"
 )
 
 $ErrorActionPreference = "Stop"
 
 function Write-Banner {
     Write-Host ""
-    Write-Host "================================================================" -ForegroundColor Cyan
-    Write-Host "             PRUBETH IDE — HORIZON EDITION (v3.0.0)             " -ForegroundColor White
-    Write-Host "         Universal AI-Native Developer Environment              " -ForegroundColor Cyan
-    Write-Host "================================================================" -ForegroundColor Cyan
+    Write-Host "================================================================" -ForegroundColor Magenta
+    Write-Host "             PRUDETH IDE — BLOOM EDITION (v3.0.0)              " -ForegroundColor White
+    Write-Host "                   Bloom, ideas unfolding                       " -ForegroundColor Cyan
+    Write-Host "================================================================" -ForegroundColor Magenta
     Write-Host ""
 }
 

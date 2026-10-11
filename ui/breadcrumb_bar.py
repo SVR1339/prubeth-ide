@@ -23,22 +23,22 @@ class BreadcrumbBarWidget(QWidget):
     def _init_ui(self):
         self.setStyleSheet("""
             QWidget {
-                background: #11141c;
-                border-bottom: 1px solid #1e2433;
-                color: #8fa0b8;
+                background: #1D2028;
+                border-bottom: 1px solid #343A49;
+                color: #A5ACBB;
                 font-size: 8.5pt;
                 font-family: 'Segoe UI', sans-serif;
             }
             QPushButton {
                 background: transparent;
                 border: none;
-                color: #8fa0b8;
+                color: #A5ACBB;
                 padding: 2px 6px;
                 border-radius: 4px;
             }
             QPushButton:hover {
-                background: #1e2433;
-                color: #ffffff;
+                background: #252934;
+                color: #E8EAF0;
             }
         """)
 
@@ -48,7 +48,7 @@ class BreadcrumbBarWidget(QWidget):
 
         # Left: Path segments
         self.path_label = QLabel("heretic-work  ›  ui  ›  settings_dialog.py  ›  SettingsDialog")
-        self.path_label.setStyleSheet("color: #8fa0b8; font-family: 'Cascadia Code', monospace; font-size: 8pt;")
+        self.path_label.setStyleSheet("color: #A5ACBB; font-family: 'Cascadia Code', monospace; font-size: 8pt;")
         layout.addWidget(self.path_label)
 
         layout.addStretch(1)
@@ -61,7 +61,7 @@ class BreadcrumbBarWidget(QWidget):
         layout.addWidget(self.btn_run)
 
         self.btn_ai = QPushButton("⚡ AI Edit (Ctrl+K)", self)
-        self.btn_ai.setStyleSheet("color: #00F0FF;")
+        self.btn_ai.setStyleSheet("color: #9485FF; font-weight: 600;")
         self.btn_ai.setToolTip("Inline code refactoring and generation")
         self.btn_ai.setCursor(QCursor(Qt.PointingHandCursor))
         self.btn_ai.clicked.connect(self.quick_edit_requested.emit)
@@ -75,7 +75,7 @@ class BreadcrumbBarWidget(QWidget):
 
     def set_path(self, filepath: str, symbol: str = ""):
         if not filepath:
-            self.path_label.setText("Welcome  ›  PRUBETH Studio")
+            self.path_label.setText("Welcome  ›  Prudeth IDE")
             return
         p = Path(filepath)
         parts = list(p.parts)
