@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SUKHI IDE — Orchestration Engine Forensic Audit Report</title>
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: #111726;
+            --border-color: #1e293b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --accent-blue: #38bdf8;
+            --accent-green: #34d399;
+            --accent-red: #f87171;
+            --accent-yellow: #fbbf24;
+            --accent-purple: #c084fc;
+        }
+
+        @media print {
+            body { background: #fff !important; color: #000 !important; }
+            .no-print { display: none !important; }
+            .card { border: 1px solid #ccc !important; background: #fff !important; color: #000 !important; }
+            table { page-break-inside: auto; }
+            tr { page-break-inside: avoid; page-break-after: auto; }
+            h1, h2, h3 { page-break-after: avoid; color: #000 !important; }
+            pre, code { background: #f1f5f9 !important; color: #000 !important; border: 1px solid #ddd !important; }
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 30px 20px;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        header {
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .header-title h1 {
+            font-size: 26pt;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: -0.5px;
+        }
+        .header-title .subtitle {
+            font-size: 13pt;
+            color: var(--accent-blue);
+            margin-top: 5px;
+            font-weight: 500;
+        }
+        .meta-badges {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 10px;
+            border-radius: 9999px;
+            font-size: 8.5pt;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .badge-blue { background: rgba(56, 189, 248, 0.15); color: var(--accent-blue); border: 1px solid rgba(56, 189, 248, 0.3); }
+        .badge-green { background: rgba(52, 211, 153, 0.15); color: var(--accent-green); border: 1px solid rgba(52, 211, 153, 0.3); }
+        .badge-red { background: rgba(248, 113, 113, 0.15); color: var(--accent-red); border: 1px solid rgba(248, 113, 113, 0.3); }
+        .badge-yellow { background: rgba(251, 191, 36, 0.15); color: var(--accent-yellow); border: 1px solid rgba(251, 191, 36, 0.3); }
+        .badge-purple { background: rgba(192, 132, 252, 0.15); color: var(--accent-purple); border: 1px solid rgba(192, 132, 252, 0.3); }
+
+        .btn-print {
+            background: #2563eb;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 10pt;
+            cursor: pointer;
+            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-print:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+        }
+
+        h2 {
+            font-size: 17pt;
+            color: #ffffff;
+            margin: 40px 0 15px 0;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        h3 {
+            font-size: 13pt;
+            color: var(--accent-blue);
+            margin: 25px 0 10px 0;
+        }
+        p {
+            margin-bottom: 15px;
+            color: var(--text-secondary);
+        }
+        strong {
+            color: #ffffff;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .alert-box {
+            background: rgba(248, 113, 113, 0.08);
+            border-left: 4px solid var(--accent-red);
+            padding: 15px 20px;
+            border-radius: 6px;
+            margin: 20px 0;
+        }
+        .alert-box h4 {
+            color: var(--accent-red);
+            font-size: 11pt;
+            margin-bottom: 6px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 9.5pt;
+        }
+        th, td {
+            padding: 12px 14px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        th {
+            background: #162032;
+            color: #ffffff;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 8pt;
+            letter-spacing: 0.5px;
+        }
+        tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        code {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 9pt;
+        }
+        pre {
+            background: #0f172a;
+            border: 1px solid var(--border-color);
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-size: 9pt;
+            color: #cbd5e1;
+            line-height: 1.5;
+        }
+
+        .diagram-container {
+            background: #090d16;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: monospace;
+            color: #94a3b8;
+            overflow-x: auto;
+        }
+
+        .status-pill {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 7.5pt;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+        .status-working { background: #064e3b; color: #6ee7b7; border: 1px solid #047857; }
+        .status-partial { background: #451a03; color: #fcd34d; border: 1px solid #b45309; }
+        .status-disconnected { background: #31104b; color: #e9d5ff; border: 1px solid #7e22ce; }
+        .status-broken { background: #4c0519; color: #fda4af; border: 1px solid #be123c; }
+        .status-missing { background: #1f2937; color: #9ca3af; border: 1px solid #4b5563; }
+
+        .priority-p0 { color: #f87171; font-weight: 800; }
+        .priority-p1 { color: #fb923c; font-weight: 700; }
+        .priority-p2 { color: #facc15; font-weight: 600; }
+        .priority-p3 { color: #94a3b8; font-weight: 500; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div class="header-title">
+            <h1>SUKHI IDE — Orchestration Engine Audit</h1>
+            <div class="subtitle">Horizon Edition v3.0.0 | Forensic Architecture & Reliability Assessment</div>
+            <div class="meta-badges">
+                <span class="badge badge-blue">Document: AUD-ORCH-2026-10-10-V1</span>
+                <span class="badge badge-purple">Working Tree: Git 9c008a6</span>
+                <span class="badge badge-green">Automated Tests: 60/60 PASSED (100%)</span>
+                <span class="badge badge-yellow">Platform: Windows / Linux Compatible</span>
+            </div>
+        </div>
+        <div class="no-print">
+            <button class="btn-print" onclick="window.print()">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><path d="M6 14h12v8H6z"/></svg>
+                Download / Print to PDF
+            </button>
+        </div>
+    </header>
+
+    <h2>1. Executive Summary</h2>
+    <div class="card">
+        <p>This forensic audit provides an evidence-based examination of SUKHI IDE's orchestration engine, autonomous loops, tool execution sandbox, model cascades, and safety architecture.</p>
+        <div class="alert-box">
+            <h4>Key Architectural Conclusion: Dual-Orchestrator Divergence</h4>
+            <p>The codebase contains two decoupled systems: an <strong>active GUI orchestrator</strong> inside <code>local_ai_studio_pro.py</code> driven by XML regex tools, and a <strong>dormant modular subsystem</strong> in <code>ai/agents/</code> and <code>core/</code> implementing DAG execution plans and AST security critics. While the modular subsystem passes 100% of unit tests, it is completely bypassed by the desktop GUI.</p>
+        </div>
+        <p><strong>Primary Strengths:</strong> Production-grade model cascading (Gemini &rarr; NavyAI &rarr; Ollama &rarr; Custom), strict canonical workspace sandboxing, Windows DPAPI credential encryption, and SHA-256 pre-edit file checkpoints with transactional rollback.</p>
+        <p><strong>Primary Critical Vulnerabilities:</strong> Autonomous agent context loss across multi-step execution turns, unwired approval callbacks in <code>ToolGateway</code> blocking high-risk commands, and regex tool extraction blind spots.</p>
+    </div>
+
+    <h2>2. Orchestration Architecture & Data Flow</h2>
+    <div class="diagram-container">
+        <strong>ARCHITECTURAL DATA FLOW:</strong><br><br>
+        [User Input] &rarr; Studio.send_prompt (L5210)<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&darr;<br>
+        [AIWorker QThread (L1031)] &rarr; IntelligentModelRouter Cascade (L440)<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&darr; (Streams tokens to chat UI)<br>
+        [Studio.on_ai_done (L5298)] &rarr; Studio.handle_agent_tools (L5344)<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&darr;<br>
+        [AgentToolEngine.extract_tools (L1756)] &rarr; Regex XML Matcher<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&darr;<br>
+        [AgentToolEngine.execute_tool (L1522)] &rarr; WorkspaceGuard &amp; CheckpointManager<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&darr;<br>
+        <span style="color: #f87171;">[CONTEXT LOSS (L5405-5410)]</span> &rarr; Drops prompt history &amp; original goal!<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&darr;<br>
+        [Studio.start_ai Next Step] &rarr; AI receives only latest tool output
+    </div>
+
+    <h2>3. Component Inventory</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Module Path</th>
+                <th>Core Classes / Entry Points</th>
+                <th>Function</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>local_ai_studio_pro.py</code></td>
+                <td><code>Studio</code>, <code>AIWorker</code>, <code>AgentToolEngine</code></td>
+                <td>Desktop IDE GUI, model router, active agent tool execution</td>
+                <td><span class="status-pill status-working">Active GUI</span></td>
+            </tr>
+            <tr>
+                <td><code>core/task_engine.py</code></td>
+                <td><code>TaskEngine</code>, <code>TaskStep</code>, <code>Task</code></td>
+                <td>In-memory task state lifecycle management</td>
+                <td><span class="status-pill status-disconnected">Disconnected</span></td>
+            </tr>
+            <tr>
+                <td><code>core/tool_gateway.py</code></td>
+                <td><code>ToolGateway</code>, <code>CommandRiskLevel</code></td>
+                <td>Safe command execution, secret redaction, risk gate</td>
+                <td><span class="status-pill status-partial">Active / Unwired Hook</span></td>
+            </tr>
+            <tr>
+                <td><code>core/workspace.py</code></td>
+                <td><code>WorkspaceGuard</code>, <code>WorkspaceSecurityError</code></td>
+                <td>Filesystem boundary defense, traversal prevention</td>
+                <td><span class="status-pill status-working">Active Core</span></td>
+            </tr>
+            <tr>
+                <td><code>core/router.py</code></td>
+                <td><code>IntelligentRouter</code>, <code>AgentProfile</code></td>
+                <td>Tiered model routing (SMALL, MEDIUM, LARGE)</td>
+                <td><span class="status-pill status-disconnected">Disconnected</span></td>
+            </tr>
+            <tr>
+                <td><code>core/plugin_engine.py</code></td>
+                <td><code>RealMCPStdioClient</code>, <code>PluginManifestValidator</code></td>
+                <td>Stdio MCP JSON-RPC 2.0 client &amp; manifest validator</td>
+                <td><span class="status-pill status-working">Active</span></td>
+            </tr>
+            <tr>
+                <td><code>ai/agents/orchestrator.py</code></td>
+                <td><code>MultiAgentOrchestrator</code>, <code>AgentRole</code></td>
+                <td>Multi-agent DAG pipeline (Architect, Coder, Critic, Tester)</td>
+                <td><span class="status-pill status-disconnected">Disconnected</span></td>
+            </tr>
+            <tr>
+                <td><code>ai/agents/planner.py</code></td>
+                <td><code>ExecutionPlan</code>, <code>TaskStep</code></td>
+                <td>Topological sorting, DAG task scheduler, cycle detector</td>
+                <td><span class="status-pill status-disconnected">Disconnected</span></td>
+            </tr>
+            <tr>
+                <td><code>ai/agents/critic.py</code></td>
+                <td><code>AgentCritic</code>, <code>CriticReport</code></td>
+                <td>AST static code analysis, dangerous call detection</td>
+                <td><span class="status-pill status-disconnected">Disconnected</span></td>
+            </tr>
+            <tr>
+                <td><code>workspace/checkpoints.py</code></td>
+                <td><code>CheckpointManager</code>, <code>FileSnapshot</code></td>
+                <td>SHA-256 pre-edit file snapshotting &amp; atomic rollback</td>
+                <td><span class="status-pill status-working">Active Core</span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>4. Capability Status Matrix (23 Areas Analyzed)</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Capability</th>
+                <th>Status</th>
+                <th>Verification Evidence &amp; File Location</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>User request intake &amp; task classification</td>
+                <td><span class="status-pill status-partial">PARTIAL</span></td>
+                <td><code>Studio.send_prompt</code> (L5210); basic string mode matching; advanced router disconnected.</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Planning &amp; task decomposition</td>
+                <td><span class="status-pill status-disconnected">DISCONNECTED</span></td>
+                <td><code>PlannerAgent</code> (ai/agents/planner.py L40) implements DAG; bypassed by GUI.</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Task dependency graphs &amp; ordering</td>
+                <td><span class="status-pill status-disconnected">DISCONNECTED</span></td>
+                <td><code>ExecutionPlan.topological_order()</code> implemented in backend; GUI uses linear counter.</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Sequential &amp; parallel task execution</td>
+                <td><span class="status-pill status-partial">PARTIAL</span></td>
+                <td>Tool calls execute sequentially in turn; parallel multi-agent workers not supported.</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Agent creation, delegation &amp; coordination</td>
+                <td><span class="status-pill status-disconnected">DISCONNECTED</span></td>
+                <td>Subagents (Architect, Coder, Critic, Tester) exist in backend; GUI uses monolithic prompt.</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>Model selection, routing &amp; fallback</td>
+                <td><span class="status-pill status-working">WORKING</span></td>
+                <td><code>IntelligentModelRouter</code> (L440) operates multi-tier cascade (Gemini &rarr; Navy &rarr; Ollama &rarr; Custom).</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>Tool discovery, registration &amp; invocation</td>
+                <td><span class="status-pill status-broken">BROKEN</span></td>
+                <td>10 tools extracted via XML regex (L1756). Checkpoints &amp; semantic search lack regex extraction patterns.</td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>Skills &amp; plugin integration</td>
+                <td><span class="status-pill status-disconnected">DISCONNECTED</span></td>
+                <td>Plugins catalog exists; hooks are not triggered during autonomous agent loop.</td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>MCP client/server integration</td>
+                <td><span class="status-pill status-partial">PARTIAL</span></td>
+                <td>Stdio JSON-RPC client connects to servers; fails if server uses HTTP-style <code>Content-Length:</code> headers.</td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>Git &amp; GitHub operations</td>
+                <td><span class="status-pill status-partial">PARTIAL</span></td>
+                <td>Local Git works via <code>GitSidebarWidget</code>; direct GitHub REST/GraphQL API not integrated.</td>
+            </tr>
+            <tr>
+                <td>11</td>
+                <td>Multi-project &amp; multi-repo awareness</td>
+                <td><span class="status-pill status-partial">PARTIAL</span></td>
+                <td>Only single root workspace directory active at one time; multi-root workspaces unsupported.</td>
+            </tr>
+            <tr>
+                <td>12</td>
+                <td>Workspace &amp; context management</td>
+                <td><span class="status-pill status-working">WORKING</span></td>
+                <td><code>WorkspaceGuard</code> (L22) strictly enforces boundaries; context injected from active buffers.</td>
+            </tr>
+            <tr>
+                <td>13</td>
+                <td>Safe file reading, editing &amp; modification</td>
+                <td><span class="status-pill status-working">WORKING</span></td>
+                <td><code>safe_read</code>, <code>safe_write</code>, <code>safe_patch</code> create backups and SHA-256 snapshots.</td>
+            </tr>
+            <tr>
+                <td>14</td>
+                <td>Code generation, diffing &amp; patching</td>
+                <td><span class="status-pill status-partial">PARTIAL</span></td>
+                <td><code>VisualDiffDialog</code> provides UI diffs; <code>safe_patch</code> fails on whitespace discrepancies.</td>
+            </tr>
+            <tr>
+                <td>15</td>
+                <td>Execution sandboxing &amp; command running</td>
+                <td><span class="status-pill status-partial">PARTIAL</span></td>
+                <td><code>ToolGateway</code> blocks destructive patterns and redacts secrets; runs via <code>subprocess.run(shell=True)</code>.</td>
+            </tr>
+            <tr>
+                <td>16</td>
+                <td>Safety boundaries &amp; confirmation gates</td>
+                <td><span class="status-pill status-broken">BROKEN</span></td>
+                <td><code>ToolGateway</code> blocks <code>HIGH_RISK</code> commands without approval hook; causes unhandled error.</td>
+            </tr>
+            <tr>
+                <td>17</td>
+                <td>Undo, rollback, checkpoint &amp; recovery</td>
+                <td><span class="status-pill status-partial">PARTIAL</span></td>
+                <td><code>CheckpointManager</code> supports transactional rollback; inaccessible to agents via tool regex.</td>
+            </tr>
+            <tr>
+                <td>18</td>
+                <td>Long-running &amp; background tasks</td>
+                <td><span class="status-pill status-partial">PARTIAL</span></td>
+                <td>Inference runs in background QThread; tool executions run synchronously, blocking Qt event loop.</td>
+            </tr>
+            <tr>
+                <td>19</td>
+                <td>Progress reporting &amp; event streaming</td>
+                <td><span class="status-pill status-working">WORKING</span></td>
+                <td>Real-time token streaming and collapsible HTML <code>&lt;details&gt;</code> tool logs in chat.</td>
+            </tr>
+            <tr>
+                <td>20</td>
+                <td>Human-in-the-loop decisions</td>
+                <td><span class="status-pill status-partial">PARTIAL</span></td>
+                <td>Basic <code>QMessageBox</code> prompt exists if unrestricted mode is off; structured questions missing.</td>
+            </tr>
+            <tr>
+                <td>21</td>
+                <td>Memory, context &amp; persistence across sessions</td>
+                <td><span class="status-pill status-broken">BROKEN</span></td>
+                <td>Conversations persist to disk; autonomous step loop discards history and goal between turns (L5405).</td>
+            </tr>
+            <tr>
+                <td>22</td>
+                <td>Self-correction &amp; verification loops</td>
+                <td><span class="status-pill status-partial">PARTIAL</span></td>
+                <td><code>&lt;tool:verify_deliverable&gt;</code> verifies syntax and tests; AST security critic disconnected.</td>
+            </tr>
+            <tr>
+                <td>23</td>
+                <td>Performance, latency &amp; rate limiting</td>
+                <td><span class="status-pill status-partial">PARTIAL</span></td>
+                <td>Context truncated at 30,000 chars; token telemetry and exponential backoff retry missing.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>5. Verified Test Suite Execution</h2>
+    <div class="card">
+        <p>Dynamic test execution conducted against the project environment (<code>.venv/Scripts/python.exe -m pytest -v</code>):</p>
+        <pre>============================= test session starts =============================
+platform win32 -- Python 3.12.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\asus\heretic-work, configfile: pyproject.toml
+testpaths: tests
+collected 60 items
+
+tests/test_agents.py::test_execution_plan_topological_sort_and_cycle_detection PASSED
+tests/test_agents.py::test_agent_critic_security_and_syntax_analysis PASSED
+tests/test_agents.py::test_multi_agent_orchestrator_pipeline PASSED
+tests/test_agents.py::test_multi_agent_orchestrator_critic_rejection PASSED
+tests/test_debugging.py (3 tests) PASSED
+tests/test_language_services.py (4 tests) PASSED
+tests/test_plugins.py (3 tests) PASSED
+tests/test_rag.py (2 tests) PASSED
+tests/test_source_control.py (4 tests) PASSED
+tests/test_studio.py (23 tests) PASSED
+tests/test_ui_widgets.py (3 tests) PASSED
+tests/test_workspace.py (4 tests) PASSED
+
+============================= 60 passed in 41.78s =============================</pre>
+    </div>
+
+    <h2>6. Prioritized Remediation Roadmap</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Priority</th>
+                <th>Remediation Action</th>
+                <th>Severity</th>
+                <th>Target File &amp; Fix Scope</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><span class="priority-p0">P0</span></td>
+                <td><strong>Preserve Agent Loop History</strong></td>
+                <td>Critical</td>
+                <td>In <code>local_ai_studio_pro.py</code> (L5405-5410), preserve user prompt and full conversation history in <code>msgs</code> instead of resetting to 2 messages.</td>
+            </tr>
+            <tr>
+                <td><span class="priority-p0">P0</span></td>
+                <td><strong>Connect ToolGateway Approval Hook</strong></td>
+                <td>Critical</td>
+                <td>In <code>AgentToolEngine.__init__</code> (L1512), wire an approval callback that displays a Qt confirmation dialog for <code>HIGH_RISK</code> commands.</td>
+            </tr>
+            <tr>
+                <td><span class="priority-p1">P1</span></td>
+                <td><strong>Harmonize Tool Regex Extractor</strong></td>
+                <td>High</td>
+                <td>Add regex patterns in <code>extract_tools</code> (L1756) for <code>create_checkpoint</code>, <code>rollback_checkpoint</code>, and <code>semantic_search</code>.</td>
+            </tr>
+            <tr>
+                <td><span class="priority-p1">P1</span></td>
+                <td><strong>Bridge MultiAgentOrchestrator to GUI</strong></td>
+                <td>High</td>
+                <td>Connect <code>ExecutionPlan</code> DAG planner and <code>AgentCritic</code> AST security checks into <code>Studio.send_prompt</code>.</td>
+            </tr>
+            <tr>
+                <td><span class="priority-p2">P2</span></td>
+                <td><strong>Support MCP HTTP-Header Framing</strong></td>
+                <td>Medium</td>
+                <td>Upgrade <code>RealMCPStdioClient</code> (core/plugin_engine.py) to parse <code>Content-Length: &lt;n&gt;\r\n\r\n{json}</code> standard headers.</td>
+            </tr>
+            <tr>
+                <td><span class="priority-p2">P2</span></td>
+                <td><strong>Offload Tool Execution from UI Thread</strong></td>
+                <td>Medium</td>
+                <td>Execute long-running shell and test commands in background worker threads to prevent UI freezes.</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

@@ -75,6 +75,18 @@ class PluginManager:
 
         self.manifests: Dict[str, PluginManifest] = {}
         self.active_plugins: Dict[str, Dict[str, Any]] = {}
+        self.quarantined_plugins: Dict[str, str] = {}
+        self.failed_plugins: Dict[str, str] = {}
+
+    def quarantine_plugin(self, plugin_id: str, reason: str = "Security or stability violation"):
+        """Quarantines a plugin and ensures it is deactivated and blocked from execution."""
+        self.quarantined_plugins[plugin_id] = reason
+        if self.is_active(plugin_id):
+            self.deactivate_plugin(plugin_id)
+        logger.warning(f"Plugin '{plugin_id}' has been quarantined: {reason}")
+
+    def is_quarantined(self, plugin_id: str) -> bool:
+        return plugin_id in self.quarantined_plugins
 
     def discover_plugins(self) -> List[PluginManifest]:
         """Discovers valid plugin directories containing 'plugin.json' manifests."""
@@ -91,8 +103,11 @@ class PluginManager:
                         if "plugin_id" in data:
                             manifest = PluginManifest.from_dict(data, root_path=item)
                             self.manifests[manifest.plugin_id] = manifest
+                        else:
+                            self.quarantine_plugin(item.name, "Missing plugin_id in manifest")
                     except Exception as ex:
                         logger.warning(f"Failed to parse manifest at {manifest_file}: {ex}")
+                        self.quarantine_plugin(item.name, f"Malformed manifest JSON: {str(ex)}")
 
         return list(self.manifests.values())
 
@@ -104,6 +119,10 @@ class PluginManager:
 
     def activate_plugin(self, plugin_id: str) -> bool:
         """Loads and activates a plugin in a restricted sandbox scope."""
+        if self.is_quarantined(plugin_id):
+            logger.warning(f"Cannot activate quarantined plugin '{plugin_id}'.")
+            return False
+
         if self.is_active(plugin_id):
             return True
 
@@ -153,6 +172,7 @@ class PluginManager:
 
         except Exception as ex:
             logger.error(f"Error activating plugin '{plugin_id}': {ex}", exc_info=True)
+            self.failed_plugins[plugin_id] = str(ex)
             return False
 
     def deactivate_plugin(self, plugin_id: str) -> bool:

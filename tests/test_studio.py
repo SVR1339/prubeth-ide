@@ -213,7 +213,7 @@ def test_blinking_ai_indicator(qapp):
 def test_app_branding():
     import local_ai_studio_pro as studio
 
-    assert "SUKHI" in studio.APP_NAME or "SO NAIVE" in studio.APP_NAME
+    assert "PRUBETH" in studio.APP_NAME or "SUKHI" in studio.APP_NAME or "SO NAIVE" in studio.APP_NAME
     assert "3.0.0" in studio.APP_VERSION
     assert studio.WEBSITE_URL == "https://www.bsvr.work/"
     assert "bsvr.work" in studio.PROJECTS_URL

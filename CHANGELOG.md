@@ -1,43 +1,40 @@
-# Changelog: SO NAIVE IDE
+# Changelog: PRUBETH IDE
 
-All notable changes to **SO NAIVE IDE** will be documented in this file.  
+All notable changes to **PRUBETH IDE** are documented in this file.  
 Official Website & Downloads: [**https://www.bsvr.work/#projects**](https://www.bsvr.work/#projects)
 
 ---
 
-## [3.0.0] - Horizon Edition - 2026-10-09
+## [3.0.0] - Horizon Edition (Flagship Release) - 2026-10-10
 
 ### Added
-- **Official Branding & Persona:** Rebranded as **SO NAIVE IDE** / **NAIVE** — "So Naive, It Solves Everything."
-- **Animated Blinking Cybernetic AI Beacon (`BlinkingAIIndicator`):**
-  - Smooth 25 FPS sine-wave breathing indicator in the main toolbar and statusbar.
-  - Reactive visual states: Idle breathing (cyan), Streaming/Inference chromatic blink (violet/cyan), Auto-Fix strobe (emerald/amber), and Error alert (ruby red).
-- **GPU Hardware Status Gauge:** Direct display of active NVIDIA CUDA acceleration (`[GTX 1050 Ti · CUDA 12.6]`) in the permanent statusbar.
-- **Universal Cross-Platform Release Matrix (`.github/workflows/release.yml`):**
-  - Windows: Automated `SoNaive-v3.0.0-Setup.exe` (Inno Setup 6 + standalone wizard) & `.zip` portable.
-  - Apple macOS: Automated `SoNaive-v3.0.0-macOS.dmg` & `.zip` universal bundle.
-  - Ubuntu / Debian: Automated `SoNaive-v3.0.0-Linux.deb` & `SoNaive-v3.0.0-Linux-x86_64.tar.gz`.
-- **BSVR Project Showcase Web Integration:**
-  - Standalone interactive HTML showcase (`website/so_naive_project_section.html`) with dynamic client-side visitor OS detection matching the pill design ("Download for Windows ⤓").
-  - Drop-in React/Next.js/Tailwind component (`website/SoNaiveProjectSection.jsx`) for `https://www.bsvr.work/`.
-  - Integration guide for webmasters (`website/INTEGRATION_GUIDE.md`).
-- **Commercial Licensing & Edition Tiers:** Free Community Edition, Pro Developer ($19/mo or $190 lifetime), and Enterprise Suite ($199/seat) with direct website links to `https://www.bsvr.work/`.
-- **Integrated Help & Update Menu:** Actions for "Visit Official Website (bsvr.work)", "Explore Projects on bsvr.work", "Check for Updates", and "Commercial Licensing".
-- **Brand Assets:** High-resolution vector `assets/logo.svg`, 512x512 `assets/logo.png`, and multi-resolution Windows icon `assets/icon.ico` (256, 128, 64, 48, 32, 16).
+- **Official PRUBETH Brand Identity & Classic Windmill Emblem:**
+  - Modern classic windmill identity symbolizing continuous sovereign energy and clean developer flow.
+  - Multi-resolution Windows ICO (`assets/icon.ico`), high-contrast dark windmill PNG (`assets/logo.png`), positive white look PNG (`assets/logo_light.png`), and vector SVG (`assets/logo.svg`).
+- **Hologram Cybernetic Glassmorphic UI Theme:**
+  - Obsidian dark palette (`#050811`) with electric cyan (`#00F0FF`) and neon magenta (`#D946EF`) hologram accents.
+  - Glowing borders, gradient tab indicators, sleek progress bars, and high-contrast typography (`#FFFFFF`).
+  - Animated Blinking Cybernetic AI Beacon (`BlinkingAIIndicator`) with 25 FPS mathematical sine breathing and reactive token streaming states.
+- **13 Architectural Verification Gates (100% Passed):**
+  - Gate 0: Baseline execution environment (`.venv`, Py 3.12, Qt5, QScintilla).
+  - Gate 1: 18 modular architectural subsystems audit.
+  - Gate 2: Agent loop context amnesia repair, approval hooks, regex extractor unification.
+  - Gate 3: Multi-agent DAG orchestrator (`Planner`, `CodeArchitect`, `TestFixer`, `ASTCritic`).
+  - Gate 4: Binary MCP stdio client with `Content-Length:` header framing.
+  - Gate 5 & 6: Non-blocking UI background worker execution & SQLite persistence (`~/.local_ai_studio_pro/tasks.db`).
+  - Gate 7: Three-Tier Architecture (`core/product_tier.py`) with capability gating and quotas.
+  - Gate 8: Security & Boundary Guard (traversal blocking, shell injection prevention, secret redaction, audit log).
+  - Gate 9: Transactional checkpoints with two-phase atomic rollback and shadow recovery.
+  - Gate 10: LSP and DAP subsystem lifecycle qualification.
+  - Gate 11: Plugin host sandbox with automated quarantine.
+  - Gate 12: Release audit, packaging payload, and installer integrity.
+- **Universal Packaging & Distribution:**
+  - Standalone Graphical Setup Wizard (`PrubethIDE-v3.0.0-Setup.exe` / `setup.exe`).
+  - Universal Portable ZIP archive (`installer/app_payload.zip`).
+  - Inno Setup 6 enterprise script (`installer/installer.iss`).
+  - Backward compatibility aliases for Sukhi and SoNaive launchers.
 
 ### Improved
-- Expanded test suite to 10/10 comprehensive pytest unit and integration tests passing in < 1.0s.
-- Enhanced Intelligent Model Router with zero-downtime failover from Google Gemini 3.8 Flash to local GPU Ollama.
-- Upgraded traceback auto-fix engine with colorized visual diff review.
-
----
-
-## [2.4.0] - Antigravity Edition
-- Introduced Intelligent Model Router with priority cascade across Gemini 3.8 Flash, Gemini 3.5 Flash, and Ollama.
-- Added 1-click `⚡ Auto-Fix with AI` error traceback repair bar.
-- Added QScintilla polyglot syntax lexers for Python, JS/TS, C++, Rust, HTML, CSS, JSON, YAML, SQL, and Shell.
-
----
-
-## [2.0.0] - Foundation Release
-- Initial PyQt5 workspace with file tree, multi-tab editor, and basic Ollama local integration.
+- Full automated test suite expanded to 105 tests across 18 test modules with 100% pass rate.
+- Intelligent Model Router with zero-downtime failover from Google Gemini 3.8 Flash (1M tokens) to local GPU Ollama (GTX 1050 Ti CUDA 12.6).
+- Zero-Plaintext Credential Vault with Windows DPAPI encryption and real-time secret redaction.

@@ -3,9 +3,9 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "so-naive-ide"
+name = "prubeth-ide"
 version = "3.0.0"
-description = "SO NAIVE IDE — Next-Gen Agentic AI IDE with Intelligent Multi-Model Cascade and Instant Local CUDA Self-Healing"
+description = "PRUBETH IDE — Sovereign Autonomous AI Developer Environment with Intelligent Multi-Model Cascade and Instant Local CUDA Self-Healing"
 readme = "README.md"
 license = { text = "MIT / Apache-2.0 (BSVR Permissive Open Developer Terms)" }
 authors = [
@@ -43,10 +43,11 @@ gpu = [
 [project.urls]
 Homepage = "https://www.bsvr.work/"
 Documentation = "https://www.bsvr.work/#projects"
-Repository = "https://github.com/bsvr/so-naive"
-Changelog = "https://github.com/bsvr/so-naive/blob/main/CHANGELOG.md"
+Repository = "https://github.com/bsvr/prubeth"
+Changelog = "https://github.com/bsvr/prubeth/blob/main/CHANGELOG.md"
 
 [project.scripts]
+prubeth = "local_ai_studio_pro:main"
 so-naive = "local_ai_studio_pro:main"
 
 [tool.pytest.ini_options]

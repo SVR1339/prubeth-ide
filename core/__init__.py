@@ -13,4 +13,5 @@ __all__ = [
     "router",
     "task_engine",
     "plugin_engine",
+    "product_tier",
 ]

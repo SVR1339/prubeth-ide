@@ -1,5 +1,5 @@
 """
-Build standalone Windows installer: SoNaive-v3.0.0-Setup.exe
+Build standalone Windows installer: PrubethIDE-v3.0.0-Setup.exe
 using PyInstaller on installer/setup_wizard.py with embedded application payload.
 """
 import os
@@ -54,8 +54,8 @@ def create_payload_archive() -> Path:
                     if p.is_file() and "__pycache__" not in str(p) and not p.name.endswith(".pyc"):
                         z.write(p, arcname=str(p.relative_to(ROOT_DIR)))
 
-        # Include standalone pre-compiled binaries if present in dist/SoNaive or dist/SukhiIDE
-        for dist_cand in [DIST_DIR / "SukhiIDE", DIST_DIR / "SoNaive"]:
+        # Include standalone pre-compiled binaries if present
+        for dist_cand in [DIST_DIR / "PrubethIDE", DIST_DIR / "SukhiIDE", DIST_DIR / "SoNaive"]:
             if dist_cand.exists() and dist_cand.is_dir():
                 print(f"[*] Including compiled standalone binaries from {dist_cand} into payload...")
                 for p in dist_cand.rglob("*"):
@@ -69,13 +69,13 @@ def create_payload_archive() -> Path:
 
 
 def build_setup_executable():
-    print("[*] Compiling Graphical Setup Wizard into standalone SukhiIDE-v3.0.0-Setup.exe...")
+    print("[*] Compiling Graphical Setup Wizard into standalone PrubethIDE-v3.0.0-Setup.exe...")
 
     payload_zip = create_payload_archive()
 
     cmd = [
         sys.executable, "-m", "PyInstaller",
-        "--name=SukhiIDE-v3.0.0-Setup",
+        "--name=PrubethIDE-v3.0.0-Setup",
         "--onefile",
         "--windowed",
         "--noconfirm",
@@ -95,19 +95,22 @@ def build_setup_executable():
         print(f"[!] Installer compilation failed: code {res.returncode}")
         return False
 
-    out_exe = DIST_DIR / "SukhiIDE-v3.0.0-Setup.exe"
+    out_exe = DIST_DIR / "PrubethIDE-v3.0.0-Setup.exe"
     if out_exe.exists():
         # Copy to setup.exe for universal deployment
         setup_copy = DIST_DIR / "setup.exe"
         shutil.copy2(out_exe, setup_copy)
 
-        # Copy to legacy alias SoNaive-v3.0.0-Setup.exe for backward compatibility
+        # Copy to backward compatible aliases
+        sukhi_copy = DIST_DIR / "SukhiIDE-v3.0.0-Setup.exe"
+        shutil.copy2(out_exe, sukhi_copy)
         legacy_copy = DIST_DIR / "SoNaive-v3.0.0-Setup.exe"
         shutil.copy2(out_exe, legacy_copy)
 
         print(f"[+] Setup executables created successfully:")
         print(f"    - {out_exe} ({out_exe.stat().st_size / (1024*1024):.2f} MB)")
         print(f"    - {setup_copy} ({setup_copy.stat().st_size / (1024*1024):.2f} MB)")
+        print(f"    - {sukhi_copy} ({sukhi_copy.stat().st_size / (1024*1024):.2f} MB)")
         print(f"    - {legacy_copy} ({legacy_copy.stat().st_size / (1024*1024):.2f} MB)")
         return True
     return False

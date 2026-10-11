@@ -31,8 +31,17 @@ class ToolGateway:
     """Central gateway governing all tool executions initiated by AI agents."""
 
     DANGEROUS_PATTERNS = [
-        "rmdir /s", "del /f", "format ", "reg delete", "diskpart",
-        "drop table", "shutdown", "powershell -enc", "Invoke-Expression"
+        "rmdir /s", "del /f", "format ", "reg delete", "reg add", "diskpart",
+        "drop table", "shutdown", "powershell -enc", "powershell -c", "invoke-expression",
+        "iex ", "certutil", "bitsadmin", "curl ", "wget ", "net user", "net localgroup"
+    ]
+
+    GIT_INJECTION_PATTERNS = [
+        "-c core.pager", "-c alias", "--exec-path", "--upload-pack"
+    ]
+
+    CHAINING_AND_INJECTION_TOKENS = [
+        "&", "|", ";", ">", "<", "`", "$("
     ]
 
     SAFE_COMMAND_PREFIXES = [
@@ -45,11 +54,33 @@ class ToolGateway:
         self.workspace = workspace_guard
         self.redactor = get_secret_redactor()
         self.approval_hook = approval_hook  # callback(command, reason) -> bool
+        self.audit_log: List[Dict[str, Any]] = []
+
+    def set_approval_hook(self, approval_hook: Optional[Callable[[str, str], bool]]) -> None:
+        """Sets or updates the approval hook callback."""
+        self.approval_hook = approval_hook
+
+    def get_audit_log(self) -> List[Dict[str, Any]]:
+        """Returns the full history of audited command executions."""
+        return list(self.audit_log)
 
     def classify_command(self, cmd_str: str) -> str:
         cmd_lower = cmd_str.strip().lower()
+
+        # Check for explicitly dangerous executable patterns
         for p in self.DANGEROUS_PATTERNS:
             if p in cmd_lower:
+                return CommandRiskLevel.HIGH_RISK
+
+        # Check for git subshell/pager injection
+        if cmd_lower.startswith("git "):
+            for p in self.GIT_INJECTION_PATTERNS:
+                if p in cmd_lower:
+                    return CommandRiskLevel.HIGH_RISK
+
+        # Check for shell metacharacters / chaining operators (e.g. "git status & evil.exe")
+        for token in self.CHAINING_AND_INJECTION_TOKENS:
+            if token in cmd_str:
                 return CommandRiskLevel.HIGH_RISK
 
         for prefix in self.SAFE_COMMAND_PREFIXES:
@@ -89,8 +120,22 @@ class ToolGateway:
             if self.approval_hook:
                 approved = self.approval_hook(command_str, "Command contains potentially destructive patterns")
                 if not approved:
+                    self.audit_log.append({
+                        "command": command_str,
+                        "risk_level": risk,
+                        "approved": False,
+                        "status": "rejected_by_user",
+                        "timestamp": time.time()
+                    })
                     raise ToolSecurityError(f"Execution rejected by user: '{command_str}'")
             else:
+                self.audit_log.append({
+                    "command": command_str,
+                    "risk_level": risk,
+                    "approved": False,
+                    "status": "blocked_no_approval_channel",
+                    "timestamp": time.time()
+                })
                 raise ToolSecurityError(
                     f"Execution blocked: Command '{command_str}' is classified as HIGH_RISK "
                     f"and no user approval channel is registered."
@@ -123,7 +168,7 @@ class ToolGateway:
             stdout_clean = self.redactor.redact(proc.stdout[:max_output_chars])
             stderr_clean = self.redactor.redact(proc.stderr[:max_output_chars])
 
-            return {
+            result = {
                 "exit_code": proc.returncode,
                 "stdout": stdout_clean,
                 "stderr": stderr_clean,
@@ -131,8 +176,26 @@ class ToolGateway:
                 "risk_level": risk,
                 "dry_run": False
             }
+            self.audit_log.append({
+                "command": command_str,
+                "risk_level": risk,
+                "approved": True if risk == CommandRiskLevel.HIGH_RISK else None,
+                "status": "executed",
+                "exit_code": proc.returncode,
+                "duration": duration,
+                "timestamp": time.time()
+            })
+            return result
 
         except subprocess.TimeoutExpired:
+            self.audit_log.append({
+                "command": command_str,
+                "risk_level": risk,
+                "status": "timeout",
+                "exit_code": -1,
+                "duration": timeout_seconds,
+                "timestamp": time.time()
+            })
             return {
                 "exit_code": -1,
                 "stdout": "",
@@ -142,6 +205,13 @@ class ToolGateway:
                 "dry_run": False
             }
         except Exception as e:
+            self.audit_log.append({
+                "command": command_str,
+                "risk_level": risk,
+                "status": "error",
+                "error": str(e),
+                "timestamp": time.time()
+            })
             return {
                 "exit_code": -1,
                 "stdout": "",

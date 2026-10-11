@@ -1,6 +1,6 @@
-# Architecture & System Design: SO NAIVE IDE
+# Architecture & System Design: PRUBETH IDE
 
-**SO NAIVE IDE** (Horizon Edition v3.0.0) is built to deliver unmatched responsiveness, source code privacy, and autonomous agent velocity.
+**PRUBETH IDE** (Horizon Edition v3.0.0) is built to deliver unmatched responsiveness, source code privacy, autonomous agent velocity, and sovereign local code compilation.
 Official Showcase: [**https://www.bsvr.work/**](https://www.bsvr.work/)
 
 ---
@@ -9,8 +9,8 @@ Official Showcase: [**https://www.bsvr.work/**](https://www.bsvr.work/)
 
 ```
 +-------------------------------------------------------------------------+
-|                              SO NAIVE IDE                               |
-|                  (PyQt5 + QScintilla Polyglot Lexers)                   |
+|                               PRUBETH IDE                               |
+|        (Obsidian Hologram Theme · QScintilla Polyglot Lexers)          |
 +-------------------------------------------------------------------------+
                                      |
                +---------------------+---------------------+
@@ -30,9 +30,19 @@ Official Showcase: [**https://www.bsvr.work/**](https://www.bsvr.work/)
                  |
                  v
 +-------------------------------------------------------------------------+
-|                    Autonomous Agent Tool Engine                         |
-|  - <tool:read_file>        - <tool:patch_file>    - <tool:run_command>  |
-|  - <tool:write_file>       - <tool:search_code>   - <tool:run_tests>    |
+|                 Autonomous Multi-Agent DAG Orchestrator                 |
+|   Planner  ->  Code Architect  ->  Test Fixer  ->  AST Critic Engine   |
+|   - <tool:read_file>        - <tool:patch_file>    - <tool:run_command> |
+|   - <tool:write_file>       - <tool:search_code>   - <tool:run_tests>   |
+|   - <tool:checkpoint>       - <tool:call_mcp>      - <tool:verify_deliv>|
++-------------------------------------------------------------------------+
+                                     |
+                                     v
++-------------------------------------------------------------------------+
+|                    Security & Boundary Guard Engine                     |
+|  - Windows DPAPI / Fernet Secret Vault with real-time log redaction     |
+|  - Workspace Jail: traversal blocking (../) & reserved device guards   |
+|  - Two-Phase Transactional Rollback Engine with shadow state backups    |
 +-------------------------------------------------------------------------+
 ```
 
@@ -54,7 +64,17 @@ If an active cloud request experiences socket timeout, HTTP 429 rate limit, or n
 
 ---
 
-## 2. Self-Healing Traceback Auto-Fix Compiler
+## 2. Hologram Cybernetic Design Theme
+
+PRUBETH features an obsidian glassmorphic theme engineered for high contrast and sustained developer focus:
+- **Obsidian Dark (`#050811`):** Deep black backdrop maximizing contrast and reducing eye strain.
+- **Electric Cyan (`#00F0FF`) & Neon Magenta (`#D946EF`):** Distinctive neon gradients for tabs, selection states, progress bars, and glowing borders.
+- **Pure White (`#FFFFFF`):** High-contrast typography for maximum readability.
+- **Positive White Theme:** High-key alternative theme with dark silhouette blades and bright contrast.
+
+---
+
+## 3. Self-Healing Traceback Auto-Fix Compiler
 
 When executing scripts (**`F5`**) or test suites (**`pytest`**):
 1. **Traceback Extraction:** The IDE intercepts `stderr` via `QProcess` and parses exception frames (`Traceback (most recent call last)`).
@@ -65,7 +85,7 @@ When executing scripts (**`F5`**) or test suites (**`pytest`**):
 
 ---
 
-## 3. Cybernetic Blinking AI Status Beacon
+## 4. Cybernetic Blinking AI Status Beacon
 
 The blinking AI beacon (`BlinkingAIIndicator`) provides continuous peripheral awareness to the developer without cluttering the screen:
 
@@ -73,14 +93,14 @@ The blinking AI beacon (`BlinkingAIIndicator`) provides continuous peripheral aw
   $$\text{glow} = 0.65 + 0.35 \cdot \sin(\theta)$$
   Where $\theta$ updates every $40\text{ ms}$ at $25\text{ FPS}$.
 - **States:**
-  - `IDLE`: Gentle breathing cycle in cyan (`#00F0FF`).
+  - `ONLINE`: Gentle breathing cycle in cyan (`#00F0FF`).
   - `STREAMING`: Chromatic alternating pulses between electric violet (`#A855F7`) and cyan (`#00F0FF`) at $300\text{ ms}$ frequency.
   - `AUTOFIX`: Emerald (`#10B981`) and amber (`#F59E0B`) strobe.
-  - `ERROR`: Ruby red (`#EF4444`) alert.
+  - `ALERT`: Ruby red (`#EF4444`) alert.
 
 ---
 
-## 4. Autonomous Agent Tool Protocol
+## 5. Autonomous Agent Tool Protocol
 
 The agent loop executes XML-tagged actions:
 
@@ -91,26 +111,11 @@ The agent loop executes XML-tagged actions:
 | `patch_file` | `<tool:patch_file path="file.py"><search>old</search><replace>new</replace></tool:patch_file>` | Surgical search-and-replace |
 | `list_files` | `<tool:list_files dir="." />` | Discovers project structure |
 | `search_code` | `<tool:search_code query="symbol" />` | Grep across project directory |
-| `run_command` | `<tool:run_command cmd="git status" />` | Shell execution with user approval check |
+| `run_command` | `<tool:run_command cmd="git status" />` | Shell execution with security guard check |
 | `run_tests` | `<tool:run_tests />` | Executes `pytest` and feeds results back to agent |
-
----
-
-## 5. Polyglot QScintilla Lexers
-
-Syntax highlighting is decoupled from cloud dependencies:
-- Python (`QsciLexerPython`)
-- JavaScript / TypeScript (`QsciLexerJavaScript`)
-- C++ / C / Rust (`QsciLexerCPP`)
-- HTML / XML (`QsciLexerHTML`, `QsciLexerXML`)
-- CSS / SCSS (`QsciLexerCSS`)
-- JSON (`QsciLexerJSON`)
-- Markdown (`QsciLexerMarkdown`)
-- YAML (`QsciLexerYAML`)
-- SQL (`QsciLexerSQL`)
-- Shell (`QsciLexerBash`, `QsciLexerBatch`)
-
-All lexers share the unified **SO NAIVE Obsidian Dark Theme** palette (`#0D1017` background, `#E6EDF7` foreground, `#5AA7FF` selection).
+| `call_mcp` | `<tool:call_mcp server="srv" tool="act" />` | Calls MCP tools with Content-Length stdio framing |
+| `create_checkpoint` | `<tool:create_checkpoint description="..." />` | Creates two-phase transactional restore point |
+| `rollback_checkpoint` | `<tool:rollback_checkpoint id="..." />` | Atomic rollback with shadow stage recovery |
 
 ---
 
@@ -138,19 +143,19 @@ To eliminate installation breakdowns and silent failures:
          |
          v (PyInstaller --add-data app_payload.zip;.)
 +-----------------------------------------------------------------------+
-|         SoNaive-v3.0.0-Setup.exe / setup.exe (Embedded Payload)       |
+|      PrubethIDE-v3.0.0-Setup.exe / setup.exe (Embedded Payload)       |
 +-----------------------------------------------------------------------+
                                    | (User Installs)
                                    v
 +-----------------------------------------------------------------------+
-|  InstallWorker (%LOCALAPPDATA%\Programs\SoNaive)                      |
+|  InstallWorker (%LOCALAPPDATA%\Programs\PrubethIDE)                   |
 |  - Extracts app_payload.zip into target directory                     |
-|  - Validates existence of local_ai_studio_pro.py / SoNaive.exe        |
-|  - Writes self-diagnosing SoNaive.bat with error alerts (mshta)       |
+|  - Validates existence of local_ai_studio_pro.py / PrubethIDE.exe     |
+|  - Writes self-diagnosing PrubethIDE.bat with error alerts (mshta)    |
 |  - Configures Desktop & Start Menu shortcuts                          |
 +-----------------------------------------------------------------------+
 ```
 
 ### Self-Bootstrapping Launchers:
 - **`run_ide.bat` / `run_local_ai_studio_pro.bat`:** Developers launching from source are automatically verified. Missing `.venv` or dependencies trigger automatic virtualenv creation and `requirements.txt` installation before launch.
-- **`SoNaive.bat`:** Installed runtime verifies Python presence and GUI libraries. If an environment is broken, it raises an explicit Windows GUI dialog rather than failing silently in the background.
+- **`PrubethIDE.bat`:** Installed runtime verifies Python presence and GUI libraries. If an environment is broken, it raises an explicit Windows GUI dialog rather than failing silently in the background.

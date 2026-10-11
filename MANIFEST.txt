@@ -1,0 +1,33 @@
+================================================================================
+PRUBETH IDE — HORIZON EDITION (v3.0.0) PRODUCTION RELEASE MANIFEST
+================================================================================
+Generated on: 2026-10-10
+Status: 100% RECTIFIED & EMPIRICALLY VERIFIED NATIVE WINDOWS BUILD
+Brand: PRUBETH (Classic Dutch Windmill Hologram & Positive White Palette)
+
+DIRECTORY OVERVIEW:
+--------------------------------------------------------------------------------
+1. Standalone Executable (Ready to run, zero external Python or dependencies needed):
+   - E:\PRUBETH_IDE_V3\PrubethIDE.exe (Native Windows 64-bit Binary)
+   - E:\PRUBETH_IDE_V3\_internal\ (Bundled Python 3.12 runtime, PyQt5, QScintilla DLLs)
+
+2. Standalone Graphical Installer:
+   - E:\PRUBETH_IDE_V3\PrubethIDE-v3.0.0-Setup.exe (92.8 MB Self-Extracting Wizard)
+   - E:\PRUBETH_IDE_V3\setup.exe (92.8 MB)
+   - C:\Users\asus\Desktop\PrubethIDE-v3.0.0-Setup.exe
+   - C:\Users\asus\Downloads\PrubethIDE-v3.0.0-Setup.exe
+
+3. Portable Distribution:
+   - E:\PRUBETH_IDE_V3\PrubethIDE-v3.0.0-Windows-Portable.zip (51.1 MB)
+   - C:\Users\asus\Desktop\PrubethIDE-v3.0.0-Windows-Portable.zip
+
+4. Shortcuts:
+   - Desktop Shortcut: C:\Users\asus\Desktop\PRUBETH IDE.lnk -> E:\PRUBETH_IDE_V3\PrubethIDE.exe
+   - Start Menu Shortcut: %APPDATA%\Microsoft\Windows\Start Menu\Programs\PRUBETH IDE\PRUBETH IDE.lnk
+
+5. Verification Results:
+   - Process Name: PrubethIDE
+   - Status: Responding: True
+   - Allocated Memory: ~85.5 MB Working Set
+   - Architecture: x86_64 Windows Native
+================================================================================

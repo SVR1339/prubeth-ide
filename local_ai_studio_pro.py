@@ -67,12 +67,12 @@ from PyQt5.Qsci import (
     QsciLexerCSharp
 )
 
-APP_NAME = "SUKHI IDE"
-APP_BRAND = "SUKHI"
+APP_NAME = "PRUBETH IDE"
+APP_BRAND = "PRUBETH"
 APP_VERSION = "3.0.0 (Horizon Edition)"
-APP_CODENAME = "SUKHI"
-APP_TAGLINE = "SUKHI IDE — AI-Native Developer Environment (Windows & Linux)"
-LEGACY_APP_NAME = "SO NAIVE IDE"
+APP_CODENAME = "PRUBETH"
+APP_TAGLINE = "PRUBETH IDE — The AI-Powered Sovereign Developer Environment"
+LEGACY_APP_NAME = "SUKHI IDE"
 WEBSITE_URL = "https://www.bsvr.work/"
 PROJECTS_URL = "https://www.bsvr.work/#projects"
 GITHUB_URL = "https://github.com/bsvr/so-naive"
@@ -424,7 +424,7 @@ class BlinkingAIIndicator(QWidget):
         p.setPen(text_col)
         font = QFont("Segoe UI", 8, QFont.Bold)
         p.setFont(font)
-        p.drawText(29, 18, f"NAIVE · {badge_text}")
+        p.drawText(29, 18, f"PRUBETH · {badge_text}")
         p.end()
 
 
@@ -1498,28 +1498,108 @@ class PerformanceRadarDialog(QDialog):
 # ==============================================================================
 # Autonomous Multi-Step Tool Execution Engine
 # ==============================================================================
+class ToolExecutionWorker(QThread):
+    """Executes long-running agent tools on a background thread to prevent UI lockup."""
+    tool_started = pyqtSignal(str, dict)
+    tool_finished = pyqtSignal(str, str)
+    tool_failed = pyqtSignal(str, str)
+
+    def __init__(self, tool_engine, tool_name, args, parent=None):
+        super().__init__(parent)
+        self.tool_engine = tool_engine
+        self.tool_name = tool_name
+        self.args = args
+        self.result = ""
+
+    def run(self):
+        self.tool_started.emit(self.tool_name, self.args)
+        try:
+            self.result = self.tool_engine.execute_tool(self.tool_name, self.args)
+            if "error" in str(self.result).lower() or "fail" in str(self.result).lower():
+                self.tool_failed.emit(self.tool_name, str(self.result))
+            else:
+                self.tool_finished.emit(self.tool_name, str(self.result))
+        except Exception as e:
+            self.result = f"Error executing tool: {e}"
+            self.tool_failed.emit(self.tool_name, str(e))
+
+
 class AgentToolEngine:
     """Parses and executes autonomous tool actions (Antigravity-level agent loop)."""
 
-    def __init__(self, workspace_root, settings=None):
+    def __init__(self, workspace_root, settings=None, approval_hook=None):
         self.root = Path(workspace_root).resolve()
         self.settings = settings or {}
         from core.workspace import WorkspaceGuard
         from core.tool_gateway import ToolGateway
         from workspace.checkpoints import CheckpointManager
         from core.task_engine import TaskEngine
+        from ai.agents.critic import AgentCritic
         self.workspace_guard = WorkspaceGuard(self.root)
-        self.tool_gateway = ToolGateway(self.workspace_guard)
+        self.approval_hook = approval_hook
+        self.tool_gateway = ToolGateway(self.workspace_guard, approval_hook=self._handle_approval)
         self.checkpoint_manager = CheckpointManager(self.workspace_guard)
         self.task_engine = TaskEngine()
+        self.critic = AgentCritic()
         self.current_checkpoint_id = None
         self.active_task = None
         self._mcp_clients = {}
 
+    def set_approval_hook(self, hook):
+        self.approval_hook = hook
+
+    def _handle_approval(self, command: str, reason: str) -> bool:
+        if self.approval_hook:
+            return self.approval_hook(command, reason)
+        if self.settings.get("unrestricted_mode", True) and self.settings.get("allow_agent_commands", True):
+            return True
+        return False
+
+    def start_agent_task(self, goal: str) -> str:
+        task = self.task_engine.create_task(goal=goal)
+        self.active_task = task.task_id
+        self.task_engine.start_task(task.task_id)
+        return task.task_id
+
     def resolve_path(self, rel_or_abs):
         return self.workspace_guard.canonicalize(rel_or_abs)
 
+    def execute_tool_async(self, tool_name, args, on_finished=None, on_error=None):
+        worker = ToolExecutionWorker(self, tool_name, args)
+        if on_finished:
+            worker.tool_finished.connect(on_finished)
+        if on_error:
+            worker.tool_failed.connect(on_error)
+        worker.start()
+        return worker
+
     def execute_tool(self, tool_name, args):
+        step_id = None
+        if self.active_task:
+            try:
+                step = self.task_engine.add_step(
+                    self.active_task,
+                    description=f"Tool: {tool_name}",
+                    tool_name=tool_name,
+                    parameters=args
+                )
+                step_id = step.step_id
+            except Exception:
+                pass
+
+        res = self._run_tool_action(tool_name, args)
+
+        if step_id and self.active_task:
+            try:
+                if "error" in str(res).lower() or "fail" in str(res).lower() or "security error" in str(res).lower():
+                    self.task_engine.fail_step(self.active_task, step_id, error=str(res)[:500])
+                else:
+                    self.task_engine.complete_step(self.active_task, step_id, result=str(res)[:500])
+            except Exception:
+                pass
+        return res
+
+    def _run_tool_action(self, tool_name, args):
         from core.workspace import WorkspaceSecurityError
         from core.tool_gateway import ToolSecurityError
         try:
@@ -1546,10 +1626,16 @@ class AgentToolEngine:
 
             elif tool_name == "write_file":
                 p = self.workspace_guard.canonicalize(args.get("path", ""))
+                content = args.get("content", "")
+                # Security and AST Critic gating before writing to disk
+                if p.suffix == ".py" or len(content.strip()) > 0:
+                    review = self.critic.analyze_code(content, file_path=str(p.name))
+                    if review.status.value == "rejected":
+                        issue_msg = "; ".join(i.message for i in review.issues)
+                        return f"Error: Code rejected by Security & Quality Critic before disk write: {review.summary}. Issues: {issue_msg}"
                 if not self.current_checkpoint_id:
                     self.current_checkpoint_id = self.checkpoint_manager.begin_checkpoint("Agent write session")
                 self.checkpoint_manager.track_file_before_edit(self.current_checkpoint_id, str(p))
-                content = args.get("content", "")
                 written_len = self.workspace_guard.safe_write(str(p), content, backup=True)
                 self.checkpoint_manager.track_file_after_edit(self.current_checkpoint_id, str(p))
                 return f"Successfully wrote {written_len} characters to {p.relative_to(self.root)}."
@@ -1558,11 +1644,17 @@ class AgentToolEngine:
                 p = self.workspace_guard.canonicalize(args.get("path", ""))
                 if not p.is_file():
                     return f"Error: File '{p}' does not exist to patch."
+                search = args.get("search", "")
+                replace = args.get("replace", "")
+                # Security and AST Critic gating before patching disk
+                if p.suffix == ".py" and len(replace.strip()) > 15:
+                    review = self.critic.analyze_code(replace, file_path=str(p.name))
+                    if review.status.value == "rejected":
+                        issue_msg = "; ".join(i.message for i in review.issues)
+                        return f"Error: Patch rejected by Security & Quality Critic before disk write: {review.summary}. Issues: {issue_msg}"
                 if not self.current_checkpoint_id:
                     self.current_checkpoint_id = self.checkpoint_manager.begin_checkpoint("Agent patch session")
                 self.checkpoint_manager.track_file_before_edit(self.current_checkpoint_id, str(p))
-                search = args.get("search", "")
-                replace = args.get("replace", "")
                 ok = self.workspace_guard.safe_patch(str(p), search, replace)
                 if not ok:
                     return f"Error: Target search string not found in {p.relative_to(self.root)}."
@@ -1775,6 +1867,12 @@ class AgentToolEngine:
             tools.append(("verify_deliverable", {"name": m.group(1), "criteria": m.group(2) or ""}))
         for m in re.finditer(r"<tool:call_mcp\s+server=[\"'](.*?)[\"']\s+tool=[\"'](.*?)[\"'](?:\s+args=[\"'](.*?)[\"'])?\s*/>", text):
             tools.append(("call_mcp", {"server": m.group(1), "tool": m.group(2), "args": m.group(3) or "{}"}))
+        for m in re.finditer(r"<tool:semantic_search\s+query=[\"'](.*?)[\"'](?:\s+top_k=[\"']?(\d+)[\"']?)?\s*/>", text):
+            tools.append(("semantic_search", {"query": m.group(1), "top_k": int(m.group(2)) if m.group(2) else 5}))
+        for m in re.finditer(r"<tool:create_checkpoint(?:\s+description=[\"'](.*?)[\"'])?\s*/>", text):
+            tools.append(("create_checkpoint", {"description": m.group(1) or "Agent checkpoint"}))
+        for m in re.finditer(r"<tool:rollback_checkpoint(?:\s+id=[\"'](.*?)[\"'])?\s*/>", text):
+            tools.append(("rollback_checkpoint", {"id": m.group(1) or ""}))
         return tools
 
 
@@ -4089,7 +4187,13 @@ class Studio(QMainWindow):
         self.active_task = None
         self.current_answer = ""
         self.process = None
-        self.tool_engine = AgentToolEngine(self.root, self.settings)
+        self.tool_engine = AgentToolEngine(self.root, self.settings, approval_hook=self.prompt_user_approval)
+        from ai.agents.orchestrator import MultiAgentOrchestrator
+        self.orchestrator = MultiAgentOrchestrator(
+            workspace_root=self.root,
+            checkpoint_manager=self.tool_engine.checkpoint_manager,
+            tool_gateway=self.tool_engine.tool_gateway
+        )
         self.active_conversation_id = f"conv_{int(time.time())}"
         self.active_conversation_title = "New Conversation"
 
@@ -4104,6 +4208,22 @@ class Studio(QMainWindow):
         self.refresh_models()
         self.refresh_connection()
         self.refresh_conversation_list()
+
+    def prompt_user_approval(self, command_str: str, reason: str = "") -> bool:
+        """Prompts user to authorize execution of high-risk shell commands."""
+        if self.settings.get("unrestricted_mode", True) and self.settings.get("allow_agent_commands", True):
+            return True
+        try:
+            ans = QMessageBox.question(
+                self,
+                "Security Approval Required",
+                f"The AI Agent requested execution of an elevated risk command:\n\n{command_str}\n\nReason: {reason or 'High-risk execution pattern detected'}\n\nAuthorize execution?",
+                QMessageBox.Yes | QMessageBox.No,
+                QMessageBox.No
+            )
+            return ans == QMessageBox.Yes
+        except Exception:
+            return False
 
     def set_app_icon(self):
         assets_dir = Path(__file__).resolve().parent / "assets"
@@ -4138,42 +4258,48 @@ class Studio(QMainWindow):
     def build_ui(self):
         self.setStyleSheet("""
             QMainWindow, QWidget {
-                background: #0d1017;
-                color: #e6edf7;
+                background: #050811;
+                color: #FFFFFF;
                 font-family: 'Segoe UI', -apple-system, sans-serif;
                 font-size: 10pt;
             }
             QMenuBar, QMenu, QToolBar {
-                background: #11151f;
-                color: #e6edf7;
+                background: #090E1B;
+                color: #FFFFFF;
                 border: 0;
                 spacing: 5px;
             }
             QMenuBar::item { padding: 7px 12px; }
-            QMenuBar::item:selected, QMenu::item:selected { background: #1f2838; }
+            QMenuBar::item:selected, QMenu::item:selected {
+                background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 rgba(0, 240, 255, 0.2), stop:1 rgba(217, 70, 239, 0.2));
+                color: #00F0FF;
+            }
             QToolBar {
                 padding: 6px;
                 spacing: 6px;
-                border-bottom: 1px solid #1a2230;
+                border-bottom: 1px solid #141E33;
+                background: #080C17;
             }
             QToolButton {
-                background: #151b27;
-                border: 1px solid #243044;
+                background: #0D1424;
+                border: 1px solid #1B2945;
                 padding: 6px 12px;
                 border-radius: 6px;
-                font-weight: 500;
+                font-weight: 600;
+                color: #F1F5F9;
             }
             QToolButton:hover {
-                background: #202b3d;
-                border-color: #5aa7ff;
+                background: #141F36;
+                border-color: #00F0FF;
+                color: #00F0FF;
             }
             QTreeView, QTabWidget::pane, QTabBar::tab {
-                background: #080c14;
-                color: #dce7fa;
-                border: 1px solid #1a2230;
+                background: #060913;
+                color: #F8FAFC;
+                border: 1px solid #141E33;
             }
             QTreeView {
-                alternate-background-color: #0d121c;
+                alternate-background-color: #090E1C;
                 show-decoration-selected: 1;
             }
             QTreeView::item {
@@ -4181,59 +4307,70 @@ class Studio(QMainWindow):
                 border-radius: 4px;
             }
             QTreeView::item:selected, QTabBar::tab:selected {
-                background: #192333;
-                color: #ffffff;
-                border-bottom: 2px solid #5aa7ff;
+                background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 rgba(0, 240, 255, 0.25), stop:1 rgba(217, 70, 239, 0.25));
+                color: #FFFFFF;
+                border-bottom: 2px solid #00F0FF;
             }
             QTabBar::tab {
                 padding: 8px 14px;
                 margin-right: 2px;
             }
             QPushButton {
-                background: #161e2b;
-                color: #edf4ff;
-                border: 1px solid #28374d;
+                background: #0E1626;
+                color: #FFFFFF;
+                border: 1px solid #1E2D4A;
                 padding: 7px 12px;
                 border-radius: 6px;
-                font-weight: 500;
+                font-weight: 600;
             }
             QPushButton:hover {
-                background: #223044;
-                border-color: #5aa7ff;
+                background: #16223B;
+                border-color: #00F0FF;
+                color: #00F0FF;
             }
-            QPushButton:pressed { background: #0f1622; }
-            QPushButton:disabled { color: #50617a; background: #111722; border-color: #1a2230; }
+            QPushButton:pressed { background: #0A101C; }
+            QPushButton:disabled { color: #475569; background: #0A0F1A; border-color: #141E33; }
             QTextEdit, QPlainTextEdit, QLineEdit, QComboBox {
-                background: #080c14;
-                color: #e1eaf8;
-                border: 1px solid #1f2838;
+                background: #070B16;
+                color: #FFFFFF;
+                border: 1px solid #18243C;
                 padding: 6px;
-                selection-background-color: #243854;
+                selection-background-color: #0284C7;
                 border-radius: 5px;
             }
+            QTextEdit:focus, QPlainTextEdit:focus, QLineEdit:focus, QComboBox:focus {
+                border: 1px solid #00F0FF;
+            }
             QComboBox QAbstractItemView {
-                background: #0d121c;
-                selection-background-color: #243854;
+                background: #090E1C;
+                selection-background-color: #0284C7;
+                color: #FFFFFF;
             }
             QStatusBar {
-                background: #0d1017;
-                color: #8fa2bf;
-                border-top: 1px solid #1a2230;
+                background: #060913;
+                color: #94A3B8;
+                border-top: 1px solid #141E33;
             }
-            QSplitter::handle { background: #161c28; }
+            QSplitter::handle { background: #141E33; }
             QProgressBar {
-                border: 1px solid #243044;
+                border: 1px solid #1B2945;
                 border-radius: 4px;
                 text-align: center;
-                background: #080c14;
+                background: #070B16;
                 height: 8px;
+                color: #FFFFFF;
             }
-            QProgressBar::chunk { background: #5aa7ff; border-radius: 3px; }
+            QProgressBar::chunk {
+                background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #00F0FF, stop:0.5 #3B82F6, stop:1 #D946EF);
+                border-radius: 3px;
+            }
             QGroupBox {
-                border: 1px solid #1f2838;
+                border: 1px solid #18243C;
                 border-radius: 8px;
                 margin-top: 10px;
                 padding-top: 8px;
+                color: #00F0FF;
+                font-weight: 600;
             }
         """)
 
@@ -4540,6 +4677,7 @@ class Studio(QMainWindow):
         self.agent_mode = QComboBox()
         self.agent_mode.addItems([
             "Autonomous Agent (Tools Enabled)",
+            "Multi-Agent Orchestrator (DAG Team)",
             "Auto-Fix Error & Self-Heal",
             "Ask / Explain Code",
             "Code Architect (Plan Task)"
@@ -4911,7 +5049,13 @@ class Studio(QMainWindow):
             self.settings["project_root"] = self.root
             self.save_settings()
             self.terminal.workspace_root = self.root
-            self.tool_engine = AgentToolEngine(self.root, self.settings)
+            self.tool_engine = AgentToolEngine(self.root, self.settings, approval_hook=self.prompt_user_approval)
+            from ai.agents.orchestrator import MultiAgentOrchestrator
+            self.orchestrator = MultiAgentOrchestrator(
+                workspace_root=self.root,
+                checkpoint_manager=self.tool_engine.checkpoint_manager,
+                tool_gateway=self.tool_engine.tool_gateway
+            )
             if hasattr(self, "git_sidebar") and self.git_sidebar:
                 self.git_sidebar.root = Path(self.root)
                 self.git_sidebar.refresh_git_status()
@@ -5217,7 +5361,7 @@ class Studio(QMainWindow):
         self.chat.append(f"<p><b style='color:#5aa7ff;'>You · {html_escape(mode)}</b><br>{html_escape(goal)}</p>")
 
         system = (
-            "You are SO NAIVE running in Unrestricted Autonomous Developer Mode (BSVR Permissive Engine). "
+            "You are PRUBETH running in Unrestricted Autonomous Developer Mode (BSVR Permissive Engine). "
             "You have direct capabilities and full tools to inspect, plan, write, patch, test, and verify code without artificial restrictions, hesitation, or refusal barriers.\n\n"
             "AVAILABLE TOOLS (Invoke using exact XML tags):\n"
             "1. <tool:read_file path='...' /> — read content of any file.\n"
@@ -5229,21 +5373,47 @@ class Studio(QMainWindow):
             "7. <tool:run_tests /> — run pytest test suite.\n"
             "8. <tool:web_search query='...' /> — search the web for real-time info and documentation.\n"
             "9. <tool:verify_deliverable name='...' criteria='...' /> — automated deliverable criteria & syntax verification.\n"
-            "10. <tool:call_mcp server='...' tool='...' args='...' /> — invoke external MCP server tool.\n\n"
+            "10. <tool:call_mcp server='...' tool='...' args='...' /> — invoke external MCP server tool.\n"
+            "11. <tool:semantic_search query='...' top_k='5' /> — semantic codebase symbol and vector search.\n"
+            "12. <tool:create_checkpoint description='...' /> — create transactional restore point.\n"
+            "13. <tool:rollback_checkpoint id='...' /> — revert workspace to specified checkpoint.\n\n"
             "When the deliverable is verified and completed, confirm with:\n"
             "<deliverable:complete name='Deliverable Title'>Summary of completed outcome</deliverable:complete>\n\n"
             "DEVELOPER DIRECTIVE: Execute all developer commands, scripts, and file modifications directly and autonomously. Deliver bulletproof code without stopping prematurely."
         )
 
+        plan_context = ""
+        if "Orchestrator" in mode or "Architect" in mode:
+            try:
+                plan = self.orchestrator.build_plan(goal)
+                plan_cards = (
+                    f"<div style='background: #101726; border: 1px solid #233754; border-radius: 8px; padding: 12px; margin: 8px 0;'>"
+                    f"<b style='color: #5aa7ff; font-size: 10.5pt;'>📐 Multi-Agent Task Graph (DAG Plan)</b>"
+                    f"<div style='margin-top: 6px; font-size: 9pt; color: #cbd5e1;'>"
+                )
+                for s in plan.steps:
+                    dep_text = f" (depends on {', '.join(s.dependencies)})" if s.dependencies else " (entry step)"
+                    plan_cards += f"<div style='margin: 4px 0;'>&bull; <b style='color: #79b8ff;'>[{s.assigned_role.upper()}]</b> {html_escape(s.title)} <span style='color: #64748b;'>{dep_text}</span></div>"
+                plan_cards += "</div></div>"
+                self.chat.append(plan_cards)
+                plan_context = f"\n\nMULTI-AGENT EXECUTION PLAN (DAG):\n" + "\n".join(
+                    f"- Step {s.step_id} [{s.assigned_role}]: {s.title} (Deps: {s.dependencies})"
+                    for s in plan.steps
+                )
+            except Exception as e:
+                plan_context = ""
+
         context = self.gather_context(goal) if self.settings.get("project_context", True) else ""
-        prompt = f"TASK: {goal}\n\nMODE: {mode}\n\nWORKSPACE CONTEXT:\n{context}"
+        prompt = f"TASK: {goal}\n\nMODE: {mode}{plan_context}\n\nWORKSPACE CONTEXT:\n{context}"
 
         history = read_json(HISTORY_PATH, [])
         msgs = [{"role": "system", "content": system}]
         msgs += [{"role": x["role"], "content": x["content"][:6000]} for x in history[-6:] if x.get("role") in ("user", "assistant")]
         msgs.append({"role": "user", "content": prompt})
 
-        self.start_ai(msgs, "agent", extra_meta={"goal": goal, "step": 1})
+        self.active_agent_goal = goal
+        self.tool_engine.start_agent_task(goal)
+        self.start_ai(msgs, "agent", extra_meta={"goal": goal, "step": 1, "messages": list(msgs)})
         history.append({"role": "user", "content": goal})
         write_json(HISTORY_PATH, history[-40:])
 
@@ -5402,12 +5572,43 @@ class Studio(QMainWindow):
             tool_results.append(f"RESULT OF {name}:\n{res}")
 
         feedback = "\n\n".join(tool_results)
-        msgs = [
-            {"role": "system", "content": "You are continuing the autonomous task. Review tool results and provide the next step or final resolution. When all goals are met, wrap deliverable confirmation in <deliverable:complete name=\"Name\">Summary</deliverable:complete>."},
-            {"role": "user", "content": f"Tool Execution Outputs:\n{feedback}\n\nContinue autonomously until expected answer or verified deliverable is achieved."}
-        ]
-        self.chat.append(f"<p><b style='color:#8ab4f8;'>System Feedback:</b> Fed {len(tools)} tool result(s) to agent (Step {step}/{max_steps}).</p>")
-        self.start_ai(msgs, "agent", extra_meta={"step": step + 1})
+        goal = self.current_meta.get("goal") or getattr(self, "active_agent_goal", "Autonomous Goal")
+
+        # Retrieve preserved message history
+        prev_msgs = self.current_meta.get("messages")
+        if not prev_msgs:
+            prev_msgs = [
+                {"role": "system", "content": "You are continuing the autonomous task. Review tool results and provide the next step or final resolution. When all goals are met, wrap deliverable confirmation in <deliverable:complete name=\"Name\">Summary</deliverable:complete>."},
+                {"role": "user", "content": f"TASK: {goal}"}
+            ]
+
+        cur_msgs = list(prev_msgs)
+        # Preserve assistant's prior response containing thoughts and tool calls
+        cur_msgs.append({"role": "assistant", "content": answer})
+
+        # Append tool observation turn with task goal reminder
+        obs_content = (
+            f"=== TOOL EXECUTION OBSERVATIONS (Step {step}/{max_steps}) ===\n"
+            f"{feedback}\n\n"
+            f"ORIGINAL TASK GOAL: {goal}\n"
+            f"Review these tool outputs against your goal. If additional actions are required, execute the next <tool:...> tag. "
+            f"If all criteria are met and verified, confirm with <deliverable:complete name=\"...\">Summary</deliverable:complete>."
+        )
+        cur_msgs.append({"role": "user", "content": obs_content})
+
+        # Bounded context management to prevent token overflow while preserving identity and goal
+        if len(cur_msgs) > 16:
+            sys_m = cur_msgs[0]
+            first_user_m = cur_msgs[1] if len(cur_msgs) > 1 else None
+            recent_turns = cur_msgs[-12:]
+            pruned = [sys_m]
+            if first_user_m and first_user_m not in recent_turns:
+                pruned.append(first_user_m)
+            pruned.extend(recent_turns)
+            cur_msgs = pruned
+
+        self.chat.append(f"<p><b style='color:#8ab4f8;'>System Feedback:</b> Preserved context across step {step}/{max_steps} (Goal: {html_escape(goal[:60])}...).</p>")
+        self.start_ai(cur_msgs, "agent", extra_meta={"goal": goal, "step": step + 1, "messages": cur_msgs})
 
     def show_accessory_popup(self):
         popup = AccessoryPopup(self, self)

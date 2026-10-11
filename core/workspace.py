@@ -25,17 +25,49 @@ class WorkspaceSecurityError(PermissionError):
     pass
 
 
-class WorkspaceGuard:
-    """Enforces strict filesystem sandbox boundaries for AI tools and extensions."""
+class QuotaExceededError(WorkspaceSecurityError):
+    """Raised when an operation exceeds workspace disk quota or file size limits."""
+    pass
 
-    def __init__(self, workspace_root: Path):
+
+class WorkspaceGuard:
+    """Enforces strict filesystem sandbox boundaries and storage quotas for AI tools and extensions."""
+
+    def __init__(
+        self,
+        workspace_root: Path,
+        max_workspace_bytes: Optional[int] = None,
+        max_file_size_bytes: Optional[int] = None
+    ):
         self.root = Path(workspace_root).resolve()
         if not self.root.exists():
             self.root.mkdir(parents=True, exist_ok=True)
+        self.max_workspace_bytes = max_workspace_bytes
+        self.max_file_size_bytes = max_file_size_bytes
+
+    RESERVED_DEVICE_NAMES: Set[str] = {
+        "CON", "PRN", "AUX", "NUL", "COM1", "COM2", "COM3", "COM4", "COM5",
+        "COM6", "COM7", "COM8", "COM9", "LPT1", "LPT2", "LPT3", "LPT4", "LPT5",
+        "LPT6", "LPT7", "LPT8", "LPT9"
+    }
 
     def canonicalize(self, rel_or_abs_path: str) -> Path:
         """Resolves path and guarantees it resides strictly inside the workspace root."""
-        p = Path(rel_or_abs_path or ".")
+        if not rel_or_abs_path:
+            return self.root
+
+        # Reject null byte injection
+        if "\0" in rel_or_abs_path:
+            raise WorkspaceSecurityError(f"Access Denied: Null bytes are not permitted in path.")
+
+        p = Path(rel_or_abs_path)
+
+        # Reject Windows reserved device names
+        if p.stem.upper() in self.RESERVED_DEVICE_NAMES:
+            raise WorkspaceSecurityError(
+                f"Access Denied: Path '{rel_or_abs_path}' targets reserved device name '{p.name}'."
+            )
+
         if not p.is_absolute():
             resolved = (self.root / p).resolve()
         else:
@@ -66,8 +98,41 @@ class WorkspaceGuard:
             raise FileNotFoundError(f"File not found: '{rel_or_abs_path}'")
         return target.read_text(encoding="utf-8", errors="replace")[:max_chars]
 
+    def get_workspace_size_bytes(self) -> int:
+        """Calculates total size in bytes of files in the workspace (excluding ignored dirs)."""
+        total = 0
+        for current_root, dirs, files in os.walk(str(self.root)):
+            dirs[:] = [d for d in dirs if d not in IGNORE_DIRS]
+            for name in files:
+                fp = Path(current_root) / name
+                try:
+                    total += fp.stat().st_size
+                except (OSError, FileNotFoundError):
+                    pass
+        return total
+
+    def check_quota(self, additional_bytes: int = 0) -> None:
+        """Verifies that adding additional_bytes will not exceed the workspace quota."""
+        if self.max_file_size_bytes is not None and additional_bytes > self.max_file_size_bytes:
+            raise QuotaExceededError(
+                f"File size limit exceeded: Operation requires {additional_bytes} bytes, "
+                f"maximum allowed per file is {self.max_file_size_bytes} bytes."
+            )
+        if self.max_workspace_bytes is not None:
+            current = self.get_workspace_size_bytes()
+            if current + additional_bytes > self.max_workspace_bytes:
+                raise QuotaExceededError(
+                    f"Workspace storage quota exceeded: Current usage is {current} bytes, "
+                    f"adding {additional_bytes} bytes would exceed maximum limit of {self.max_workspace_bytes} bytes."
+                )
+
     def safe_write(self, rel_or_abs_path: str, content: str, backup: bool = True) -> int:
         target = self.canonicalize(rel_or_abs_path)
+        content_bytes_len = len(content.encode("utf-8"))
+
+        # Enforce quota limits
+        self.check_quota(additional_bytes=content_bytes_len)
+
         target.parent.mkdir(parents=True, exist_ok=True)
 
         if backup and target.exists() and target.is_file():

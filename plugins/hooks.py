@@ -62,6 +62,45 @@ class HookRegistry:
         bucket.sort(key=lambda r: r.priority, reverse=True)
         return handler_id
 
+    def register_hook(
+        self,
+        plugin_id: str,
+        event: Any,
+        callback: Callable[..., Any],
+        priority: int = 100
+    ) -> str:
+        """Convenience method accepting string or HookEvent."""
+        if isinstance(event, str):
+            try:
+                evt = HookEvent(event)
+            except ValueError:
+                # Map common strings
+                if "save" in event:
+                    evt = HookEvent.ON_FILE_SAVE
+                elif "open" in event:
+                    evt = HookEvent.ON_FILE_OPEN
+                else:
+                    evt = HookEvent.ON_STARTUP
+        else:
+            evt = event
+        return self.register(event=evt, callback=callback, priority=priority, plugin_id=plugin_id)
+
+    def trigger_hook(self, event: Any, *args, **kwargs) -> List[Any]:
+        """Convenience method accepting string or HookEvent."""
+        if isinstance(event, str):
+            try:
+                evt = HookEvent(event)
+            except ValueError:
+                if "save" in event:
+                    evt = HookEvent.ON_FILE_SAVE
+                elif "open" in event:
+                    evt = HookEvent.ON_FILE_OPEN
+                else:
+                    evt = HookEvent.ON_STARTUP
+        else:
+            evt = event
+        return self.dispatch(evt, *args, **kwargs)
+
     def unregister(self, handler_id: str) -> bool:
         for bucket in self._hooks.values():
             for i, reg in enumerate(bucket):
@@ -78,13 +117,16 @@ class HookRegistry:
             bucket[:] = filtered
         return removed
 
-    def dispatch(self, event: HookEvent, **kwargs) -> List[Any]:
+    def dispatch(self, event: HookEvent, *args, **kwargs) -> List[Any]:
         """Broadcasts event to registered callbacks; errors are logged without halting dispatch."""
         results = []
         bucket = self._hooks.get(event, [])
         for reg in list(bucket):
             try:
-                res = reg.callback(**kwargs)
+                if args:
+                    res = reg.callback(*args, **kwargs)
+                else:
+                    res = reg.callback(**kwargs)
                 results.append(res)
             except Exception as ex:
                 logger.error(

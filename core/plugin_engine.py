@@ -49,12 +49,21 @@ class PluginManifestValidator:
 
 
 class RealMCPStdioClient:
-    """Communicates with local Model Context Protocol servers over standard I/O (JSON-RPC 2.0)."""
+    """Communicates with local Model Context Protocol servers over standard I/O (JSON-RPC 2.0).
+    Supports standard LSP/MCP Content-Length header framing alongside newline-delimited JSON.
+    """
 
-    def __init__(self, command: str, args: Optional[List[str]] = None, cwd: Optional[Path] = None):
+    def __init__(
+        self,
+        command: str,
+        args: Optional[List[str]] = None,
+        cwd: Optional[Path] = None,
+        framing: str = "content-length"
+    ):
         self.command = command
         self.args = args or []
         self.cwd = cwd
+        self.framing = framing  # "content-length" or "newline"
         self.process: Optional[subprocess.Popen] = None
         self._req_id = 0
 
@@ -66,9 +75,8 @@ class RealMCPStdioClient:
                 stdin=subprocess.PIPE,
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
-                text=True,
                 cwd=str(self.cwd) if self.cwd else None,
-                bufsize=1
+                bufsize=0
             )
             # Send MCP initialize
             init_payload = {
@@ -78,7 +86,7 @@ class RealMCPStdioClient:
                 "params": {
                     "protocolVersion": "2024-11-05",
                     "capabilities": {"tools": {}},
-                    "clientInfo": {"name": "SO NAIVE IDE", "version": "3.0.0"}
+                    "clientInfo": {"name": "SUKHI IDE — Horizon Edition", "version": "3.0.0"}
                 }
             }
             resp = self._send_request(init_payload, timeout=timeout_seconds)
@@ -120,26 +128,61 @@ class RealMCPStdioClient:
         self._req_id += 1
         return self._req_id
 
+    def _format_message(self, payload: Dict[str, Any]) -> bytes:
+        data = json.dumps(payload, ensure_ascii=False).encode("utf-8")
+        if self.framing == "content-length":
+            header = f"Content-Length: {len(data)}\r\n\r\n".encode("ascii")
+            return header + data
+        else:
+            return data + b"\n"
+
     def _send_request(self, payload: Dict[str, Any], timeout: int = 10) -> Optional[Dict[str, Any]]:
         if not self.process or self.process.poll() is not None:
             return None
-        line = json.dumps(payload) + "\n"
-        self.process.stdin.write(line)
-        self.process.stdin.flush()
 
-        # Read JSON-RPC response line
-        # Non-blocking or timed read
+        raw = self._format_message(payload)
+        try:
+            self.process.stdin.write(raw)
+            self.process.stdin.flush()
+        except Exception:
+            return None
+
         start_time = time.time()
+        stdout = self.process.stdout
         while time.time() - start_time < timeout:
-            raw_line = self.process.stdout.readline()
-            if raw_line:
-                raw_line = raw_line.strip()
-                if raw_line.startswith("{") and raw_line.endswith("}"):
-                    try:
-                        return json.loads(raw_line)
-                    except Exception:
-                        pass
-            time.sleep(0.05)
+            if not self.process or self.process.poll() is not None:
+                break
+
+            line = stdout.readline()
+            if not line:
+                time.sleep(0.02)
+                continue
+
+            line_str = line.decode("utf-8", errors="replace").strip()
+            if not line_str:
+                continue
+
+            # Check 1: Content-Length header framing
+            if line_str.lower().startswith("content-length:"):
+                try:
+                    content_length = int(line_str.split(":", 1)[1].strip())
+                    # Read remaining headers until empty line
+                    while True:
+                        hdr = stdout.readline()
+                        if not hdr or not hdr.decode("utf-8", errors="replace").strip():
+                            break
+                    body_bytes = stdout.read(content_length)
+                    return json.loads(body_bytes.decode("utf-8", errors="replace"))
+                except Exception:
+                    pass
+
+            # Check 2: Direct line-delimited JSON
+            elif line_str.startswith("{") and line_str.endswith("}"):
+                try:
+                    return json.loads(line_str)
+                except Exception:
+                    pass
+
         return None
 
     def stop(self):

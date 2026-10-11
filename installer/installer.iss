@@ -1,12 +1,12 @@
-; Inno Setup 6 Script for SO NAIVE IDE
-; Codename: SO NAIVE Horizon (Antigravity Architecture)
+; Inno Setup 6 Script for PRUBETH IDE
+; Codename: PRUBETH Horizon (Antigravity Architecture)
 ; Official Website: https://www.bsvr.work/
 
-#define MyAppName "SO NAIVE IDE"
+#define MyAppName "PRUBETH IDE"
 #define MyAppVersion "3.0.0"
 #define MyAppPublisher "BSVR Technologies"
 #define MyAppURL "https://www.bsvr.work/"
-#define MyAppExeName "SoNaive.exe"
+#define MyAppExeName "PrubethIDE.exe"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
@@ -22,7 +22,7 @@ DefaultGroupName={#MyAppName}
 AllowNoIcons=yes
 LicenseFile=..\LICENSE
 OutputDir=..\dist
-OutputBaseFilename=SoNaive-v3.0.0-Setup
+OutputBaseFilename=PrubethIDE-v3.0.0-Setup
 SetupIconFile=..\assets\icon.ico
 Compression=lzma2/ultra64
 SolidCompression=yes
@@ -43,7 +43,7 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Name: "startmenuicon"; Description: "Create a Start Menu shortcut"; GroupDescription: "{cm:AdditionalIcons}"
 
 [Files]
-Source: "..\dist\SoNaive\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "..\dist\PrubethIDE\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs; Check: DirExists(ExpandConstant('{src}\..\dist\PrubethIDE'))
 Source: "..\assets\icon.ico"; DestDir: "{app}\assets"; Flags: ignoreversion
 Source: "..\assets\logo.png"; DestDir: "{app}\assets"; Flags: ignoreversion
 
@@ -61,3 +61,9 @@ Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChang
 Root: HKCU; Subkey: "Software\Microsoft\Windows\CurrentVersion\Uninstall\{#MyAppName}"; ValueType: string; ValueName: "URLInfoAbout"; ValueData: "{#MyAppURL}"; Flags: uninsdeletekey
 Root: HKCU; Subkey: "Software\Microsoft\Windows\CurrentVersion\Uninstall\{#MyAppName}"; ValueType: string; ValueName: "HelpLink"; ValueData: "https://www.bsvr.work/#projects"; Flags: uninsdeletekey
 Root: HKCU; Subkey: "Software\Microsoft\Windows\CurrentVersion\Uninstall\{#MyAppName}"; ValueType: string; ValueName: "Publisher"; ValueData: "{#MyAppPublisher}"; Flags: uninsdeletekey
+
+[Code]
+function DirExists(Dir: String): Boolean;
+begin
+  Result := DirExists(Dir);
+end;

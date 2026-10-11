@@ -8,6 +8,14 @@ from dataclasses import dataclass
 from typing import Dict, Any, List, Optional, Tuple
 
 from core.model_registry import ModelRegistry, ModelCapability
+from core.product_tier import (
+    ProductTier,
+    TierRestrictionError,
+    is_model_allowed_for_tier,
+    filter_models_for_tier,
+    is_tool_allowed_for_tier,
+    get_tier_spec
+)
 
 
 class AgentProfile(str, Enum):
@@ -18,6 +26,7 @@ class AgentProfile(str, Enum):
 
 @dataclass
 class PolicyConstraint:
+    tier: ProductTier = ProductTier.PRO_HORIZON
     local_only: bool = False
     privacy_first: bool = False
     low_latency: bool = False
@@ -50,13 +59,17 @@ class IntelligentRouter:
         # Default for coding/editing/fixing
         return AgentProfile.MEDIUM
 
-    def get_allowed_tools_for_profile(self, profile: AgentProfile) -> List[str]:
+    def get_allowed_tools_for_profile(self, profile: AgentProfile, tier: Optional[ProductTier] = None) -> List[str]:
         if profile == AgentProfile.SMALL:
-            return ["read_file", "list_files", "search_code", "web_search"]
+            base_tools = ["read_file", "list_files", "search_code", "web_search"]
         elif profile == AgentProfile.MEDIUM:
-            return ["read_file", "write_file", "patch_file", "list_files", "search_code", "run_tests", "web_search"]
+            base_tools = ["read_file", "write_file", "patch_file", "list_files", "search_code", "run_tests", "web_search"]
         else:  # LARGE
-            return ["read_file", "write_file", "patch_file", "list_files", "search_code", "run_command", "run_tests", "call_mcp", "web_search"]
+            base_tools = ["read_file", "write_file", "patch_file", "list_files", "search_code", "run_command", "run_tests", "call_mcp", "web_search"]
+
+        if tier is not None:
+            return [t for t in base_tools if is_tool_allowed_for_tier(tier, t)]
+        return base_tools
 
     def build_execution_plan(
         self,
@@ -66,9 +79,9 @@ class IntelligentRouter:
         explicit_model: Optional[str] = None
     ) -> Tuple[AgentProfile, List[ModelCapability], List[str]]:
         profile = self.classify_task_profile(prompt)
-        allowed_tools = self.get_allowed_tools_for_profile(profile)
+        allowed_tools = self.get_allowed_tools_for_profile(profile, tier=policy.tier)
 
-        # Filter candidates based on policy constraints
+        # Filter candidates based on policy constraints and tier capability bounds
         candidates: List[ModelCapability] = []
 
         if explicit_model and explicit_model != "Auto":
@@ -76,6 +89,8 @@ class IntelligentRouter:
             if mod:
                 if policy.local_only and not mod.is_local:
                     pass  # Reject remote model if local_only is enforced
+                elif not is_model_allowed_for_tier(policy.tier, mod):
+                    pass  # Reject model if restricted by tier
                 else:
                     candidates.append(mod)
 
@@ -86,12 +101,17 @@ class IntelligentRouter:
                 continue
             if policy.privacy_first and mod.privacy_tier == "cloud_public":
                 continue
+            if not is_model_allowed_for_tier(policy.tier, mod):
+                continue
             if mod not in candidates:
                 candidates.append(mod)
 
         # Ensure we always have at least local fallback
         if not candidates:
-            local_models = self.registry.list_models(local_only=True)
+            local_models = [
+                m for m in self.registry.list_models(local_only=True)
+                if is_model_allowed_for_tier(policy.tier, m)
+            ]
             if local_models:
                 candidates.extend(local_models)
 
@@ -107,15 +127,21 @@ class IntelligentRouter:
         p_obj = PolicyConstraint()
         if policy:
             for k, v in policy.items():
-                if hasattr(p_obj, k):
+                if k == "tier" and isinstance(v, str):
+                    try:
+                        p_obj.tier = ProductTier(v)
+                    except ValueError:
+                        pass
+                elif hasattr(p_obj, k):
                     setattr(p_obj, k, v)
 
         assigned_profile = profile or self.classify_task_profile(prompt)
-        allowed_tools = self.get_allowed_tools_for_profile(assigned_profile)
+        allowed_tools = self.get_allowed_tools_for_profile(assigned_profile, tier=p_obj.tier)
         _, candidates, _ = self.build_execution_plan(prompt, p_obj)
 
         primary = candidates[0] if candidates else None
         return {
+            "tier": p_obj.tier.value,
             "profile": assigned_profile,
             "primary_model": {
                 "model_id": primary.model_id,

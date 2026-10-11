@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
-# SUKHI IDE — Horizon Edition v3.0.0
+# PRUBETH IDE — Horizon Edition v3.0.0
 # Linux / Ubuntu Launcher & Environment Bootstrapper
 set -e
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR"
 
 echo "==============================================================================="
-echo "  SUKHI IDE — Horizon Edition (v3.0.0)"
+echo "  PRUBETH IDE — Horizon Edition (v3.0.0)"
 echo "  AI-Native Developer Environment for Linux & Windows"
 echo "==============================================================================="
 
@@ -35,5 +35,5 @@ if ! "$PYTHON_BIN" -c "import PyQt5, requests" &>/dev/null; then
     PYTHON_BIN=".venv/bin/python"
 fi
 
-echo "[*] Launching SUKHI IDE via $PYTHON_BIN..."
+echo "[*] Launching PRUBETH IDE via $PYTHON_BIN..."
 exec "$PYTHON_BIN" local_ai_studio_pro.py "$@"

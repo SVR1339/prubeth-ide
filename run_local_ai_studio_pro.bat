@@ -1,10 +1,10 @@
 @echo off
 setlocal enabledelayedexpansion
 cd /d "%~dp0"
-title SUKHI IDE — Horizon Edition (v3.0.0)
+title PRUBETH IDE — Horizon Edition (v3.0.0)
 
 echo ===============================================================================
-echo   SUKHI IDE — Horizon Edition (v3.0.0)
+echo   PRUBETH IDE — Horizon Edition (v3.0.0)
 echo   AI-Native Developer Environment (Windows & Linux)
 echo ===============================================================================
 echo.
@@ -55,7 +55,7 @@ if %ERRORLEVEL% neq 0 (
 set "PYTHON_EXE=.venv\Scripts\python.exe"
 
 :RUN_APP
-echo [*] Launching SUKHI IDE via %PYTHON_EXE%...
+echo [*] Launching PRUBETH IDE via %PYTHON_EXE%...
 echo.
 "%PYTHON_EXE%" local_ai_studio_pro.py %*
 if %ERRORLEVEL% neq 0 (

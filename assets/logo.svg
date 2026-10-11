@@ -1,52 +1,63 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
   <defs>
-    <radialGradient id="bgGlow" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#1e1b4b" stop-opacity="0.8"/>
-      <stop offset="100%" stop-color="#0a0a0f" stop-opacity="1"/>
+    <!-- Background Radial Gradient -->
+    <radialGradient id="bgObsidian" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#0c1017"/>
+      <stop offset="100%" stop-color="#040608"/>
     </radialGradient>
-    <linearGradient id="neonCyan" x1="0%" y1="0%" x2="100%" y2="100%">
+    
+    <!-- Electric Cyan Gradient -->
+    <linearGradient id="cyanAccent" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#00F0FF"/>
-      <stop offset="50%" stop-color="#7000FF"/>
-      <stop offset="100%" stop-color="#FF007A"/>
+      <stop offset="100%" stop-color="#0284C7"/>
     </linearGradient>
-    <linearGradient id="coreGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+
+    <!-- Neon Magenta/Purple Gradient -->
+    <linearGradient id="purpleAccent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F43F5E"/>
+      <stop offset="50%" stop-color="#D946EF"/>
+      <stop offset="100%" stop-color="#8B5CF6"/>
+    </linearGradient>
+
+    <!-- Pure Pearl White Blade Gradient -->
+    <linearGradient id="whiteBlade" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#FFFFFF"/>
-      <stop offset="100%" stop-color="#00F0FF"/>
+      <stop offset="100%" stop-color="#E2E8F0"/>
     </linearGradient>
-    <filter id="neonBlur" x="-30%" y="-30%" width="160%" height="160%">
-      <feGaussianBlur stdDeviation="12" result="blur"/>
-      <feMerge>
-        <feMergeNode in="blur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
+
+    <!-- Glossy Jet Black Blade Gradient -->
+    <linearGradient id="blackBlade" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E293B"/>
+      <stop offset="100%" stop-color="#050810"/>
+    </linearGradient>
   </defs>
 
-  <!-- Base Dark Canvas -->
-  <rect width="512" height="512" rx="110" fill="url(#bgGlow)" stroke="#27273a" stroke-width="4"/>
+  <!-- Canvas Background -->
+  <rect width="512" height="512" rx="64" fill="url(#bgObsidian)"/>
 
-  <!-- Subtle Cybernetic Grid Ring -->
-  <circle cx="256" cy="256" r="180" fill="none" stroke="#2a2a40" stroke-width="2" stroke-dasharray="8 6"/>
-  <circle cx="256" cy="256" r="140" fill="none" stroke="#333355" stroke-width="1.5"/>
+  <!-- Tower Base (Minimalist Geometric Architectural Pedestal) -->
+  <path d="M 232,270 L 220,350 L 292,350 L 280,270 Z" fill="url(#blackBlade)" stroke="url(#cyanAccent)" stroke-width="2"/>
 
-  <!-- Outer Hexagonal Shroud -->
-  <polygon points="256,90 395,170 395,330 256,410 117,330 117,170" 
-           fill="none" stroke="url(#neonCyan)" stroke-width="10" stroke-linejoin="round" filter="url(#neonBlur)"/>
+  <!-- Central Windmill Rotor Group -->
+  <g transform="translate(256, 230)">
+    <!-- Top-Left Sail (Crisp Pearl White with Cyan Highlight) -->
+    <path d="M 0,-15 L -90,-120 L -30,-135 L -8,-25 Z" fill="url(#whiteBlade)" stroke="url(#cyanAccent)" stroke-width="3"/>
 
-  <!-- Inner Diamond Core (The NAIVE Iris) -->
-  <polygon points="256,130 366,256 256,382 146,256" 
-           fill="#10101c" fill-opacity="0.9" stroke="#00F0FF" stroke-width="5" stroke-linejoin="round"/>
+    <!-- Top-Right Sail (Glossy Jet Black with Neon Violet Contour) -->
+    <path d="M 15,0 L 120,-90 L 135,-30 L 25,-8 Z" fill="url(#blackBlade)" stroke="url(#purpleAccent)" stroke-width="3"/>
 
-  <!-- The Blinking Eye / Neural Core -->
-  <circle cx="256" cy="256" r="48" fill="url(#coreGlow)" filter="url(#neonBlur)"/>
-  <circle cx="256" cy="256" r="22" fill="#0A0A14"/>
-  <circle cx="264" cy="248" r="8" fill="#FFFFFF"/>
+    <!-- Bottom-Right Sail (Crisp Pearl White with Violet Highlight) -->
+    <path d="M 0,15 L 90,120 L 30,135 L 8,25 Z" fill="url(#whiteBlade)" stroke="url(#purpleAccent)" stroke-width="3"/>
 
-  <!-- Accent Nodes -->
-  <circle cx="256" cy="90" r="8" fill="#00F0FF"/>
-  <circle cx="395" cy="170" r="8" fill="#7000FF"/>
-  <circle cx="395" cy="330" r="8" fill="#FF007A"/>
-  <circle cx="256" cy="410" r="8" fill="#00F0FF"/>
-  <circle cx="117" cy="330" r="8" fill="#7000FF"/>
-  <circle cx="117" cy="170" r="8" fill="#FF007A"/>
+    <!-- Bottom-Left Sail (Glossy Jet Black with Cyan Contour) -->
+    <path d="M -15,0 L -120,90 L -135,30 L -25,8 Z" fill="url(#blackBlade)" stroke="url(#cyanAccent)" stroke-width="3"/>
+
+    <!-- Inner Core & Center Pivot -->
+    <circle cx="0" cy="0" r="24" fill="#04060A" stroke="url(#cyanAccent)" stroke-width="4"/>
+    <circle cx="0" cy="0" r="10" fill="url(#purpleAccent)"/>
+  </g>
+
+  <!-- Brand Typography -->
+  <text x="256" y="420" font-family="'Segoe UI', 'Montserrat', 'Helvetica Neue', sans-serif" font-size="46" font-weight="900" fill="#FFFFFF" text-anchor="middle" letter-spacing="10">PRUBETH</text>
+  <text x="256" y="452" font-family="'Segoe UI', sans-serif" font-size="13" font-weight="700" fill="url(#cyanAccent)" text-anchor="middle" letter-spacing="5">THE AI POWERED IDE</text>
 </svg>

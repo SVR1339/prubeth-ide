@@ -1,6 +1,6 @@
 """
-SO NAIVE IDE — Graphical Setup Wizard (Windows Installer).
-Installs SO NAIVE IDE into %LOCALAPPDATA%\\Programs\\SoNaive,
+PRUBETH IDE — Graphical Setup Wizard (Windows Installer).
+Installs PRUBETH IDE into %LOCALAPPDATA%\\Programs\\PrubethIDE,
 configures Desktop & Start Menu shortcuts, and registers in Windows Control Panel.
 Official Website: https://www.bsvr.work/
 """
@@ -9,6 +9,10 @@ import sys
 import shutil
 import subprocess
 import zipfile
+import time
+import tempfile
+import urllib.request
+import ssl
 from pathlib import Path
 
 from PyQt5.QtCore import Qt, QThread, pyqtSignal
@@ -19,13 +23,22 @@ from PyQt5.QtWidgets import (
     QFileDialog, QMessageBox, QFrame
 )
 
-APP_NAME = "SUKHI IDE"
-APP_DISPLAY_NAME = "SUKHI IDE — Horizon Edition"
+APP_NAME = "PRUBETH"
+APP_DISPLAY_NAME = "PRUBETH IDE — Horizon Edition"
 APP_VERSION = "3.0.0"
 PUBLISHER = "BSVR Technologies"
 WEBSITE_URL = "https://www.bsvr.work/"
 PROJECTS_URL = "https://www.bsvr.work/#projects"
-DEFAULT_INSTALL_DIR = Path.home() / "AppData" / "Local" / "Programs" / "SukhiIDE"
+GITHUB_REPO = "imyouiamyou/prubeth-ide"
+GITHUB_REPO_URL = f"https://github.com/{GITHUB_REPO}"
+RELEASE_TAG = "v3.0.0"
+ONLINE_PAYLOAD_URLS = [
+    f"https://github.com/{GITHUB_REPO}/releases/download/{RELEASE_TAG}/PrubethIDE-v3.0.0-Universal-Portable.zip",
+    f"https://github.com/{GITHUB_REPO}/releases/latest/download/PrubethIDE-v3.0.0-Universal-Portable.zip",
+    f"https://github.com/{GITHUB_REPO}/archive/refs/tags/{RELEASE_TAG}.zip",
+    f"https://github.com/{GITHUB_REPO}/archive/refs/heads/master.zip",
+]
+DEFAULT_INSTALL_DIR = Path.home() / "AppData" / "Local" / "Programs" / "PrubethIDE"
 
 
 def get_resource_dir() -> Path:
@@ -53,6 +66,52 @@ class InstallWorker(QThread):
         self.create_startmenu = create_startmenu
         self.payload_zip = payload_zip
 
+    def download_payload_from_github(self) -> Path:
+        """Downloads full application resource archive from GitHub with live progress updates."""
+        ctx = ssl.create_default_context()
+        ctx.check_hostname = False
+        ctx.verify_mode = ssl.CERT_NONE
+
+        dest_temp = Path(tempfile.gettempdir()) / f"prubeth_github_payload_{int(time.time())}.zip"
+        headers = {"User-Agent": f"PrubethIDE-Installer/{APP_VERSION} (Windows NT 10.0; Win64; x64)"}
+
+        for url in ONLINE_PAYLOAD_URLS:
+            try:
+                self.progress.emit(12, f"Connecting to GitHub: {url.split('/')[2]}...")
+                req = urllib.request.Request(url, headers=headers)
+                with urllib.request.urlopen(req, context=ctx, timeout=30) as resp:
+                    if resp.status not in (200, 302):
+                        continue
+                    total_bytes = int(resp.headers.get("content-length", 0))
+                    downloaded = 0
+                    chunk_size = 65536
+                    with open(dest_temp, "wb") as f_out:
+                        while True:
+                            chunk = resp.read(chunk_size)
+                            if not chunk:
+                                break
+                            f_out.write(chunk)
+                            downloaded += len(chunk)
+                            if total_bytes > 0:
+                                pct = int(12 + (downloaded / total_bytes) * 36)
+                                mb_done = downloaded / (1024 * 1024)
+                                mb_tot = total_bytes / (1024 * 1024)
+                                self.progress.emit(min(pct, 48), f"Downloading from GitHub: {mb_done:.1f} MB / {mb_tot:.1f} MB ({int((downloaded/total_bytes)*100)}%)...")
+                            else:
+                                mb_done = downloaded / (1024 * 1024)
+                                self.progress.emit(25, f"Downloading from GitHub: {mb_done:.1f} MB...")
+                    if dest_temp.exists() and dest_temp.stat().st_size > 1000:
+                        try:
+                            with zipfile.ZipFile(dest_temp, 'r') as z:
+                                if z.testzip() is None:
+                                    self.progress.emit(49, "GitHub package download & integrity verified.")
+                                    return dest_temp
+                        except Exception:
+                            pass
+            except Exception as ex:
+                continue
+        return None
+
     def run(self):
         try:
             self.progress.emit(10, "Preparing target installation directory...")
@@ -62,19 +121,67 @@ class InstallWorker(QThread):
             src_dir = get_source_dir()
             installed_anything = False
 
-            # 1. Extract payload archive if available
+            # 1. Determine payload archive
+            effective_payload = None
             if self.payload_zip and Path(self.payload_zip).exists():
-                self.progress.emit(25, f"Extracting application payload ({Path(self.payload_zip).name})...")
-                with zipfile.ZipFile(self.payload_zip, 'r') as z:
-                    z.extractall(self.target_dir)
+                effective_payload = Path(self.payload_zip)
+            else:
+                for cand in [
+                    res_dir / "app_payload.zip",
+                    res_dir / "installer" / "app_payload.zip",
+                    res_dir / "PrubethIDE-v3.0.0-Universal-Portable.zip",
+                    src_dir / "app_payload.zip",
+                    src_dir / "installer" / "app_payload.zip",
+                    src_dir / "PrubethIDE-v3.0.0-Universal-Portable.zip",
+                    src_dir / "dist" / "PrubethIDE-v3.0.0-Universal-Portable.zip",
+                ]:
+                    if cand.exists() and cand.is_file() and cand.stat().st_size > 50000:
+                        effective_payload = cand
+                        break
+
+            # 2. If no valid local payload exists and we're not running from full source tree, fetch from GitHub
+            if not effective_payload and not (src_dir / "local_ai_studio_pro.py").exists():
+                self.progress.emit(12, "Stand-alone installer detected. Fetching complete resources from GitHub...")
+                downloaded = self.download_payload_from_github()
+                if downloaded:
+                    effective_payload = downloaded
+
+            # 3. Extract payload archive if available
+            if effective_payload and effective_payload.exists():
+                self.progress.emit(50, f"Extracting application payload ({effective_payload.name})...")
+                with zipfile.ZipFile(effective_payload, 'r') as z:
+                    names = z.namelist()
+                    top_prefix = None
+                    dirs = [n for n in names if '/' in n]
+                    if dirs:
+                        first_top = dirs[0].split('/')[0] + '/'
+                        if all(n.startswith(first_top) for n in names if n != first_top):
+                            top_prefix = first_top
+
+                    if top_prefix:
+                        for member in z.infolist():
+                            if member.filename.startswith(top_prefix):
+                                rel = member.filename[len(top_prefix):]
+                                if not rel:
+                                    continue
+                                out_p = self.target_dir / rel
+                                if member.is_dir():
+                                    out_p.mkdir(parents=True, exist_ok=True)
+                                else:
+                                    out_p.parent.mkdir(parents=True, exist_ok=True)
+                                    with z.open(member) as src_m, open(out_p, "wb") as dst_m:
+                                        shutil.copyfileobj(src_m, dst_m)
+                    else:
+                        z.extractall(self.target_dir)
                 installed_anything = True
             else:
-                # 2. If no payload zip, fall back to copying from available source/resource bases
-                dist_src = src_dir / "dist" / "SoNaive"
-                if dist_src.exists() and dist_src.is_dir():
-                    self.progress.emit(35, "Deploying standalone application binaries...")
-                    shutil.copytree(dist_src, self.target_dir, dirs_exist_ok=True)
-                    installed_anything = True
+                # 4. Fall back to copying from available source/resource bases
+                for cand in [src_dir / "dist" / "PrubethIDE", src_dir / "dist" / "SukhiIDE", src_dir / "dist" / "SoNaive"]:
+                    if cand.exists() and cand.is_dir():
+                        self.progress.emit(35, "Deploying standalone application binaries...")
+                        shutil.copytree(cand, self.target_dir, dirs_exist_ok=True)
+                        installed_anything = True
+                        break
 
                 search_bases = [src_dir, res_dir]
                 core_files = [
@@ -88,7 +195,8 @@ class InstallWorker(QThread):
                     "run_local_ai_studio_pro.bat",
                     "run_ide.bat",
                     "run_ide.sh",
-                    "test_ollama.py"
+                    "test_ollama.py",
+                    "pyproject.toml"
                 ]
 
                 self.progress.emit(45, "Verifying and synchronizing core modules...")
@@ -102,48 +210,46 @@ class InstallWorker(QThread):
                                 installed_anything = True
                             break
 
-                # Copy core modules directory
-                for base in search_bases:
-                    core_src = base / "core"
-                    if core_src.exists() and core_src.is_dir():
-                        shutil.copytree(core_src, self.target_dir / "core", dirs_exist_ok=True)
-                        break
+                # Copy subsystem directories
+                sub_dirs = ["core", "workspace", "source_control", "language_services", "debugging", "ai", "ui", "plugins", "assets", "tests"]
+                for sub in sub_dirs:
+                    for base in search_bases:
+                        sub_src = base / sub
+                        if sub_src.exists() and sub_src.is_dir():
+                            shutil.copytree(sub_src, self.target_dir / sub, dirs_exist_ok=True)
+                            break
 
-                # Copy assets directory
-                for base in search_bases:
-                    assets_src = base / "assets"
-                    if assets_src.exists() and assets_src.is_dir():
-                        shutil.copytree(assets_src, self.target_dir / "assets", dirs_exist_ok=True)
-                        break
-
-                # Copy tests directory
-                for base in search_bases:
-                    tests_src = base / "tests"
-                    if tests_src.exists() and tests_src.is_dir():
-                        shutil.copytree(tests_src, self.target_dir / "tests", dirs_exist_ok=True)
-                        break
-
-            # 4. Strict verification of installed payload
-            has_exe = (self.target_dir / "SoNaive.exe").exists()
+            # 5. Strict verification of installed payload
+            has_exe = (
+                (self.target_dir / "PrubethIDE.exe").exists() or
+                (self.target_dir / "SukhiIDE.exe").exists() or
+                (self.target_dir / "SoNaive.exe").exists()
+            )
             has_py = (self.target_dir / "local_ai_studio_pro.py").exists()
 
             if not (has_exe or has_py):
                 raise RuntimeError(
-                    f"Installation integrity verification failed: neither 'SoNaive.exe' nor 'local_ai_studio_pro.py' "
+                    f"Installation integrity verification failed: neither 'PrubethIDE.exe' nor 'local_ai_studio_pro.py' "
                     f"could be installed to '{self.target_dir}'. "
                     f"The setup package does not contain an executable payload."
                 )
 
             self.progress.emit(65, "Configuring runtime launcher and diagnostic wrappers...")
-            # Create a robust, self-diagnosing launcher batch file for SUKHI IDE and SoNaive alias
+            # Create robust, self-diagnosing launcher batch files
+            launcher_prubeth = self.target_dir / "PrubethIDE.bat"
             launcher_sukhi = self.target_dir / "SukhiIDE.bat"
             launcher_bat = self.target_dir / "SoNaive.bat"
+
             launcher_content = f"""@echo off
 setlocal enabledelayedexpansion
-title {APP_NAME} Launcher
+title {APP_DISPLAY_NAME} Launcher
 cd /d "%~dp0"
 
 :: 1. If standalone executable is installed, launch it directly
+if exist "PrubethIDE.exe" (
+    start "" "PrubethIDE.exe" %*
+    exit /b 0
+)
 if exist "SukhiIDE.exe" (
     start "" "SukhiIDE.exe" %*
     exit /b 0
@@ -207,26 +313,29 @@ if exist "!PY_CON!" (
 start "" "!PY_CMD!" local_ai_studio_pro.py %*
 exit /b 0
 """
+            launcher_prubeth.write_text(launcher_content, encoding="utf-8")
             launcher_sukhi.write_text(launcher_content, encoding="utf-8")
             launcher_bat.write_text(launcher_content, encoding="utf-8")
 
-            # 5. Create Shortcuts
-            target_exe = self.target_dir / "SukhiIDE.exe"
+            # 4. Create Shortcuts
+            target_exe = self.target_dir / "PrubethIDE.exe"
+            if not target_exe.exists():
+                target_exe = self.target_dir / "SukhiIDE.exe"
             if not target_exe.exists():
                 target_exe = self.target_dir / "SoNaive.exe"
-            target_path = str(target_exe if target_exe.exists() else launcher_sukhi)
+            target_path = str(target_exe if target_exe.exists() else launcher_prubeth)
             icon_path = str(self.target_dir / "assets" / "icon.ico")
 
             if self.create_desktop:
                 self.progress.emit(78, "Creating Desktop shortcut...")
-                desktop = Path.home() / "Desktop" / f"{APP_NAME}.lnk"
+                desktop = Path.home() / "Desktop" / f"{APP_NAME} IDE.lnk"
                 self.create_windows_shortcut(str(desktop), target_path, icon_path)
 
             if self.create_startmenu:
                 self.progress.emit(88, "Creating Start Menu shortcut...")
-                programs = Path.home() / "AppData" / "Roaming" / "Microsoft" / "Windows" / "Start Menu" / "Programs" / APP_NAME
+                programs = Path.home() / "AppData" / "Roaming" / "Microsoft" / "Windows" / "Start Menu" / "Programs" / f"{APP_NAME} IDE"
                 programs.mkdir(parents=True, exist_ok=True)
-                lnk = programs / f"{APP_NAME}.lnk"
+                lnk = programs / f"{APP_NAME} IDE.lnk"
                 self.create_windows_shortcut(str(lnk), target_path, icon_path)
 
             self.progress.emit(95, "Registering Windows Uninstall hooks...")
@@ -249,7 +358,7 @@ $Shortcut.WindowStyle = {window_style}
 if (Test-Path '{icon_path}') {{
     $Shortcut.IconLocation = '{icon_path}'
 }}
-$Shortcut.Description = '{APP_NAME} - Next-Gen Agentic AI IDE'
+$Shortcut.Description = '{APP_DISPLAY_NAME}'
 $Shortcut.Save()
 """
         subprocess.run(["powershell", "-NoProfile", "-Command", ps_cmd], capture_output=True)
@@ -257,23 +366,23 @@ $Shortcut.Save()
     def register_uninstaller(self):
         uninst_bat = self.target_dir / "Uninstall.bat"
         uninst_content = f"""@echo off
-title Uninstall {APP_NAME}
-echo Removing {APP_NAME}...
+title Uninstall {APP_DISPLAY_NAME}
+echo Removing {APP_DISPLAY_NAME}...
 timeout /t 2 /nobreak >nul
-del /q "%USERPROFILE%\\Desktop\\{APP_NAME}.lnk" 2>nul
-rmdir /s /q "%APPDATA%\\Microsoft\\Windows\\Start Menu\\Programs\\SO NAIVE" 2>nul
-reg delete "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\SoNaiveIDE" /f 2>nul
+del /q "%USERPROFILE%\\Desktop\\{APP_NAME} IDE.lnk" 2>nul
+rmdir /s /q "%APPDATA%\\Microsoft\\Windows\\Start Menu\\Programs\\{APP_NAME} IDE" 2>nul
+reg delete "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\PrubethIDE" /f 2>nul
 cd /d "%TEMP%"
 rmdir /s /q "{self.target_dir}" 2>nul
-echo {APP_NAME} has been uninstalled.
+echo {APP_DISPLAY_NAME} has been uninstalled.
 pause
 """
         uninst_bat.write_text(uninst_content, encoding="utf-8")
 
         reg_cmd = f"""
-$key = 'HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\SoNaiveIDE'
+$key = 'HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\PrubethIDE'
 New-Item -Path $key -Force | Out-Null
-Set-ItemProperty -Path $key -Name 'DisplayName' -Value '{APP_NAME}'
+Set-ItemProperty -Path $key -Name 'DisplayName' -Value '{APP_DISPLAY_NAME}'
 Set-ItemProperty -Path $key -Name 'DisplayVersion' -Value '{APP_VERSION}'
 Set-ItemProperty -Path $key -Name 'Publisher' -Value '{PUBLISHER}'
 Set-ItemProperty -Path $key -Name 'UninstallString' -Value '"{self.target_dir}\\Uninstall.bat"'
@@ -287,7 +396,7 @@ Set-ItemProperty -Path $key -Name 'HelpLink' -Value '{PROJECTS_URL}'
 class WelcomePage(QWizardPage):
     def __init__(self):
         super().__init__()
-        self.setTitle("Welcome to SO NAIVE IDE Setup")
+        self.setTitle(f"Welcome to {APP_NAME} IDE Setup")
         layout = QVBoxLayout(self)
 
         logo_lbl = QLabel()
@@ -300,14 +409,14 @@ class WelcomePage(QWizardPage):
             logo_lbl.setAlignment(Qt.AlignCenter)
         layout.addWidget(logo_lbl)
 
-        title = QLabel(f"<h2>{APP_NAME} <span style='color:#00F0FF;'>v{APP_VERSION}</span></h2>")
+        title = QLabel(f"<h2>{APP_DISPLAY_NAME} <span style='color:#00F0FF;'>v{APP_VERSION}</span></h2>")
         title.setAlignment(Qt.AlignCenter)
         layout.addWidget(title)
 
         desc = QLabel(
-            "<p align='center' style='color:#A855F7; font-weight:bold;'>So Naive, It Solves Everything — 1M Context & Local CUDA Speed</p>"
-            "<p align='center'>This wizard will install the official SO NAIVE IDE distribution on your computer.<br>"
-            "Includes Intelligent Multi-Model Cascade, Instant Auto-Fix Compiler, and Autonomous Agent Loop.</p>"
+            "<p align='center' style='color:#00F0FF; font-weight:bold;'>Sovereign Agentic Developer Studio · Classic Windmill Horizon Edition</p>"
+            "<p align='center'>This wizard will install the official PRUBETH IDE distribution on your computer.<br>"
+            "Engineered with Hologram Cybernetic Design, Intelligent Multi-Model Cascade, and Instant Local CUDA Self-Healing.</p>"
             f"<p align='center'><small>Official Website: <a href='{WEBSITE_URL}'>{WEBSITE_URL}</a></small></p>"
         )
         desc.setOpenExternalLinks(True)
@@ -319,7 +428,7 @@ class DirectoryPage(QWizardPage):
     def __init__(self):
         super().__init__()
         self.setTitle("Select Installation Folder")
-        self.setSubTitle(f"Where would you like to install {APP_NAME}?")
+        self.setSubTitle(f"Where would you like to install {APP_NAME} IDE?")
 
         layout = QVBoxLayout(self)
         layout.addWidget(QLabel("Destination Directory:"))
@@ -355,8 +464,8 @@ class DirectoryPage(QWizardPage):
 class ProgressPage(QWizardPage):
     def __init__(self):
         super().__init__()
-        self.setTitle("Installing SO NAIVE IDE")
-        self.setSubTitle("Please wait while the system installs files and shortcuts...")
+        self.setTitle(f"Installing {APP_NAME} IDE")
+        self.setSubTitle("Please wait while the system installs files, assets, and shortcuts...")
 
         layout = QVBoxLayout(self)
         self.status_lbl = QLabel("Initializing setup...")
@@ -385,12 +494,12 @@ class ProgressPage(QWizardPage):
         payload_candidates = [
             res_dir / "app_payload.zip",
             res_dir / "installer" / "app_payload.zip",
-            res_dir / "SoNaive-v3.0.0-Universal-Portable.zip",
-            res_dir / "dist" / "SoNaive-v3.0.0-Windows-Portable.zip",
+            res_dir / "PrubethIDE-v3.0.0-Universal-Portable.zip",
             src_dir / "app_payload.zip",
             src_dir / "installer" / "app_payload.zip",
+            src_dir / "PrubethIDE-v3.0.0-Universal-Portable.zip",
+            src_dir / "SukhiIDE-v3.0.0-Universal-Portable.zip",
             src_dir / "SoNaive-v3.0.0-Universal-Portable.zip",
-            src_dir / "dist" / "SoNaive-v3.0.0-Windows-Portable.zip",
         ]
         payload_zip = None
         for p in payload_candidates:
@@ -427,14 +536,14 @@ class FinishPage(QWizardPage):
         layout = QVBoxLayout(self)
 
         congrats = QLabel(
-            f"<h3>{APP_NAME} has been successfully installed!</h3>"
-            "<p>You are now ready to launch the next-generation agentic AI IDE.</p>"
-            f"<p>Find future updates and community extensions at <a href='{PROJECTS_URL}'>{PROJECTS_URL}</a></p>"
+            f"<h3>{APP_DISPLAY_NAME} has been successfully installed!</h3>"
+            "<p>You are now ready to launch the sovereign agentic developer environment.</p>"
+            f"<p>Find future updates and extensions at <a href='{PROJECTS_URL}'>{PROJECTS_URL}</a></p>"
         )
         congrats.setOpenExternalLinks(True)
         layout.addWidget(congrats)
 
-        self.chk_launch = QCheckBox(f"Launch {APP_NAME} now")
+        self.chk_launch = QCheckBox(f"Launch {APP_NAME} IDE now")
         self.chk_launch.setChecked(True)
         layout.addWidget(self.chk_launch)
         layout.addStretch()
@@ -443,9 +552,9 @@ class FinishPage(QWizardPage):
 class SetupWizard(QWizard):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle(f"{APP_NAME} Setup — v{APP_VERSION}")
+        self.setWindowTitle(f"{APP_NAME} IDE Setup — v{APP_VERSION}")
         self.setWizardStyle(QWizard.ModernStyle)
-        self.resize(600, 420)
+        self.resize(620, 430)
 
         icon_path = get_resource_dir() / "assets" / "icon.ico"
         if not icon_path.exists():
@@ -455,36 +564,46 @@ class SetupWizard(QWizard):
 
         self.setStyleSheet("""
             QWizard {
-                background: #0d1117;
-                color: #e6edf7;
+                background: #050811;
+                color: #FFFFFF;
                 font-family: 'Segoe UI', sans-serif;
             }
-            QLabel { color: #dce7fa; font-size: 10pt; }
+            QLabel { color: #E2E8F0; font-size: 10pt; }
             QLineEdit {
-                background: #161b22;
-                color: #ffffff;
-                border: 1px solid #30363d;
+                background: #090E1C;
+                color: #FFFFFF;
+                border: 1px solid #1E2D4A;
                 padding: 6px;
                 border-radius: 4px;
             }
+            QLineEdit:focus {
+                border-color: #00F0FF;
+            }
             QPushButton {
-                background: #238636;
-                color: #ffffff;
-                border: 1px solid #2ea043;
+                background: #0E1626;
+                color: #FFFFFF;
+                border: 1px solid #1E2D4A;
                 padding: 6px 14px;
                 border-radius: 4px;
                 font-weight: bold;
             }
-            QPushButton:hover { background: #2ea043; }
+            QPushButton:hover {
+                background: #16223B;
+                border-color: #00F0FF;
+                color: #00F0FF;
+            }
             QProgressBar {
-                border: 1px solid #30363d;
+                border: 1px solid #1E2D4A;
                 border-radius: 4px;
                 text-align: center;
-                background: #161b22;
+                background: #090E1C;
                 height: 18px;
             }
-            QProgressBar::chunk { background: #00F0FF; border-radius: 3px; }
-            QCheckBox { color: #dce7fa; spacing: 8px; }
+            QProgressBar::chunk {
+                background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #00F0FF, stop:1 #D946EF);
+                border-radius: 3px;
+            }
+            QCheckBox { color: #E2E8F0; spacing: 8px; }
         """)
 
         self.page_welcome = WelcomePage()
@@ -504,8 +623,12 @@ def main():
     if wizard.exec_() == QWizard.Accepted:
         if wizard.page_finish.chk_launch.isChecked():
             target_dir = wizard.field("target_dir")
-            exe = Path(target_dir) / "SoNaive.exe"
-            bat = Path(target_dir) / "SoNaive.bat"
+            exe = Path(target_dir) / "PrubethIDE.exe"
+            if not exe.exists():
+                exe = Path(target_dir) / "SukhiIDE.exe"
+            bat = Path(target_dir) / "PrubethIDE.bat"
+            if not bat.exists():
+                bat = Path(target_dir) / "SukhiIDE.bat"
             launch_target = str(exe if exe.exists() else bat)
             subprocess.Popen([launch_target], cwd=target_dir, shell=True)
 

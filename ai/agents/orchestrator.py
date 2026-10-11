@@ -14,11 +14,49 @@ from ai.agents.critic import AgentCritic, ReviewReport, ReviewStatus
 
 
 class AgentRole(str, Enum):
-    ARCHITECT = "architect"
+    # Specification Starter Agents (Section 4)
+    PLANNER = "planner"
+    RESEARCHER = "researcher"
     CODER = "coder"
-    CRITIC = "critic"
     TESTER = "tester"
+    REVIEWER = "reviewer"
+    DEBUGGER = "debugger"
+    RELEASE = "release"
+    # Core Architecture & Compatibility Aliases
+    ARCHITECT = "architect"
+    CRITIC = "critic"
     ORCHESTRATOR = "orchestrator"
+    # Specialist Extensions
+    WORK = "work"
+    CODEX = "codex"
+    DOTS = "dots"
+
+
+@dataclass
+class StructuredAgentResult:
+    """Structured agent contract matching SUKHI IDE specification."""
+    task_id: str
+    status: str = "success"  # "success", "failed", "blocked"
+    changed_files: List[str] = field(default_factory=list)
+    evidence: str = ""
+    errors: List[str] = field(default_factory=list)
+    test_results: Dict[str, Any] = field(default_factory=dict)
+    unresolved_questions: List[str] = field(default_factory=list)
+    output: str = ""
+    artifacts: List[str] = field(default_factory=list)
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "task_id": self.task_id,
+            "status": self.status,
+            "changed_files": self.changed_files,
+            "evidence": self.evidence,
+            "errors": self.errors,
+            "test_results": self.test_results,
+            "unresolved_questions": self.unresolved_questions,
+            "output": self.output,
+            "artifacts": self.artifacts
+        }
 
 
 @dataclass
@@ -58,10 +96,16 @@ class Subagent:
     def execute(self, task: TaskStep, context: Dict[str, Any]) -> Dict[str, Any]:
         if self.execution_handler:
             return self.execution_handler(task, context)
-        # Default fallback execution simulation
+        # Default fallback execution contract
         return {
             "status": "success",
+            "task_id": task.step_id,
             "output": f"Completed {task.title} by {self.name} ({self.role.value}).",
+            "changed_files": [],
+            "evidence": f"Executed via {self.name}",
+            "errors": [],
+            "test_results": {},
+            "unresolved_questions": [],
             "artifacts": []
         }
 
@@ -85,13 +129,31 @@ class MultiAgentOrchestrator:
         self._init_default_agents()
 
     def _init_default_agents(self):
+        # 1. Planner / Architect
+        planner = Subagent(
+            name="System Planner",
+            role=AgentRole.PLANNER,
+            system_prompt="Analyze requirements, produce modular software designs, and decompose tasks into DAGs with acceptance criteria."
+        )
+        self.register_subagent(planner)
         self.register_subagent(
             Subagent(
                 name="System Architect",
                 role=AgentRole.ARCHITECT,
-                system_prompt="Analyze requirements, produce modular software designs, and decompose tasks into DAGs."
+                system_prompt=planner.system_prompt
             )
         )
+
+        # 2. Researcher
+        self.register_subagent(
+            Subagent(
+                name="Repository Researcher",
+                role=AgentRole.RESEARCHER,
+                system_prompt="Inspect relevant files, dependencies, AST symbols, and gather evidence with file references."
+            )
+        )
+
+        # 3. Coder
         self.register_subagent(
             Subagent(
                 name="Senior Coder",
@@ -99,18 +161,69 @@ class MultiAgentOrchestrator:
                 system_prompt="Implement clean, robust, production-grade source code matching specifications."
             )
         )
+
+        # 4. Reviewer / Critic
+        reviewer = Subagent(
+            name="Security & Quality Reviewer",
+            role=AgentRole.REVIEWER,
+            system_prompt="Verify syntax, security guardrails, credential safety, and architectural integrity."
+        )
+        self.register_subagent(reviewer)
         self.register_subagent(
             Subagent(
                 name="Security & Quality Critic",
                 role=AgentRole.CRITIC,
-                system_prompt="Verify syntax, security guardrails, credential safety, and architectural integrity."
+                system_prompt=reviewer.system_prompt
             )
         )
+
+        # 5. Tester
         self.register_subagent(
             Subagent(
                 name="QA & Verification Tester",
                 role=AgentRole.TESTER,
                 system_prompt="Create reproducible unit/integration tests and verify deliverable acceptance criteria."
+            )
+        )
+
+        # 6. Debugger
+        self.register_subagent(
+            Subagent(
+                name="Diagnosis Debugger",
+                role=AgentRole.DEBUGGER,
+                system_prompt="Reproduce failures, isolate root causes, and formulate minimal corrective patches."
+            )
+        )
+
+        # 7. Release Agent
+        self.register_subagent(
+            Subagent(
+                name="Release & Build Agent",
+                role=AgentRole.RELEASE,
+                system_prompt="Execute build/test/package workflows, verify deliverables, and generate release evidence."
+            )
+        )
+
+        # 8. Specialist Extensions: Work, Codex, Dots
+        self.register_subagent(
+            Subagent(
+                name="Work Operations Agent",
+                role=AgentRole.WORK,
+                system_prompt="Execute cross-file workflows, environment configuration, and project-wide operations."
+            )
+        )
+        self.register_subagent(
+            Subagent(
+                name="Codex Synthesis Engine",
+                role=AgentRole.CODEX,
+                system_prompt="High-speed code synthesis, refactoring, and AST transformations."
+            )
+        )
+        self.register_subagent(
+            Subagent(
+                name="Dots Background Sentinel",
+                role=AgentRole.DOTS,
+                system_prompt="Always-on background monitoring, continuous linting, and auto-heal diagnosis."
             )
         )
 
@@ -229,8 +342,8 @@ class MultiAgentOrchestrator:
             out_text = res.get("output", "")
             artifacts = res.get("artifacts", [])
 
-            # Run Critic gating on Coder outputs
-            if role_enum == AgentRole.CODER and out_text:
+            # Run Critic gating on Coder/Codex/Work outputs
+            if role_enum in (AgentRole.CODER, AgentRole.CODEX, AgentRole.WORK) and out_text:
                 review = self.critic.analyze_code(out_text)
                 if review.status == ReviewStatus.REJECTED:
                     plan.mark_step_status(step.step_id, TaskStatus.FAILED, result_output=f"Rejected by Critic: {review.summary}")
