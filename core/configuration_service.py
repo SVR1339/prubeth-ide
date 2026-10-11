@@ -82,7 +82,7 @@ class ConfigurationService:
     _instance: Optional[ConfigurationService] = None
 
     def __init__(self, user_config_path: Optional[Path] = None, workspace_root: Optional[Path] = None):
-        self.user_config_path = user_config_path or (Path.home() / ".local_ai_studio_pro" / "settings.json")
+        self.user_config_path = Path(user_config_path) if user_config_path else (Path.home() / ".local_ai_studio_pro" / "settings.json")
         self.workspace_root = Path(workspace_root) if workspace_root else None
         
         # Scoped configuration stores
@@ -119,6 +119,14 @@ class ConfigurationService:
         """Retrieves effective value by traversing scopes in documented precedence order."""
         val, _ = self.get_with_source(key, default)
         return val
+
+    def get_effective(self, key: str, default: Any = None) -> Any:
+        """Alias for get() returning effective value across scopes."""
+        return self.get(key, default)
+
+    def is_locked_by_org(self, key: str) -> bool:
+        """Checks if key is locked by Organization Policy."""
+        return key in self._scopes[ConfigScope.ORGANIZATION]
 
     def get_with_source(self, key: str, default: Any = None) -> Tuple[Any, str]:
         """Returns (effective_value, source_scope_name) showing where the value originated."""

@@ -246,6 +246,12 @@ class SettingsStore:
         self.data: Dict[str, Any] = copy.deepcopy(DEFAULTS)
         self.load()
 
+    def get(self, key: str, default: Any = None) -> Any:
+        return self.data.get(key, default)
+
+    def set(self, key: str, value: Any) -> None:
+        self.data[key] = value
+
     def load(self) -> Dict[str, Any]:
         if not self.path.exists():
             self.data = copy.deepcopy(DEFAULTS)
