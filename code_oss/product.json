@@ -1,0 +1,50 @@
+{
+  "nameShort": "PRUBETH",
+  "nameLong": "PRUBETH IDE (Horizon Edition)",
+  "applicationName": "prubeth",
+  "dataFolderName": ".prubeth",
+  "win32AppId": "PRUBETH.IDE",
+  "win32x64AppId": "PRUBETH.IDE",
+  "win32UserAppId": "PRUBETH.IDE.User",
+  "win32AppUserModelId": "PRUBETH.IDE",
+  "version": "3.0.0",
+  "commit": "0aa5810",
+  "date": "2026-10-11T09:00:00.000Z",
+  "forkOrigin": "microsoft/vscode (Code-OSS)",
+  "forkType": "Proprietary Autonomous AI IDE Fork (PORK)",
+  "quality": "stable",
+  "licenseName": "MIT",
+  "licenseUrl": "https://github.com/imyouiamyou/prubeth-ide/blob/master/LICENSE",
+  "serverLicenseUrl": "https://github.com/imyouiamyou/prubeth-ide/blob/master/LICENSE",
+  "extensionsGallery": {
+    "serviceUrl": "https://open-vsx.org/vscode/gallery",
+    "itemUrl": "https://open-vsx.org/vscode/item",
+    "resourceUrlTemplate": "https://open-vsx.org/vscode/asset/{publisher}/{name}/{version}/Microsoft.VisualStudio.Code.WebResources/{path}",
+    "controlUrl": "https://open-vsx.org/vscode/control"
+  },
+  "linkProtectionTrustedDomains": [
+    "https://open-vsx.org",
+    "https://github.com",
+    "https://www.bsvr.work",
+    "http://127.0.0.1:11434"
+  ],
+  "aiCapabilities": {
+    "composerEnabled": true,
+    "inlineDiffEnabled": true,
+    "codebaseEmbeddingEnabled": true,
+    "localGpuOllamaSocket": "http://127.0.0.1:11434",
+    "defaultLocalModel": "redsage-8b:latest",
+    "hardwareTarget": "NVIDIA GeForce GTX 1050 Ti (4GB GDDR5)",
+    "cloudTier1": "gemini-3.8-flash",
+    "cloudTier2": "gemini-3.5-flash",
+    "contextWindowMax": 1000000
+  },
+  "telemetry": {
+    "enableCrashReporter": false,
+    "enableTelemetry": false,
+    "optOutByDefault": true
+  },
+  "documentationUrl": "https://www.bsvr.work/",
+  "requestFeatureUrl": "https://github.com/imyouiamyou/prubeth-ide/issues",
+  "reportIssueUrl": "https://github.com/imyouiamyou/prubeth-ide/issues"
+}

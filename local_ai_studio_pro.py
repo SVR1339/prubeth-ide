@@ -3196,6 +3196,10 @@ class Studio(QMainWindow):
             ("⌘ Palette", self.open_command_palette),
             ("📡 Radar", self.open_performance_radar),
             ("⑂ Git", self.git_status),
+            ("✨ Composer", self.open_composer),
+            ("🚀 Mission Control", self.open_mission_control),
+            ("📜 Artifacts", self.open_artifact_inspector),
+            ("🧩 Open VSX", self.open_open_vsx),
             ("🧪 Tests", self.run_tests),
             ("✓ Fitness", self.run_ide_check),
             ("⚙️ Settings", self.settings_dialog),
@@ -3383,6 +3387,42 @@ class Studio(QMainWindow):
             self.left_tabs.addTab(self.gpu_telemetry_widget, "⚡ Models")
         except Exception:
             self.gpu_telemetry_widget = None
+
+        # Tab 6: Code-OSS Composer (Cursor Style)
+        try:
+            from ui.composer_widget import ComposerWidget
+            self.composer_widget = ComposerWidget(self.root, self.tool_engine.checkpoint_manager, parent=self)
+            self.left_tabs.addTab(self.composer_widget, "✨ Composer")
+        except Exception:
+            self.composer_widget = None
+
+        # Tab 7: Open VSX Extension Marketplace
+        try:
+            from ui.open_vsx_widget import OpenVsxWidget
+            self.open_vsx_widget = OpenVsxWidget(parent=self)
+            self.left_tabs.addTab(self.open_vsx_widget, "🧩 Extensions")
+        except Exception:
+            self.open_vsx_widget = None
+
+        # Tab 8: Antigravity Mission Control (Agent Manager)
+        try:
+            from antigravity.mission_control import MissionControlOrchestrator
+            from ui.mission_control_widget import MissionControlWidget
+            self.antigravity_orchestrator = MissionControlOrchestrator(self.root)
+            self.mission_control_widget = MissionControlWidget(self.antigravity_orchestrator, parent=self)
+            self.mission_control_widget.switchToEditorRequested.connect(self.show_editor_view)
+            self.left_tabs.addTab(self.mission_control_widget, "🚀 Mission Control")
+        except Exception:
+            self.mission_control_widget = None
+
+        # Tab 9: Verifiable Artifact Inspector
+        try:
+            from ui.artifact_viewer_widget import ArtifactViewerWidget
+            if hasattr(self, "antigravity_orchestrator") and self.antigravity_orchestrator:
+                self.artifact_viewer_widget = ArtifactViewerWidget(self.antigravity_orchestrator.artifact_engine, parent=self)
+                self.left_tabs.addTab(self.artifact_viewer_widget, "📜 Artifacts")
+        except Exception:
+            self.artifact_viewer_widget = None
 
         # Left Container with VS Code style 48px Activity Bar
         self.left_container = QWidget()
@@ -3667,6 +3707,9 @@ class Studio(QMainWindow):
             ("Ctrl+K", self.trigger_quick_edit),
             ("Ctrl+Shift+F", self.search_project),
             ("F5", self.run_python),
+            ("Ctrl+I", self.open_composer),
+            ("Ctrl+Shift+M", self.open_mission_control),
+            ("Ctrl+Shift+A", self.open_artifact_inspector),
             ("Ctrl+Enter", self.send_prompt),
             ("Ctrl+`", self.toggle_terminal),
         ]
@@ -4202,10 +4245,40 @@ class Studio(QMainWindow):
 
         if not shutil.which("git"):
             QMessageBox.information(self, "Git", "Git CLI not found on PATH.")
+
+    def open_composer(self):
+        if hasattr(self, "composer_widget") and self.composer_widget and hasattr(self, "left_tabs"):
+            self.left_tabs.setCurrentWidget(self.composer_widget)
+            if not self.left_tabs.isVisible():
+                self.left_tabs.show()
+            self.statusBar().showMessage("Code-OSS Multi-File Composer Active", 3000)
+
+    def open_open_vsx(self):
+        if hasattr(self, "open_vsx_widget") and self.open_vsx_widget and hasattr(self, "left_tabs"):
+            self.left_tabs.setCurrentWidget(self.open_vsx_widget)
+            if not self.left_tabs.isVisible():
+                self.left_tabs.show()
+            self.statusBar().showMessage("Open VSX Extension Marketplace Active", 3000)
             return
-        p = subprocess.run(["git", "-C", self.root, "status", "--short", "--branch"], capture_output=True, text=True, timeout=10)
-        self.bottom_tabs.setCurrentIndex(0)
-        self.output.setPlainText(p.stdout or p.stderr or "Git status clean.")
+
+    def open_mission_control(self):
+        if hasattr(self, "mission_control_widget") and self.mission_control_widget and hasattr(self, "left_tabs"):
+            self.left_tabs.setCurrentWidget(self.mission_control_widget)
+            if not self.left_tabs.isVisible():
+                self.left_tabs.show()
+            self.statusBar().showMessage("Antigravity Mission Control (Agent Manager) Active", 3000)
+
+    def open_artifact_inspector(self):
+        if hasattr(self, "artifact_viewer_widget") and self.artifact_viewer_widget and hasattr(self, "left_tabs"):
+            self.left_tabs.setCurrentWidget(self.artifact_viewer_widget)
+            if not self.left_tabs.isVisible():
+                self.left_tabs.show()
+            self.statusBar().showMessage("Antigravity Verifiable Artifact Inspector Active", 3000)
+
+    def show_editor_view(self):
+        if hasattr(self, "tabs"):
+            self.tabs.setFocus()
+            self.statusBar().showMessage("Synchronous Surface (Editor View) Active", 3000)
 
     def run_tests(self):
         self.bottom_tabs.setCurrentIndex(0)

@@ -1,0 +1,21 @@
+{
+  "name": "prubeth-code-oss",
+  "displayName": "PRUBETH IDE (Horizon Edition)",
+  "description": "Proprietary Autonomous AI Fork of Microsoft Code-OSS with Native Monaco, Cursor-grade Composer, and Local GPU Offloading",
+  "version": "3.0.0",
+  "author": "BSVR & Antigravity Systems (Forked from Microsoft Corporation)",
+  "license": "MIT",
+  "main": "./out/main.js",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/imyouiamyou/prubeth-ide.git"
+  },
+  "dependencies": {
+    "monaco-editor": "^0.52.0"
+  },
+  "scripts": {
+    "start": "python local_ai_studio_pro.py",
+    "test": "pytest"
+  }
+}
