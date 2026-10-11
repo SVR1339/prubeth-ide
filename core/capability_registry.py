@@ -342,3 +342,15 @@ class CapabilityRegistry:
             description="Physical VRAM/KV cache estimator, catalog upgrade re-evaluation, and multi-objective model recommendation.",
             commands=["model.reevaluate_hardware", "model.recommend_optimal"]
         ))
+        # Zero-Silent-Failure Launcher & Application Startup Subsystem
+        self.register(Capability(
+            component_id="startup.orchestrator",
+            name="Authoritative Startup & Preflight Orchestrator",
+            category="diagnostics",
+            flexibility_level="B",
+            implementation_location="core/startup/launcher.py",
+            status="implemented",
+            description="Staged 6-state machine, rapid preflight sanity check, dependency-ordered service initialization, and zero-silent-failure recovery traps.",
+            commands=["startup.run_preflight", "startup.view_telemetry"]
+        ))
+

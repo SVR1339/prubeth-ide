@@ -220,3 +220,19 @@ class ToolGateway:
                 "risk_level": risk,
                 "dry_run": False
             }
+
+
+_global_tool_gateway: Optional[ToolGateway] = None
+
+
+def get_tool_gateway(workspace: Any = ".") -> ToolGateway:
+    """Retrieves or creates the tool execution gateway for a workspace."""
+    global _global_tool_gateway
+    if _global_tool_gateway is None:
+        if isinstance(workspace, WorkspaceGuard):
+            guard = workspace
+        else:
+            guard = WorkspaceGuard(Path(workspace))
+        _global_tool_gateway = ToolGateway(guard)
+    return _global_tool_gateway
+

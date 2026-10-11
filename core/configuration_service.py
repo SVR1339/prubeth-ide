@@ -100,9 +100,12 @@ class ConfigurationService:
         self._load_workspace_config()
 
     @classmethod
-    def get_instance(cls) -> ConfigurationService:
+    def get_instance(cls, user_config_path: Optional[Path] = None, workspace_root: Optional[Path] = None) -> ConfigurationService:
         if cls._instance is None:
-            cls._instance = ConfigurationService()
+            cls._instance = ConfigurationService(user_config_path=user_config_path, workspace_root=workspace_root)
+        elif user_config_path is not None:
+            cls._instance.user_config_path = Path(user_config_path)
+            cls._instance._load_user_config()
         return cls._instance
 
     def set_workspace_root(self, root: Optional[Path]) -> None:

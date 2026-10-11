@@ -61,7 +61,7 @@ echo.
 if %ERRORLEVEL% neq 0 (
     echo.
     echo ===============================================================================
-    echo [ERROR] SUKHI IDE terminated with exit code %ERRORLEVEL%.
+    echo [ERROR] PRUBETH IDE terminated with exit code %ERRORLEVEL%.
     echo Review the traceback or output above for diagnosis.
     echo ===============================================================================
     pause

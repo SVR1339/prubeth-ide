@@ -5,6 +5,7 @@ and bounded recovery loops.
 """
 import time
 import uuid
+import contextlib
 from enum import Enum
 from dataclasses import dataclass, field
 from typing import Dict, Any, List, Optional
@@ -81,6 +82,20 @@ class TaskEngine:
         self._init_db()
         self._load_from_db()
 
+    @contextlib.contextmanager
+    def _connection(self):
+        import sqlite3
+        conn = sqlite3.connect(self.db_path, check_same_thread=False, timeout=15.0)
+        conn.row_factory = sqlite3.Row
+        try:
+            with conn:
+                yield conn
+        finally:
+            try:
+                conn.close()
+            except Exception:
+                pass
+
     def _get_conn(self):
         import sqlite3
         conn = sqlite3.connect(self.db_path, check_same_thread=False, timeout=15.0)
@@ -89,7 +104,7 @@ class TaskEngine:
 
     def _init_db(self):
         try:
-            with self._get_conn() as conn:
+            with self._connection() as conn:
                 cur = conn.cursor()
                 cur.execute("""
                     CREATE TABLE IF NOT EXISTS tasks (
@@ -131,7 +146,7 @@ class TaskEngine:
     def _load_from_db(self):
         try:
             import json
-            with self._get_conn() as conn:
+            with self._connection() as conn:
                 cur = conn.cursor()
                 cur.execute("SELECT * FROM tasks")
                 for r in cur.fetchall():
@@ -182,7 +197,7 @@ class TaskEngine:
 
     def _persist_task(self, task: Task):
         try:
-            with self._get_conn() as conn:
+            with self._connection() as conn:
                 cur = conn.cursor()
                 cur.execute("""
                     INSERT OR REPLACE INTO tasks (
@@ -201,7 +216,7 @@ class TaskEngine:
     def _persist_step(self, task_id: str, step: TaskStep):
         try:
             import json
-            with self._get_conn() as conn:
+            with self._connection() as conn:
                 cur = conn.cursor()
                 cur.execute("""
                     INSERT OR REPLACE INTO task_steps (
@@ -306,7 +321,7 @@ class TaskEngine:
                 "data": state_data
             })
             try:
-                with self._get_conn() as conn:
+                with self._connection() as conn:
                     cur = conn.cursor()
                     cur.execute("""
                         INSERT INTO task_checkpoints (task_id, name, timestamp, data)

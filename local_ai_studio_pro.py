@@ -5303,13 +5303,21 @@ class Studio(QMainWindow):
 
 
 def main():
-    app = QApplication(sys.argv)
-    app.setApplicationName(APP_NAME)
-    app.setStyle("Fusion")
-    win = Studio()
-    win.show()
-    sys.exit(app.exec_())
+    try:
+        from core.startup import AuthoritativeLauncher
+        launcher = AuthoritativeLauncher()
+        sys.exit(launcher.launch())
+    except Exception as e:
+        # Emergency direct fallback
+        print(f"[CRITICAL ERROR] Failed to initialize PRUBETH IDE startup orchestrator: {e}", file=sys.stderr)
+        app = QApplication(sys.argv)
+        app.setApplicationName(APP_NAME)
+        app.setStyle("Fusion")
+        win = Studio()
+        win.show()
+        sys.exit(app.exec_())
 
 
 if __name__ == "__main__":
     main()
+

@@ -211,3 +211,9 @@ class WorkspaceGuard:
                     except Exception:
                         pass
         return results
+
+
+def get_workspace_boundary_guard(workspace_root: Any = ".") -> WorkspaceGuard:
+    """Convenience helper to instantiate or retrieve WorkspaceGuard."""
+    return WorkspaceGuard(Path(workspace_root))
+
