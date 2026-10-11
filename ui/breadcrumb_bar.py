@@ -75,7 +75,7 @@ class BreadcrumbBarWidget(QWidget):
 
     def set_path(self, filepath: str, symbol: str = ""):
         if not filepath:
-            self.path_label.setText("Welcome  ›  Prudeth IDE")
+            self.path_label.setText("Welcome  ›  PRUBETH IDE")
             return
         p = Path(filepath)
         parts = list(p.parts)

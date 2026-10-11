@@ -1,15 +1,15 @@
 <div align="center">
 
-<img src="assets/brand_banner.png" alt="Prudeth IDE Banner" width="650" />
+<img src="assets/brand_banner.png" alt="PRUBETH IDE Banner" width="650" />
 
-# Prudeth IDE
+# PRUBETH IDE
 ### Bloom, ideas unfolding · Sovereign Agentic Developer Workstation (v3.0.0)
 
 > **"Bloom, ideas unfolding."**  
 > An ultra-fast, local-first agentic developer workstation engineered with a **Premium Dark Design System**, **Intelligent Multi-Model Cascade**, **1M-Token SSE Reasoning**, **Horizon Hardware Scaling Engine**, **Zero-Plaintext Credential Security**, and **Instant Local CUDA Self-Healing**.
 
 [![Release](https://img.shields.io/badge/Release-v3.0.0--Bloom-9485FF?style=for-the-badge&logo=rocket)](https://github.com/imyouiamyou/prubeth-ide/releases/tag/v3.0.0)
-[![Tests Passing](https://img.shields.io/badge/Tests-254%20%2F%20254%20Passed%20(100%25)-70D6A0?style=for-the-badge&logo=pytest)](FINAL_RELEASE_VERIFICATION.md)
+[![Tests Passing](https://img.shields.io/badge/Tests-258%20%2F%20258%20Passed%20(100%25)-70D6A0?style=for-the-badge&logo=pytest)](FINAL_RELEASE_VERIFICATION.md)
 [![Design](https://img.shields.io/badge/Design%20System-Dark%20Workstation-1D2028?style=for-the-badge)](ui/design_system.py)
 [![Python](https://img.shields.io/badge/Python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue?style=for-the-badge&logo=python)](https://python.org)
 [![CUDA](https://img.shields.io/badge/CUDA-12.6%20Accelerated-76B900?style=for-the-badge&logo=nvidia)](https://developer.nvidia.com/cuda-toolkit)
@@ -41,7 +41,7 @@ curl -fsSL https://raw.githubusercontent.com/imyouiamyou/prubeth-ide/master/inst
 ### 🖱️ Single-Click Windows Setup (Zero Prerequisites)
 If downloading directly, double-click the self-contained installer located in the repository root:
 - **[`PrubethIDE-Setup.exe`](file:///c:/Users/asus/heretic-work/PrubethIDE-Setup.exe)** (or **[`setup.exe`](file:///c:/Users/asus/heretic-work/setup.exe)**)  
-*Installs into `%LOCALAPPDATA%\Programs\PrubethIDE`, deploys Desktop and Start Menu shortcuts, and registers in Windows Control Panel automatically.*
+*Features Full (Recommended) and Custom installation modes, real-time disk space calculation, offline language lexers, local AI connector templates, Desktop/Start Menu shortcuts, User PATH integration, and Windows Control Panel registration.*
 
 ---
 
@@ -241,7 +241,7 @@ Add custom OpenAI-compatible inference servers (vLLM, LocalAI, LM Studio) in `~/
 | :--- | :--- | :--- |
 | **Local GPU Ollama Throughput** | **30.99 tok/s** | NVIDIA GeForce GTX 1050 Ti (CUDA 12.6) |
 | **Gemini 3.8 Flash Cloud Stream** | **128.4 tok/s** | Google Generative Language SSE |
-| **Automated Test Suite Execution** | **254 / 254 Passing (100%)** | 16 Verification Subsystems across Reliability, Concurrency & Security |
+| **Automated Test Suite Execution** | **258 / 258 Passing (100%)** | 17 Verification Subsystems across Reliability, Concurrency & Security |
 | **Memory Footprint (Idle)** | **148 MB** | PyQt5 QScintilla Engine |
 | **Preflight Diagnostics Status** | **0 Exit Code (Clean Pass)** | Fully verified system dependencies and configuration |
 

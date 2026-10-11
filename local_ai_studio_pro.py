@@ -79,12 +79,12 @@ from PyQt5.Qsci import (
     QsciLexerCSharp
 )
 
-APP_NAME = "PRUBETH / Prudeth IDE"
-APP_BRAND = "Prudeth"
+APP_NAME = "PRUBETH IDE"
+APP_BRAND = "PRUBETH"
 APP_VERSION = "3.0.0 (Bloom Edition)"
-APP_CODENAME = "Prudeth"
+APP_CODENAME = "PRUBETH"
 APP_TAGLINE = "Bloom, ideas unfolding"
-LEGACY_APP_NAME = "PRUBETH / SUKHI IDE"
+LEGACY_APP_NAME = "SUKHI IDE"
 WEBSITE_URL = "https://www.bsvr.work/"
 PROJECTS_URL = "https://www.bsvr.work/#projects"
 GITHUB_URL = "https://github.com/imyouiamyou/prubeth-ide"

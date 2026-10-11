@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# Prudeth IDE — Unified Linux & macOS Automated Installer
+# PRUBETH IDE — Unified Linux & macOS Automated Installer
 # Bloom, ideas unfolding
 # https://github.com/imyouiamyou/prubeth-ide
 # ==============================================================================
@@ -15,7 +15,7 @@ RED='\033[0;31m'
 NC='\033[0m' # No Color
 
 echo -e "${MAGENTA}================================================================${NC}"
-echo -e "${MAGENTA}             PRUDETH IDE — BLOOM EDITION (v3.0.0)              ${NC}"
+echo -e "${MAGENTA}             PRUBETH IDE — BLOOM EDITION (v3.0.0)              ${NC}"
 echo -e "${CYAN}                   Bloom, ideas unfolding                       ${NC}"
 echo -e "${MAGENTA}================================================================${NC}"
 
