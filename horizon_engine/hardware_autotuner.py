@@ -35,6 +35,10 @@ class HardwareProfile:
     vram_total_mb: int
     vram_free_mb: int
     tier_name: str  # ULTRA_LOW, BALANCED_LAPTOP, HIGH_PERFORMANCE, WORKSTATION_PRO
+    devices_count: int = 1
+    has_hardware_acceleration: bool = False
+    snapshot: Optional[Any] = None
+    scaling_profile: Optional[Any] = None
 
 
 @dataclass
@@ -44,10 +48,46 @@ class TuningResult:
     suggested_tier: str
     settings_delta: Dict[str, Any]
     diagnostic_summary: str
+    scaling_profile: Optional[Any] = None
 
 
 class HardwareAutoTuner:
     """Cross-platform hardware discovery and autonomous performance tuning engine."""
+
+    @classmethod
+    def get_capability_manager(cls):
+        from core.hardware.detection import HardwareCapabilityManager
+        return HardwareCapabilityManager.get_instance()
+
+    @classmethod
+    def get_scaling_engine(cls):
+        from core.hardware.performance_tiers import DynamicPerformanceTierEngine
+        return DynamicPerformanceTierEngine
+
+    @classmethod
+    def get_budget_manager(cls):
+        from core.hardware.resource_budget import ResourceBudgetManager
+        return ResourceBudgetManager()
+
+    @classmethod
+    def get_acceleration_registry(cls):
+        from core.hardware.acceleration_adapters import AccelerationRegistry
+        return AccelerationRegistry()
+
+    @classmethod
+    def get_multi_gpu_router(cls):
+        from core.hardware.multi_gpu import MultiGPURuntimeRouter
+        return MultiGPURuntimeRouter()
+
+    @classmethod
+    def get_model_capacity_evaluator(cls):
+        from core.hardware.model_expansion import DynamicModelCapacityEvaluator
+        return DynamicModelCapacityEvaluator
+
+    @classmethod
+    def get_persistence_manager(cls):
+        from core.hardware.persistence import HardwarePersistenceManager
+        return HardwarePersistenceManager()
 
     @classmethod
     def detect_hardware(cls) -> HardwareProfile:
@@ -74,6 +114,18 @@ class HardwareAutoTuner:
         else:
             tier = "WORKSTATION_PRO"
 
+        snapshot = None
+        scaling_prof = None
+        dev_count = 1
+        try:
+            from core.hardware.detection import HardwareCapabilityManager
+            from core.hardware.performance_tiers import DynamicPerformanceTierEngine
+            snapshot = HardwareCapabilityManager.get_instance().get_current_snapshot()
+            scaling_prof = DynamicPerformanceTierEngine.evaluate_hardware(snapshot)
+            dev_count = len(snapshot.devices)
+        except Exception:
+            pass
+
         return HardwareProfile(
             os_name=os_name,
             os_release=os_release,
@@ -88,8 +140,13 @@ class HardwareAutoTuner:
             gpu_name=gpu_name,
             vram_total_mb=vram_total_mb,
             vram_free_mb=vram_free_mb,
-            tier_name=tier
+            tier_name=tier,
+            devices_count=dev_count,
+            has_hardware_acceleration=has_nvidia or (snapshot is not None and snapshot.has_hardware_acceleration),
+            snapshot=snapshot,
+            scaling_profile=scaling_prof
         )
+
 
     @classmethod
     def synthesize_tuning(cls, target_model: str = "qwen2.5:1.5b") -> TuningResult:
@@ -176,7 +233,8 @@ class HardwareAutoTuner:
             profile=hw,
             suggested_tier=hw.tier_name,
             settings_delta=delta,
-            diagnostic_summary=desc
+            diagnostic_summary=desc,
+            scaling_profile=hw.scaling_profile
         )
 
     @classmethod

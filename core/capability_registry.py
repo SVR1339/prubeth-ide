@@ -281,3 +281,64 @@ class CapabilityRegistry:
             description="Executes Observe-Diagnose-Plan-Approve-Execute-Verify-Record loop with human-in-the-loop tickets.",
             commands=["ops.run_diagnostics", "ops.view_tickets"]
         ))
+        # Indefinite Hardware Upgradability & Progressive Performance Scaling Subsystems
+        self.register(Capability(
+            component_id="hw.capability_manager",
+            name="Dynamic Hardware Capability Manager",
+            category="diagnostics",
+            flexibility_level="B",
+            implementation_location="core/hardware/detection.py",
+            status="implemented",
+            description="Multi-device vendor-agnostic discovery (CUDA, ROCm, DirectML, Intel, Apple Silicon, SIMD) without static ceilings.",
+            commands=["hw.refresh_inventory", "hw.view_devices"]
+        ))
+        self.register(Capability(
+            component_id="hw.resource_budget",
+            name="Resource Budget & Admission Controller",
+            category="ai",
+            flexibility_level="C",
+            implementation_location="core/hardware/resource_budget.py",
+            status="implemented",
+            description="Admission control, reserved OS headroom, backpressure queues, priority eviction, and hysteresis smoothing.",
+            commands=["hw.inspect_budget", "hw.check_memory_pressure"]
+        ))
+        self.register(Capability(
+            component_id="hw.performance_tiers",
+            name="Progressive Performance Scaling Engine",
+            category="settings",
+            flexibility_level="B",
+            implementation_location="core/hardware/performance_tiers.py",
+            status="implemented",
+            description="Dynamically scales agent concurrency, indexing throughput, cache budgets, and context windows.",
+            commands=["hw.evaluate_scaling", "hw.apply_scaling"]
+        ))
+        self.register(Capability(
+            component_id="hw.acceleration_adapters",
+            name="Pluggable Hardware Acceleration Adapters",
+            category="ai",
+            flexibility_level="C",
+            implementation_location="core/hardware/acceleration_adapters.py",
+            status="implemented",
+            description="Replaceable acceleration adapters with transparent fallback chains (CUDA -> DirectML -> CPU SIMD).",
+            commands=["hw.list_adapters", "hw.verify_backend"]
+        ))
+        self.register(Capability(
+            component_id="hw.multi_gpu",
+            name="Multi-GPU Topology Router & Device Placement",
+            category="ai",
+            flexibility_level="C",
+            implementation_location="core/hardware/multi_gpu.py",
+            status="implemented",
+            description="Per-device discovery, best-fit placement, user device pinning, pipeline parallelism, and hybrid CPU offloading.",
+            commands=["hw.inspect_gpus", "hw.pin_device"]
+        ))
+        self.register(Capability(
+            component_id="hw.model_expansion",
+            name="Dynamic Model Capacity Evaluator",
+            category="ai",
+            flexibility_level="B",
+            implementation_location="core/hardware/model_expansion.py",
+            status="implemented",
+            description="Physical VRAM/KV cache estimator, catalog upgrade re-evaluation, and multi-objective model recommendation.",
+            commands=["model.reevaluate_hardware", "model.recommend_optimal"]
+        ))
