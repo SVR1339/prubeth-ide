@@ -230,3 +230,54 @@ class CapabilityRegistry:
             description="Inspects active workspaces, loaded extensions, resource pressure, and diagnostic bundles.",
             commands=["dev.export_diagnostic_bundle", "dev.run_self_tests"]
         ))
+        # Long-Horizon Platform & Cybersecurity Research Subsystems
+        self.register(Capability(
+            component_id="sec.sast_sca",
+            name="SAST & SCA Security Analysis Engine",
+            category="security",
+            flexibility_level="B",
+            implementation_location="security_research/sast_sca_engine.py",
+            status="implemented",
+            description="AST/regex static vulnerability analysis, dependency CVE auditing, and CycloneDX/SPDX SBOM generation.",
+            commands=["sec.run_sast_scan", "sec.generate_sbom"]
+        ))
+        self.register(Capability(
+            component_id="sec.reverse_engineering",
+            name="Reverse Engineering & Binary Inspector",
+            category="security",
+            flexibility_level="C",
+            implementation_location="security_research/reverse_engineering_bridge.py",
+            status="implemented",
+            description="Pure-Python PE/ELF header parser, Shannon entropy calculator, IoC extractor, and opcode disassembler.",
+            commands=["sec.inspect_binary"]
+        ))
+        self.register(Capability(
+            component_id="sec.isolated_lab",
+            name="Isolated Lab Manager & Research Sandbox",
+            category="security",
+            flexibility_level="C",
+            implementation_location="security_research/isolated_lab_manager.py",
+            status="implemented",
+            description="Sandboxed target execution with strict air-gapped/host-only containment, resource quotas, and file rollback.",
+            commands=["sec.run_lab_target", "sec.rollback_lab"]
+        ))
+        self.register(Capability(
+            component_id="model.lab_harness",
+            name="Personal Model Lab & Air-Gap Policy Guard",
+            category="ai",
+            flexibility_level="B",
+            implementation_location="core/model_lab.py",
+            status="implemented",
+            description="Profiles token latency, throughput, context degradation, and enforces zero-egress offline socket guard.",
+            commands=["model.run_benchmark", "model.toggle_airgap"]
+        ))
+        self.register(Capability(
+            component_id="ops.autonomous_supervisor",
+            name="Autonomous Self-Healing Supervisor",
+            category="diagnostics",
+            flexibility_level="C",
+            implementation_location="core/autonomous_ops.py",
+            status="implemented",
+            description="Executes Observe-Diagnose-Plan-Approve-Execute-Verify-Record loop with human-in-the-loop tickets.",
+            commands=["ops.run_diagnostics", "ops.view_tickets"]
+        ))

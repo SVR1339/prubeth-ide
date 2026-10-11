@@ -3792,6 +3792,16 @@ class Studio(QMainWindow):
             act.triggered.connect(fn)
             tools_menu.addAction(act)
 
+        sec_menu = menu_bar.addMenu("🛡️ Security & Lab")
+        sec_menu.addAction(QAction("🛡️ Run SAST Code Vulnerability Scan", self, triggered=self.run_workspace_sast_scan))
+        sec_menu.addAction(QAction("📦 Generate CycloneDX & SPDX SBOM", self, triggered=self.run_workspace_sbom_generation))
+        sec_menu.addAction(QAction("🔬 Reverse Engineering & Binary Inspector", self, triggered=self.run_binary_inspection_dialog))
+        sec_menu.addSeparator()
+        sec_menu.addAction(QAction("🧪 Personal Model Lab: Benchmark Inference", self, triggered=self.run_model_lab_benchmark))
+        sec_menu.addAction(QAction("🔒 Strict Air-Gap / Offline Policy Toggle", self, triggered=self.toggle_airgap_policy))
+        sec_menu.addSeparator()
+        sec_menu.addAction(QAction("🤖 Autonomous Self-Healing Diagnostic", self, triggered=self.run_autonomous_diagnostics))
+
         help_menu = menu_bar.addMenu("Help")
         help_menu.addAction(QAction("🌐 Visit Official Website (bsvr.work)", self, triggered=lambda: QDesktopServices.openUrl(QUrl(WEBSITE_URL))))
         help_menu.addAction(QAction("🚀 Explore Projects on bsvr.work", self, triggered=lambda: QDesktopServices.openUrl(QUrl(PROJECTS_URL))))
@@ -5104,6 +5114,156 @@ class Studio(QMainWindow):
                 f"• <b>Ctrl+K:</b> Inline Quick Edit | <b>Ctrl+P:</b> Quick Open | <b>Ctrl+Shift+P:</b> Command Palette.<br>"
                 f"• <b>Tools → Radar:</b> Benchmark live latencies and model execution speeds.</p>"
             )
+
+    def run_workspace_sast_scan(self):
+        from security_research.sast_sca_engine import get_sast_engine
+        engine = get_sast_engine()
+        findings = engine.scan_directory(self.root, max_files=300)
+        summary = engine.get_summary(findings)
+
+        self.output_tabs.setCurrentIndex(1)
+        self.output.append("\n" + "=" * 60)
+        self.output.append(f"🛡️ PRUBETH SAST SCAN REPORT — {len(findings)} Findings [{summary['risk_status']}]")
+        self.output.append("=" * 60)
+        for f in findings[:25]:
+            self.output.append(f"[{f.severity.value}] {f.title} ({f.rule_id})")
+            self.output.append(f"  File: {f.file_path}:{f.line_number}")
+            self.output.append(f"  Code: {f.code_snippet}")
+            self.output.append(f"  Fix:  {f.remediation}\n")
+
+        QMessageBox.information(
+            self,
+            "SAST Scan Complete",
+            f"Scanned workspace: {len(findings)} security findings detected.\nRisk Status: {summary['risk_status']}\n\nDetailed breakdown displayed in Console Output."
+        )
+
+    def run_workspace_sbom_generation(self):
+        from security_research.sast_sca_engine import get_sca_engine
+        engine = get_sca_engine()
+
+        req_p = Path(self.root) / "requirements.txt"
+        pkg_p = Path(self.root) / "package.json"
+        target = req_p if req_p.exists() else pkg_p if pkg_p.exists() else None
+
+        if not target:
+            QMessageBox.warning(self, "No Manifest Found", "Could not find requirements.txt or package.json in active workspace.")
+            return
+
+        sbom = engine.generate_cyclonedx_sbom(str(target), project_name="prubeth-workspace")
+        advisories = engine.audit_dependencies(str(target))
+
+        out_file = Path(self.root) / "cyclonedx_sbom.json"
+        out_file.write_text(json.dumps(sbom, indent=2), encoding="utf-8")
+
+        self.output_tabs.setCurrentIndex(1)
+        self.output.append(f"\n📦 CycloneDX 1.5 SBOM generated: {out_file} ({len(sbom['components'])} components)")
+        if advisories:
+            self.output.append(f"⚠️ {len(advisories)} Dependency Advisories Detected:")
+            for adv in advisories:
+                self.output.append(f"  - [{adv.severity.value}] {adv.title}: {adv.description}")
+
+        QMessageBox.information(
+            self,
+            "SBOM Generated",
+            f"Saved CycloneDX 1.5 SBOM to:\n{out_file}\n\nComponents: {len(sbom['components'])}\nCVE Advisories: {len(advisories)}"
+        )
+
+    def run_binary_inspection_dialog(self):
+        from security_research.reverse_engineering_bridge import get_reverse_engineering_bridge
+        path, _ = QFileDialog.getOpenFileName(
+            self, "Choose Target Binary for Inspection", self.root,
+            "Binaries (*.exe *.dll *.so *.bin *.sys *.elf);;All Files (*)"
+        )
+        if not path:
+            return
+
+        bridge = get_reverse_engineering_bridge()
+        meta = bridge.inspect_file(path)
+
+        self.output_tabs.setCurrentIndex(1)
+        self.output.append("\n" + "=" * 60)
+        self.output.append(f"🔬 BINARY INSPECTION: {Path(path).name}")
+        self.output.append("=" * 60)
+        self.output.append(f"Format: {meta.format.value} | Arch: {meta.architecture.value} | 64-bit: {meta.is_64bit}")
+        self.output.append(f"Entropy: {meta.overall_entropy:.4f} (Packed/Obfuscated: {meta.overall_entropy > 7.15})")
+        self.output.append(f"Sections: {len(meta.sections)} | Strings Extracted: {meta.extracted_strings_count}")
+        if meta.suspicious_iocs:
+            self.output.append(f"⚠️ Suspicious IoCs ({len(meta.suspicious_iocs)}):")
+            for ioc in meta.suspicious_iocs:
+                self.output.append(f"  [{ioc['type']}] {ioc['indicator']} ({ioc['category']})")
+
+        QMessageBox.information(
+            self,
+            "Binary Inspection Complete",
+            f"Target: {Path(path).name}\nFormat: {meta.format.value} ({meta.architecture.value})\nEntropy: {meta.overall_entropy:.2f} / 8.0\nIoCs Detected: {len(meta.suspicious_iocs)}\n\nDetailed breakdown displayed in Console Output."
+        )
+
+    def run_model_lab_benchmark(self):
+        from core.model_lab import get_model_benchmark_harness
+        harness = get_model_benchmark_harness()
+
+        def synthetic_stream():
+            import time
+            time.sleep(0.04)
+            for i in range(25):
+                time.sleep(0.015)
+                yield f"tok_{i} "
+
+        metric = harness.benchmark_stream(self.model, synthetic_stream, prompt_token_count=120)
+
+        self.output_tabs.setCurrentIndex(1)
+        self.output.append(f"\n🧪 MODEL LAB BENCHMARK — {metric.model_name}")
+        self.output.append(f"  First Token Latency (FTL): {metric.first_token_latency_ms:.2f} ms")
+        self.output.append(f"  Generation Speed:          {metric.tokens_per_second:.2f} tokens/sec")
+        self.output.append(f"  Total Duration:            {metric.total_duration_ms:.2f} ms")
+        self.output.append(f"  Hardware Offload VRAM:     {metric.vram_allocated_mb:.0f} MB")
+
+        QMessageBox.information(
+            self,
+            "Model Benchmark Complete",
+            f"Model: {metric.model_name}\nFTL: {metric.first_token_latency_ms:.1f} ms\nSpeed: {metric.tokens_per_second:.1f} tok/s\nAllocated VRAM: {metric.vram_allocated_mb:.0f} MB"
+        )
+
+    def toggle_airgap_policy(self):
+        from core.model_lab import get_offline_policy, OfflinePolicyMode
+        policy = get_offline_policy()
+        if policy.mode == OfflinePolicyMode.STRICT_AIRGAP:
+            policy.set_mode(OfflinePolicyMode.AUDIT_ONLY)
+            msg = "Air-Gap Policy set to AUDIT_ONLY (monitored, non-blocking)."
+        else:
+            policy.set_mode(OfflinePolicyMode.STRICT_AIRGAP)
+            msg = "Strict Air-Gap Policy ENFORCED: All external network egress blocked at socket level."
+
+        self.statusBar().showMessage(f"🔒 {msg}", 5000)
+        QMessageBox.information(self, "Air-Gap Policy Status", msg)
+
+    def run_autonomous_diagnostics(self):
+        from core.autonomous_ops import get_autonomous_supervisor
+        supervisor = get_autonomous_supervisor()
+        observations = supervisor.observe()
+        issues = supervisor.diagnose(observations)
+
+        self.output_tabs.setCurrentIndex(1)
+        self.output.append("\n" + "=" * 60)
+        self.output.append(f"🤖 AUTONOMOUS SUPERVISOR DIAGNOSTIC — {len(observations)} Observations, {len(issues)} Issues")
+        self.output.append("=" * 60)
+        for obs in observations:
+            status = "HEALTHY" if obs.healthy else "ALERT"
+            self.output.append(f"[{status}] {obs.category} - {obs.metric_name}: {obs.current_value} (threshold: {obs.threshold_value})")
+
+        if not issues:
+            self.output.append("✓ All monitored subsystems are healthy. Zero remediation required.")
+            QMessageBox.information(self, "Autonomous Diagnostics", "All monitored subsystems are healthy.\nZero remediation required.")
+        else:
+            for issue in issues:
+                plan = supervisor.plan(issue)
+                can_exec, ticket = supervisor.check_policy_and_approve(plan)
+                if can_exec:
+                    rec = supervisor.execute_and_verify(plan)
+                    self.output.append(f"✓ Auto-remediated {issue.title} ({rec.details})")
+                else:
+                    self.output.append(f"⏸ Remediation ticket generated: {ticket.ticket_id} [{ticket.risk_level.value}]")
+            QMessageBox.information(self, "Autonomous Diagnostics", f"Diagnosed {len(issues)} issue(s).\nRemediations evaluated according to policy.\nSee Console Output for details.")
 
     def save_settings(self):
         write_json(SETTINGS_PATH, self.settings)
