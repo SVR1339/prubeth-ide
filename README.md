@@ -9,7 +9,7 @@
 > An ultra-fast, local-first agentic developer workstation engineered with a **Premium Dark Design System**, **Intelligent Multi-Model Cascade**, **1M-Token SSE Reasoning**, **Horizon Hardware Scaling Engine**, **Zero-Plaintext Credential Security**, and **Instant Local CUDA Self-Healing**.
 
 [![Release](https://img.shields.io/badge/Release-v3.0.0--Bloom-9485FF?style=for-the-badge&logo=rocket)](https://github.com/imyouiamyou/prubeth-ide/releases/tag/v3.0.0)
-[![Tests Passing](https://img.shields.io/badge/Tests-258%20%2F%20258%20Passed%20(100%25)-70D6A0?style=for-the-badge&logo=pytest)](FINAL_RELEASE_VERIFICATION.md)
+[![Tests Passing](https://img.shields.io/badge/Tests-274%20%2F%20274%20Passed%20(100%25)-70D6A0?style=for-the-badge&logo=pytest)](FINAL_RELEASE_VERIFICATION.md)
 [![Design](https://img.shields.io/badge/Design%20System-Dark%20Workstation-1D2028?style=for-the-badge)](ui/design_system.py)
 [![Python](https://img.shields.io/badge/Python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue?style=for-the-badge&logo=python)](https://python.org)
 [![CUDA](https://img.shields.io/badge/CUDA-12.6%20Accelerated-76B900?style=for-the-badge&logo=nvidia)](https://developer.nvidia.com/cuda-toolkit)
@@ -117,6 +117,12 @@ The built-in agent loop inspects your workspace and performs verified actions th
 ### 8. 🔬 Defensive Security Research & Reverse Engineering Lab
 - **Isolated Sandbox:** Built-in workspace isolation for binary inspection, static analysis (SAST/SCA), decompiler bridges, and authorized malware analysis.
 - **Reverse Engineering Bridge:** Integrates with GDB, Radare2, and binary disassemblers directly inside the IDE terminal and tools panel.
+
+### 9. 🛡️ PRINCE2 7 Crash-Test & Reliability Assurance Engine
+Engineered for inevitable powerful projects, large enterprise repositories, and zero data loss invariants:
+- **Out-of-Process Crash Supervisor (`core/crash_supervisor.py`):** External watchdog monitoring process lifecycle, translating exit codes (`0`, `1`, `137`/`-9` OOM, `0xC0000005` access violations), enforcing bounded restarts (max 3 per 10m), and safe-mode auto-escalation.
+- **PRINCE2 7 Reliability Assurance Engine (`core/reliability_engine.py`):** 9 configurable workload test profiles (`Smoke`, `Standard`, `Large Project`, `Stress`, `Fault Injection`, `Recovery`, `Security`, `Endurance`, `Release Candidate`) with SHA-256 data integrity tracking and stage-gate approvals.
+- **Native Live Reliability Center (`ui/reliability_dashboard_widget.py`):** Integrated bottom tab GUI dashboard showing live test progress, peak memory telemetry, pass/fail metrics, and one-click JSON report exports.
 
 ---
 

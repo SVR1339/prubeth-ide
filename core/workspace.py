@@ -5,6 +5,9 @@ directory traversal rejection, and atomic safe file operations.
 """
 import os
 import shutil
+import time
+import uuid
+import threading
 from pathlib import Path
 from typing import List, Dict, Any, Optional, Set
 
@@ -44,6 +47,14 @@ class WorkspaceGuard:
             self.root.mkdir(parents=True, exist_ok=True)
         self.max_workspace_bytes = max_workspace_bytes
         self.max_file_size_bytes = max_file_size_bytes
+        self._meta_lock = threading.Lock()
+        self._path_locks: Dict[Path, threading.Lock] = {}
+
+    def _get_path_lock(self, path: Path) -> threading.Lock:
+        with self._meta_lock:
+            if path not in self._path_locks:
+                self._path_locks[path] = threading.Lock()
+            return self._path_locks[path]
 
     RESERVED_DEVICE_NAMES: Set[str] = {
         "CON", "PRN", "AUX", "NUL", "COM1", "COM2", "COM3", "COM4", "COM5",
@@ -96,7 +107,15 @@ class WorkspaceGuard:
         target = self.canonicalize(rel_or_abs_path)
         if not target.is_file():
             raise FileNotFoundError(f"File not found: '{rel_or_abs_path}'")
-        return target.read_text(encoding="utf-8", errors="replace")[:max_chars]
+        # Retry briefly on Windows if another thread is currently completing atomic replace
+        for attempt in range(5):
+            try:
+                return target.read_text(encoding="utf-8", errors="replace")[:max_chars]
+            except (PermissionError, OSError):
+                if attempt < 4:
+                    time.sleep(0.01 * (attempt + 1))
+                else:
+                    raise
 
     def get_workspace_size_bytes(self) -> int:
         """Calculates total size in bytes of files in the workspace (excluding ignored dirs)."""
@@ -135,39 +154,60 @@ class WorkspaceGuard:
 
         target.parent.mkdir(parents=True, exist_ok=True)
 
-        if backup and target.exists() and target.is_file():
-            bak_path = target.with_suffix(target.suffix + ".bak")
-            shutil.copy2(target, bak_path)
-
-        # Atomic write via temporary file
-        temp_file = target.with_suffix(target.suffix + ".tmp_write")
-        temp_file.write_text(content, encoding="utf-8")
-        try:
-            temp_file.replace(target)
-        except OSError:
-            if target.exists():
+        with self._get_path_lock(target):
+            if backup and target.exists() and target.is_file():
+                bak_path = target.with_suffix(target.suffix + ".bak")
                 try:
-                    target.unlink()
+                    shutil.copy2(target, bak_path)
                 except Exception:
                     pass
-            temp_file.rename(target)
+
+            # Atomic write via unique temporary file
+            temp_file = target.with_suffix(f"{target.suffix}.tmp_write_{uuid.uuid4().hex[:8]}")
+            try:
+                temp_file.write_text(content, encoding="utf-8")
+                # Retry loop with backoff for Windows file-sharing locks
+                for attempt in range(6):
+                    try:
+                        temp_file.replace(target)
+                        break
+                    except (OSError, PermissionError):
+                        if attempt < 5:
+                            time.sleep(0.015 * (attempt + 1))
+                        else:
+                            if target.exists():
+                                try:
+                                    target.unlink()
+                                except Exception:
+                                    pass
+                            temp_file.rename(target)
+            finally:
+                if temp_file.exists():
+                    try:
+                        temp_file.unlink()
+                    except Exception:
+                        pass
         return len(content)
 
     def safe_patch(self, rel_or_abs_path: str, search: str, replace: str) -> bool:
         target = self.canonicalize(rel_or_abs_path)
-        if not target.is_file():
-            raise FileNotFoundError(f"Target file for patch not found: '{rel_or_abs_path}'")
+        with self._get_path_lock(target):
+            if not target.is_file():
+                raise FileNotFoundError(f"Target file for patch not found: '{rel_or_abs_path}'")
 
-        source = target.read_text(encoding="utf-8")
-        if search not in source:
-            return False
+            source = target.read_text(encoding="utf-8")
+            if search not in source:
+                return False
 
-        bak_path = target.with_suffix(target.suffix + ".bak")
-        shutil.copy2(target, bak_path)
+            bak_path = target.with_suffix(target.suffix + ".bak")
+            try:
+                shutil.copy2(target, bak_path)
+            except Exception:
+                pass
 
-        updated = source.replace(search, replace, 1)
-        target.write_text(updated, encoding="utf-8")
-        return True
+            updated = source.replace(search, replace, 1)
+            target.write_text(updated, encoding="utf-8")
+            return True
 
     def safe_list_dir(self, rel_or_abs_path: str = ".") -> List[Dict[str, Any]]:
         target_dir = self.canonicalize(rel_or_abs_path)

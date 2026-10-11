@@ -3431,6 +3431,13 @@ class Studio(QMainWindow):
         except Exception:
             pass
 
+        try:
+            from ui.reliability_dashboard_widget import ReliabilityCenterWidget
+            self.bottom_reliability = ReliabilityCenterWidget(self.root, parent=self)
+            self.bottom_tabs.addTab(self.bottom_reliability, "🛡️ Reliability Center")
+        except Exception:
+            self.bottom_reliability = None
+
         center_splitter.addWidget(self.bottom_tabs)
         center_splitter.setSizes([640, 260])
         split.addWidget(center)
