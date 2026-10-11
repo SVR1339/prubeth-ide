@@ -21,6 +21,12 @@ sys.path.insert(0, str(INSTALLER_DIR))
 from setup_wizard import InstallWorker, APP_VERSION, ONLINE_PAYLOAD_URLS
 
 
+import json
+import hashlib
+from release_config import compute_manifest_signature
+from manifest_schema import build_manifest_document
+
+
 def test_online_payload_urls_configured():
     """Verify that multiple redundant GitHub mirrors are configured."""
     assert len(ONLINE_PAYLOAD_URLS) >= 3
@@ -30,18 +36,32 @@ def test_online_payload_urls_configured():
 
 
 def test_installer_downloads_from_github_when_no_local_payload(tmp_path):
-    """Simulate clean machine without local source repo: downloads payload from GitHub."""
+    """Simulate clean machine without local source repo: downloads authenticated payload from GitHub."""
     target_install = tmp_path / "installed_app"
 
     # Create a mock valid payload zip containing local_ai_studio_pro.py and assets
     mock_payload_buffer = io.BytesIO()
     with zipfile.ZipFile(mock_payload_buffer, 'w', compression=zipfile.ZIP_STORED) as z:
-        z.writestr("local_ai_studio_pro.py", "# Mock Prubeth IDE Entrypoint\nAPP_VERSION='3.0.0'\n")
+        z.writestr("local_ai_studio_pro.py", "# Mock Prubeth IDE Entrypoint\nAPP_VERSION='1.12.0'\n")
         z.writestr("README.md", "# Prubeth IDE\n")
         z.writestr("assets/icon.ico", b"MOCK_ICON_BYTES" * 100)
         z.writestr("padding.dat", b"X" * 2000)
 
     mock_bytes = mock_payload_buffer.getvalue()
+    payload_sha = hashlib.sha256(mock_bytes).hexdigest()
+
+    # Generate valid release manifest and Ed25519 asymmetric signature
+    manifest_doc = build_manifest_document(
+        version=APP_VERSION,
+        payload_filename=f"Prubeth-Payload-{APP_VERSION}-windows-x64.zip",
+        payload_sha256=payload_sha,
+        payload_size_bytes=len(mock_bytes),
+        min_required_disk_bytes=100000,
+        required_files=["local_ai_studio_pro.py"]
+    )
+    manifest_bytes = json.dumps(manifest_doc).encode("utf-8")
+    sig_hex = compute_manifest_signature(manifest_bytes)
+    sig_bytes = (sig_hex + "\n").encode("utf-8")
 
     # Create worker with no payload zip and a target dir
     worker = InstallWorker(
@@ -52,17 +72,26 @@ def test_installer_downloads_from_github_when_no_local_payload(tmp_path):
         mode="online"
     )
 
-    # Mock urllib.request.urlopen returning the mock zip payload
-    mock_response = MagicMock()
-    mock_response.status = 200
-    mock_response.headers = {"content-length": str(len(mock_bytes))}
-    mock_response.read.side_effect = [mock_bytes[:30000], mock_bytes[30000:], b""]
-    mock_response.__enter__.return_value = mock_response
+    def mock_urlopen(req, *args, **kwargs):
+        url = req.full_url if hasattr(req, "full_url") else str(req)
+        resp = MagicMock()
+        resp.status = 200
+        if "Manifest" in url and url.endswith(".json"):
+            resp.headers = {"content-length": str(len(manifest_bytes))}
+            resp.read.side_effect = [manifest_bytes, b""]
+        elif "Manifest" in url and url.endswith(".sig"):
+            resp.headers = {"content-length": str(len(sig_bytes))}
+            resp.read.side_effect = [sig_bytes, b""]
+        else:
+            resp.headers = {"content-length": str(len(mock_bytes))}
+            resp.read.side_effect = [mock_bytes[:30000], mock_bytes[30000:], b""]
+        resp.__enter__.return_value = resp
+        return resp
 
     progress_events = []
     worker.progress.connect(lambda pct, msg: progress_events.append((pct, msg)))
 
-    with patch("urllib.request.urlopen", return_value=mock_response), \
+    with patch("urllib.request.urlopen", side_effect=mock_urlopen), \
          patch("setup_wizard.get_source_dir", return_value=tmp_path / "nonexistent_source"), \
          patch("setup_wizard.get_resource_dir", return_value=tmp_path / "nonexistent_res"):
         worker.run()
@@ -70,4 +99,4 @@ def test_installer_downloads_from_github_when_no_local_payload(tmp_path):
     # Verify installation succeeded
     assert (target_install / "local_ai_studio_pro.py").exists()
     assert (target_install / "PrubethIDE.bat").exists()
-    assert any("Downloading from GitHub" in msg for _, msg in progress_events)
+    assert any("integrity verified" in msg.lower() or "download" in msg.lower() for _, msg in progress_events)

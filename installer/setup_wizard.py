@@ -289,53 +289,37 @@ class InstallWorker(QThread):
 
     def download_payload_from_github(self) -> Optional[Path]:
         """
-        Downloads application payload from GitHub with strict TLS certificate verification
-        and cryptographic/archive safety checks (Finding 1 & 2 remediation).
+        Retrieves and authenticates the application payload from official GitHub Releases.
+        Enforces strict TLS, Ed25519 signed manifest verification, SHA-256 payload digest verification,
+        size bounding, and pre-extraction zip-slip archive security inspection.
+        Fails closed on any security failure, invalid signature, or unauthenticated archive.
         """
-        # Strict TLS verification: default trust anchors and hostname verification enforced.
-        ctx = ssl.create_default_context()
+        try:
+            self.progress.emit(10, f"Resolving official GitHub release manifest for v{APP_VERSION}...")
+            resolver = ReleaseMetadataResolver(
+                repo=GITHUB_REPO,
+                version=APP_VERSION,
+                channel=self.channel,
+                arch=TARGET_ARCH
+            )
+            release_info = resolver.resolve_release(progress_callback=self._progress_bridge)
+            if self.is_cancelled:
+                return None
 
-        dest_temp = Path(tempfile.gettempdir()) / f"prubeth_github_payload_{int(time.time())}.zip"
-        headers = {"User-Agent": f"PrubethIDE-Installer/{APP_VERSION} (Windows NT 10.0; Win64; x64)"}
-
-        for url in ONLINE_PAYLOAD_URLS:
-            try:
-                self.progress.emit(12, f"Connecting to GitHub: {url.split('/')[2]}...")
-                req = urllib.request.Request(url, headers=headers)
-                with urllib.request.urlopen(req, context=ctx, timeout=30) as resp:
-                    if resp.status not in (200, 302):
-                        continue
-                    total_bytes = int(resp.headers.get("content-length", 0))
-                    downloaded = 0
-                    chunk_size = 65536
-                    with open(dest_temp, "wb") as f_out:
-                        while True:
-                            chunk = resp.read(chunk_size)
-                            if not chunk:
-                                break
-                            f_out.write(chunk)
-                            downloaded += len(chunk)
-                            if total_bytes > 0:
-                                pct = int(12 + (downloaded / total_bytes) * 36)
-                                mb_done = downloaded / (1024 * 1024)
-                                mb_tot = total_bytes / (1024 * 1024)
-                                self.progress.emit(min(pct, 48), f"Downloading from GitHub: {mb_done:.1f} MB / {mb_tot:.1f} MB ({int((downloaded/total_bytes)*100)}%)...")
-                            else:
-                                mb_done = downloaded / (1024 * 1024)
-                                self.progress.emit(25, f"Downloading from GitHub: {mb_done:.1f} MB...")
-                    if dest_temp.exists() and dest_temp.stat().st_size > 1000:
-                        try:
-                            # Pre-extraction security inspection (rejects path traversal, absolute paths, reserved names)
-                            inspect_archive_security(dest_temp)
-                            with zipfile.ZipFile(dest_temp, 'r') as z:
-                                names = z.namelist()
-                                if "local_ai_studio_pro.py" in names and z.testzip() is None:
-                                    self.progress.emit(49, "GitHub package download & integrity verified.")
-                                    return dest_temp
-                        except Exception:
-                            pass
-            except Exception:
-                continue
+            downloaded_zip = self.downloader.download_payload(
+                payload_url=release_info["payload_url"],
+                expected_sha256=release_info["payload_sha256"],
+                expected_size_bytes=release_info["payload_size_bytes"],
+                destination_dir=self.staging_dir,
+                progress_callback=self._progress_bridge
+            )
+            if downloaded_zip and downloaded_zip.exists():
+                inspect_archive_security(downloaded_zip)
+                self.progress.emit(49, "GitHub package download & Ed25519 cryptographic integrity verified.")
+                return downloaded_zip
+        except Exception as ex:
+            logging.error(f"Authenticated GitHub payload retrieval failed: {ex}")
+            return None
         return None
 
     def run(self):
@@ -378,32 +362,8 @@ class InstallWorker(QThread):
 
             if is_online:
                 downloaded_zip = self.download_payload_from_github()
-                if not downloaded_zip:
-                    # Fallback to resolver & download engine if direct download did not resolve
-                    try:
-                        resolver = ReleaseMetadataResolver(
-                            repo=GITHUB_REPO,
-                            version=APP_VERSION,
-                            channel=self.channel,
-                            arch=TARGET_ARCH
-                        )
-                        release_info = resolver.resolve_release(progress_callback=self._progress_bridge)
-                        if self.is_cancelled:
-                            raise DownloadError("Installation cancelled by user.")
-
-                        downloaded_zip = self.downloader.download_payload(
-                            payload_url=release_info["payload_url"],
-                            expected_sha256=release_info["payload_sha256"],
-                            expected_size_bytes=release_info["payload_size_bytes"],
-                            destination_dir=self.staging_dir,
-                            progress_callback=self._progress_bridge
-                        )
-                    except Exception as ex_resolver:
-                        raise DownloadError(f"Failed to retrieve release payload from GitHub: {ex_resolver}")
-
                 if not downloaded_zip or not downloaded_zip.exists():
-                    raise DownloadError("Could not retrieve valid application payload archive from GitHub.")
-
+                    raise DownloadError("Could not retrieve authenticated and cryptographically verified release payload from GitHub.")
                 effective_payload = downloaded_zip
             else:
                 # Mode B: Full Offline Installer with verified local payload

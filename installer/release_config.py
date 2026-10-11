@@ -4,7 +4,6 @@ Defines official repository coordinates, release asset layouts, 70 MiB size thre
 delivery modes (Mode A Online vs Mode B Offline), and release signature verification.
 """
 import os
-import hmac
 import hashlib
 import json
 from pathlib import Path
