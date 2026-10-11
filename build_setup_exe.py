@@ -45,7 +45,8 @@ def create_payload_archive() -> Path:
         # Include application subsystem modules and resources
         module_dirs = [
             "core", "workspace", "source_control", "language_services",
-            "debugging", "ai", "ui", "plugins", "assets", "tests", "docs", "scripts"
+            "debugging", "ai", "ui", "plugins", "assets", "tests", "docs", "scripts",
+            "horizon_engine", "security_research"
         ]
         for m_name in module_dirs:
             m_dir = ROOT_DIR / m_name

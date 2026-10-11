@@ -38,6 +38,8 @@ def build_pyinstaller():
         f"--add-data={ROOT_DIR / 'plugins'};plugins",
         f"--add-data={ROOT_DIR / 'language_services'};language_services",
         f"--add-data={ROOT_DIR / 'debugging'};debugging",
+        f"--add-data={ROOT_DIR / 'horizon_engine'};horizon_engine",
+        f"--add-data={ROOT_DIR / 'security_research'};security_research",
         "--hidden-import=PyQt5.QtCore",
         "--hidden-import=PyQt5.QtGui",
         "--hidden-import=PyQt5.QtWidgets",
