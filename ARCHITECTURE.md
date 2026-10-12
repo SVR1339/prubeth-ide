@@ -1,5 +1,5 @@
 # PRUBETH IDE — Full Design Infrastructure Specification
-**Version:** 1.12.0 / v1.12 (Horizon Edition)  
+**Version:** 1.89.0 / v1.89 (Horizon Edition)  
 **Author:** BSVR & PRUBETH Horizon Autonomous Systems  
 **Live Showcase:** [https://www.bsvr.work/](https://www.bsvr.work/)  
 **Target Platform:** Windows 10/11 x64 (Native CUDA / Hybrid Cloud / Fully Air-Gapped)

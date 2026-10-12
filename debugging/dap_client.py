@@ -1,5 +1,5 @@
 """
-SUKHI IDE — Debug Adapter Protocol (DAP) Client Engine
+PRUBETH IDE â€” Debug Adapter Protocol (DAP) Client Engine
 Implements standard DAP framing with Content-Length headers, breakpoint registration,
 launch requests, thread stepping, and variable inspection.
 """
@@ -83,7 +83,7 @@ class DapClient:
                 "command": "initialize",
                 "arguments": {
                     "clientID": "sukhi-ide",
-                    "clientName": "SUKHI IDE",
+                    "clientName": "PRUBETH IDE",
                     "adapterID": "python",
                     "linesStartAt1": True,
                     "columnsStartAt1": True,
@@ -314,3 +314,4 @@ class DapClient:
             req_seq = msg.get("request_seq")
             if req_seq is not None and req_seq in self._pending_requests:
                 self._pending_requests[req_seq].put(msg)
+

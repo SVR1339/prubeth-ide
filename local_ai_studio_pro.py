@@ -1,6 +1,6 @@
 """
-Local AI Studio Pro — Next-Gen Agentic AI IDE (PRUBETH Horizon Edition)
-v2.4.0 — High-Performance Intelligent Multi-Model Router & Self-Healing IDE
+Local AI Studio Pro ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â Next-Gen Agentic AI IDE (PRUBETH Horizon Edition)
+v1.89.0 - Horizon Edition - High-Performance Multi-Model Router & Self-Healing AI IDE
 
 Key Features:
   - Intelligent Model Router: Priority Cascade across Gemini 3.8 Flash, Gemini 3.5 Flash, and Local Ollama GPU
@@ -84,10 +84,9 @@ from PyQt5.Qsci import (
 
 APP_NAME = "PRUBETH IDE"
 APP_BRAND = "PRUBETH"
-APP_VERSION = "3.0.0 (Bloom Edition)"
+APP_VERSION = "1.89.0 (Horizon Edition)"
 APP_CODENAME = "PRUBETH"
 APP_TAGLINE = "Bloom, ideas unfolding"
-LEGACY_APP_NAME = "SUKHI IDE"
 WEBSITE_URL = "https://www.bsvr.work/"
 PROJECTS_URL = "https://www.bsvr.work/#projects"
 GITHUB_URL = "https://github.com/imyouiamyou/prubeth-ide"
@@ -116,7 +115,7 @@ DEFAULT_EXTENSIONS = [
         "version": "1.4.0",
         "author": "SO NAIVE Core",
         "description": "Bidirectional IPC bridge synchronizing open editor tabs, live diagnostics, and workspaces with VS Code, Cursor, and Zed.",
-        "icon": "⚡",
+        "icon": "ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã‚Â¡Ãƒâ€šÃ‚Â¡",
         "installed": True,
         "enabled": True,
         "port": 7432,
@@ -128,7 +127,7 @@ DEFAULT_EXTENSIONS = [
         "version": "2.2.0",
         "author": "PRUBETH Systems",
         "description": "Spawns parallel background subagents (Researcher, Code Architect, Test Fixer) with multi-turn task queues.",
-        "icon": "🚀",
+        "icon": "ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€¦Ã‚Â¡ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬",
         "installed": True,
         "enabled": True,
     },
@@ -139,7 +138,7 @@ DEFAULT_EXTENSIONS = [
         "version": "1.3.0",
         "author": "SO NAIVE Vision",
         "description": "Full screenshot analysis, OCR text extraction, UI wireframe-to-code compiler, and image reference embeddings.",
-        "icon": "👁️",
+        "icon": "ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã‹Å“Ãƒâ€šÃ‚ÂÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¸Ãƒâ€šÃ‚Â",
         "installed": True,
         "enabled": True,
     },
@@ -150,7 +149,7 @@ DEFAULT_EXTENSIONS = [
         "version": "2.0.1",
         "author": "High-Throughput Labs",
         "description": "High-performance bridge connecting private on-premise inference servers, LM Studio, vLLM, and Ollama clusters.",
-        "icon": "🔒",
+        "icon": "ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢",
         "installed": True,
         "enabled": True,
     },
@@ -161,7 +160,7 @@ DEFAULT_EXTENSIONS = [
         "version": "1.1.0",
         "author": "GitHub Team",
         "description": "Interactive git branch visualization, staging, commit message generation, and automated GitHub PR creation.",
-        "icon": "⑂",
+        "icon": "ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‹Å“ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡",
         "installed": True,
         "enabled": False,
     },
@@ -172,7 +171,7 @@ DEFAULT_EXTENSIONS = [
         "version": "1.0.5",
         "author": "Data Agent Kit",
         "description": "Interactive Jupyter notebook kernel runner, dataframe inspector, inline matplotlib rendering, and BigQuery analytics.",
-        "icon": "📊",
+        "icon": "ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œÃƒâ€¦Ã‚Â ",
         "installed": False,
         "enabled": False,
     },
@@ -183,7 +182,7 @@ DEFAULT_EXTENSIONS = [
         "version": "1.2.0",
         "author": "LSP Guild",
         "description": "Deep symbol definitions, find all references, and type inlay hints for Rust Analyzer, Clangd, Gopls, and Pyright.",
-        "icon": "🦀",
+        "icon": "ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€šÃ‚Â¦ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬",
         "installed": False,
         "enabled": False,
     },
@@ -194,7 +193,7 @@ DEFAULT_EXTENSIONS = [
         "version": "1.0.0",
         "author": "Container Ops",
         "description": "Executes shell commands and runs test suites inside isolated Docker containers or DevEnvironments.",
-        "icon": "🐳",
+        "icon": "ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€šÃ‚ÂÃƒâ€šÃ‚Â³",
         "installed": False,
         "enabled": False,
     },
@@ -205,7 +204,7 @@ DEFAULT_EXTENSIONS = [
         "version": "1.5.0",
         "author": "Anthropic / OpenMCP",
         "description": "Connects standard MCP servers (Filesystem, DuckDuckGo, PyTest Runner, Postgres, GitHub, Slack) as live tools.",
-        "icon": "🛠️",
+        "icon": "ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂºÃƒâ€šÃ‚Â ÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¸Ãƒâ€šÃ‚Â",
         "installed": True,
         "enabled": True,
     }
@@ -325,7 +324,7 @@ def format_collapsible_thought(text: str) -> str:
         thought_body = match.group(1).strip()
         return (
             f"<details style='background: #111622; border: 1px solid #1f2838; border-radius: 6px; margin: 6px 0; padding: 6px;'>"
-            f"<summary style='color: #8fa2bf; cursor: pointer; font-weight: bold;'>Thought for 5s ▾</summary>"
+            f"<summary style='color: #8fa2bf; cursor: pointer; font-weight: bold;'>Thought for 5s ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“Ãƒâ€šÃ‚Â¾</summary>"
             f"<div style='color: #64748b; font-family: monospace; font-size: 8.5pt; margin-top: 4px; white-space: pre-wrap;'>{html_escape(thought_body)}</div>"
             f"</details>"
         )
@@ -337,7 +336,7 @@ def format_collapsible_thought(text: str) -> str:
 # ==============================================================================
 class BlinkingAIIndicator(QWidget):
     """
-    Animated blinking & breathing cybernetic AI status indicator for SO NAIVE IDE.
+    Animated blinking & breathing cybernetic AI status indicator for PRUBETH IDE.
     Renders smooth sine-wave glowing iris, dynamic chromatic blinking during
     inference, and distinct state visual cues (Idle, Streaming, Auto-Fix, Error).
     """
@@ -439,7 +438,7 @@ class BlinkingAIIndicator(QWidget):
         p.setPen(text_col)
         font = QFont("Segoe UI", 8, QFont.Bold)
         p.setFont(font)
-        p.drawText(29, 18, f"PRUBETH · {badge_text}")
+        p.drawText(29, 18, f"PRUBETH ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â· {badge_text}")
         p.end()
 
 
@@ -468,7 +467,8 @@ class IntelligentModelRouter:
         local_model = settings.get("local_model") or "qwen2.5:1.5b"
 
         # 1. If user explicitly requested a specific provider (not Auto)
-        if requested_provider and requested_provider not in ("⚡ Auto-Router", "Auto"):
+        _is_auto = not requested_provider or "Auto-Router" in str(requested_provider) or requested_provider == "Auto"
+        if requested_provider and not _is_auto:
             if requested_provider == "NavyAI":
                 candidates.append(("NavyAI", requested_model or navy_model, "Direct User Selection (NavyAI Unified)"))
             else:
@@ -728,7 +728,7 @@ class VisualDiffDialog(QDialog):
 
     def __init__(self, before_text, after_text, file_name="file", parent=None):
         super().__init__(parent)
-        self.setWindowTitle(f"Review AI Changes — {file_name}")
+        self.setWindowTitle(f"Review AI Changes ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â {file_name}")
         self.resize(1240, 780)
         self.setStyleSheet("""
             QDialog { background: #0f121a; color: #e6edf7; }
@@ -797,14 +797,14 @@ class VisualDiffDialog(QDialog):
         btn_layout = QHBoxLayout()
         btn_layout.addStretch()
 
-        self.btn_apply = QPushButton("✓ Apply to Editor Tab")
+        self.btn_apply = QPushButton("ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã¢â‚¬Å“ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œ Apply to Editor Tab")
         self.btn_apply.setStyleSheet("background: #186036; border-color: #2ea055;")
         self.btn_apply.clicked.connect(self.accept)
 
-        self.btn_save_disk = QPushButton("💾 Save Directly to Disk")
+        self.btn_save_disk = QPushButton("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢Ãƒâ€šÃ‚Â¾ Save Directly to Disk")
         self.btn_save_disk.clicked.connect(self.accept_and_save)
 
-        self.btn_cancel = QPushButton("✕ Discard")
+        self.btn_cancel = QPushButton("ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã¢â‚¬Å“ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢ Discard")
         self.btn_cancel.clicked.connect(self.reject)
 
         btn_layout.addWidget(self.btn_cancel)
@@ -870,7 +870,7 @@ class QuickOpenDialog(QDialog):
 
         layout = QVBoxLayout(self)
         self.search_input = QLineEdit()
-        self.search_input.setPlaceholderText("Search file by name or path… (Up/Down to navigate, Enter to open)")
+        self.search_input.setPlaceholderText("Search file by name or pathÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¦ (Up/Down to navigate, Enter to open)")
         self.search_input.textChanged.connect(self.filter_files)
         layout.addWidget(self.search_input)
 
@@ -967,7 +967,7 @@ class CommandPaletteDialog(QDialog):
 
         layout = QVBoxLayout(self)
         self.input = QLineEdit()
-        self.input.setPlaceholderText("Type a command… (Up/Down to select, Enter to run)")
+        self.input.setPlaceholderText("Type a commandÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¦ (Up/Down to select, Enter to run)")
         self.input.textChanged.connect(self.filter_commands)
         layout.addWidget(self.input)
 
@@ -1043,7 +1043,7 @@ class QuickEditDialog(QDialog):
         layout.addWidget(QLabel(f"Target: <span style='color:#5aa7ff;'>{target_label}</span>"))
 
         self.input = QLineEdit()
-        self.input.setPlaceholderText("Describe the change (e.g., 'Add type hints and docstring', 'Refactor into generator')…")
+        self.input.setPlaceholderText("Describe the change (e.g., 'Add type hints and docstring', 'Refactor into generator')ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¦")
         layout.addWidget(self.input)
 
         row = QHBoxLayout()
@@ -1102,9 +1102,9 @@ class AIWorker(QThread):
                 break
             try:
                 if idx > 0:
-                    self.status.emit(f"⚡ Cascading to backup tier [{idx+1}/{len(chain)}]: {provider} ({model})…")
+                    self.status.emit(f"ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã‚Â¡Ãƒâ€šÃ‚Â¡ Cascading to backup tier [{idx+1}/{len(chain)}]: {provider} ({model})ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¦")
                 else:
-                    self.status.emit(f"⚡ Executing with: {provider} ({model})…")
+                    self.status.emit(f"ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã‚Â¡Ãƒâ€šÃ‚Â¡ Executing with: {provider} ({model})ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¦")
 
                 if provider == "Google Gemini":
                     self._run_gemini(model)
@@ -1462,7 +1462,7 @@ class PerformanceRadarDialog(QDialog):
         self.populate_matrix()
 
         btn_row = QHBoxLayout()
-        btn_bench = QPushButton("⚡ Benchmark Latency Now")
+        btn_bench = QPushButton("ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã‚Â¡Ãƒâ€šÃ‚Â¡ Benchmark Latency Now")
         btn_bench.setStyleSheet("background: #186036; border-color: #2ea055;")
         btn_bench.clicked.connect(self.run_benchmark)
         btn_close = QPushButton("Close")
@@ -1494,7 +1494,7 @@ class PerformanceRadarDialog(QDialog):
                 self.table.setItem(i, j, item)
 
     def run_benchmark(self):
-        QMessageBox.information(self, "Benchmark", "Measuring live latency across configured endpoints…")
+        QMessageBox.information(self, "Benchmark", "Measuring live latency across configured endpointsÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¦")
         results = {}
         # Ping Gemini
         key = self.settings.get("gemini_api_key") or os.environ.get("GEMINI_API_KEY", "")
@@ -1950,7 +1950,7 @@ class EmbeddedTerminalWidget(QWidget):
 
         self.cmd_input = QLineEdit()
         self.cmd_input.setFont(QFont("Cascadia Code", 10))
-        self.cmd_input.setPlaceholderText("Enter shell command (e.g., 'pytest', 'git status', 'pip install <pkg>')…")
+        self.cmd_input.setPlaceholderText("Enter shell command (e.g., 'pytest', 'git status', 'pip install <pkg>')ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¦")
         self.cmd_input.returnPressed.connect(self.execute_command)
         self.cmd_input.installEventFilter(self)
         input_bar.addWidget(self.cmd_input, 1)
@@ -2086,15 +2086,15 @@ def verify_gguf_header(path_str):
                     if len(hdr_len_b) == 8:
                         hdr_len = struct.unpack("<Q", hdr_len_b)[0]
                         if 0 < hdr_len < 100 * 1024 * 1024:
-                            return True, f"✓ Valid SafeTensors Model ({size_gb:.2f} GB · Header: {hdr_len} bytes)"
+                            return True, f"ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã¢â‚¬Å“ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œ Valid SafeTensors Model ({size_gb:.2f} GB ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â· Header: {hdr_len} bytes)"
                 return False, f"Invalid magic header {magic!r} (expected b'GGUF'). File may be incomplete or corrupted."
             ver = struct.unpack("<I", f.read(4))[0]
             extra_info = ""
             if ver >= 2:
                 tensor_count, kv_count = struct.unpack("<QQ", f.read(16))
-                extra_info = f" · {tensor_count} Tensors · {kv_count} Metadata Keys"
+                extra_info = f" ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â· {tensor_count} Tensors ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â· {kv_count} Metadata Keys"
             vram_est = size_gb * 1.15
-            return True, f"✓ Valid GGUF v{ver} Model ({size_gb:.2f} GB{extra_info} · Est. VRAM: {vram_est:.2f} GB)"
+            return True, f"ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã¢â‚¬Å“ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œ Valid GGUF v{ver} Model ({size_gb:.2f} GB{extra_info} ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â· Est. VRAM: {vram_est:.2f} GB)"
     except Exception as e:
         return False, f"Header read error: {str(e)}"
 
@@ -2159,7 +2159,7 @@ class SketchCanvasDialog(QDialog):
         super().__init__(parent)
         self.workspace_root = Path(workspace_root)
         self.saved_image_path = None
-        self.setWindowTitle("✏️ Sketch Canvas — Draw & Attach")
+        self.setWindowTitle("ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã¢â‚¬Å“Ãƒâ€šÃ‚ÂÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¸Ãƒâ€šÃ‚Â Sketch Canvas ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â Draw & Attach")
         self.resize(650, 480)
         self.setStyleSheet("""
             QDialog { background: #11151f; color: #e6edf7; }
@@ -2217,7 +2217,7 @@ class SketchCanvasDialog(QDialog):
         btn_cancel.clicked.connect(self.reject)
         b_layout.addWidget(btn_cancel)
 
-        btn_attach = QPushButton("💾 Attach Sketch to Prompt")
+        btn_attach = QPushButton("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢Ãƒâ€šÃ‚Â¾ Attach Sketch to Prompt")
         btn_attach.setStyleSheet("background: #186036; border-color: #2ea055; font-weight: bold;")
         btn_attach.clicked.connect(self.save_and_attach)
         b_layout.addWidget(btn_attach)
@@ -2247,7 +2247,7 @@ class WebSearchDialog(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.search_summary = ""
-        self.setWindowTitle("🌐 Web Search — Real-Time Info & Documentation")
+        self.setWindowTitle("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€¦Ã¢â‚¬â„¢Ãƒâ€šÃ‚Â Web Search ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â Real-Time Info & Documentation")
         self.resize(600, 420)
         self.setStyleSheet("""
             QDialog { background: #11151f; color: #e6edf7; }
@@ -2308,7 +2308,7 @@ class CreateImageDialog(QDialog):
         super().__init__(parent)
         self.workspace_root = Path(workspace_root)
         self.generated_path = None
-        self.setWindowTitle("🎨 Create Image & Visual Assets")
+        self.setWindowTitle("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€¦Ã‚Â½Ãƒâ€šÃ‚Â¨ Create Image & Visual Assets")
         self.resize(540, 320)
         self.setStyleSheet("""
             QDialog { background: #11151f; color: #e6edf7; }
@@ -2351,7 +2351,7 @@ class CreateImageDialog(QDialog):
             svg_content = f"""<svg xmlns="http://www.w3.org/2000/svg" width="600" height="300" viewBox="0 0 600 300">
   <rect width="600" height="300" fill="#0d1117" rx="12"/>
   <rect x="50" y="50" width="140" height="80" rx="8" fill="#161b22" stroke="#00F0FF" stroke-width="2"/>
-  <text x="120" y="95" fill="#ffffff" font-family="sans-serif" font-size="14" text-anchor="middle">SO NAIVE IDE</text>
+  <text x="120" y="95" fill="#ffffff" font-family="sans-serif" font-size="14" text-anchor="middle">PRUBETH IDE</text>
   <line x1="190" y1="90" x2="250" y2="90" stroke="#00F0FF" stroke-width="2"/>
   <rect x="250" y="50" width="140" height="80" rx="8" fill="#161b22" stroke="#A855F7" stroke-width="2"/>
   <text x="320" y="95" fill="#ffffff" font-family="sans-serif" font-size="14" text-anchor="middle">Model Router</text>
@@ -2385,7 +2385,7 @@ class LibraryBrowserDialog(QDialog):
         super().__init__(parent)
         self.workspace_root = Path(workspace_root)
         self.selected_files = []
-        self.setWindowTitle("📚 Library — Browse Workspace Files")
+        self.setWindowTitle("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œÃƒâ€¦Ã‚Â¡ Library ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â Browse Workspace Files")
         self.resize(560, 440)
         self.setStyleSheet("""
             QDialog { background: #11151f; color: #e6edf7; }
@@ -2396,7 +2396,7 @@ class LibraryBrowserDialog(QDialog):
 
         layout = QVBoxLayout(self)
         self.search_box = QLineEdit()
-        self.search_box.setPlaceholderText("Filter files by name or extension…")
+        self.search_box.setPlaceholderText("Filter files by name or extensionÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¦")
         self.search_box.textChanged.connect(self.filter_list)
         layout.addWidget(self.search_box)
 
@@ -2450,7 +2450,7 @@ class VisualizationDialog(QDialog):
         super().__init__(parent)
         self.workspace_root = Path(workspace_root)
         self.generated_path = None
-        self.setWindowTitle("🧬 Visualize — Interactive Diagrams & Dashboards")
+        self.setWindowTitle("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€šÃ‚Â§Ãƒâ€šÃ‚Â¬ Visualize ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â Interactive Diagrams & Dashboards")
         self.resize(600, 440)
         self.setStyleSheet("""
             QDialog { background: #11151f; color: #e6edf7; }
@@ -2463,7 +2463,7 @@ class VisualizationDialog(QDialog):
         layout.addWidget(QLabel("<b>Diagram / HTML Visualization Source:</b>"))
 
         default_mermaid = """graph TD
-    User["Developer Prompt"] --> Router["⚡ Intelligent Model Router"]
+    User["Developer Prompt"] --> Router["ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã‚Â¡Ãƒâ€šÃ‚Â¡ Intelligent Model Router"]
     Router --> Gemini["Google Gemini 3.8 Flash (Cloud)"]
     Router --> Ollama["Local CUDA Ollama (NVIDIA 1050 Ti)"]
     Gemini --> Agent["Autonomous Tool Engine"]
@@ -2501,7 +2501,7 @@ class GitHubFlowDialog(QDialog):
     def __init__(self, workspace_root, parent=None):
         super().__init__(parent)
         self.workspace_root = Path(workspace_root)
-        self.setWindowTitle("🐙 GitHub & CI/CD Workflow Hub")
+        self.setWindowTitle("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€šÃ‚ÂÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ GitHub & CI/CD Workflow Hub")
         self.resize(620, 460)
         self.setStyleSheet("""
             QDialog { background: #11151f; color: #e6edf7; }
@@ -2654,15 +2654,15 @@ class AccessoryPopup(QDialog):
         self.items_layout.setSpacing(2)
 
         items_spec = [
-            ("📎", "Add photos & files", "Upload from computer", self.studio.accessory_add_photos_files),
-            ("📚", "Add from library", "Browse and search your files", self.studio.accessory_add_from_library),
-            ("🖼️", "Create image", "Visualize anything", self.studio.accessory_create_image),
-            ("✏️", "Sketch", "Draw and attach an image", self.studio.accessory_sketch),
-            ("🌐", "Web search", "Find real-time news and info", self.studio.accessory_web_search),
-            ("🔭", "Deep research", "Get a detailed report", self.studio.accessory_deep_research),
-            ("🧬", "Visualize", "Create visualizations and interactive tools", self.studio.accessory_visualize),
-            ("⚙️", "OpenAI Platform & Hub", "Manage OpenAI API keys and view organization billing", self.studio.accessory_open_provider_hub),
-            ("🐙", "GitHub", "Triage PRs, issues, CI, and publish flows", self.studio.accessory_github_flow),
+            ("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œÃƒâ€¦Ã‚Â½", "Add photos & files", "Upload from computer", self.studio.accessory_add_photos_files),
+            ("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œÃƒâ€¦Ã‚Â¡", "Add from library", "Browse and search your files", self.studio.accessory_add_from_library),
+            ("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“Ãƒâ€šÃ‚Â¼ÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¸Ãƒâ€šÃ‚Â", "Create image", "Visualize anything", self.studio.accessory_create_image),
+            ("ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã¢â‚¬Å“Ãƒâ€šÃ‚ÂÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¸Ãƒâ€šÃ‚Â", "Sketch", "Draw and attach an image", self.studio.accessory_sketch),
+            ("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€¦Ã¢â‚¬â„¢Ãƒâ€šÃ‚Â", "Web search", "Find real-time news and info", self.studio.accessory_web_search),
+            ("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒâ€šÃ‚Â­", "Deep research", "Get a detailed report", self.studio.accessory_deep_research),
+            ("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€šÃ‚Â§Ãƒâ€šÃ‚Â¬", "Visualize", "Create visualizations and interactive tools", self.studio.accessory_visualize),
+            ("ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã‚Â¡ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¸Ãƒâ€šÃ‚Â", "OpenAI Platform & Hub", "Manage OpenAI API keys and view organization billing", self.studio.accessory_open_provider_hub),
+            ("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€šÃ‚ÂÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢", "GitHub", "Triage PRs, issues, CI, and publish flows", self.studio.accessory_github_flow),
         ]
 
         self.item_widgets = []
@@ -2706,7 +2706,7 @@ class AccessoryPopup(QDialog):
 # ==============================================================================
 class SessionInspectorWidget(QWidget):
     """
-    Inspector Panel matching PRUBETH Horizon & SO NAIVE IDE design.
+    Inspector Panel matching PRUBETH Horizon & PRUBETH IDE design.
     """
     def __init__(self, studio, parent=None):
         super().__init__(parent)
@@ -2737,11 +2737,11 @@ class SessionInspectorWidget(QWidget):
         # 1. Subagents
         self.grp_subagents = QGroupBox("Subagents  (1 >)")
         sa_l = QVBoxLayout(self.grp_subagents)
-        sa_l.addWidget(QLabel("● Main Copilot Agent (Active · Auto-Router)"))
+        sa_l.addWidget(QLabel("ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬ÂÃƒâ€šÃ‚Â Main Copilot Agent (Active ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â· Auto-Router)"))
         cl.addWidget(self.grp_subagents)
 
         # 2. Files Changed
-        self.grp_files = QGroupBox("Files Changed  (0 ▾)")
+        self.grp_files = QGroupBox("Files Changed  (0 ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“Ãƒâ€šÃ‚Â¾)")
         self.files_layout = QVBoxLayout(self.grp_files)
         self.files_list = QListWidget()
         self.files_list.setMaximumHeight(160)
@@ -2751,7 +2751,7 @@ class SessionInspectorWidget(QWidget):
         cl.addWidget(self.grp_files)
 
         # 3. Artifacts
-        self.grp_artifacts = QGroupBox("Artifacts  (4 ▾)")
+        self.grp_artifacts = QGroupBox("Artifacts  (4 ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“Ãƒâ€šÃ‚Â¾)")
         self.art_layout = QVBoxLayout(self.grp_artifacts)
         self.art_list = QListWidget()
         self.art_list.setMaximumHeight(130)
@@ -2761,7 +2761,7 @@ class SessionInspectorWidget(QWidget):
         cl.addWidget(self.grp_artifacts)
 
         # 4. Uploads
-        self.grp_uploads = QGroupBox("Uploads  (0 ▾)")
+        self.grp_uploads = QGroupBox("Uploads  (0 ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“Ãƒâ€šÃ‚Â¾)")
         self.up_layout = QVBoxLayout(self.grp_uploads)
         self.up_list = QListWidget()
         self.up_list.setMaximumHeight(110)
@@ -2778,11 +2778,11 @@ class SessionInspectorWidget(QWidget):
         # 6. Terminals
         self.grp_terms = QGroupBox("Terminals  (1 >)")
         term_l = QVBoxLayout(self.grp_terms)
-        term_l.addWidget(QLabel("● PowerShell / CMD (Interactive Terminal)"))
+        term_l.addWidget(QLabel("ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬ÂÃƒâ€šÃ‚Â PowerShell / CMD (Interactive Terminal)"))
         cl.addWidget(self.grp_terms)
 
         # 7. Skills Used
-        self.grp_skills = QGroupBox("Skills Used  (4 ▾)")
+        self.grp_skills = QGroupBox("Skills Used  (4 ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“Ãƒâ€šÃ‚Â¾)")
         self.sk_layout = QVBoxLayout(self.grp_skills)
         self.sk_list = QListWidget()
         self.sk_list.setMaximumHeight(110)
@@ -2814,34 +2814,34 @@ class SessionInspectorWidget(QWidget):
             self.refresh_skills()
 
     def refresh_files(self):
-        self.grp_files.setTitle(f"Files Changed  ({len(self.files_changed)} ▾)")
+        self.grp_files.setTitle(f"Files Changed  ({len(self.files_changed)} ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“Ãƒâ€šÃ‚Â¾)")
         self.files_list.clear()
         for f in sorted(self.files_changed):
-            item = QListWidgetItem(f"📄 {f}")
+            item = QListWidgetItem(f"ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ {f}")
             item.setData(Qt.UserRole, f)
             self.files_list.addItem(item)
 
     def refresh_artifacts(self):
-        self.grp_artifacts.setTitle(f"Artifacts  ({len(self.artifacts)} ▾)")
+        self.grp_artifacts.setTitle(f"Artifacts  ({len(self.artifacts)} ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“Ãƒâ€šÃ‚Â¾)")
         self.art_list.clear()
         for name, desc in self.artifacts:
-            item = QListWidgetItem(f"📦 {name} — {desc}")
+            item = QListWidgetItem(f"ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œÃƒâ€šÃ‚Â¦ {name} ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â {desc}")
             item.setData(Qt.UserRole, name)
             self.art_list.addItem(item)
 
     def refresh_uploads(self):
-        self.grp_uploads.setTitle(f"Uploads  ({len(self.uploads)} ▾)")
+        self.grp_uploads.setTitle(f"Uploads  ({len(self.uploads)} ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“Ãƒâ€šÃ‚Â¾)")
         self.up_list.clear()
         for name, p in self.uploads:
-            item = QListWidgetItem(f"📎 {name}")
+            item = QListWidgetItem(f"ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œÃƒâ€¦Ã‚Â½ {name}")
             item.setData(Qt.UserRole, p)
             self.up_list.addItem(item)
 
     def refresh_skills(self):
-        self.grp_skills.setTitle(f"Skills Used  ({len(self.skills_used)} ▾)")
+        self.grp_skills.setTitle(f"Skills Used  ({len(self.skills_used)} ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“Ãƒâ€šÃ‚Â¾)")
         self.sk_list.clear()
         for s in self.skills_used:
-            self.sk_list.addItem(f"⚡ {s}")
+            self.sk_list.addItem(f"ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã‚Â¡Ãƒâ€šÃ‚Â¡ {s}")
 
     def refresh_all(self):
         self.refresh_files()
@@ -2871,7 +2871,7 @@ class ConversationHistoryDialog(QDialog):
     def __init__(self, studio, parent=None):
         super().__init__(parent)
         self.studio = studio
-        self.setWindowTitle("🕒 Conversation History")
+        self.setWindowTitle("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ Conversation History")
         self.resize(580, 440)
         self.setStyleSheet("""
             QDialog { background: #11151f; color: #e6edf7; }
@@ -2889,7 +2889,7 @@ class ConversationHistoryDialog(QDialog):
             d = read_json(f, {})
             title = d.get("title", f.stem)
             ts = time.strftime("%Y-%m-%d %H:%M", time.localtime(d.get("timestamp", f.stat().st_mtime)))
-            item = QListWidgetItem(f"💬 {title} ({ts})")
+            item = QListWidgetItem(f"ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢Ãƒâ€šÃ‚Â¬ {title} ({ts})")
             item.setData(Qt.UserRole, d.get("id", f.stem))
             self.list_view.addItem(item)
 
@@ -2929,7 +2929,7 @@ class ConversationHistoryDialog(QDialog):
 class AutomationsDialog(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.setWindowTitle("⏱️ Background Automations & Scheduled Tasks")
+        self.setWindowTitle("ÃƒÆ’Ã‚Â¢Ãƒâ€šÃ‚ÂÃƒâ€šÃ‚Â±ÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¸Ãƒâ€šÃ‚Â Background Automations & Scheduled Tasks")
         self.resize(540, 360)
         self.setStyleSheet("""
             QDialog { background: #11151f; color: #e6edf7; }
@@ -2945,9 +2945,9 @@ class AutomationsDialog(QDialog):
 
         list_w = QListWidget()
         list_w.setStyleSheet("background: #080c14; border: 1px solid #1f2838; border-radius: 5px;")
-        list_w.addItem("⏱️ Nightly Test Runner: Runs pytest every midnight and logs results")
-        list_w.addItem("⏱️ Git Sync Daemon: Auto-fetches remote branches every 30 minutes")
-        list_w.addItem("⏱️ Release Packager: Auto-builds setup.exe on git tag commit")
+        list_w.addItem("ÃƒÆ’Ã‚Â¢Ãƒâ€šÃ‚ÂÃƒâ€šÃ‚Â±ÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¸Ãƒâ€šÃ‚Â Nightly Test Runner: Runs pytest every midnight and logs results")
+        list_w.addItem("ÃƒÆ’Ã‚Â¢Ãƒâ€šÃ‚ÂÃƒâ€šÃ‚Â±ÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¸Ãƒâ€šÃ‚Â Git Sync Daemon: Auto-fetches remote branches every 30 minutes")
+        list_w.addItem("ÃƒÆ’Ã‚Â¢Ãƒâ€šÃ‚ÂÃƒâ€šÃ‚Â±ÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¸Ãƒâ€šÃ‚Â Release Packager: Auto-builds setup.exe on git tag commit")
         layout.addWidget(list_w, 1)
 
         b_row = QHBoxLayout()
@@ -2961,7 +2961,7 @@ class AutomationsDialog(QDialog):
 class CustomizationsDialog(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.setWindowTitle("🧰 Customizations — Skills, Plugins & MCP Servers")
+        self.setWindowTitle("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€šÃ‚Â§Ãƒâ€šÃ‚Â° Customizations ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â Skills, Plugins & MCP Servers")
         self.resize(580, 400)
         self.setStyleSheet("""
             QDialog { background: #11151f; color: #e6edf7; }
@@ -2973,12 +2973,12 @@ class CustomizationsDialog(QDialog):
         layout.addWidget(QLabel("<h3>Installed IDE Customizations</h3>"))
         list_w = QListWidget()
         list_w.setStyleSheet("background: #080c14; border: 1px solid #1f2838; border-radius: 5px;")
-        list_w.addItem("🧰 Skill: autonomous-agent-loop (Multi-step tool calling & verification)")
-        list_w.addItem("🧰 Skill: deliverable-verification (Automated criteria verification & syntax/test checking)")
-        list_w.addItem("🧰 Skill: gguf-model-verifier (Direct header parsing & VRAM computation)")
-        list_w.addItem("🧰 Skill: managing-python-dependencies (Virtualenv auto-detection)")
-        list_w.addItem("🧰 MCP Server: filesystem (@modelcontextprotocol/server-filesystem)")
-        list_w.addItem("🧰 MCP Server: duckduckgo (Web search & real-time docs)")
+        list_w.addItem("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€šÃ‚Â§Ãƒâ€šÃ‚Â° Skill: autonomous-agent-loop (Multi-step tool calling & verification)")
+        list_w.addItem("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€šÃ‚Â§Ãƒâ€šÃ‚Â° Skill: deliverable-verification (Automated criteria verification & syntax/test checking)")
+        list_w.addItem("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€šÃ‚Â§Ãƒâ€šÃ‚Â° Skill: gguf-model-verifier (Direct header parsing & VRAM computation)")
+        list_w.addItem("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€šÃ‚Â§Ãƒâ€šÃ‚Â° Skill: managing-python-dependencies (Virtualenv auto-detection)")
+        list_w.addItem("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€šÃ‚Â§Ãƒâ€šÃ‚Â° MCP Server: filesystem (@modelcontextprotocol/server-filesystem)")
+        list_w.addItem("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€šÃ‚Â§Ãƒâ€šÃ‚Â° MCP Server: duckduckgo (Web search & real-time docs)")
         layout.addWidget(list_w, 1)
 
         b_row = QHBoxLayout()
@@ -3005,7 +3005,7 @@ class Studio(QMainWindow):
             pass
 
         self.settings = read_json(SETTINGS_PATH, {})
-        self.settings.setdefault("provider", "⚡ Auto-Router")
+        self.settings.setdefault("provider", "ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã‚Â¡Ãƒâ€šÃ‚Â¡ Auto-Router")
         self.settings.setdefault("ollama_url", "http://localhost:11434")
         self.settings.setdefault("model", "gemini-3.8-flash")
         self.settings.setdefault("project_root", os.getcwd())
@@ -3032,7 +3032,7 @@ class Studio(QMainWindow):
         self.active_conversation_id = f"conv_{int(time.time())}"
         self.active_conversation_title = "New Conversation"
 
-        self.setWindowTitle(f"{APP_NAME} — {APP_VERSION}")
+        self.setWindowTitle(f"{APP_NAME} ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â {APP_VERSION}")
         self.resize(1740, 1040)
         self.setMinimumSize(1100, 700)
         self.set_app_icon()
@@ -3080,7 +3080,7 @@ class Studio(QMainWindow):
 
     @property
     def provider(self):
-        return self.settings.get("provider", "⚡ Auto-Router")
+        return self.settings.get("provider", "ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã‚Â¡Ãƒâ€šÃ‚Â¡ Auto-Router")
 
     @property
     def model(self):
@@ -3107,25 +3107,25 @@ class Studio(QMainWindow):
         self.addToolBar(bar)
 
         tools = [
-            ("＋ New", self.new_file),
-            ("↗ Open", self.open_file_dialog),
-            ("📁 Project", self.open_folder),
-            ("💾 Save", self.save_file),
-            ("▶ Run (F5)", self.run_python),
-            ("■ Stop", self.stop_process),
-            ("⚡ Auto-Fix", self.auto_fix_error),
-            ("⚡ Quick Edit", self.trigger_quick_edit),
-            ("🔍 Quick Open", self.open_quick_open),
-            ("⌘ Palette", self.open_command_palette),
-            ("📡 Radar", self.open_performance_radar),
-            ("⑂ Git", self.git_status),
-            ("✨ Composer", self.open_composer),
-            ("🚀 Mission Control", self.open_mission_control),
-            ("📜 Artifacts", self.open_artifact_inspector),
-            ("🧩 Open VSX", self.open_open_vsx),
-            ("🧪 Tests", self.run_tests),
-            ("✓ Fitness", self.run_ide_check),
-            ("⚙️ Settings", self.settings_dialog),
+            ("ÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¼ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¹ New", self.new_file),
+            ("ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Open", self.open_file_dialog),
+            ("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œÃƒâ€šÃ‚Â Project", self.open_folder),
+            ("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢Ãƒâ€šÃ‚Â¾ Save", self.save_file),
+            ("ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“Ãƒâ€šÃ‚Â¶ Run (F5)", self.run_python),
+            ("ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“Ãƒâ€šÃ‚Â  Stop", self.stop_process),
+            ("ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã‚Â¡Ãƒâ€šÃ‚Â¡ Auto-Fix", self.auto_fix_error),
+            ("ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã‚Â¡Ãƒâ€šÃ‚Â¡ Quick Edit", self.trigger_quick_edit),
+            ("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒâ€šÃ‚Â Quick Open", self.open_quick_open),
+            ("ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã¢â‚¬â„¢Ãƒâ€¹Ã…â€œ Palette", self.open_command_palette),
+            ("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œÃƒâ€šÃ‚Â¡ Radar", self.open_performance_radar),
+            ("ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‹Å“ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ Git", self.git_status),
+            ("ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã¢â‚¬Å“Ãƒâ€šÃ‚Â¨ Composer", self.open_composer),
+            ("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€¦Ã‚Â¡ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ Mission Control", self.open_mission_control),
+            ("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œÃƒâ€¦Ã¢â‚¬Å“ Artifacts", self.open_artifact_inspector),
+            ("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€šÃ‚Â§Ãƒâ€šÃ‚Â© Open VSX", self.open_open_vsx),
+            ("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€šÃ‚Â§Ãƒâ€šÃ‚Âª Tests", self.run_tests),
+            ("ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã¢â‚¬Å“ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œ Fitness", self.run_ide_check),
+            ("ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã‚Â¡ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¸Ãƒâ€šÃ‚Â Settings", self.settings_dialog),
         ]
         for label, fn in tools:
             a = QAction(label, self)
@@ -3148,7 +3148,7 @@ class Studio(QMainWindow):
         self.model_combo.currentTextChanged.connect(self.change_model)
         bar.addWidget(self.model_combo)
 
-        ref_act = QAction("⟳", self)
+        ref_act = QAction("ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã‚Â¸Ãƒâ€šÃ‚Â³", self)
         ref_act.triggered.connect(self.refresh_models)
         bar.addAction(ref_act)
 
@@ -3169,11 +3169,11 @@ class Studio(QMainWindow):
         top_nav = QVBoxLayout()
         top_nav.setSpacing(4)
 
-        lbl_brand = QLabel(f"<b>{APP_BRAND}</b> · {APP_NAME}")
+        lbl_brand = QLabel(f"<b>{APP_BRAND}</b> ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â· {APP_NAME}")
         lbl_brand.setStyleSheet("color: #00F0FF; font-size: 10.5pt; font-weight: bold; padding: 2px 4px;")
         top_nav.addWidget(lbl_brand)
 
-        btn_new_chat = QPushButton("＋ New Conversation")
+        btn_new_chat = QPushButton("ÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¼ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¹ New Conversation")
         btn_new_chat.setStyleSheet("""
             QPushButton {
                 background: #162030;
@@ -3193,15 +3193,15 @@ class Studio(QMainWindow):
         top_nav.addWidget(btn_new_chat)
 
         nav_row = QHBoxLayout()
-        btn_history = QPushButton("🕒 History")
+        btn_history = QPushButton("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ History")
         btn_history.setStyleSheet("padding: 4px 6px; font-size: 8.5pt;")
         btn_history.clicked.connect(self.open_conversation_history)
 
-        btn_automations = QPushButton("⏱️ Automations")
+        btn_automations = QPushButton("ÃƒÆ’Ã‚Â¢Ãƒâ€šÃ‚ÂÃƒâ€šÃ‚Â±ÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¸Ãƒâ€šÃ‚Â Automations")
         btn_automations.setStyleSheet("padding: 4px 6px; font-size: 8.5pt;")
         btn_automations.clicked.connect(self.open_automations_dialog)
 
-        btn_custom = QPushButton("🧰 Customizations")
+        btn_custom = QPushButton("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€šÃ‚Â§Ãƒâ€šÃ‚Â° Customizations")
         btn_custom.setStyleSheet("padding: 4px 6px; font-size: 8.5pt;")
         btn_custom.clicked.connect(self.open_customizations_dialog)
 
@@ -3216,7 +3216,7 @@ class Studio(QMainWindow):
         proj_head = QHBoxLayout()
         proj_head.addWidget(QLabel("<b>PROJECTS</b>"))
         proj_head.addStretch()
-        b_folder = QPushButton("Folder…")
+        b_folder = QPushButton("FolderÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¦")
         b_folder.setStyleSheet("padding: 3px 8px; font-size: 8.5pt;")
         b_folder.clicked.connect(self.open_folder)
         proj_head.addWidget(b_folder)
@@ -3241,7 +3241,7 @@ class Studio(QMainWindow):
         conv_head = QHBoxLayout()
         conv_head.addWidget(QLabel("<b>CONVERSATIONS</b>"))
         conv_head.addStretch()
-        btn_add_conv = QPushButton("＋")
+        btn_add_conv = QPushButton("ÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¼ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¹")
         btn_add_conv.setFixedSize(20, 20)
         btn_add_conv.clicked.connect(self.new_conversation)
         conv_head.addWidget(btn_add_conv)
@@ -3273,14 +3273,14 @@ class Studio(QMainWindow):
         ll.addWidget(self.conv_list)
 
         self.left_tabs = QTabWidget()
-        self.left_tabs.addTab(left, "📁 Files")
+        self.left_tabs.addTab(left, "ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œÃƒâ€šÃ‚Â Files")
 
         # Tab 2: Git Sidebar
         try:
             from ui.git_sidebar import GitSidebarWidget
             self.git_sidebar = GitSidebarWidget(self.root, parent=self)
-            self.git_sidebar.file_selected.connect(self.open_file)
-            self.left_tabs.addTab(self.git_sidebar, "⑂ Git")
+            self.git_sidebar.file_diff_requested.connect(lambda path, staged: self.open_file(path))
+            self.left_tabs.addTab(self.git_sidebar, "ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‹Å“ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ Git")
         except Exception:
             self.git_sidebar = None
 
@@ -3290,7 +3290,7 @@ class Studio(QMainWindow):
             self.checkpoints_widget = CheckpointsWidget(self.tool_engine.checkpoint_manager, parent=self)
             self.checkpoints_widget.file_open_requested.connect(self.open_file)
             self.checkpoints_widget.checkpoint_rolled_back.connect(self._on_checkpoint_rolled_back)
-            self.left_tabs.addTab(self.checkpoints_widget, "🛡️ Checkpoints")
+            self.left_tabs.addTab(self.checkpoints_widget, "ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂºÃƒâ€šÃ‚Â¡ÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¸Ãƒâ€šÃ‚Â Checkpoints")
         except Exception:
             self.checkpoints_widget = None
 
@@ -3299,7 +3299,7 @@ class Studio(QMainWindow):
             from ui.testing_widget import TestingWidget
             self.testing_widget = TestingWidget(self.root, parent=self)
             self.testing_widget.run_all_requested.connect(self.run_tests)
-            self.left_tabs.addTab(self.testing_widget, "🧪 Tests")
+            self.left_tabs.addTab(self.testing_widget, "ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€šÃ‚Â§Ãƒâ€šÃ‚Âª Tests")
         except Exception:
             self.testing_widget = None
 
@@ -3307,7 +3307,7 @@ class Studio(QMainWindow):
         try:
             from ui.gpu_telemetry_widget import GpuTelemetryWidget
             self.gpu_telemetry_widget = GpuTelemetryWidget(parent=self)
-            self.left_tabs.addTab(self.gpu_telemetry_widget, "⚡ Models")
+            self.left_tabs.addTab(self.gpu_telemetry_widget, "ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã‚Â¡Ãƒâ€šÃ‚Â¡ Models")
         except Exception:
             self.gpu_telemetry_widget = None
 
@@ -3315,7 +3315,10 @@ class Studio(QMainWindow):
         try:
             from ui.composer_widget import ComposerWidget
             self.composer_widget = ComposerWidget(self.root, self.tool_engine.checkpoint_manager, parent=self)
-            self.left_tabs.addTab(self.composer_widget, "✨ Composer")
+            def _composer_worker_factory(prompt: str):
+                return AIWorker(self.model, self.settings, prompt)
+            self.composer_widget.set_ai_worker_factory(_composer_worker_factory)
+            self.left_tabs.addTab(self.composer_widget, "⚡ Composer")
         except Exception:
             self.composer_widget = None
 
@@ -3323,7 +3326,7 @@ class Studio(QMainWindow):
         try:
             from ui.open_vsx_widget import OpenVsxWidget
             self.open_vsx_widget = OpenVsxWidget(parent=self)
-            self.left_tabs.addTab(self.open_vsx_widget, "🧩 Extensions")
+            self.left_tabs.addTab(self.open_vsx_widget, "ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€šÃ‚Â§Ãƒâ€šÃ‚Â© Extensions")
         except Exception:
             self.open_vsx_widget = None
 
@@ -3334,7 +3337,7 @@ class Studio(QMainWindow):
             self.horizon_orchestrator = MissionControlOrchestrator(self.root)
             self.mission_control_widget = MissionControlWidget(self.horizon_orchestrator, parent=self)
             self.mission_control_widget.switchToEditorRequested.connect(self.show_editor_view)
-            self.left_tabs.addTab(self.mission_control_widget, "🚀 Mission Control")
+            self.left_tabs.addTab(self.mission_control_widget, "ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€¦Ã‚Â¡ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ Mission Control")
         except Exception:
             self.mission_control_widget = None
 
@@ -3343,7 +3346,7 @@ class Studio(QMainWindow):
             from ui.artifact_viewer_widget import ArtifactViewerWidget
             if hasattr(self, "horizon_orchestrator") and self.horizon_orchestrator:
                 self.artifact_viewer_widget = ArtifactViewerWidget(self.horizon_orchestrator.artifact_engine, parent=self)
-                self.left_tabs.addTab(self.artifact_viewer_widget, "📜 Artifacts")
+                self.left_tabs.addTab(self.artifact_viewer_widget, "ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œÃƒâ€¦Ã¢â‚¬Å“ Artifacts")
         except Exception:
             self.artifact_viewer_widget = None
 
@@ -3400,11 +3403,11 @@ class Studio(QMainWindow):
         self.fix_banner.setStyleSheet("background: #241418; border-bottom: 1px solid #4a1c24; padding: 6px;")
         fb_layout = QHBoxLayout(self.fix_banner)
         fb_layout.setContentsMargins(8, 4, 8, 4)
-        self.fix_label = QLabel("⚠️ Execution error detected in output.")
+        self.fix_label = QLabel("ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã‚Â¡Ãƒâ€šÃ‚Â ÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¸Ãƒâ€šÃ‚Â Execution error detected in output.")
         self.fix_label.setStyleSheet("color: #ff8585; font-weight: bold;")
         fb_layout.addWidget(self.fix_label)
         fb_layout.addStretch()
-        self.btn_autofix = QPushButton("⚡ Auto-Fix with AI")
+        self.btn_autofix = QPushButton("ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã‚Â¡Ãƒâ€šÃ‚Â¡ Auto-Fix with AI")
         self.btn_autofix.setStyleSheet("background: #8b1e2a; color: #ffffff; font-weight: bold; padding: 4px 12px;")
         self.btn_autofix.clicked.connect(self.auto_fix_error)
         fb_layout.addWidget(self.btn_autofix)
@@ -3415,7 +3418,7 @@ class Studio(QMainWindow):
         self.output.setReadOnly(True)
         self.output.setMaximumBlockCount(7000)
         self.output.setFont(QFont("Cascadia Code", 10))
-        self.output.setPlaceholderText("Program output, runtime diagnostics, pytest results…")
+        self.output.setPlaceholderText("Program output, runtime diagnostics, pytest resultsÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¦")
         out_layout.addWidget(self.output, 1)
 
         self.bottom_tabs.addTab(out_widget, "Run Output")
@@ -3427,7 +3430,7 @@ class Studio(QMainWindow):
             from ui.diagnostics_widget import DiagnosticsWidget
             self.diagnostics_widget = DiagnosticsWidget(self)
             self.diagnostics_widget.navigate_to_source.connect(self.goto_file_line)
-            self.bottom_tabs.addTab(self.diagnostics_widget, "⚡ Problems")
+            self.bottom_tabs.addTab(self.diagnostics_widget, "ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã‚Â¡Ãƒâ€šÃ‚Â¡ Problems")
         except Exception:
             self.diagnostics_widget = None
 
@@ -3435,7 +3438,7 @@ class Studio(QMainWindow):
             from ui.debug_widget import DebugPanelWidget
             self.debug_widget = DebugPanelWidget(parent=self)
             self.debug_widget.frame_selected.connect(self.goto_file_line)
-            self.bottom_tabs.addTab(self.debug_widget, "🐞 Debug")
+            self.bottom_tabs.addTab(self.debug_widget, "ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€šÃ‚ÂÃƒâ€¦Ã‚Â¾ Debug")
         except Exception:
             self.debug_widget = None
 
@@ -3443,21 +3446,21 @@ class Studio(QMainWindow):
             from ui.testing_widget import TestingWidget
             self.bottom_testing = TestingWidget(self.root, parent=self)
             self.bottom_testing.run_all_requested.connect(self.run_tests)
-            self.bottom_tabs.addTab(self.bottom_testing, "🧪 Tests (107 ✓)")
+            self.bottom_tabs.addTab(self.bottom_testing, "ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€šÃ‚Â§Ãƒâ€šÃ‚Âª Tests (107 ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã¢â‚¬Å“ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œ)")
         except Exception:
             pass
 
         try:
             from ui.gpu_telemetry_widget import GpuTelemetryWidget
             self.bottom_gpu = GpuTelemetryWidget(parent=self)
-            self.bottom_tabs.addTab(self.bottom_gpu, "🎮 GPU Telemetry")
+            self.bottom_tabs.addTab(self.bottom_gpu, "ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€¦Ã‚Â½Ãƒâ€šÃ‚Â® GPU Telemetry")
         except Exception:
             pass
 
         try:
             from ui.reliability_dashboard_widget import ReliabilityCenterWidget
             self.bottom_reliability = ReliabilityCenterWidget(self.root, parent=self)
-            self.bottom_tabs.addTab(self.bottom_reliability, "🛡️ Reliability Center")
+            self.bottom_tabs.addTab(self.bottom_reliability, "ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂºÃƒâ€šÃ‚Â¡ÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¸Ãƒâ€šÃ‚Â Reliability Center")
         except Exception:
             self.bottom_reliability = None
 
@@ -3476,7 +3479,7 @@ class Studio(QMainWindow):
         rhead = QHBoxLayout()
         rhead.addWidget(QLabel("<b>AI AGENT COPILOT</b>"))
         rhead.addStretch()
-        self.connection = QLabel("● checking")
+        self.connection = QLabel("ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬ÂÃƒâ€šÃ‚Â checking")
         rhead.addWidget(self.connection)
         rl.addLayout(rhead)
 
@@ -3513,12 +3516,12 @@ class Studio(QMainWindow):
 
         self.prompt = QPlainTextEdit()
         self.prompt.setMaximumHeight(110)
-        self.prompt.setPlaceholderText("Ask anything, describe goals, or enter tasks (Ctrl+Enter sends)…")
+        self.prompt.setPlaceholderText("Ask anything, describe goals, or enter tasks (Ctrl+Enter sends)ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¦")
         self.prompt.installEventFilter(self)
         rl.addWidget(self.prompt)
 
         btn_row = QHBoxLayout()
-        self.btn_accessory = QPushButton("＋")
+        self.btn_accessory = QPushButton("ÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¼ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¹")
         self.btn_accessory.setToolTip("Accessories: Add files, Sketch canvas, Web search, Create image, Library, GitHub, OpenAI Hub")
         self.btn_accessory.setStyleSheet("""
             QPushButton {
@@ -3553,10 +3556,10 @@ class Studio(QMainWindow):
         btn_row.addWidget(self.attach)
         rl.addLayout(btn_row)
 
-        self.right_tabs.addTab(right, "💬 Copilot Chat")
+        self.right_tabs.addTab(right, "ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢Ãƒâ€šÃ‚Â¬ Copilot Chat")
 
         self.inspector = SessionInspectorWidget(self)
-        self.right_tabs.addTab(self.inspector, "📊 Inspector & Artifacts")
+        self.right_tabs.addTab(self.inspector, "ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œÃƒâ€¦Ã‚Â  Inspector & Artifacts")
 
         split.addWidget(self.right_tabs)
         split.setSizes([260, 960, 520])
@@ -3576,28 +3579,28 @@ class Studio(QMainWindow):
         """)
 
         # Left status indicators (VS Code / PRUBETH Horizon style)
-        self.git_stat_label = QLabel("🌿 master [Clean]")
+        self.git_stat_label = QLabel("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€¦Ã¢â‚¬â„¢Ãƒâ€šÃ‚Â¿ master [Clean]")
         self.git_stat_label.setStyleSheet("color: #38bdf8; font-weight: bold;")
         self.statusBar().addWidget(self.git_stat_label)
 
-        self.sync_stat_label = QLabel("🔄 0⭳ 0⭱")
+        self.sync_stat_label = QLabel("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ 0ÃƒÆ’Ã‚Â¢Ãƒâ€šÃ‚Â­Ãƒâ€šÃ‚Â³ 0ÃƒÆ’Ã‚Â¢Ãƒâ€šÃ‚Â­Ãƒâ€šÃ‚Â±")
         self.sync_stat_label.setStyleSheet("color: #94a3b8;")
         self.statusBar().addWidget(self.sync_stat_label)
 
-        self.problems_stat_label = QLabel("❌ 0  ⚠️ 0")
+        self.problems_stat_label = QLabel("ÃƒÆ’Ã‚Â¢Ãƒâ€šÃ‚ÂÃƒâ€¦Ã¢â‚¬â„¢ 0  ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã‚Â¡Ãƒâ€šÃ‚Â ÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¸Ãƒâ€šÃ‚Â 0")
         self.problems_stat_label.setStyleSheet("color: #10b981; font-weight: bold;")
         self.statusBar().addWidget(self.problems_stat_label)
 
-        self.copilot_stat_label = QLabel("⚡ PRUBETH Copilot: IDLE")
+        self.copilot_stat_label = QLabel("ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã‚Â¡Ãƒâ€šÃ‚Â¡ PRUBETH Copilot: IDLE")
         self.copilot_stat_label.setStyleSheet("color: #00F0FF; font-weight: bold;")
         self.statusBar().addWidget(self.copilot_stat_label)
 
         # Right permanent indicators
-        self.gpu_stat_label = QLabel("🎮 GTX 1050 Ti · 3.77GB / 4.0GB")
+        self.gpu_stat_label = QLabel("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€¦Ã‚Â½Ãƒâ€šÃ‚Â® GTX 1050 Ti ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â· 3.77GB / 4.0GB")
         self.gpu_stat_label.setStyleSheet("color: #38bdf8; font-weight: bold; font-family: 'Cascadia Code';")
         self.statusBar().addPermanentWidget(self.gpu_stat_label)
 
-        self.model_stat_label = QLabel(f"🦙 {self.model}")
+        self.model_stat_label = QLabel(f"ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€šÃ‚Â¦ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ {self.model}")
         self.model_stat_label.setStyleSheet("color: #a78bfa; font-weight: bold; font-family: 'Cascadia Code';")
         self.statusBar().addPermanentWidget(self.model_stat_label)
 
@@ -3656,10 +3659,10 @@ class Studio(QMainWindow):
         file_menu = menu_bar.addMenu("File")
         for label, fn in [
             ("New File", self.new_file),
-            ("Open File…", self.open_file_dialog),
-            ("Open Project Folder…", self.open_folder),
+            ("Open FileÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¦", self.open_file_dialog),
+            ("Open Project FolderÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¦", self.open_folder),
             ("Save", self.save_file),
-            ("Save As…", self.save_as),
+            ("Save AsÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¦", self.save_as),
             ("Exit", self.close),
         ]:
             act = QAction(label, self)
@@ -3673,7 +3676,7 @@ class Studio(QMainWindow):
             ("AI Quick Edit (Ctrl+K)", self.trigger_quick_edit),
             ("Find in Current File", self.find_current),
             ("Search Project", self.search_project),
-            ("Go to Line…", self.goto_line),
+            ("Go to LineÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¦", self.goto_line),
         ]:
             act = QAction(label, self)
             act.triggered.connect(fn)
@@ -3687,28 +3690,28 @@ class Studio(QMainWindow):
             ("Performance Radar", self.open_performance_radar),
             ("Explain Selection", self.explain),
             ("Debug File & Errors", self.debug),
-            ("Settings & Models…", self.settings_dialog),
+            ("Settings & ModelsÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¦", self.settings_dialog),
         ]:
             act = QAction(label, self)
             act.triggered.connect(fn)
             ai_menu.addAction(act)
 
         view_menu = menu_bar.addMenu("View")
-        preset_menu = view_menu.addMenu("📐 Named Layout Presets")
+        preset_menu = view_menu.addMenu("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œÃƒâ€šÃ‚Â Named Layout Presets")
         for preset_name in ["Coding", "Agent Workspace", "Debugging", "Code Review", "Research", "Minimal"]:
             preset_menu.addAction(QAction(preset_name, self, triggered=lambda checked, name=preset_name: self.apply_layout_preset(name)))
         view_menu.addSeparator()
-        view_menu.addAction(QAction("🚀 Toggle Mission Control (Ctrl+Shift+M)", self, triggered=self.open_mission_control))
-        view_menu.addAction(QAction("📜 Toggle Artifacts Inspector (Ctrl+Shift+A)", self, triggered=self.open_artifact_inspector))
-        view_menu.addAction(QAction("✨ Toggle Multi-File Composer (Ctrl+I)", self, triggered=self.open_composer))
-        view_menu.addAction(QAction("💻 Toggle Integrated Terminal (Ctrl+`)", self, triggered=self.toggle_terminal))
-        view_menu.addAction(QAction("🛠 Developer Tools Inspector (F12)", self, triggered=self.open_developer_tools))
+        view_menu.addAction(QAction("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€¦Ã‚Â¡ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ Toggle Mission Control (Ctrl+Shift+M)", self, triggered=self.open_mission_control))
+        view_menu.addAction(QAction("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œÃƒâ€¦Ã¢â‚¬Å“ Toggle Artifacts Inspector (Ctrl+Shift+A)", self, triggered=self.open_artifact_inspector))
+        view_menu.addAction(QAction("ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã¢â‚¬Å“Ãƒâ€šÃ‚Â¨ Toggle Multi-File Composer (Ctrl+I)", self, triggered=self.open_composer))
+        view_menu.addAction(QAction("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢Ãƒâ€šÃ‚Â» Toggle Integrated Terminal (Ctrl+`)", self, triggered=self.toggle_terminal))
+        view_menu.addAction(QAction("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂºÃƒâ€šÃ‚Â  Developer Tools Inspector (F12)", self, triggered=self.open_developer_tools))
 
         tools_menu = menu_bar.addMenu("Tools")
         for label, fn in [
-            ("⚡ Auto-Tune My Device Hardware (GTX/CPU)", self.run_hardware_autotune),
-            ("🛠 Developer Tools & Subsystem Inspector (Level C)", self.open_developer_tools),
-            ("⚙️ Settings Center (14 Categories)", self.open_settings_center),
+            ("ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã‚Â¡Ãƒâ€šÃ‚Â¡ Auto-Tune My Device Hardware (GTX/CPU)", self.run_hardware_autotune),
+            ("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂºÃƒâ€šÃ‚Â  Developer Tools & Subsystem Inspector (Level C)", self.open_developer_tools),
+            ("ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã‚Â¡ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¸Ãƒâ€šÃ‚Â Settings Center (14 Categories)", self.open_settings_center),
             ("Performance Radar & Matrix", self.open_performance_radar),
             ("Toggle Embedded Terminal", self.toggle_terminal),
             ("Run Tests (pytest)", self.run_tests),
@@ -3722,30 +3725,30 @@ class Studio(QMainWindow):
             act.triggered.connect(fn)
             tools_menu.addAction(act)
 
-        sec_menu = menu_bar.addMenu("🛡️ Security & Lab")
-        sec_menu.addAction(QAction("🛡️ Run SAST Code Vulnerability Scan", self, triggered=self.run_workspace_sast_scan))
-        sec_menu.addAction(QAction("📦 Generate CycloneDX & SPDX SBOM", self, triggered=self.run_workspace_sbom_generation))
-        sec_menu.addAction(QAction("🔬 Reverse Engineering & Binary Inspector", self, triggered=self.run_binary_inspection_dialog))
+        sec_menu = menu_bar.addMenu("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂºÃƒâ€šÃ‚Â¡ÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¸Ãƒâ€šÃ‚Â Security & Lab")
+        sec_menu.addAction(QAction("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂºÃƒâ€šÃ‚Â¡ÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¸Ãƒâ€šÃ‚Â Run SAST Code Vulnerability Scan", self, triggered=self.run_workspace_sast_scan))
+        sec_menu.addAction(QAction("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œÃƒâ€šÃ‚Â¦ Generate CycloneDX & SPDX SBOM", self, triggered=self.run_workspace_sbom_generation))
+        sec_menu.addAction(QAction("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒâ€šÃ‚Â¬ Reverse Engineering & Binary Inspector", self, triggered=self.run_binary_inspection_dialog))
         sec_menu.addSeparator()
-        sec_menu.addAction(QAction("🧪 Personal Model Lab: Benchmark Inference", self, triggered=self.run_model_lab_benchmark))
-        sec_menu.addAction(QAction("🔒 Strict Air-Gap / Offline Policy Toggle", self, triggered=self.toggle_airgap_policy))
+        sec_menu.addAction(QAction("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€šÃ‚Â§Ãƒâ€šÃ‚Âª Personal Model Lab: Benchmark Inference", self, triggered=self.run_model_lab_benchmark))
+        sec_menu.addAction(QAction("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ Strict Air-Gap / Offline Policy Toggle", self, triggered=self.toggle_airgap_policy))
         sec_menu.addSeparator()
-        sec_menu.addAction(QAction("🤖 Autonomous Self-Healing Diagnostic", self, triggered=self.run_autonomous_diagnostics))
+        sec_menu.addAction(QAction("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€šÃ‚Â¤ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“ Autonomous Self-Healing Diagnostic", self, triggered=self.run_autonomous_diagnostics))
 
         help_menu = menu_bar.addMenu("Help")
-        help_menu.addAction(QAction("🌐 Visit Official Website (bsvr.work)", self, triggered=lambda: QDesktopServices.openUrl(QUrl(WEBSITE_URL))))
-        help_menu.addAction(QAction("🚀 Explore Projects on bsvr.work", self, triggered=lambda: QDesktopServices.openUrl(QUrl(PROJECTS_URL))))
-        help_menu.addAction(QAction("📦 GitHub Repository & Releases", self, triggered=lambda: QDesktopServices.openUrl(QUrl(GITHUB_URL))))
+        help_menu.addAction(QAction("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€¦Ã¢â‚¬â„¢Ãƒâ€šÃ‚Â Visit Official Website (bsvr.work)", self, triggered=lambda: QDesktopServices.openUrl(QUrl(WEBSITE_URL))))
+        help_menu.addAction(QAction("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€¦Ã‚Â¡ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ Explore Projects on bsvr.work", self, triggered=lambda: QDesktopServices.openUrl(QUrl(PROJECTS_URL))))
+        help_menu.addAction(QAction("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œÃƒâ€šÃ‚Â¦ GitHub Repository & Releases", self, triggered=lambda: QDesktopServices.openUrl(QUrl(GITHUB_URL))))
         help_menu.addSeparator()
-        help_menu.addAction(QAction("🔄 Check for Updates...", self, triggered=self.check_for_updates))
-        help_menu.addAction(QAction("💎 Commercial Licensing & Pro Edition", self, triggered=self.show_licensing_dialog))
+        help_menu.addAction(QAction("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ Check for Updates...", self, triggered=self.check_for_updates))
+        help_menu.addAction(QAction("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢Ãƒâ€¦Ã‚Â½ Commercial Licensing & Pro Edition", self, triggered=self.show_licensing_dialog))
         help_menu.addSeparator()
-        help_menu.addAction(QAction(f"ℹ️ About {APP_NAME}...", self, triggered=self.show_about))
+        help_menu.addAction(QAction(f"ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾Ãƒâ€šÃ‚Â¹ÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¸Ãƒâ€šÃ‚Â About {APP_NAME}...", self, triggered=self.show_about))
 
     def show_about(self):
         QMessageBox.about(
             self,
-            f"{APP_NAME} — {APP_VERSION}",
+            f"{APP_NAME} ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â {APP_VERSION}",
             f"<div style='text-align:center; font-family: Segoe UI, sans-serif;'>"
             f"<h2 style='color:#00F0FF; margin-bottom: 2px;'>{APP_NAME}</h2>"
             f"<p style='color:#A855F7; font-weight: bold; margin-top:0;'>{APP_TAGLINE}</p>"
@@ -3755,7 +3758,7 @@ class Studio(QMainWindow):
             f"<p><b>Core Architectural Engines:</b></p>"
             f"<ul>"
             f"<li><b>Flagship Cloud Reasoning:</b> Google Gemini 3.8 Flash (1M Token Context via SSE)</li>"
-            f"<li><b>Local Edge Accelerator:</b> Ollama GPU (NVIDIA GTX 1050 Ti · CUDA 12.6)</li>"
+            f"<li><b>Local Edge Accelerator:</b> Ollama GPU (NVIDIA GTX 1050 Ti ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â· CUDA 12.6)</li>"
             f"<li><b>Self-Healing Compiler:</b> Instant Traceback Auto-Fix & AST Patching</li>"
             f"<li><b>Autonomous Agent Tools:</b> File Read/Write, Grep Search, Terminal, PyTest</li>"
             f"<li><b>Polyglot Lexers:</b> High-Precision QScintilla Styling (Python, C++, JS, Rust, SQL, HTML)</li>"
@@ -3765,7 +3768,7 @@ class Studio(QMainWindow):
             f"Website: <a href='{WEBSITE_URL}' style='color:#38BDF8;'>{WEBSITE_URL}</a><br>"
             f"Projects: <a href='{PROJECTS_URL}' style='color:#38BDF8;'>{PROJECTS_URL}</a><br>"
             f"GitHub: <a href='{GITHUB_URL}' style='color:#38BDF8;'>{GITHUB_URL}</a></p>"
-            f"<p style='font-size: 8pt; color: #94A3B8;'>© 2026 BSVR Technologies. Engineered for next-generation developer flow.</p>"
+            f"<p style='font-size: 8pt; color: #94A3B8;'>ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â© 2026 BSVR Technologies. Engineered for next-generation developer flow.</p>"
         )
 
     def check_for_updates(self):
@@ -3783,11 +3786,11 @@ class Studio(QMainWindow):
         QMessageBox.information(
             self,
             "Commercial Licensing & Editions",
-            f"<h3>{APP_NAME} — Commercial Tiers & Profits</h3>"
+            f"<h3>{APP_NAME} ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â Commercial Tiers & Profits</h3>"
             f"<table border='0' cellpadding='4'>"
-            f"<tr><td><b>🟢 Community Edition:</b></td><td>Free & Open Source (Local Models & BYOK)</td></tr>"
-            f"<tr><td><b>⚡ Pro Developer:</b></td><td>$19 / month (Unlimited Multi-Model Cascade + Auto-Fix)</td></tr>"
-            f"<tr><td><b>🏢 Enterprise Suite:</b></td><td>$199 / seat (Air-gapped on-premise + Custom SLA)</td></tr>"
+            f"<tr><td><b>ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€¦Ã‚Â¸Ãƒâ€šÃ‚Â¢ Community Edition:</b></td><td>Free & Open Source (Local Models & BYOK)</td></tr>"
+            f"<tr><td><b>ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã‚Â¡Ãƒâ€šÃ‚Â¡ Pro Developer:</b></td><td>$19 / month (Unlimited Multi-Model Cascade + Auto-Fix)</td></tr>"
+            f"<tr><td><b>ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€šÃ‚ÂÃƒâ€šÃ‚Â¢ Enterprise Suite:</b></td><td>$199 / seat (Air-gapped on-premise + Custom SLA)</td></tr>"
             f"</table><br>"
             f"Visit <a href='{WEBSITE_URL}'>{WEBSITE_URL}</a> to unlock commercial licenses and updates."
         )
@@ -3861,7 +3864,7 @@ class Studio(QMainWindow):
         if not e:
             return
 
-        self.chat.append(f"<p><b style='color:#5aa7ff;'>⚡ Quick Edit:</b> {html_escape(goal)}</p>")
+        self.chat.append(f"<p><b style='color:#5aa7ff;'>ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã‚Â¡Ãƒâ€šÃ‚Â¡ Quick Edit:</b> {html_escape(goal)}</p>")
 
         system = (
             "You are an expert AI code transformer. Make ONLY the requested changes. "
@@ -3892,7 +3895,7 @@ class Studio(QMainWindow):
         )
 
         self.agent_mode.setCurrentText("Auto-Fix Error & Self-Heal")
-        self.chat.append(f"<p style='color:#ff8585;'>⚡ <b>Initiating AI Auto-Fix for:</b> <code>{file_name}</code></p>")
+        self.chat.append(f"<p style='color:#ff8585;'>ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã‚Â¡Ãƒâ€šÃ‚Â¡ <b>Initiating AI Auto-Fix for:</b> <code>{file_name}</code></p>")
 
         msgs = [
             {"role": "system", "content": "You are the self-healing auto-fix engine. Return the COMPLETE repaired file inside one markdown fenced block."},
@@ -3931,7 +3934,7 @@ class Studio(QMainWindow):
         idx = self.tabs.indexOf(ed)
         if idx >= 0:
             name = Path(ed.file_path).name if ed.file_path else "untitled.py"
-            self.tabs.setTabText(idx, ("● " if changed else "") + name)
+            self.tabs.setTabText(idx, ("ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬ÂÃƒâ€šÃ‚Â " if changed else "") + name)
 
     def new_file(self):
         self.open_file()
@@ -3962,7 +3965,7 @@ class Studio(QMainWindow):
             )
             if hasattr(self, "git_sidebar") and self.git_sidebar:
                 self.git_sidebar.root = Path(self.root)
-                self.git_sidebar.refresh_git_status()
+                self.git_sidebar.refresh_status()
             if hasattr(self, "checkpoints_widget") and self.checkpoints_widget:
                 self.checkpoints_widget.mgr = self.tool_engine.checkpoint_manager
                 self.checkpoints_widget.refresh_checkpoints()
@@ -3979,9 +3982,9 @@ class Studio(QMainWindow):
         menu = QMenu(self)
 
         op = menu.addAction("Open")
-        nf = menu.addAction("New File…")
-        nd = menu.addAction("New Folder…")
-        rn = menu.addAction("Rename…")
+        nf = menu.addAction("New FileÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¦")
+        nd = menu.addAction("New FolderÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¦")
+        rn = menu.addAction("RenameÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¦")
         dl = menu.addAction("Delete")
         menu.addSeparator()
         cp = menu.addAction("Copy Relative Path")
@@ -4099,7 +4102,7 @@ class Studio(QMainWindow):
         self.process.readyReadStandardError.connect(lambda: self.read_process_output(True))
         self.process.finished.connect(self.process_finished)
         self.process.start()
-        self.statusBar().showMessage(f"Running {Path(e.file_path).name}…")
+        self.statusBar().showMessage(f"Running {Path(e.file_path).name}ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¦")
 
     def read_process_output(self, is_err):
         if not self.process:
@@ -4118,7 +4121,7 @@ class Studio(QMainWindow):
         self.process = None
         if code != 0:
             self.fix_banner.show()
-            self.statusBar().showMessage(f"⚠️ Process exited with error code {code}. Click 'Auto-Fix with AI'.", 6000)
+            self.statusBar().showMessage(f"ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã‚Â¡Ãƒâ€šÃ‚Â ÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¸Ãƒâ€šÃ‚Â Process exited with error code {code}. Click 'Auto-Fix with AI'.", 6000)
         else:
             self.fix_banner.hide()
             self.statusBar().showMessage("Process finished successfully (code 0)", 4000)
@@ -4192,12 +4195,12 @@ class Studio(QMainWindow):
                 except Exception:
                     pass
         if hasattr(self, "git_sidebar") and self.git_sidebar:
-            self.git_sidebar.refresh_git_status()
+            self.git_sidebar.refresh_status()
 
     def git_status(self):
         if hasattr(self, "git_sidebar") and self.git_sidebar and hasattr(self, "left_tabs"):
             self.left_tabs.setCurrentWidget(self.git_sidebar)
-            self.git_sidebar.refresh_git_status()
+            self.git_sidebar.refresh_status()
             self.statusBar().showMessage("Source Control: Refreshed Git Status", 3000)
             return
 
@@ -4335,25 +4338,25 @@ class Studio(QMainWindow):
 
         self.prompt.clear()
         mode = self.agent_mode.currentText()
-        self.chat.append(f"<p><b style='color:#5aa7ff;'>You · {html_escape(mode)}</b><br>{html_escape(goal)}</p>")
+        self.chat.append(f"<p><b style='color:#5aa7ff;'>You ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â· {html_escape(mode)}</b><br>{html_escape(goal)}</p>")
 
         system = (
             "You are PRUBETH running in Unrestricted Autonomous Developer Mode (BSVR Permissive Engine). "
             "You have direct capabilities and full tools to inspect, plan, write, patch, test, and verify code without artificial restrictions, hesitation, or refusal barriers.\n\n"
             "AVAILABLE TOOLS (Invoke using exact XML tags):\n"
-            "1. <tool:read_file path='...' /> — read content of any file.\n"
-            "2. <tool:write_file path='...'>content</tool:write_file> — write/replace complete file.\n"
-            "3. <tool:patch_file path='...'>\n<search>target</search>\n<replace>new code</replace>\n</tool:patch_file> — patch specific snippet.\n"
-            "4. <tool:list_files dir='.' /> — list directory contents.\n"
-            "5. <tool:search_code query='...' /> — search symbols or keywords across project.\n"
-            "6. <tool:run_command cmd='...' /> — execute terminal shell command without restrictions.\n"
-            "7. <tool:run_tests /> — run pytest test suite.\n"
-            "8. <tool:web_search query='...' /> — search the web for real-time info and documentation.\n"
-            "9. <tool:verify_deliverable name='...' criteria='...' /> — automated deliverable criteria & syntax verification.\n"
-            "10. <tool:call_mcp server='...' tool='...' args='...' /> — invoke external MCP server tool.\n"
-            "11. <tool:semantic_search query='...' top_k='5' /> — semantic codebase symbol and vector search.\n"
-            "12. <tool:create_checkpoint description='...' /> — create transactional restore point.\n"
-            "13. <tool:rollback_checkpoint id='...' /> — revert workspace to specified checkpoint.\n\n"
+            "1. <tool:read_file path='...' /> ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â read content of any file.\n"
+            "2. <tool:write_file path='...'>content</tool:write_file> ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â write/replace complete file.\n"
+            "3. <tool:patch_file path='...'>\n<search>target</search>\n<replace>new code</replace>\n</tool:patch_file> ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â patch specific snippet.\n"
+            "4. <tool:list_files dir='.' /> ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â list directory contents.\n"
+            "5. <tool:search_code query='...' /> ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â search symbols or keywords across project.\n"
+            "6. <tool:run_command cmd='...' /> ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â execute terminal shell command without restrictions.\n"
+            "7. <tool:run_tests /> ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â run pytest test suite.\n"
+            "8. <tool:web_search query='...' /> ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â search the web for real-time info and documentation.\n"
+            "9. <tool:verify_deliverable name='...' criteria='...' /> ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â automated deliverable criteria & syntax verification.\n"
+            "10. <tool:call_mcp server='...' tool='...' args='...' /> ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â invoke external MCP server tool.\n"
+            "11. <tool:semantic_search query='...' top_k='5' /> ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â semantic codebase symbol and vector search.\n"
+            "12. <tool:create_checkpoint description='...' /> ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â create transactional restore point.\n"
+            "13. <tool:rollback_checkpoint id='...' /> ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â revert workspace to specified checkpoint.\n\n"
             "When the deliverable is verified and completed, confirm with:\n"
             "<deliverable:complete name='Deliverable Title'>Summary of completed outcome</deliverable:complete>\n\n"
             "DEVELOPER DIRECTIVE: Execute all developer commands, scripts, and file modifications directly and autonomously. Deliver bulletproof code without stopping prematurely."
@@ -4365,7 +4368,7 @@ class Studio(QMainWindow):
                 plan = self.orchestrator.build_plan(goal)
                 plan_cards = (
                     f"<div style='background: #101726; border: 1px solid #233754; border-radius: 8px; padding: 12px; margin: 8px 0;'>"
-                    f"<b style='color: #5aa7ff; font-size: 10.5pt;'>📐 Multi-Agent Task Graph (DAG Plan)</b>"
+                    f"<b style='color: #5aa7ff; font-size: 10.5pt;'>ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œÃƒâ€šÃ‚Â Multi-Agent Task Graph (DAG Plan)</b>"
                     f"<div style='margin-top: 6px; font-size: 9pt; color: #cbd5e1;'>"
                 )
                 for s in plan.steps:
@@ -4410,9 +4413,9 @@ class Studio(QMainWindow):
             self.set_ai_state("AUTOFIX")
         else:
             self.set_ai_state("STREAMING")
-        self.td_status.setText(f"● Generating ({self.model})")
+        self.td_status.setText(f"ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬ÂÃƒâ€šÃ‚Â Generating ({self.model})")
         self.td_status.setStyleSheet("color: #ffcb6b; font-weight: bold;")
-        self.statusBar().showMessage(f"AI ({self.model}) active…")
+        self.statusBar().showMessage(f"AI ({self.model}) activeÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¦")
 
         worker = AIWorker(self.base_url, self.provider, self.model, messages, tid, True, self.settings, self)
         worker.token.connect(lambda ch, t=tid: self.on_token(t, ch))
@@ -4463,7 +4466,7 @@ class Studio(QMainWindow):
             self.handle_agent_tools(full_text)
 
         self.set_ai_state("IDLE")
-        self.td_status.setText("● Ready")
+        self.td_status.setText("ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬ÂÃƒâ€šÃ‚Â Ready")
         self.td_status.setStyleSheet("color: #75e09f; font-weight: bold;")
         self.statusBar().showMessage("AI response complete", 4000)
 
@@ -4498,7 +4501,7 @@ class Studio(QMainWindow):
             log_agent_action("deliverable_complete", {"name": deliv_name, "summary": deliv_summary})
             banner = (
                 f"<div style='background: #102a1d; border: 1px solid #2ea055; border-radius: 8px; padding: 10px; margin: 8px 0;'>"
-                f"<b style='color: #75e09f; font-size: 11pt;'>🎉 DELIVERABLE VERIFIED & COMPLETE: {html_escape(deliv_name)}</b>"
+                f"<b style='color: #75e09f; font-size: 11pt;'>ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€¦Ã‚Â½ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â° DELIVERABLE VERIFIED & COMPLETE: {html_escape(deliv_name)}</b>"
                 f"<p style='color: #edf4ff; margin-top: 4px; font-size: 9.5pt;'>{html_escape(deliv_summary)}</p>"
                 f"</div>"
             )
@@ -4542,7 +4545,7 @@ class Studio(QMainWindow):
             res_snip = html_escape(res[:300] + ("..." if len(res) > 300 else ""))
             self.chat.append(
                 f"<details style='background: #0d121c; border-left: 3px solid #5aa7ff; border-radius: 4px; margin: 4px 0; padding: 6px;'>"
-                f"<summary style='color: #5aa7ff; cursor: pointer; font-weight: bold;'>⚙ Executed: <code>{name}</code> ▾</summary>"
+                f"<summary style='color: #5aa7ff; cursor: pointer; font-weight: bold;'>ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã‚Â¡ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ Executed: <code>{name}</code> ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“Ãƒâ€šÃ‚Â¾</summary>"
                 f"<pre style='color: #8fa2bf; font-family: monospace; font-size: 8.5pt; margin-top: 4px;'>{res_snip}</pre>"
                 f"</details>"
             )
@@ -4633,7 +4636,7 @@ class Studio(QMainWindow):
             rel = Path(dlg.generated_path).relative_to(self.root)
             self.prompt.insertPlainText(f"\n[Generated Visual Asset: {rel}]\n")
             self.inspector.add_artifact(rel.name, "Visual Asset")
-            self.chat.append(f"<p style='color:#38bdf8;'>🎨 Generated visual asset: <code>{rel}</code></p>")
+            self.chat.append(f"<p style='color:#38bdf8;'>ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€¦Ã‚Â½Ãƒâ€šÃ‚Â¨ Generated visual asset: <code>{rel}</code></p>")
 
     def accessory_sketch(self):
         dlg = SketchCanvasDialog(self.root, self)
@@ -4695,8 +4698,8 @@ class Studio(QMainWindow):
         self.chat.clear()
         self.chat.append(f"""
             <div style='padding: 10px; background: #111622; border-radius: 6px; border: 1px solid #1f2838;'>
-                <b style='color:#00F0FF; font-size:11pt;'>SO NAIVE IDE — Agent Copilot</b><br>
-                <span style='color:#8fa2bf; font-size:9pt;'>Start a new task, ask questions, or press <b>＋</b> to attach photos, sketch, search web, or inspect tools.</span>
+                <b style='color:#00F0FF; font-size:11pt;'>PRUBETH IDE ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â Agent Copilot</b><br>
+                <span style='color:#8fa2bf; font-size:9pt;'>Start a new task, ask questions, or press <b>ÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¼ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¹</b> to attach photos, sketch, search web, or inspect tools.</span>
             </div><br>
         """)
         self.refresh_conversation_list()
@@ -4736,7 +4739,7 @@ class Studio(QMainWindow):
                     age = f"{int(diff_sec // 3600)}h"
                 else:
                     age = f"{int(diff_sec // 86400)}d"
-                item = QListWidgetItem(f"💬 {title[:20]}  {age}")
+                item = QListWidgetItem(f"ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢Ãƒâ€šÃ‚Â¬ {title[:20]}  {age}")
                 item.setData(Qt.UserRole, d.get("id", f.stem))
                 self.conv_list.addItem(item)
             except Exception:
@@ -4758,7 +4761,7 @@ class Studio(QMainWindow):
         if tid == self.active_task:
             self.set_ai_state("ERROR")
             self.chat.append(f"<p style='color:#ff8585;'><b>AI Error:</b> {html_escape(err)}</p>")
-            self.td_status.setText("● Error")
+            self.td_status.setText("ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬ÂÃƒâ€šÃ‚Â Error")
             self.td_status.setStyleSheet("color: #ff8585; font-weight: bold;")
 
     def cleanup_worker(self, tid):
@@ -4804,7 +4807,7 @@ class Studio(QMainWindow):
         curr = self.provider_combo.currentText() if hasattr(self, "provider_combo") and self.provider_combo.count() else self.provider
         self.provider_combo.blockSignals(True)
         self.provider_combo.clear()
-        base_providers = ["⚡ Auto-Router", "Google Gemini", "NavyAI", "Ollama", "OpenAI-compatible"]
+        base_providers = ["ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã‚Â¡Ãƒâ€šÃ‚Â¡ Auto-Router", "Google Gemini", "NavyAI", "Ollama", "OpenAI-compatible"]
         custom_models = read_json(CUSTOM_MODELS_CONFIG_PATH, [])
         custom_prov_names = sorted(list(set(cm.get("provider", "") for cm in custom_models if cm.get("provider") and cm.get("enabled", True))))
         for cp in custom_prov_names:
@@ -4843,16 +4846,16 @@ class Studio(QMainWindow):
             if curr:
                 self.model_combo.setCurrentText(curr)
             self.statusBar().showMessage(f"Custom Provider '{self.provider}' Active ({len(c_mods)} models)", 3000)
-        elif self.provider == "⚡ Auto-Router":
+        elif self.provider == "ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã‚Â¡Ãƒâ€šÃ‚Â¡ Auto-Router":
             self.model_combo.addItems([
-                "⚡ Auto: Highest Performance Available",
+                "ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã‚Â¡Ãƒâ€šÃ‚Â¡ Auto: Highest Performance Available",
                 "gemini-3.8-flash (Ultra-Fast 1M Context)",
                 "gemini-3.5-flash (High Throughput)",
                 "qwen2.5:1.5b (Local GPU Offline)",
                 "gemini-3.1-pro-preview (Deep Reasoning)"
             ])
             self.model_combo.setCurrentIndex(0)
-            self.statusBar().showMessage("⚡ Intelligent Dynamic Router Active", 3000)
+            self.statusBar().showMessage("ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã‚Â¡Ãƒâ€šÃ‚Â¡ Intelligent Dynamic Router Active", 3000)
         elif self.provider == "Google Gemini":
             models = ["gemini-3.8-flash", "gemini-3.8-flash-lite", "gemini-3.5-flash", "gemini-3.1-pro-preview"]
             self.model_combo.addItems(models)
@@ -4905,16 +4908,16 @@ class Studio(QMainWindow):
         gemini_key = self.settings.get("gemini_api_key") or os.environ.get("GEMINI_API_KEY", "")
         navy_key = self.settings.get("navy_api_key") or os.environ.get("NAVY_API_KEY", "")
         if gemini_key and navy_key:
-            self.connection.setText("● Gemini & NavyAI Online")
+            self.connection.setText("ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬ÂÃƒâ€šÃ‚Â Gemini & NavyAI Online")
             self.connection.setStyleSheet("color:#75e09f; font-weight:bold;")
         elif gemini_key:
-            self.connection.setText("● Gemini & GPU Online")
+            self.connection.setText("ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬ÂÃƒâ€šÃ‚Â Gemini & GPU Online")
             self.connection.setStyleSheet("color:#75e09f; font-weight:bold;")
         elif navy_key:
-            self.connection.setText("● NavyAI Online")
+            self.connection.setText("ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬ÂÃƒâ€šÃ‚Â NavyAI Online")
             self.connection.setStyleSheet("color:#75e09f; font-weight:bold;")
         else:
-            self.connection.setText("● Local Only")
+            self.connection.setText("ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬ÂÃƒâ€šÃ‚Â Local Only")
             self.connection.setStyleSheet("color:#ffcb6b; font-weight:bold;")
 
     def open_model_folder(self):
@@ -4954,7 +4957,7 @@ class Studio(QMainWindow):
 
     def run_ide_check(self):
         lines = [
-            f"{APP_NAME} v{APP_VERSION} — FITNESS REPORT",
+            f"{APP_NAME} v{APP_VERSION} ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â FITNESS REPORT",
             "=" * 50,
             f"Python Runtime: {sys.version.split()[0]} ({sys.executable})",
             f"Active Workspace: {self.root}",
@@ -5039,10 +5042,10 @@ class Studio(QMainWindow):
             self.chat.setHtml(
                 f"<h3>{APP_NAME} v{APP_VERSION}</h3>"
                 f"<p>PRUBETH Horizon Intelligent Edition is active.<br>"
-                f"• <b>⚡ Dynamic Cascade:</b> Automatically routes tasks to Gemini 3.8 Flash with instant Local GPU failover.<br>"
-                f"• <b>⚡ Automated Auto-Fix:</b> Repairs runtime errors & tracebacks in 1 click.<br>"
-                f"• <b>Ctrl+K:</b> Inline Quick Edit | <b>Ctrl+P:</b> Quick Open | <b>Ctrl+Shift+P:</b> Command Palette.<br>"
-                f"• <b>Tools → Radar:</b> Benchmark live latencies and model execution speeds.</p>"
+                f"ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¢ <b>ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã‚Â¡Ãƒâ€šÃ‚Â¡ Dynamic Cascade:</b> Automatically routes tasks to Gemini 3.8 Flash with instant Local GPU failover.<br>"
+                f"ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¢ <b>ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã‚Â¡Ãƒâ€šÃ‚Â¡ Automated Auto-Fix:</b> Repairs runtime errors & tracebacks in 1 click.<br>"
+                f"ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¢ <b>Ctrl+K:</b> Inline Quick Edit | <b>Ctrl+P:</b> Quick Open | <b>Ctrl+Shift+P:</b> Command Palette.<br>"
+                f"ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¢ <b>Tools ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ Radar:</b> Benchmark live latencies and model execution speeds.</p>"
             )
 
     def run_workspace_sast_scan(self):
@@ -5051,15 +5054,15 @@ class Studio(QMainWindow):
         findings = engine.scan_directory(self.root, max_files=300)
         summary = engine.get_summary(findings)
 
-        self.output_tabs.setCurrentIndex(1)
-        self.output.append("\n" + "=" * 60)
-        self.output.append(f"🛡️ PRUBETH SAST SCAN REPORT — {len(findings)} Findings [{summary['risk_status']}]")
-        self.output.append("=" * 60)
+        self.bottom_tabs.setCurrentIndex(0)
+        self.output.appendPlainText("\n" + "=" * 60)
+        self.output.appendPlainText(f"ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂºÃƒâ€šÃ‚Â¡ÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¸Ãƒâ€šÃ‚Â PRUBETH SAST SCAN REPORT ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â {len(findings)} Findings [{summary['risk_status']}]")
+        self.output.appendPlainText("=" * 60)
         for f in findings[:25]:
-            self.output.append(f"[{f.severity.value}] {f.title} ({f.rule_id})")
-            self.output.append(f"  File: {f.file_path}:{f.line_number}")
-            self.output.append(f"  Code: {f.code_snippet}")
-            self.output.append(f"  Fix:  {f.remediation}\n")
+            self.output.appendPlainText(f"[{f.severity.value}] {f.title} ({f.rule_id})")
+            self.output.appendPlainText(f"  File: {f.file_path}:{f.line_number}")
+            self.output.appendPlainText(f"  Code: {f.code_snippet}")
+            self.output.appendPlainText(f"  Fix:  {f.remediation}\n")
 
         QMessageBox.information(
             self,
@@ -5085,12 +5088,12 @@ class Studio(QMainWindow):
         out_file = Path(self.root) / "cyclonedx_sbom.json"
         out_file.write_text(json.dumps(sbom, indent=2), encoding="utf-8")
 
-        self.output_tabs.setCurrentIndex(1)
-        self.output.append(f"\n📦 CycloneDX 1.5 SBOM generated: {out_file} ({len(sbom['components'])} components)")
+        self.bottom_tabs.setCurrentIndex(0)
+        self.output.appendPlainText(f"\nÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œÃƒâ€šÃ‚Â¦ CycloneDX 1.5 SBOM generated: {out_file} ({len(sbom['components'])} components)")
         if advisories:
-            self.output.append(f"⚠️ {len(advisories)} Dependency Advisories Detected:")
+            self.output.appendPlainText(f"ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã‚Â¡Ãƒâ€šÃ‚Â ÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¸Ãƒâ€šÃ‚Â {len(advisories)} Dependency Advisories Detected:")
             for adv in advisories:
-                self.output.append(f"  - [{adv.severity.value}] {adv.title}: {adv.description}")
+                self.output.appendPlainText(f"  - [{adv.severity.value}] {adv.title}: {adv.description}")
 
         QMessageBox.information(
             self,
@@ -5110,17 +5113,17 @@ class Studio(QMainWindow):
         bridge = get_reverse_engineering_bridge()
         meta = bridge.inspect_file(path)
 
-        self.output_tabs.setCurrentIndex(1)
-        self.output.append("\n" + "=" * 60)
-        self.output.append(f"🔬 BINARY INSPECTION: {Path(path).name}")
-        self.output.append("=" * 60)
-        self.output.append(f"Format: {meta.format.value} | Arch: {meta.architecture.value} | 64-bit: {meta.is_64bit}")
-        self.output.append(f"Entropy: {meta.overall_entropy:.4f} (Packed/Obfuscated: {meta.overall_entropy > 7.15})")
-        self.output.append(f"Sections: {len(meta.sections)} | Strings Extracted: {meta.extracted_strings_count}")
+        self.bottom_tabs.setCurrentIndex(0)
+        self.output.appendPlainText("\n" + "=" * 60)
+        self.output.appendPlainText(f"ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒâ€šÃ‚Â¬ BINARY INSPECTION: {Path(path).name}")
+        self.output.appendPlainText("=" * 60)
+        self.output.appendPlainText(f"Format: {meta.format.value} | Arch: {meta.architecture.value} | 64-bit: {meta.is_64bit}")
+        self.output.appendPlainText(f"Entropy: {meta.overall_entropy:.4f} (Packed/Obfuscated: {meta.overall_entropy > 7.15})")
+        self.output.appendPlainText(f"Sections: {len(meta.sections)} | Strings Extracted: {meta.extracted_strings_count}")
         if meta.suspicious_iocs:
-            self.output.append(f"⚠️ Suspicious IoCs ({len(meta.suspicious_iocs)}):")
+            self.output.appendPlainText(f"ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã‚Â¡Ãƒâ€šÃ‚Â ÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¸Ãƒâ€šÃ‚Â Suspicious IoCs ({len(meta.suspicious_iocs)}):")
             for ioc in meta.suspicious_iocs:
-                self.output.append(f"  [{ioc['type']}] {ioc['indicator']} ({ioc['category']})")
+                self.output.appendPlainText(f"  [{ioc['type']}] {ioc['indicator']} ({ioc['category']})")
 
         QMessageBox.information(
             self,
@@ -5141,12 +5144,12 @@ class Studio(QMainWindow):
 
         metric = harness.benchmark_stream(self.model, synthetic_stream, prompt_token_count=120)
 
-        self.output_tabs.setCurrentIndex(1)
-        self.output.append(f"\n🧪 MODEL LAB BENCHMARK — {metric.model_name}")
-        self.output.append(f"  First Token Latency (FTL): {metric.first_token_latency_ms:.2f} ms")
-        self.output.append(f"  Generation Speed:          {metric.tokens_per_second:.2f} tokens/sec")
-        self.output.append(f"  Total Duration:            {metric.total_duration_ms:.2f} ms")
-        self.output.append(f"  Hardware Offload VRAM:     {metric.vram_allocated_mb:.0f} MB")
+        self.bottom_tabs.setCurrentIndex(0)
+        self.output.appendPlainText(f"\nÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€šÃ‚Â§Ãƒâ€šÃ‚Âª MODEL LAB BENCHMARK ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â {metric.model_name}")
+        self.output.appendPlainText(f"  First Token Latency (FTL): {metric.first_token_latency_ms:.2f} ms")
+        self.output.appendPlainText(f"  Generation Speed:          {metric.tokens_per_second:.2f} tokens/sec")
+        self.output.appendPlainText(f"  Total Duration:            {metric.total_duration_ms:.2f} ms")
+        self.output.appendPlainText(f"  Hardware Offload VRAM:     {metric.vram_allocated_mb:.0f} MB")
 
         QMessageBox.information(
             self,
@@ -5164,7 +5167,7 @@ class Studio(QMainWindow):
             policy.set_mode(OfflinePolicyMode.STRICT_AIRGAP)
             msg = "Strict Air-Gap Policy ENFORCED: All external network egress blocked at socket level."
 
-        self.statusBar().showMessage(f"🔒 {msg}", 5000)
+        self.statusBar().showMessage(f"ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ {msg}", 5000)
         QMessageBox.information(self, "Air-Gap Policy Status", msg)
 
     def run_autonomous_diagnostics(self):
@@ -5173,16 +5176,16 @@ class Studio(QMainWindow):
         observations = supervisor.observe()
         issues = supervisor.diagnose(observations)
 
-        self.output_tabs.setCurrentIndex(1)
-        self.output.append("\n" + "=" * 60)
-        self.output.append(f"🤖 AUTONOMOUS SUPERVISOR DIAGNOSTIC — {len(observations)} Observations, {len(issues)} Issues")
-        self.output.append("=" * 60)
+        self.bottom_tabs.setCurrentIndex(0)
+        self.output.appendPlainText("\n" + "=" * 60)
+        self.output.appendPlainText(f"ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€šÃ‚Â¤ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“ AUTONOMOUS SUPERVISOR DIAGNOSTIC ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â {len(observations)} Observations, {len(issues)} Issues")
+        self.output.appendPlainText("=" * 60)
         for obs in observations:
             status = "HEALTHY" if obs.healthy else "ALERT"
-            self.output.append(f"[{status}] {obs.category} - {obs.metric_name}: {obs.current_value} (threshold: {obs.threshold_value})")
+            self.output.appendPlainText(f"[{status}] {obs.category} - {obs.metric_name}: {obs.current_value} (threshold: {obs.threshold_value})")
 
         if not issues:
-            self.output.append("✓ All monitored subsystems are healthy. Zero remediation required.")
+            self.output.appendPlainText("ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã¢â‚¬Å“ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œ All monitored subsystems are healthy. Zero remediation required.")
             QMessageBox.information(self, "Autonomous Diagnostics", "All monitored subsystems are healthy.\nZero remediation required.")
         else:
             for issue in issues:
@@ -5190,9 +5193,9 @@ class Studio(QMainWindow):
                 can_exec, ticket = supervisor.check_policy_and_approve(plan)
                 if can_exec:
                     rec = supervisor.execute_and_verify(plan)
-                    self.output.append(f"✓ Auto-remediated {issue.title} ({rec.details})")
+                    self.output.appendPlainText(f"ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã¢â‚¬Å“ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œ Auto-remediated {issue.title} ({rec.details})")
                 else:
-                    self.output.append(f"⏸ Remediation ticket generated: {ticket.ticket_id} [{ticket.risk_level.value}]")
+                    self.output.appendPlainText(f"ÃƒÆ’Ã‚Â¢Ãƒâ€šÃ‚ÂÃƒâ€šÃ‚Â¸ Remediation ticket generated: {ticket.ticket_id} [{ticket.risk_level.value}]")
             QMessageBox.information(self, "Autonomous Diagnostics", f"Diagnosed {len(issues)} issue(s).\nRemediations evaluated according to policy.\nSee Console Output for details.")
 
     def save_settings(self):
@@ -5246,21 +5249,20 @@ def main():
         else:
             sys.exit(runner.execute_test(subcmd))
 
-    try:
-        from core.startup import AuthoritativeLauncher
-        launcher = AuthoritativeLauncher()
-        sys.exit(launcher.launch())
-    except Exception as e:
-        # Emergency direct fallback
-        print(f"[CRITICAL ERROR] Failed to initialize PRUBETH IDE startup orchestrator: {e}", file=sys.stderr)
-        app = QApplication(sys.argv)
-        app.setApplicationName(APP_NAME)
-        app.setStyle("Fusion")
-        win = Studio()
-        win.show()
-        sys.exit(app.exec_())
+    app = QApplication(sys.argv)
+    app.setApplicationName(APP_NAME)
+    app.setStyle("Fusion")
+    win = Studio()
+    win.show()
+    sys.exit(app.exec_())
 
 
 if __name__ == "__main__":
     main()
+
+
+
+
+
+
 

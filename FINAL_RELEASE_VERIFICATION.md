@@ -1,12 +1,12 @@
 # FINAL RELEASE VERIFICATION & SIGN-OFF REPORT
 ## PRUBETH IDE — Sovereign Autonomous AI Developer Environment
-**Version:** 1.12.0 (Release Tag `v1.12` / Horizon Edition)  
+**Version:** 1.89.0 (Release Tag `v1.89` / Horizon Edition)  
 **Document Identifier:** `FINAL_RELEASE_VERIFICATION.md`  
 **Date of Audit:** October 12, 2026  
 **Author / Reviewer Role:** Principal Systems Architect & Desktop IDE Reliability Lead  
 **Repository:** [https://github.com/imyouiamyou/prubeth-ide](https://github.com/imyouiamyou/prubeth-ide)  
 **Repository Branch:** `master`  
-**Git Commit Identifier:** `v1.12` Release Candidate  
+**Git Commit Identifier:** `v1.89` Release Candidate  
 **Overall Release Status:** **APPROVED FOR RELEASE — EXTERNAL SECURITY AUDIT PASSED**
 
 ---

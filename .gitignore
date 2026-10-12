@@ -36,3 +36,8 @@ installer/app_payload.zip
 scratch/
 
 .github/
+
+# Upstream VS Code source & build directories
+vscode/
+VSCode-win32-x64/
+prubeth-build/

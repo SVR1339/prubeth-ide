@@ -1,0 +1,160 @@
+{
+  "version": "1.89.0",
+  "nameShort": "PRUBETH",
+  "nameLong": "PRUBETH IDE",
+  "extensionsGallery": {
+    "serviceUrl": "https://open-vsx.org/vscode/gallery",
+    "itemUrl": "https://open-vsx.org/vscode/item",
+    "controlUrl": "https://open-vsx.org/vscode/control",
+    "nlsBaseUrl": "https://open-vsx.org/vscode/nls"
+  },
+  "recommendedExtensions": [
+    "ms-python.python",
+    "ms-python.pylance",
+    "rust-lang.rust-analyzer",
+    "esbenp.prettier-vscode",
+    "eamodio.gitlens",
+    "ms-azuretools.vscode-docker",
+    "redhat.vscode-yaml",
+    "ms-vscode.cpptools",
+    "golang.go",
+    "bmewburn.vscode-intelephense-client",
+    "ms-vscode.vscode-typescript-next",
+    "GraphQL.vscode-graphql-syntax",
+    "Prisma.prisma",
+    "svelte.svelte-vscode",
+    "Vue.volar",
+    "dbaeumer.vscode-eslint",
+    "streetsidesoftware.code-spell-checker",
+    "usernamehw.errorlens",
+    "PKief.material-icon-theme",
+    "enkia.tokyo-night",
+    "GitHub.vscode-pull-request-github",
+    "ms-vscode-remote.remote-ssh",
+    "ms-vscode.remote-explorer"
+  ],
+  "prubethExtensions": {
+    "curated": [
+      {
+        "id": "ms-python.python",
+        "displayName": "Python",
+        "description": "Full Python language support: IntelliSense, linting, debugging, formatting",
+        "tier": "core"
+      },
+      {
+        "id": "rust-lang.rust-analyzer",
+        "displayName": "rust-analyzer",
+        "description": "Official Rust language server with inlay hints and refactoring",
+        "tier": "core"
+      },
+      {
+        "id": "esbenp.prettier-vscode",
+        "displayName": "Prettier",
+        "description": "Multi-language opinionated code formatter",
+        "tier": "core"
+      },
+      {
+        "id": "eamodio.gitlens",
+        "displayName": "GitLens",
+        "description": "Supercharged Git with blame, history, and commit graph",
+        "tier": "core"
+      },
+      {
+        "id": "ms-azuretools.vscode-docker",
+        "displayName": "Docker",
+        "description": "Build, manage, and deploy containerized applications",
+        "tier": "core"
+      },
+      {
+        "id": "usernamehw.errorlens",
+        "displayName": "Error Lens",
+        "description": "Inline error and warning messages in the editor",
+        "tier": "productivity"
+      },
+      {
+        "id": "PKief.material-icon-theme",
+        "displayName": "Material Icon Theme",
+        "description": "File and folder icon theme based on Material Design",
+        "tier": "ui"
+      },
+      {
+        "id": "enkia.tokyo-night",
+        "displayName": "Tokyo Night",
+        "description": "Dark theme inspired by Tokyo's night aesthetic",
+        "tier": "ui"
+      },
+      {
+        "id": "ms-vscode.cpptools",
+        "displayName": "C/C++",
+        "description": "C and C++ IntelliSense, debugging, and code browsing",
+        "tier": "core"
+      },
+      {
+        "id": "golang.go",
+        "displayName": "Go",
+        "description": "Rich Go language support",
+        "tier": "core"
+      },
+      {
+        "id": "redhat.vscode-yaml",
+        "displayName": "YAML",
+        "description": "YAML language support with schema validation",
+        "tier": "core"
+      },
+      {
+        "id": "ms-vscode-remote.remote-ssh",
+        "displayName": "Remote - SSH",
+        "description": "Edit files on any remote machine using SSH",
+        "tier": "remote"
+      },
+      {
+        "id": "ms-vscode.remote-explorer",
+        "displayName": "Remote Explorer",
+        "description": "View remote machines for SSH and Tunnels",
+        "tier": "remote"
+      },
+      {
+        "id": "GitHub.vscode-pull-request-github",
+        "displayName": "GitHub Pull Requests",
+        "description": "Review and manage GitHub pull requests from the editor",
+        "tier": "vcs"
+      },
+      {
+        "id": "dbaeumer.vscode-eslint",
+        "displayName": "ESLint",
+        "description": "ESLint JavaScript linter integration",
+        "tier": "core"
+      },
+      {
+        "id": "svelte.svelte-vscode",
+        "displayName": "Svelte for VS Code",
+        "description": "Svelte language support",
+        "tier": "frontend"
+      },
+      {
+        "id": "Vue.volar",
+        "displayName": "Vue - Official",
+        "description": "Vue 3 language support with Volar",
+        "tier": "frontend"
+      },
+      {
+        "id": "ms-vscode.vscode-typescript-next",
+        "displayName": "TypeScript Nightly",
+        "description": "Latest TypeScript language service",
+        "tier": "core"
+      },
+      {
+        "id": "streetsidesoftware.code-spell-checker",
+        "displayName": "Code Spell Checker",
+        "description": "Spell checker for code and documents",
+        "tier": "productivity"
+      },
+      {
+        "id": "bmewburn.vscode-intelephense-client",
+        "displayName": "PHP Intelephense",
+        "description": "High performance PHP language server",
+        "tier": "core"
+      }
+    ]
+  }
+}

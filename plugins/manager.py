@@ -1,5 +1,5 @@
 """
-SUKHI IDE — Extensible Plugin Lifecycle & Marketplace Manager
+PRUBETH IDE â€” Extensible Plugin Lifecycle & Marketplace Manager
 Discovers, validates manifests, resolves dependencies, and manages the lifecycle
 (load, activate, execute, deactivate) of third-party and custom extensions.
 """
@@ -195,3 +195,4 @@ class PluginManager:
         self.active_plugins.pop(plugin_id, None)
         logger.info(f"Plugin '{plugin_id}' deactivated.")
         return True
+

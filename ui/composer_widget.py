@@ -174,17 +174,68 @@ class ComposerWidget(QWidget):
         self.prompt_input.insertPlainText(f"{chip} ")
         self.prompt_input.setFocus()
 
+    def set_ai_worker_factory(self, factory):
+        """Inject a callable factory(prompt, model) → AIWorker from Studio."""
+        self._ai_worker_factory = factory
+
     def _on_generate_clicked(self):
         prompt = self.prompt_input.toPlainText().strip()
         if not prompt:
+            from PyQt5.QtWidgets import QMessageBox
             QMessageBox.information(self, "Composer", "Please enter an instruction or query.")
             return
 
-        # Create demo plan based on prompt
-        self.status_lbl.setText("Generating plan...")
-        p1 = self.engine.plan_file_change("ui/settings_dialog.py", "# Upgraded with Composer mod\nclass SettingsDialog: pass\n")
-        self.refresh_plan_ui()
-        self.status_lbl.setText("1 file staged in plan")
+        factory = getattr(self, "_ai_worker_factory", None)
+        if factory is None:
+            # Fallback: show stub plan so UI is still useful without AI wiring
+            self.status_lbl.setText("⚠️  AI not connected — stub plan shown")
+            self.engine.plan_file_change(
+                "ui/settings_dialog.py",
+                "# Stub: connect AI worker via set_ai_worker_factory\n"
+            )
+            self.refresh_plan_ui()
+            return
+
+        # Build a composer-style system prompt
+        system = (
+            "You are PRUBETH Composer, an agentic code editor. "
+            "The user will describe a code change. "
+            "Reply with the FULL updated content of each file you would modify, "
+            "prefixed with: FILE: <relative_path>\\n```<lang>\\n<content>\\n```\\n. "
+            "Do not add explanations outside the file blocks."
+        )
+        full_prompt = f"{system}\n\nUSER INSTRUCTION:\n{prompt}"
+
+        self.status_lbl.setText("⏳ Generating with AI…")
+        self.btn_generate = self.findChild(type(self.btn_accept), "btn_generate") or None
+
+        worker = factory(full_prompt)
+        worker.chunk_received.connect(self._on_ai_chunk)
+        worker.finished.connect(self._on_ai_done)
+        worker.error_occurred.connect(self._on_ai_error)
+        self._ai_response_buf = ""
+        self._ai_worker = worker
+        worker.start()
+
+    def _on_ai_chunk(self, chunk: str):
+        self._ai_response_buf += chunk
+        self.status_lbl.setText(f"⏳ Streaming… ({len(self._ai_response_buf)} chars)")
+
+    def _on_ai_done(self):
+        try:
+            plans = self.engine.parse_composer_response(self._ai_response_buf)
+            if plans:
+                self.refresh_plan_ui()
+                self.status_lbl.setText(f"✓ {len(plans)} file(s) staged")
+            else:
+                self.status_lbl.setText("⚠️  No file blocks found in AI response")
+                self.diff_view.setPlainText(self._ai_response_buf)
+        except Exception as exc:
+            self.status_lbl.setText(f"⚠️  Parse error: {exc}")
+            self.diff_view.setPlainText(self._ai_response_buf)
+
+    def _on_ai_error(self, msg: str):
+        self.status_lbl.setText(f"✗ AI error: {msg}")
 
     def refresh_plan_ui(self):
         self.file_tree.clear()

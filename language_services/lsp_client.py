@@ -1,5 +1,5 @@
 """
-SUKHI IDE — Language Server Protocol (LSP) Client Engine
+PRUBETH IDE â€” Language Server Protocol (LSP) Client Engine
 Implements standard JSON-RPC 2.0 framing over stdin/stdout with Content-Length headers,
 document synchronization, symbol definition requests, and diagnostic capturing.
 """
@@ -101,7 +101,7 @@ class LspClient:
                             "publishDiagnostics": {"relatedInformation": True}
                         }
                     },
-                    "clientInfo": {"name": "SUKHI IDE", "version": "3.0.0"}
+                    "clientInfo": {"name": "PRUBETH IDE", "version": "1.12.0"}
                 }
             }
             resp = self._send_request(init_req, timeout=timeout_seconds)
@@ -281,3 +281,4 @@ class LspClient:
                     source=d.get("source")
                 ))
             self._diagnostics[uri] = parsed
+
