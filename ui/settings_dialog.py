@@ -725,6 +725,61 @@ class UniversalProviderHubDialog(QDialog):
         layout.setContentsMargins(4, 4, 12, 12)
         layout.setSpacing(12)
 
+        layout.addWidget(SectionHeader("MODEL USAGE RESTRICTION & AGENT GOVERNANCE"))
+
+        card_gov = SettingsCard()
+
+        # Governance Restriction Tiers
+        self.restriction_tier = QComboBox()
+        self.restriction_tier.addItems([
+            "🟢 Low (Full Authority / No Restrictions — Unbounded Agentic Programming)",
+            "🟡 Mid (Balanced Governance — Supervised Tool Execution & Standard Limits)",
+            "🔴 High (Strict Enterprise — Sandboxed Mode, Explicit Step Approvals)"
+        ])
+        saved_tier = self.settings.get("model_restriction_tier", "low").lower()
+        if saved_tier == "high":
+            self.restriction_tier.setCurrentIndex(2)
+        elif saved_tier == "mid":
+            self.restriction_tier.setCurrentIndex(1)
+        else:
+            self.restriction_tier.setCurrentIndex(0)
+
+        card_gov.add_row(
+            "🛡️ Model Usage Restriction Tier",
+            "Controls agentic authority and model execution boundaries across the entire IDE.\n"
+            "• Low: Full developer authority, zero confirmation friction, unbounded token budget.\n"
+            "• Mid: Balanced safety guardrails with standard execution budgets.\n"
+            "• High: Strict isolation requiring confirmation for all file modifications.",
+            self.restriction_tier
+        )
+
+        # Developer Token Budget
+        self.token_budget = QComboBox()
+        self.token_budget.addItems(["Unlimited (Frontier Full Context)", "128,000 Tokens (Extended)", "32,000 Tokens (Standard)", "8,000 Tokens (Eco)"])
+        self.token_budget.setCurrentText(self.settings.get("token_budget", "Unlimited (Frontier Full Context)"))
+        card_gov.add_row(
+            "📊 Reasoning Token Allowance",
+            "Allocates context and reasoning depth per agentic workflow.",
+            self.token_budget
+        )
+
+        # Tool Execution Policy
+        self.tool_exec_policy = QComboBox()
+        self.tool_exec_policy.addItems([
+            "Direct Autonomous Execution (Instant)",
+            "Supervised (Prompt on Destructive Actions)",
+            "Strict Review (Confirm Every File & Command)"
+        ])
+        self.tool_exec_policy.setCurrentText(self.settings.get("tool_exec_policy", "Direct Autonomous Execution (Instant)"))
+        card_gov.add_row(
+            "⚙️ Agent Tool Execution Policy",
+            "Determines whether tools (file writes, shell execution, test runs) execute autonomously or pause for confirmation.",
+            self.tool_exec_policy
+        )
+
+        self.restriction_tier.currentIndexChanged.connect(self._on_restriction_tier_changed)
+        layout.addWidget(card_gov)
+
         layout.addWidget(SectionHeader("AUTONOMOUS AGENT ALLOWANCES & SAFETY"))
 
         card1 = SettingsCard()
@@ -797,6 +852,35 @@ class UniversalProviderHubDialog(QDialog):
         layout.addStretch()
         scroll.setWidget(content)
         return scroll
+
+    def _on_restriction_tier_changed(self, index: int):
+        if index == 0:  # LOW: Full Authority / No Restrictions
+            self.unrestricted_mode.setChecked(True)
+            self.abliteration_mode.setChecked(True)
+            self.allow_commands.setChecked(True)
+            self.allow_edits.setChecked(True)
+            self.max_steps.setValue(100)
+            self.auto_heal.setChecked(True)
+            self.token_budget.setCurrentIndex(0)  # Unlimited
+            self.tool_exec_policy.setCurrentIndex(0)  # Direct Autonomous Execution
+        elif index == 1:  # MID: Balanced Governance
+            self.unrestricted_mode.setChecked(False)
+            self.abliteration_mode.setChecked(False)
+            self.allow_commands.setChecked(True)
+            self.allow_edits.setChecked(True)
+            self.max_steps.setValue(50)
+            self.auto_heal.setChecked(True)
+            self.token_budget.setCurrentIndex(2)  # 32,000 Tokens
+            self.tool_exec_policy.setCurrentIndex(1)  # Supervised
+        elif index == 2:  # HIGH: Strict Enterprise
+            self.unrestricted_mode.setChecked(False)
+            self.abliteration_mode.setChecked(False)
+            self.allow_commands.setChecked(False)
+            self.allow_edits.setChecked(False)
+            self.max_steps.setValue(10)
+            self.auto_heal.setChecked(False)
+            self.token_budget.setCurrentIndex(3)  # 8,000 Tokens
+            self.tool_exec_policy.setCurrentIndex(2)  # Strict Review
 
     # --------------------------------------------------------------------------
     # Page 1: Cloud Providers (Gemini, Claude, OpenAI, DeepSeek, Groq, NavyAI)
@@ -2130,6 +2214,9 @@ class UniversalProviderHubDialog(QDialog):
             "google_adc_path": self.google_adc_path.text().strip(),
             "hf_token": self.hf_token.text().strip(),
             "max_agent_steps": self.max_steps.value(),
+            "model_restriction_tier": ["low", "mid", "high"][self.restriction_tier.currentIndex()],
+            "token_budget": self.token_budget.currentText(),
+            "tool_exec_policy": self.tool_exec_policy.currentText(),
             "allow_agent_commands": self.allow_commands.isChecked(),
             "allow_agent_edits": self.allow_edits.isChecked(),
             "project_context": self.auto_context.isChecked(),

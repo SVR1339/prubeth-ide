@@ -75,6 +75,12 @@ class ExecutionPlan:
         self.created_at = time.time()
         self.steps: Dict[str, TaskStep] = {}
 
+    def __iter__(self):
+        return iter(self.steps.values())
+
+    def __len__(self):
+        return len(self.steps)
+
     def add_step(
         self,
         title: str,

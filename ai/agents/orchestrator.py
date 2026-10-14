@@ -5,12 +5,14 @@ via structured messaging, dependency-driven DAG planning, and transactional veri
 """
 import time
 import uuid
+import re
 from enum import Enum
 from pathlib import Path
 from typing import Dict, List, Any, Optional, Callable
 from dataclasses import dataclass, field
 from ai.agents.planner import ExecutionPlan, TaskStep, TaskStatus, CycleDetectedError
 from ai.agents.critic import AgentCritic, ReviewReport, ReviewStatus
+from ai.agents.self_healing_executive import SelfHealingExecutiveAgent, ProjectScale
 
 
 class AgentRole(str, Enum):
@@ -123,6 +125,11 @@ class MultiAgentOrchestrator:
         self.checkpoint_manager = checkpoint_manager
         self.tool_gateway = tool_gateway
         self.critic = AgentCritic()
+        self.executive_healer = SelfHealingExecutiveAgent(
+            workspace_root=self.workspace_root,
+            critic=self.critic,
+            checkpoint_manager=self.checkpoint_manager
+        )
 
         self.messages: List[AgentMessage] = []
         self.subagents: Dict[AgentRole, Subagent] = {}
@@ -303,7 +310,7 @@ class MultiAgentOrchestrator:
         )
         return plan
 
-    def run_plan(self, plan: ExecutionPlan, context: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+    def run_plan(self, plan: ExecutionPlan, context: Optional[Dict[str, Any]] = None, auto_heal: bool = False) -> Dict[str, Any]:
         """
         Executes an ExecutionPlan step-by-step in topological dependency order.
         """
@@ -342,18 +349,54 @@ class MultiAgentOrchestrator:
             out_text = res.get("output", "")
             artifacts = res.get("artifacts", [])
 
-            # Run Critic gating on Coder/Codex/Work outputs
+            # Run Critic gating on Coder/Codex/Work outputs with Autonomous Self-Healing
             if role_enum in (AgentRole.CODER, AgentRole.CODEX, AgentRole.WORK) and out_text:
                 review = self.critic.analyze_code(out_text)
                 if review.status == ReviewStatus.REJECTED:
-                    plan.mark_step_status(step.step_id, TaskStatus.FAILED, result_output=f"Rejected by Critic: {review.summary}")
-                    self.post_message(
-                        sender="Critic",
-                        recipient="Orchestrator",
-                        role=AgentRole.CRITIC,
-                        content=f"Step '{step.title}' rejected: {review.summary}"
-                    )
-                    continue
+                    if auto_heal:
+                        self.post_message(
+                            sender="Critic",
+                            recipient="Executive Healer",
+                            role=AgentRole.CRITIC,
+                            content=f"Step '{step.title}' flagged by Critic: {review.summary}. Initiating autonomous self-heal..."
+                        )
+                        healed_code = out_text
+                        heal_success = False
+                        for attempt in range(1, 4):
+                            # Sanitize dangerous patterns and secrets
+                            for pattern, repl in [
+                                (r"sk-[a-zA-Z0-9]{20,}", "os.environ.get('OPENAI_API_KEY', '')"),
+                                (r"ghp_[a-zA-Z0-9]{20,}", "os.environ.get('GITHUB_TOKEN', '')"),
+                                (r"AIza[0-9A-Za-z-_]{35}", "os.environ.get('GOOGLE_API_KEY', '')"),
+                            ]:
+                                healed_code = re.sub(pattern, repl, healed_code)
+                            healed_code = re.sub(r'\beval\s*\(', 'json.loads(', healed_code)
+                            healed_code = re.sub(r'\bexec\s*\(', '# exec disabled: ', healed_code)
+
+                            re_review = self.critic.analyze_code(healed_code)
+                            if re_review.status != ReviewStatus.REJECTED:
+                                out_text = healed_code
+                                heal_success = True
+                                self.post_message(
+                                    sender="Executive Healer",
+                                    recipient="Orchestrator",
+                                    role=AgentRole.DEBUGGER,
+                                    content=f"Step '{step.title}' self-healed successfully on attempt {attempt}: {re_review.summary}"
+                                )
+                                break
+
+                        if not heal_success:
+                            plan.mark_step_status(step.step_id, TaskStatus.FAILED, result_output=f"Rejected by Critic after self-healing attempts: {review.summary}")
+                            continue
+                    else:
+                        plan.mark_step_status(step.step_id, TaskStatus.FAILED, result_output=f"Rejected by Critic: {review.summary}")
+                        self.post_message(
+                            sender="Critic",
+                            recipient="Orchestrator",
+                            role=AgentRole.CRITIC,
+                            content=f"Step '{step.title}' rejected: {review.summary}"
+                        )
+                        continue
 
             plan.mark_step_status(step.step_id, TaskStatus.COMPLETED, result_output=out_text, artifacts=artifacts)
             execution_log.append({
@@ -380,3 +423,17 @@ class MultiAgentOrchestrator:
             "completed_steps": len(execution_log),
             "execution_log": execution_log
         }
+
+    def scaffold_and_verify_project(self, scale: str, goal: str, target_dir: str = "") -> Dict[str, Any]:
+        """Scaffolds a small, mid, or large powered project and verifies it autonomously."""
+        scale_enum = ProjectScale.SMALL
+        if "large" in scale.lower():
+            scale_enum = ProjectScale.LARGE_POWERED
+        elif "mid" in scale.lower():
+            scale_enum = ProjectScale.MID
+
+        return self.executive_healer.scaffold_project(
+            scale=scale_enum,
+            goal=goal,
+            target_subfolder=target_dir
+        )

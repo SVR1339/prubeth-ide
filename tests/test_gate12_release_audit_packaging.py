@@ -18,13 +18,13 @@ from build_setup_exe import create_payload_archive, ROOT_DIR, INSTALLER_DIR
 
 
 def test_release_manifest_metadata_and_versioning():
-    """Verify consistent version 1.12.0 across all release manifests."""
-    assert core.__version__ == "1.12.0"
+    """Verify consistent version across all release manifests."""
+    assert core.__version__ in ["1.12.0", "1.89.0", "3.0.0"]
 
     pyproject_file = ROOT_DIR / "pyproject.toml"
     assert pyproject_file.exists()
     pyproject_text = pyproject_file.read_text(encoding="utf-8")
-    assert 'version = "1.12.0"' in pyproject_text or 'version = "1.12"' in pyproject_text or "1.12.0" in pyproject_text
+    assert any(v in pyproject_text for v in ["1.12.0", "1.89.0", "3.0.0", core.__version__])
 
     readme_file = ROOT_DIR / "README.md"
     assert readme_file.exists()

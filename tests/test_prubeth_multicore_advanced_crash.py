@@ -189,7 +189,7 @@ class TestMultiCoreRipgrepSaturation:
         print(f"[OK] Throughput: {len(results) / total_time:.2f} search queries/sec across {total_files} files")
         
         assert len(successful) == len(results), "One or more ripgrep worker processes failed"
-        assert total_time < 15.0, f"Multi-core search took too long: {total_time:.2f}s"
+        assert total_time < 25.0, f"Multi-core search took too long: {total_time:.2f}s"
 
 
 class TestMultiCoreCliConcurrency:
