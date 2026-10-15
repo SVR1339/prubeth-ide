@@ -283,6 +283,45 @@ class IEEE1012VerificationRunner:
                 "Welcome to PRUBETH IDE and sovereign NLS strings verified (265 localized strings)"
             )
 
+        # 4.4 Holographic First Loading Screen & Watermark Distinction
+        wb_html = self.app_dir / "out" / "vs" / "code" / "electron-browser" / "workbench" / "workbench.html"
+        if wb_html.exists():
+            wb_html_text = wb_html.read_text(encoding="utf-8")
+            has_holo_splash = "prubeth-holograph-splash" in wb_html_text
+            has_holo_blink = "holoBlink" in wb_html_text and "holoPulse" in wb_html_text
+            has_holo_orbit = "holo-orbit-ring" in wb_html_text and "holo-orbit-ring-outer" in wb_html_text
+            self.record(
+                "VIS-06", "Visual", "Workbench blinking holographic loading screen",
+                has_holo_splash and has_holo_blink and has_holo_orbit,
+                "Blinking holographic quantum orbit splash confirmed in workbench.html"
+            )
+
+        # 4.5 Official Platform Watermark
+        watermark_expected = "DONT HIRE ROBOTS - JUST USE IT"
+        letterpress_has_wm = False
+        if watermark_light.exists():
+            letterpress_has_wm = watermark_expected in watermark_light.read_text(encoding="utf-8")
+        html_has_wm = False
+        if wb_html.exists():
+            html_has_wm = watermark_expected in wb_html.read_text(encoding="utf-8")
+
+        self.record(
+            "VIS-07", "Visual", "Official watermark text 'DONT HIRE ROBOTS - JUST USE IT'",
+            letterpress_has_wm and html_has_wm,
+            f"Watermark '{watermark_expected}' authenticated across SVG and HTML splash"
+        )
+
+        # 4.6 Sessions Holographic Splash Screen
+        sess_html = self.app_dir / "out" / "vs" / "sessions" / "electron-browser" / "sessions.html"
+        if sess_html.exists():
+            sess_text = sess_html.read_text(encoding="utf-8")
+            has_sess_holo = "prubeth-holograph-splash" in sess_text and watermark_expected in sess_text
+            self.record(
+                "VIS-08", "Visual", "Sessions blinking holographic loading screen",
+                has_sess_holo,
+                "Blinking holographic quantum splash confirmed in sessions.html"
+            )
+
     # ─── PHASE 5: LIVE RUNTIME & PROCESS ASSURANCE ──────────────────────────
     def verify_runtime_processes(self):
         print("\n[IEEE-1012 Phase 5] Verifying Live Process Runtime & Execution Proof...")
