@@ -612,16 +612,20 @@ def test_ide_custom_provider_combo_and_refresh_models(qapp, tmp_path, monkeypatc
     monkeypatch.setattr(local_ai_studio_pro, "CUSTOM_MODELS_CONFIG_PATH", test_cm_path)
 
     studio = Studio()
+    try:
+        # Verify custom providers are present in the provider_combo
+        providers = [studio.provider_combo.itemText(i) for i in range(studio.provider_combo.count())]
+        assert "MistralAI" in providers
+        assert "TogetherAI" in providers
 
-    # Verify custom providers are present in the provider_combo
-    providers = [studio.provider_combo.itemText(i) for i in range(studio.provider_combo.count())]
-    assert "MistralAI" in providers
-    assert "TogetherAI" in providers
-
-    # Switch provider to MistralAI and test refresh_models
-    studio.provider_combo.setCurrentText("MistralAI")
-    models = [studio.model_combo.itemText(i) for i in range(studio.model_combo.count())]
-    assert "mistral-large-2411" in models
+        # Switch provider to MistralAI and test refresh_models
+        studio.provider_combo.setCurrentText("MistralAI")
+        models = [studio.model_combo.itemText(i) for i in range(studio.model_combo.count())]
+        assert "mistral-large-2411" in models
+    finally:
+        studio.close()
+        studio.deleteLater()
+        qapp.processEvents()
 
 
 

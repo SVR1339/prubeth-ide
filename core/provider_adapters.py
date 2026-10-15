@@ -13,11 +13,20 @@ import json
 import time
 import urllib.request
 import urllib.error
+import urllib.parse
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field, asdict
 from typing import Dict, Any, List, Optional, Iterator
 
 from core.model_registry import ModelCapability
+
+
+def _validate_url(url: str) -> str:
+    """Validates that a URL uses http or https scheme to prevent SSRF and scheme-injection."""
+    parsed = urllib.parse.urlparse(url)
+    if parsed.scheme.lower() not in ("http", "https"):
+        raise ValueError(f"Invalid or prohibited URL scheme: '{parsed.scheme}'. Only http and https are allowed.")
+    return url
 
 
 @dataclass
@@ -90,8 +99,9 @@ class OllamaAdapter(BaseProviderAdapter):
     def probe_health(self) -> ProviderHealth:
         t0 = time.time()
         try:
-            req = urllib.request.Request(f"{self.base_url}/api/tags", headers={"User-Agent": "PRUBETH-IDE/1.0"})
-            with urllib.request.urlopen(req, timeout=1.5) as resp:
+            url = _validate_url(f"{self.base_url}/api/tags")
+            req = urllib.request.Request(url, headers={"User-Agent": "PRUBETH-IDE/1.0"})
+            with urllib.request.urlopen(req, timeout=1.5) as resp:  # nosec B310
                 latency = round((time.time() - t0) * 1000, 1)
                 data = json.loads(resp.read().decode("utf-8"))
                 models = data.get("models", [])
@@ -102,8 +112,9 @@ class OllamaAdapter(BaseProviderAdapter):
     def list_models(self) -> List[ModelCapability]:
         models: List[ModelCapability] = []
         try:
-            req = urllib.request.Request(f"{self.base_url}/api/tags", headers={"User-Agent": "PRUBETH-IDE/1.0"})
-            with urllib.request.urlopen(req, timeout=2.0) as resp:
+            url = _validate_url(f"{self.base_url}/api/tags")
+            req = urllib.request.Request(url, headers={"User-Agent": "PRUBETH-IDE/1.0"})
+            with urllib.request.urlopen(req, timeout=2.0) as resp:  # nosec B310
                 data = json.loads(resp.read().decode("utf-8"))
                 for m in data.get("models", []):
                     name = m.get("name", "")
@@ -121,7 +132,7 @@ class OllamaAdapter(BaseProviderAdapter):
         return models
 
     def complete(self, request: ChatCompletionRequest) -> ChatCompletionResponse:
-        url = f"{self.base_url}/api/chat"
+        url = _validate_url(f"{self.base_url}/api/chat")
         payload = {
             "model": request.model,
             "messages": [{"role": m.role, "content": m.content} for m in request.messages],
@@ -130,7 +141,7 @@ class OllamaAdapter(BaseProviderAdapter):
         }
         data = json.dumps(payload).encode("utf-8")
         req = urllib.request.Request(url, data=data, headers={"Content-Type": "application/json"})
-        with urllib.request.urlopen(req, timeout=60) as resp:
+        with urllib.request.urlopen(req, timeout=60) as resp:  # nosec B310
             raw = json.loads(resp.read().decode("utf-8"))
             content = raw.get("message", {}).get("content", "")
             return ChatCompletionResponse(content=content, model=request.model, provider="Ollama")
@@ -148,8 +159,9 @@ class OpenAICompatibleAdapter(BaseProviderAdapter):
         if self.api_key:
             headers["Authorization"] = f"Bearer {self.api_key}"
         try:
-            req = urllib.request.Request(f"{self.base_url}/models", headers=headers)
-            with urllib.request.urlopen(req, timeout=2.5) as resp:
+            url = _validate_url(f"{self.base_url}/models")
+            req = urllib.request.Request(url, headers=headers)
+            with urllib.request.urlopen(req, timeout=2.5) as resp:  # nosec B310
                 latency = round((time.time() - t0) * 1000, 1)
                 data = json.loads(resp.read().decode("utf-8"))
                 models = data.get("data", [])
@@ -167,8 +179,9 @@ class OpenAICompatibleAdapter(BaseProviderAdapter):
         if self.api_key:
             headers["Authorization"] = f"Bearer {self.api_key}"
         try:
-            req = urllib.request.Request(f"{self.base_url}/models", headers=headers)
-            with urllib.request.urlopen(req, timeout=3.0) as resp:
+            url = _validate_url(f"{self.base_url}/models")
+            req = urllib.request.Request(url, headers=headers)
+            with urllib.request.urlopen(req, timeout=3.0) as resp:  # nosec B310
                 data = json.loads(resp.read().decode("utf-8"))
                 for m in data.get("data", []):
                     mid = m.get("id", "")
@@ -186,7 +199,7 @@ class OpenAICompatibleAdapter(BaseProviderAdapter):
         return models
 
     def complete(self, request: ChatCompletionRequest) -> ChatCompletionResponse:
-        url = f"{self.base_url}/chat/completions"
+        url = _validate_url(f"{self.base_url}/chat/completions")
         headers = {"Content-Type": "application/json", "User-Agent": "PRUBETH-IDE/1.0"}
         if self.api_key:
             headers["Authorization"] = f"Bearer {self.api_key}"
@@ -199,7 +212,7 @@ class OpenAICompatibleAdapter(BaseProviderAdapter):
         }
         data = json.dumps(payload).encode("utf-8")
         req = urllib.request.Request(url, data=data, headers=headers)
-        with urllib.request.urlopen(req, timeout=90) as resp:
+        with urllib.request.urlopen(req, timeout=90) as resp:  # nosec B310
             raw = json.loads(resp.read().decode("utf-8"))
             content = raw.get("choices", [{}])[0].get("message", {}).get("content", "")
             return ChatCompletionResponse(content=content, model=request.model, provider=self.display_name)

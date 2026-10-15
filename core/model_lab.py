@@ -72,7 +72,7 @@ class OfflineEnforcementPolicy:
     """Enforces zero remote egress for sensitive development and air-gapped research."""
 
     ALLOWED_LOCAL_HOSTS = {
-        "127.0.0.1", "localhost", "::1", "0.0.0.0"
+        "127.0.0.1", "localhost", "::1"
     }
 
     def __init__(self, mode: OfflinePolicyMode = OfflinePolicyMode.STRICT_AIRGAP) -> None:

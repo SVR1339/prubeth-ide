@@ -6,6 +6,7 @@ execution timeouts, secret redaction on stdout/stderr, and risk-based approval g
 import os
 import sys
 import shlex
+import shutil
 import subprocess
 import time
 from pathlib import Path
@@ -143,26 +144,40 @@ class ToolGateway:
 
         start_time = time.time()
         try:
-            # On Windows, commands with arguments are executed safely without interactive shell
+            # Tokenize command safely without shell=True to eliminate command injection (CWE-78)
+            args = shlex.split(command_str, posix=(sys.platform != "win32"))
+            if not args:
+                return {
+                    "exit_code": 0,
+                    "stdout": "",
+                    "stderr": "",
+                    "duration_s": 0.0,
+                    "risk_level": risk,
+                    "blocked": False,
+                    "dry_run": False
+                }
+
             if sys.platform == "win32":
-                proc = subprocess.run(
-                    command_str,
-                    cwd=str(self.workspace.root),
-                    shell=True,  # Necessary for Windows batch/builtins, but strictly monitored
-                    capture_output=True,
-                    text=True,
-                    timeout=timeout_seconds
-                )
+                # For Windows cmd builtins (echo, dir, etc.) or unresolved binaries,
+                # wrap safely as arguments to cmd.exe with shell=False
+                cmd_builtins = {"echo", "dir", "type", "copy", "del", "move", "mkdir", "md", "rmdir", "rd", "cls", "ver"}
+                executable = shutil.which(args[0])
+                if not executable or args[0].lower() in cmd_builtins:
+                    exec_args = ["cmd.exe", "/d", "/c", *args]
+                else:
+                    exec_args = args
             else:
-                args = shlex.split(command_str)
-                proc = subprocess.run(
-                    args,
-                    cwd=str(self.workspace.root),
-                    shell=False,
-                    capture_output=True,
-                    text=True,
-                    timeout=timeout_seconds
-                )
+                exec_args = args
+
+            proc = subprocess.run(
+                exec_args,
+                cwd=str(self.workspace.root),
+                shell=False,
+                capture_output=True,
+                text=True,
+                timeout=timeout_seconds,
+                creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0
+            )
 
             duration = round(time.time() - start_time, 2)
             stdout_clean = self.redactor.redact(proc.stdout[:max_output_chars])

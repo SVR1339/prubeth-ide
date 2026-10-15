@@ -1804,8 +1804,10 @@ class AgentToolEngine:
         headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
         try:
             url = f"https://api.duckduckgo.com/?q={encoded}&format=json&no_html=1&skip_disambig=1"
+            if not url.startswith("https://"):
+                return "Error: Insecure URL scheme"
             req = urllib.request.Request(url, headers=headers)
-            with urllib.request.urlopen(req, timeout=5) as resp:
+            with urllib.request.urlopen(req, timeout=5) as resp:  # nosec B310 - HTTPS strictly enforced
                 data = json.loads(resp.read().decode("utf-8", errors="ignore"))
                 results = []
                 if data.get("AbstractText"):
@@ -1821,8 +1823,10 @@ class AgentToolEngine:
 
         try:
             html_url = f"https://html.duckduckgo.com/html/?q={encoded}"
+            if not html_url.startswith("https://"):
+                return "Error: Insecure URL scheme"
             req = urllib.request.Request(html_url, headers=headers)
-            with urllib.request.urlopen(req, timeout=5) as resp:
+            with urllib.request.urlopen(req, timeout=5) as resp:  # nosec B310 - HTTPS strictly enforced
                 html = resp.read().decode("utf-8", errors="ignore")
                 snippets = re.findall(r'<a class="result__snippet[^>]*>(.*?)</a>', html, re.DOTALL)
                 titles = re.findall(r'<a class="result__url[^>]*href="([^"]+)"[^>]*>(.*?)</a>', html, re.DOTALL)
