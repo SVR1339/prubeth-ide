@@ -1,5 +1,5 @@
 """
-SO NAIVE IDE — Secure Credentials & Secret Redaction Engine
+PRUBETH IDE — Secure Credentials & Secret Redaction Engine
 Provides Windows DPAPI-backed encryption (with AES-GCM fallback),
 idempotent legacy settings migration, secret masking, and log/traceback redaction.
 """

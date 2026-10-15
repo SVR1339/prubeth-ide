@@ -1,5 +1,5 @@
 """
-SO NAIVE IDE — Dynamic AI Model Registry & Capability Hub
+PRUBETH IDE — Dynamic AI Model Registry & Capability Hub
 Stores model capabilities, context limits, privacy classifications,
 and per-task routing rules with non-secret export/import.
 """

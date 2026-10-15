@@ -1,6 +1,6 @@
 # Deployment & Integration Guide: https://www.bsvr.work/
 
-This guide documents the full proceedings, website updates, removal of the flying doll widget, and deployment instructions for **SO NAIVE IDE (v3.0.0 Horizon Edition)** on **[https://www.bsvr.work/](https://www.bsvr.work/)**.
+This guide documents the full proceedings, website updates, removal of the flying doll widget, and deployment instructions for **PRUBETH IDE (v3.0.0 Horizon Edition)** on **[https://www.bsvr.work/](https://www.bsvr.work/)**.
 
 ---
 
@@ -10,7 +10,7 @@ This guide documents the full proceedings, website updates, removal of the flyin
 - **Identified Component:** The peeping Cupid / "God of Love" widget (`#god-of-love`, `.god-of-love-container`, `.cupid-body`, `.cupid-3d-img`, `.love-particle`) and its associated animations (`floatLove`, `loveRise`, `peepOut`, `spawnLoveParticles`, `triggerLoveBurst`).
 - **Resolution:** 100% excised from HTML, CSS styles, and JavaScript runtime. The page is now clean, sleek, and distraction-free.
 
-### B. Flagship SO NAIVE IDE Showcase Section Added
+### B. Flagship PRUBETH IDE Showcase Section Added
 - **Dedicated Section (`#projects`):** Seamlessly positioned in the core portfolio layout with glassmorphic styling matching Apple Vision Pro aesthetics.
 - **Cybernetic Blinking Beacon:** Real-time pulsing cyan indicator signaling live IDE status.
 - **Dynamic Client-Side OS Detection:** Automatically detects whether the visitor is on Windows, macOS, or Linux, and renders the tailored primary download CTA pill button:
@@ -22,7 +22,7 @@ This guide documents the full proceedings, website updates, removal of the flyin
 - **Core Specifications Matrix:** 128KB Complete File Context, 4-tier router cascade, 1-click AI Auto-Fix compiler, autonomous agent loop, and Dual MIT / Apache 2.0 permissive license.
 
 ### C. Top & Mobile Navigation Updated
-- Direct **`Projects (SO NAIVE)`** link added with blinking cybernetic beacon to:
+- Direct **`Projects (PRUBETH)`** link added with blinking cybernetic beacon to:
   - Fixed desktop glass navbar (`<header class="navbar">`)
   - Mobile slide-out drawer menu (`<div class="mobile-menu-drawer">`)
 
@@ -32,7 +32,7 @@ This guide documents the full proceedings, website updates, removal of the flyin
 
 | File | Purpose |
 | :--- | :--- |
-| **[`website/index.html`](file:///c:/Users/asus/heretic-work/website/index.html)** | **Complete, standalone drop-in replacement for the entire homepage.** Flying doll removed + SO NAIVE IDE project section integrated. (102.5 KB) |
+| **[`website/index.html`](file:///c:/Users/asus/heretic-work/website/index.html)** | **Complete, standalone drop-in replacement for the entire homepage.** Flying doll removed + PRUBETH IDE project section integrated. (102.5 KB) |
 | **[`website/so_naive_project_section.html`](file:///c:/Users/asus/heretic-work/website/so_naive_project_section.html)** | Standalone HTML section block for embedding into existing pages or IFrames. |
 | **[`website/SoNaiveProjectSection.jsx`](file:///c:/Users/asus/heretic-work/website/SoNaiveProjectSection.jsx)** | React / Next.js / Tailwind CSS component for modern frontend frameworks. |
 

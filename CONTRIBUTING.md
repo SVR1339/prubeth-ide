@@ -1,6 +1,6 @@
-# Contributing to SO NAIVE IDE
+# Contributing to PRUBETH IDE
 
-Thank you for your interest in improving **SO NAIVE IDE**!  
+Thank you for your interest in improving **PRUBETH IDE**!  
 Official Project Portal: [**https://www.bsvr.work/#projects**](https://www.bsvr.work/#projects)
 
 ---

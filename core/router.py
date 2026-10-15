@@ -1,5 +1,5 @@
 """
-SO NAIVE IDE — Intelligent Agent Router & Policy Engine
+PRUBETH IDE — Intelligent Agent Router & Policy Engine
 Implements Small, Medium, Large agent profiles, deterministic routing constraints,
 and task complexity classification.
 """

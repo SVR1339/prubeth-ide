@@ -1,5 +1,5 @@
 """
-SO NAIVE IDE — Workspace Security & Filesystem Boundary Guard
+PRUBETH IDE — Workspace Security & Filesystem Boundary Guard
 Provides canonical path resolution, symlink boundary validation,
 directory traversal rejection, and atomic safe file operations.
 """

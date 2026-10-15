@@ -1,5 +1,5 @@
 """
-SO NAIVE IDE — Core Architecture Package
+PRUBETH IDE — Core Architecture Package
 Modular subsystem engines for credentials, workspace protection, tool execution,
 model registry, intelligent routing, task lifecycle, and plugin architecture.
 """

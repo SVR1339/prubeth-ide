@@ -1,5 +1,5 @@
 """
-Local AI Studio Pro ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â Next-Gen Agentic AI IDE (PRUBETH Horizon Edition)
+PRUBETH AI Studio Pro — Next-Gen Agentic AI IDE (PRUBETH Horizon Edition)
 v1.89.0 - Horizon Edition - High-Performance Multi-Model Router & Self-Healing AI IDE
 
 Key Features:
@@ -113,7 +113,7 @@ DEFAULT_EXTENSIONS = [
         "name": "VS Code & Cursor Remote Bridge",
         "category": "IDE Bridges",
         "version": "1.4.0",
-        "author": "SO NAIVE Core",
+        "author": "PRUBETH AI Core",
         "description": "Bidirectional IPC bridge synchronizing open editor tabs, live diagnostics, and workspaces with VS Code, Cursor, and Zed.",
         "icon": "ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã‚Â¡Ãƒâ€šÃ‚Â¡",
         "installed": True,
@@ -136,7 +136,7 @@ DEFAULT_EXTENSIONS = [
         "name": "Multi-Modal Visual Inspector & Canvas",
         "category": "Multi-Modal",
         "version": "1.3.0",
-        "author": "SO NAIVE Vision",
+        "author": "PRUBETH Vision",
         "description": "Full screenshot analysis, OCR text extraction, UI wireframe-to-code compiler, and image reference embeddings.",
         "icon": "ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã‹Å“Ãƒâ€šÃ‚ÂÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¸Ãƒâ€šÃ‚Â",
         "installed": True,
@@ -351,20 +351,20 @@ class BlinkingAIIndicator(QWidget):
         self._timer.timeout.connect(self._tick)
         self._timer.start()
 
-        self.setToolTip("SO NAIVE AI Engine: Idle & Ready (Click for Performance Radar)")
+        self.setToolTip("PRUBETH AI Engine: Idle & Ready (Click for Performance Radar)")
         self.setCursor(Qt.PointingHandCursor)
         self.setFixedSize(148, 28)
 
     def set_state(self, state: str):
         self.state = state.upper()
         if self.state == "STREAMING":
-            self.setToolTip("SO NAIVE AI Engine: Thinking & Generating Code...")
+            self.setToolTip("PRUBETH AI Engine: Thinking & Generating Code...")
         elif self.state == "AUTOFIX":
-            self.setToolTip("SO NAIVE AI Engine: Auto-Fixing Code & Diagnosing Bug...")
+            self.setToolTip("PRUBETH AI Engine: Auto-Fixing Code & Diagnosing Bug...")
         elif self.state == "ERROR":
-            self.setToolTip("SO NAIVE AI Engine: Error Detected / Attention Needed")
+            self.setToolTip("PRUBETH AI Engine: Error Detected / Attention Needed")
         else:
-            self.setToolTip("SO NAIVE AI Engine: Online & Ready (Click for Performance Radar)")
+            self.setToolTip("PRUBETH AI Engine: Online & Ready (Click for Performance Radar)")
         self.update()
 
     def _tick(self):
@@ -2623,7 +2623,7 @@ class AccessoryItemWidget(QWidget):
 
 class AccessoryPopup(QDialog):
     """
-    Accessory & Tool Picker popup menu matching SO NAIVE / PRUBETH Horizon design.
+    Accessory & Tool Picker popup menu matching PRUBETH Horizon design.
     """
     def __init__(self, studio, parent=None):
         super().__init__(parent, Qt.Popup | Qt.FramelessWindowHint)
@@ -2997,7 +2997,7 @@ class CustomizationsDialog(QDialog):
 # Main Studio Window (PRUBETH Horizon UI Experience)
 # ==============================================================================
 class Studio(QMainWindow):
-    """Flagship Local AI Studio Pro window."""
+    """Flagship PRUBETH AI Studio Pro window."""
 
     def __init__(self):
         super().__init__()

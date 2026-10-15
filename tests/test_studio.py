@@ -865,7 +865,7 @@ def test_plugin_manifest_validation():
         "id": "ext-test",
         "name": "Test Extension",
         "version": "1.0.0",
-        "publisher": "SO NAIVE",
+        "publisher": "PRUBETH",
         "description": "A valid test extension",
         "permissions": ["workspace:read", "workspace:write"]
     }

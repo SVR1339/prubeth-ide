@@ -1,5 +1,5 @@
 """
-SO NAIVE IDE — Real MCP Protocol Transport & Plugin Manifest Engine
+PRUBETH IDE — Real MCP Protocol Transport & Plugin Manifest Engine
 Provides JSON-RPC 2.0 stdio protocol transport for Model Context Protocol servers
 and strict extension manifest validation.
 """

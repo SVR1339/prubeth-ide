@@ -1,5 +1,5 @@
 """
-SO NAIVE IDE — Persistent Task Engine & Recovery Lifecycle
+PRUBETH IDE — Persistent Task Engine & Recovery Lifecycle
 Provides explicit task state machines, cancellation tokens, step checkpoints,
 and bounded recovery loops.
 """

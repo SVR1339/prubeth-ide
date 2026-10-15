@@ -1,5 +1,5 @@
 """
-SO NAIVE IDE — Centralized Tool Execution Gateway & Command Sandbox
+PRUBETH IDE — Centralized Tool Execution Gateway & Command Sandbox
 Enforces structured command execution without shell invocation, argument validation,
 execution timeouts, secret redaction on stdout/stderr, and risk-based approval gates.
 """
