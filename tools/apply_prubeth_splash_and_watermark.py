@@ -7,9 +7,11 @@ TARGETS = [
     Path(r"c:\Users\asus\heretic-work\VSCode-win32-x64\resources\app"),
 ]
 
-# SVG templates with flower + clean "SAI" signature watermark
-LETTERPRESS_DARK = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="260" height="260" opacity="0.12">
-  <g transform="translate(256, 225)">
+WATERMARK_TEXT = "DONT HIRE ROBOTS - JUST USE IT"
+
+# SVG templates with flower + "DONT HIRE ROBOTS - JUST USE IT" signature watermark
+LETTERPRESS_DARK = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="260" height="260" opacity="0.12">
+  <g transform="translate(256, 220)">
     <g fill="#FFFFFF">
       <ellipse cx="0" cy="-115" rx="42" ry="84" transform="rotate(45)"/>
       <ellipse cx="0" cy="-115" rx="42" ry="84" transform="rotate(135)"/>
@@ -22,12 +24,12 @@ LETTERPRESS_DARK = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 5
     </g>
     <circle cx="0" cy="0" r="44" fill="#FFFFFF"/>
   </g>
-  <text x="256" y="445" text-anchor="middle" font-family="'Space Mono', Consolas, 'Courier New', monospace" font-size="14" letter-spacing="5" fill="#FFFFFF" opacity="0.38" font-weight="600">SAI</text>
+  <text x="256" y="445" text-anchor="middle" font-family="'Space Mono', Consolas, 'Courier New', monospace" font-size="12" letter-spacing="2" fill="#FFFFFF" opacity="0.45" font-weight="600">{WATERMARK_TEXT}</text>
 </svg>
 """
 
-LETTERPRESS_LIGHT = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="260" height="260" opacity="0.15">
-  <g transform="translate(256, 225)">
+LETTERPRESS_LIGHT = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="260" height="260" opacity="0.15">
+  <g transform="translate(256, 220)">
     <g fill="#707075">
       <ellipse cx="0" cy="-115" rx="42" ry="84" transform="rotate(45)"/>
       <ellipse cx="0" cy="-115" rx="42" ry="84" transform="rotate(135)"/>
@@ -40,11 +42,11 @@ LETTERPRESS_LIGHT = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 
     </g>
     <circle cx="0" cy="0" r="44" fill="#505055"/>
   </g>
-  <text x="256" y="445" text-anchor="middle" font-family="'Space Mono', Consolas, 'Courier New', monospace" font-size="14" letter-spacing="5" fill="#303035" opacity="0.38" font-weight="600">SAI</text>
+  <text x="256" y="445" text-anchor="middle" font-family="'Space Mono', Consolas, 'Courier New', monospace" font-size="12" letter-spacing="2" fill="#303035" opacity="0.45" font-weight="600">{WATERMARK_TEXT}</text>
 </svg>
 """
 
-SPLASH_HTML_CONTENT = """	<body aria-label="">
+SPLASH_HTML_CONTENT = f"""	<body aria-label="">
 		<div id="monaco-parts-splash" style="position: fixed; inset: 0; background-color: #12141a; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 999999; user-select: none; pointer-events: none;">
 			<div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
 				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="118" height="118" style="filter: drop-shadow(0 12px 28px rgba(112, 89, 226, 0.4));">
@@ -70,8 +72,8 @@ SPLASH_HTML_CONTENT = """	<body aria-label="">
 				<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 24px; font-weight: 700; letter-spacing: 3px; color: #F1F5F9; margin-top: 22px;">
 					PRUBETH IDE
 				</div>
-				<div style="font-family: 'Space Mono', Consolas, 'Courier New', monospace; font-size: 13px; letter-spacing: 5px; color: rgba(148, 163, 184, 0.45); margin-top: 10px; font-weight: 600; text-transform: uppercase;">
-					SAI
+				<div style="font-family: 'Space Mono', Consolas, 'Courier New', monospace; font-size: 11px; letter-spacing: 3px; color: rgba(148, 163, 184, 0.5); margin-top: 10px; font-weight: 600; text-transform: uppercase;">
+					{WATERMARK_TEXT}
 				</div>
 			</div>
 		</div>
@@ -79,7 +81,7 @@ SPLASH_HTML_CONTENT = """	<body aria-label="">
 
 def apply_branding():
     print("=" * 70)
-    print("APPLYING PRUBETH IDE SPLASH SCREEN & CLEAN 'SAI' SIGNATURE WATERMARK")
+    print(f"APPLYING PRUBETH IDE SPLASH SCREEN & '{WATERMARK_TEXT}' WATERMARK")
     print("=" * 70)
 
     for target in TARGETS:
@@ -97,7 +99,6 @@ def apply_branding():
         for hpath in html_files:
             if hpath.exists():
                 text = hpath.read_text(encoding="utf-8")
-                # Replace <body aria-label="">...</body>
                 new_text = re.sub(
                     r'<body aria-label="">.*?</body>',
                     SPLASH_HTML_CONTENT,
@@ -118,21 +119,21 @@ def apply_branding():
         for jpath in js_files:
             if jpath.exists():
                 text = jpath.read_text(encoding="utf-8")
-                # Replace old SVR watermark with SAI in JS
+                # Replace previous watermark text with WATERMARK_TEXT
                 text = re.sub(
-                    r'======&nbsp;+SVR&nbsp;+======',
-                    'SAI',
+                    r'>\s*SAI\s*<',
+                    f'>{WATERMARK_TEXT}<',
                     text
                 )
                 text = re.sub(
-                    r'======\s+SVR\s+======',
-                    'SAI',
+                    r'======&nbsp;+SVR&nbsp;+======',
+                    WATERMARK_TEXT,
                     text
                 )
                 jpath.write_text(text, encoding="utf-8")
                 print(f"  [UPDATED JS BRAND] {jpath.name}")
 
-        # 3. Update letterpress watermarks with flower + clean "SAI" signature watermark
+        # 3. Update letterpress watermarks with flower + WATERMARK_TEXT
         watermark_paths = [
             target / "out" / "media" / "letterpress-dark.svg",
             target / "out" / "media" / "letterpress-light.svg",
@@ -153,7 +154,7 @@ def apply_branding():
                 wpath.write_text(content, encoding="utf-8")
                 print(f"  [UPDATED WATERMARK] {wpath.relative_to(target)}")
 
-    print("\n'SAI' Signature Branding Complete!")
+    print(f"\n'{WATERMARK_TEXT}' Branding Complete!")
 
 if __name__ == "__main__":
     apply_branding()
