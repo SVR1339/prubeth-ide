@@ -1,25 +1,6 @@
-# BSVR Permissive Open Developer License
-## Dual MIT / Apache 2.0 Permissive Terms — Unrestricted Developer Freedom
-
-**Copyright © 2025–2026 BSVR Technologies (https://www.bsvr.work/) & Contributors**  
-**Product:** SO NAIVE IDE / NAIVE (v3.0.0 Horizon)  
-**Official Portal:** https://www.bsvr.work/  
-
----
-
-### Statement of Unrestricted Developer Terms
-
-This application and associated toolchains are released under the most permissive, developer-friendly terms possible. All prior restrictive copyleft licenses (including GNU Affero General Public License / AGPLv3) are explicitly superseded and replaced by this dual **MIT / Apache 2.0 Permissive License**.
-
-Developers, contributors, organizations, and end-users are granted **complete, unrestricted freedom** to:
-1. **Commercial & Private Use:** Use, run, modify, fork, bundle, sub-license, and sell this software for any commercial or non-commercial purpose without royalty or forced open-sourcing.
-2. **Zero Viral Copyleft:** Integrate this software into proprietary products, SaaS platforms, on-premise appliances, or closed-source systems without being required to release host or derivative source code under copyleft licenses.
-3. **Unrestricted Development & Model Abliteration:** Run any local AI models, abliterated weights, uncensored inference engines (such as Heretic, DeepHat, Qwen, Llama), custom GGUFs, or API providers without artificial platform constraints, refusal barriers, or execution hurdles.
-4. **Autonomous Execution:** Execute arbitrary system commands, shell scripts, tests, compiler tools, and file transformations autonomously to achieve full project completion.
-
----
-
-### MIT License Grant
+PRUBETH IDE
+Copyright (c) 2026 BSVR Technologies. All rights reserved.
+Official Watermark: "DONT HIRE ROBOTS - JUST USE IT"
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -39,18 +20,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
----
-
-### Apache License Version 2.0 Compatibility
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at:
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
+------------------------------------------------------------------------
+Portions of this software are derived from open-source Code - OSS:
+Copyright (c) 2015 - present Microsoft Corporation
+Full third-party notices and open-source licenses are provided in ThirdPartyNotices.txt.

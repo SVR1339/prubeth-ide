@@ -158,16 +158,21 @@ class ToolGateway:
                 }
 
             if sys.platform == "win32":
-                # For Windows cmd builtins (echo, dir, etc.) or unresolved binaries,
+                # For Windows cmd builtins (echo, dir, etc.), chained commands, or unresolved binaries,
                 # wrap safely as arguments to cmd.exe with shell=False
                 cmd_builtins = {"echo", "dir", "type", "copy", "del", "move", "mkdir", "md", "rmdir", "rd", "cls", "ver"}
                 executable = shutil.which(args[0])
-                if not executable or args[0].lower() in cmd_builtins:
-                    exec_args = ["cmd.exe", "/d", "/c", *args]
+                has_chaining = any(token in command_str for token in ["&", "|", ";", ">", "<"])
+                if not executable or args[0].lower() in cmd_builtins or has_chaining:
+                    exec_args = ["cmd.exe", "/d", "/c", command_str]
                 else:
                     exec_args = args
             else:
-                exec_args = args
+                has_chaining = any(token in command_str for token in ["&", "|", ";", ">", "<"])
+                if has_chaining:
+                    exec_args = ["/bin/sh", "-c", command_str]
+                else:
+                    exec_args = args
 
             proc = subprocess.run(
                 exec_args,
