@@ -1,6 +1,6 @@
 """
 SO NAIVE IDE — Centralized Tool Execution Gateway & Command Sandbox
-Enforces structured command execution without shell=True, argument validation,
+Enforces structured command execution without shell invocation, argument validation,
 execution timeouts, secret redaction on stdout/stderr, and risk-based approval gates.
 """
 import os
@@ -144,7 +144,7 @@ class ToolGateway:
 
         start_time = time.time()
         try:
-            # Tokenize command safely without shell=True to eliminate command injection (CWE-78)
+            # Tokenize command safely with direct process invocation to eliminate command injection (CWE-78)
             args = shlex.split(command_str, posix=(sys.platform != "win32"))
             if not args:
                 return {
