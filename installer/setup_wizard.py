@@ -431,7 +431,19 @@ setlocal enabledelayedexpansion
 title {APP_DISPLAY_NAME} Launcher
 cd /d "%~dp0"
 
-:: 1. Launch standalone executable if installed
+:: 1. Launch VS Code based PRUBETH IDE if present
+if exist "E:\\PRUBETH IDE\\PRUBETH.exe" (
+    start "" /high "E:\\PRUBETH IDE\\PRUBETH.exe" --enable-gpu-rasterization --enable-zero-copy --ignore-gpu-blocklist --disable-background-timer-throttling --disable-renderer-backgrounding %*
+    exit /b 0
+)
+if exist "%USERPROFILE%\\heretic-work\\VSCode-win32-x64\\PRUBETH.exe" (
+    start "" /high "%USERPROFILE%\\heretic-work\\VSCode-win32-x64\\PRUBETH.exe" --enable-gpu-rasterization --enable-zero-copy --ignore-gpu-blocklist --disable-background-timer-throttling --disable-renderer-backgrounding %*
+    exit /b 0
+)
+if exist "PRUBETH.exe" (
+    start "" /high "PRUBETH.exe" --enable-gpu-rasterization --enable-zero-copy --ignore-gpu-blocklist --disable-background-timer-throttling --disable-renderer-backgrounding %*
+    exit /b 0
+)
 if exist "PrubethIDE.exe" (
     start "" "PrubethIDE.exe" %*
     exit /b 0
@@ -471,6 +483,12 @@ exit /b 0
 
     def _create_desktop_shortcut(self):
         desktop = Path.home() / "Desktop" / f"{APP_NAME} IDE.lnk"
+        vscode_engine = Path(r"E:\PRUBETH IDE\PRUBETH.exe")
+        if vscode_engine.exists():
+            target = vscode_engine
+            icon = self.target_dir / "assets" / "icon.ico"
+            self._create_windows_shortcut(str(desktop), str(target), str(icon), working_dir=str(vscode_engine.parent))
+            return
         target = self.target_dir / "PrubethIDE.bat"
         icon = self.target_dir / "assets" / "icon.ico"
         self._create_windows_shortcut(str(desktop), str(target), str(icon))
@@ -479,16 +497,23 @@ exit /b 0
         programs = Path.home() / "AppData" / "Roaming" / "Microsoft" / "Windows" / "Start Menu" / "Programs" / f"{APP_NAME} IDE"
         programs.mkdir(parents=True, exist_ok=True)
         lnk = programs / f"{APP_NAME} IDE.lnk"
+        vscode_engine = Path(r"E:\PRUBETH IDE\PRUBETH.exe")
+        if vscode_engine.exists():
+            target = vscode_engine
+            icon = self.target_dir / "assets" / "icon.ico"
+            self._create_windows_shortcut(str(lnk), str(target), str(icon), working_dir=str(vscode_engine.parent))
+            return
         target = self.target_dir / "PrubethIDE.bat"
         icon = self.target_dir / "assets" / "icon.ico"
         self._create_windows_shortcut(str(lnk), str(target), str(icon))
 
-    def _create_windows_shortcut(self, lnk_path: str, target_path: str, icon_path: str):
+    def _create_windows_shortcut(self, lnk_path: str, target_path: str, icon_path: str, working_dir: Optional[str] = None):
+        work_dir = working_dir or str(self.target_dir)
         ps_cmd = f"""
 $WshShell = New-Object -comObject WScript.Shell
 $Shortcut = $WshShell.CreateShortcut('{lnk_path}')
 $Shortcut.TargetPath = '{target_path}'
-$Shortcut.WorkingDirectory = '{self.target_dir}'
+$Shortcut.WorkingDirectory = '{work_dir}'
 $Shortcut.WindowStyle = 7
 if (Test-Path '{icon_path}') {{ $Shortcut.IconLocation = '{icon_path}' }}
 $Shortcut.Description = '{APP_DISPLAY_NAME}'
