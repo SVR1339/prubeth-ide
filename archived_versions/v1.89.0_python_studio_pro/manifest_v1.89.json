@@ -1,8 +1,0 @@
-{
-  "version": "1.89.0",
-  "architecture": "Python 3.12 + PyQt5 (QScintilla)",
-  "release_name": "PRUBETH IDE v1.89.0 (Horizon Edition)",
-  "status": "ARCHIVED / DEPRECATED (Superceded by v1.90.0 Code-OSS Engine)",
-  "primary_file": "local_ai_studio_pro.py",
-  "launcher": "launch_studio_pro_v1.89.bat"
-}

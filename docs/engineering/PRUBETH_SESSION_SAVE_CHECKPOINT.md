@@ -1,4 +1,4 @@
-# SUKHI IDE — Horizon Edition v3.0.0
+# PRUBETH IDE — Horizon Edition v3.0.0
 ## Session Save Checkpoint & Progress Status
 **Timestamp:** 2026-10-10 08:06:00 IST  
 **Environment:** Windows (PowerShell), Python 3.12.2 (.venv)  
@@ -10,8 +10,8 @@
 ### 1. Work Completed & Verified in Current Session
 
 #### A. Gate 1 / Phase Zero — Architectural Baseline & Forensic Audit
-- Authored comprehensive 12-section audit: [`docs/engineering/SUKHI_ORCHESTRATOR_CURRENT_STATE_AUDIT.md`](file:///c:/Users/asus/heretic-work/docs/engineering/SUKHI_ORCHESTRATOR_CURRENT_STATE_AUDIT.md) and standalone styled HTML [`docs/engineering/SUKHI_ORCHESTRATOR_CURRENT_STATE_AUDIT.html`](file:///c:/Users/asus/heretic-work/docs/engineering/SUKHI_ORCHESTRATOR_CURRENT_STATE_AUDIT.html).
-- Established verified repository baseline: [`docs/engineering/SUKHI_ENGINEERING_BASELINE.md`](file:///c:/Users/asus/heretic-work/docs/engineering/SUKHI_ENGINEERING_BASELINE.md).
+- Authored comprehensive 12-section audit: [`docs/engineering/PRUBETH_ORCHESTRATOR_CURRENT_STATE_AUDIT.md`](file:///c:/Users/asus/heretic-work/docs/engineering/PRUBETH_ORCHESTRATOR_CURRENT_STATE_AUDIT.md) and standalone styled HTML [`docs/engineering/PRUBETH_ORCHESTRATOR_CURRENT_STATE_AUDIT.html`](file:///c:/Users/asus/heretic-work/docs/engineering/PRUBETH_ORCHESTRATOR_CURRENT_STATE_AUDIT.html).
+- Established verified repository baseline: [`docs/engineering/PRUBETH_ENGINEERING_BASELINE.md`](file:///c:/Users/asus/heretic-work/docs/engineering/PRUBETH_ENGINEERING_BASELINE.md).
 
 #### B. Gate 2 / Phase One — Agent Loop, Approval & Context Repairs
 1. **Agent Context Retention Repaired:**
@@ -39,9 +39,9 @@
 | `core/tool_gateway.py` | Modified | Added `set_approval_hook` and approval verification flow |
 | `core/task_engine.py` | Modified | Added property aliases (`tool_name`, `state`, `goal`), step logging methods |
 | `tests/test_agent_loop_repairs.py` | Added | 6 new automated tests verifying agent loop and approval hook |
-| `docs/engineering/SUKHI_ORCHESTRATOR_CURRENT_STATE_AUDIT.md` | Added | 12-section forensic audit |
-| `docs/engineering/SUKHI_ORCHESTRATOR_CURRENT_STATE_AUDIT.html` | Added | Interactive audit report |
-| `docs/engineering/SUKHI_ENGINEERING_BASELINE.md` | Added | Verification baseline |
+| `docs/engineering/PRUBETH_ORCHESTRATOR_CURRENT_STATE_AUDIT.md` | Added | 12-section forensic audit |
+| `docs/engineering/PRUBETH_ORCHESTRATOR_CURRENT_STATE_AUDIT.html` | Added | Interactive audit report |
+| `docs/engineering/PRUBETH_ENGINEERING_BASELINE.md` | Added | Verification baseline |
 
 ---
 

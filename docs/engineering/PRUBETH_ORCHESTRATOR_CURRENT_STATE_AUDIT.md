@@ -1,6 +1,6 @@
-# SUKHI IDE — Orchestration Engine Forensic Audit
+# PRUBETH IDE — Orchestration Engine Forensic Audit
 **Document ID:** `AUD-ORCH-2026-10-10-V1`  
-**Target Product:** SUKHI IDE — Horizon Edition v3.0.0  
+**Target Product:** PRUBETH IDE — Horizon Edition v3.0.0  
 **Repository Working Tree:** `c:\Users\asus\heretic-work` (Git commit: `9c008a6`)  
 **Audit Type:** Static Code Inspection, Dependency Tracing, and Dynamic Test Execution Audit  
 **Classification:** Engineering Architecture & Security Audit  
@@ -10,7 +10,7 @@
 
 ## 1. Executive Summary
 
-This forensic audit evaluates the orchestration, agent execution, task scheduling, model routing, tool dispatch, security boundaries, and persistence mechanisms of **SUKHI IDE — Horizon Edition v3.0.0**.
+This forensic audit evaluates the orchestration, agent execution, task scheduling, model routing, tool dispatch, security boundaries, and persistence mechanisms of **PRUBETH IDE — Horizon Edition v3.0.0**.
 
 ### Key Conclusions:
 1. **The Dual-Orchestrator Architecture:** The codebase contains **two completely separate orchestrator subsystems**:
@@ -245,7 +245,7 @@ The checkpoint subsystem in `workspace/checkpoints.py` provides high-fidelity, t
 ## 7. Tool, Skills, Plugin and MCP Integration Analysis
 
 ### 7.1 AgentToolEngine vs Native Tool Calling
-SUKHI IDE relies on **prompt-engineered XML tag extraction** rather than native provider function calling (such as OpenAI Tools or Gemini Function Calling API schemas).
+PRUBETH IDE relies on **prompt-engineered XML tag extraction** rather than native provider function calling (such as OpenAI Tools or Gemini Function Calling API schemas).
 - **Advantages:** Provider-agnostic. Functions uniformly on local models (Ollama, custom GGUF) that do not support OpenAI-style tool schema JSON parameters.
 - **Disadvantages:**
   - Susceptible to hallucinated XML formats (e.g. `<tool:read_file>path</tool:read_file>` instead of `<tool:read_file path="..." />`).

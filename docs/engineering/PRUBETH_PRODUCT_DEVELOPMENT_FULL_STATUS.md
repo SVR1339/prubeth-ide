@@ -1,7 +1,7 @@
-# SUKHI IDE — HORIZON EDITION v3.0.0
+# PRUBETH IDE — HORIZON EDITION v3.0.0
 # NATIVE PRODUCT DEVELOPMENT FULL STATUS AUDIT
 
-**Document ID:** `SUKHI-NATIVE-STATUS-2026-10-10`  
+**Document ID:** `PRUBETH-NATIVE-STATUS-2026-10-10`  
 **Timestamp:** 2026-10-10 08:12:00 IST  
 **Environment:** Windows 11, Python 3.12.2 (`.venv`), PyQt5 5.15.11, QScintilla 2.14.1, pytest 9.1.1  
 **Git Working Tree:** `master` @ commit `9c008a6`  
@@ -11,15 +11,15 @@
 
 ## 1. SCOPE & PRODUCT IDENTITY CLARIFICATION
 
-**SUKHI IDE — Horizon Edition v3.0.0** is an independent, independent, AI-native desktop integrated development environment.
+**PRUBETH IDE — Horizon Edition v3.0.0** is an independent, independent, AI-native desktop integrated development environment.
 
-### What is NOT Part of SUKHI IDE:
+### What is NOT Part of PRUBETH IDE:
 - **Codex (OpenAI Codex / external cloud coding services):** Not a component of this IDE.
 - **Consumer Chat Features (Personal finance, calendar/email hooks):** Completely out of scope.
 - **Proprietary Vendor Lock-in:** The IDE is provider-agnostic, supporting local models (Ollama, GGUF) and cloud models (Gemini, Anthropic, Groq, OpenAI) via standard HTTP and JSON-RPC APIs.
 
-### What IS the Native Architecture of SUKHI IDE:
-SUKHI IDE's native multi-agent engine (`ai/agents/`) coordinates 4 specialized, deterministic roles:
+### What IS the Native Architecture of PRUBETH IDE:
+PRUBETH IDE's native multi-agent engine (`ai/agents/`) coordinates 4 specialized, deterministic roles:
 1. **System Architect (`AgentRole.ARCHITECT`):** Requirement analysis, modular architecture design, and DAG execution plan generation.
 2. **Senior Coder (`AgentRole.CODER`):** Clean, idiomatic source-code implementation and refactoring matching project specifications.
 3. **Security & Quality Critic (`AgentRole.CRITIC`):** AST syntax validation, security hazard detection (`eval`, `exec`), and credential leakage prevention.

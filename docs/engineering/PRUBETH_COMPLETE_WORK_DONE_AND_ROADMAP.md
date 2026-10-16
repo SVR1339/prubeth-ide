@@ -1,7 +1,7 @@
-# SUKHI IDE — HORIZON EDITION v3.0.0
+# PRUBETH IDE — HORIZON EDITION v3.0.0
 # MASTER VERIFICATION & RELEASE REPORT: 100% GATES COMPLETE
 
-**Document ID:** `SUKHI-MASTER-AUDIT-2026-10-10`  
+**Document ID:** `PRUBETH-MASTER-AUDIT-2026-10-10`  
 **Generated At:** 2026-10-10 10:00:00 IST  
 **Environment:** Windows 11, Python 3.12.2 (`.venv`), PyQt5 5.15.11, QScintilla 2.14.1, pytest 9.1.1  
 **Project Workspace:** `C:\Users\asus\heretic-work`  
@@ -22,7 +22,7 @@
 
 ## 1. EXECUTIVE SUMMARY & PRODUCT SCOPE
 
-**SUKHI IDE — Horizon Edition v3.0.0** is an enterprise-grade, independent, AI-native desktop integrated development environment engineered to provide:
+**PRUBETH IDE — Horizon Edition v3.0.0** is an enterprise-grade, independent, AI-native desktop integrated development environment engineered to provide:
 - Deterministic multi-agent coding (Architect, Coder, Critic, Tester).
 - In-place file modification, AST code analysis, and visual diff reviews.
 - Strict workspace boundary containment and DPAPI Windows secret encryption.
@@ -31,8 +31,8 @@
 - Total model neutrality: Run 100% offline via local Ollama / GGUF models or connect cloud frontier models (Claude 3.7 Sonnet, GPT-4o, Gemini 3.8 Flash, Groq).
 
 ### Competitive Context & Clarity:
-- **Codex / Consumer Chat Tools:** Third-party cloud features (e.g. OpenAI Codex, personal finance bots, calendar hooks) are **NOT** part of SUKHI IDE.
-- SUKHI IDE is engineered to surpass cloud chatbots by operating directly inside the developer's local repository—compiling, testing, analyzing, and self-healing in-place without copying code to external web containers.
+- **Codex / Consumer Chat Tools:** Third-party cloud features (e.g. OpenAI Codex, personal finance bots, calendar hooks) are **NOT** part of PRUBETH IDE.
+- PRUBETH IDE is engineered to surpass cloud chatbots by operating directly inside the developer's local repository—compiling, testing, analyzing, and self-healing in-place without copying code to external web containers.
 
 ---
 
@@ -40,8 +40,8 @@
 
 ### 2.1 Gate 0 & Gate 1 — Forensic Architecture Baseline & Audit
 - **Commit Baseline Established:** Locked commit `9c008a6`, verified Python 3.12.2 environment, locked all dependencies.
-- **Forensic Audit Generated:** Authored 12-section technical investigation [`docs/engineering/SUKHI_ORCHESTRATOR_CURRENT_STATE_AUDIT.md`](file:///c:/Users/asus/heretic-work/docs/engineering/SUKHI_ORCHESTRATOR_CURRENT_STATE_AUDIT.md) and interactive HTML report [`docs/engineering/SUKHI_ORCHESTRATOR_CURRENT_STATE_AUDIT.html`](file:///c:/Users/asus/heretic-work/docs/engineering/SUKHI_ORCHESTRATOR_CURRENT_STATE_AUDIT.html).
-- **Engineering Baseline Authored:** Produced [`docs/engineering/SUKHI_ENGINEERING_BASELINE.md`](file:///c:/Users/asus/heretic-work/docs/engineering/SUKHI_ENGINEERING_BASELINE.md) detailing all 18 IDE subsystems and 23 orchestration capabilities.
+- **Forensic Audit Generated:** Authored 12-section technical investigation [`docs/engineering/PRUBETH_ORCHESTRATOR_CURRENT_STATE_AUDIT.md`](file:///c:/Users/asus/heretic-work/docs/engineering/PRUBETH_ORCHESTRATOR_CURRENT_STATE_AUDIT.md) and interactive HTML report [`docs/engineering/PRUBETH_ORCHESTRATOR_CURRENT_STATE_AUDIT.html`](file:///c:/Users/asus/heretic-work/docs/engineering/PRUBETH_ORCHESTRATOR_CURRENT_STATE_AUDIT.html).
+- **Engineering Baseline Authored:** Produced [`docs/engineering/PRUBETH_ENGINEERING_BASELINE.md`](file:///c:/Users/asus/heretic-work/docs/engineering/PRUBETH_ENGINEERING_BASELINE.md) detailing all 18 IDE subsystems and 23 orchestration capabilities.
 
 ### 2.2 Gate 2 — Agent Loop, Approval & Context Repairs (100% Complete & Verified)
 Four critical architectural defects were discovered and surgically repaired:
@@ -93,11 +93,11 @@ Four critical architectural defects were discovered and surgically repaired:
   - `core/task_engine.py`: Added property aliases (`tool_name`, `state`, `goal`), step logging methods.
 - **Untracked Staged Files:**
   - `tests/test_agent_loop_repairs.py` (6 verified passing tests)
-  - `docs/engineering/SUKHI_ORCHESTRATOR_CURRENT_STATE_AUDIT.md` (Forensic audit)
-  - `docs/engineering/SUKHI_ORCHESTRATOR_CURRENT_STATE_AUDIT.html` (Interactive audit report)
-  - `docs/engineering/SUKHI_ENGINEERING_BASELINE.md` (Engineering baseline)
-  - `docs/engineering/SUKHI_SESSION_SAVE_CHECKPOINT.md` (Session checkpoint)
-  - `docs/engineering/SUKHI_PRODUCT_DEVELOPMENT_FULL_STATUS.md` (Product status)
+  - `docs/engineering/PRUBETH_ORCHESTRATOR_CURRENT_STATE_AUDIT.md` (Forensic audit)
+  - `docs/engineering/PRUBETH_ORCHESTRATOR_CURRENT_STATE_AUDIT.html` (Interactive audit report)
+  - `docs/engineering/PRUBETH_ENGINEERING_BASELINE.md` (Engineering baseline)
+  - `docs/engineering/PRUBETH_SESSION_SAVE_CHECKPOINT.md` (Session checkpoint)
+  - `docs/engineering/PRUBETH_PRODUCT_DEVELOPMENT_FULL_STATUS.md` (Product status)
 
 ### 3.2 Exact Code Locations Where Execution Paused
 1. **`core/plugin_engine.py` (Lines 51–156):**
@@ -158,10 +158,10 @@ This blueprint details the exact technical implementation tasks to execute upon 
 - **Concrete Tasks:**
   1. Execute full project test suite and verify 100% pass rate.
   2. Generate release documentation:
-     - `docs/engineering/SUKHI_REPAIR_CHANGELOG.md`
-     - `docs/engineering/SUKHI_SECURITY_REVIEW.md`
-     - `docs/engineering/SUKHI_DEVELOPER_GUIDE.md`
-     - `docs/engineering/SUKHI_INSTALLATION_AND_RECOVERY.md`
+     - `docs/engineering/PRUBETH_REPAIR_CHANGELOG.md`
+     - `docs/engineering/PRUBETH_SECURITY_REVIEW.md`
+     - `docs/engineering/PRUBETH_DEVELOPER_GUIDE.md`
+     - `docs/engineering/PRUBETH_INSTALLATION_AND_RECOVERY.md`
   3. Test Windows standalone executable building via `build_setup_exe.py`.
 
 ---

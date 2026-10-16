@@ -1,6 +1,6 @@
-# SUKHI IDE — Engineering Baseline & System Inventory
+# PRUBETH IDE — Engineering Baseline & System Inventory
 **Document ID:** `BASE-2026-10-10-V1`  
-**Product:** SUKHI IDE — Horizon Edition v3.0.0  
+**Product:** PRUBETH IDE — Horizon Edition v3.0.0  
 **Workspace Root:** `c:\Users\asus\heretic-work`  
 **Git Baseline Commit:** `9c008a6` (`feat(architecture): implement M00-M08 full-thrust architecture with 60/60 passing tests`)  
 **Branch:** `master`  
@@ -11,7 +11,7 @@
 
 ## 1. Executive Baseline & Environment Overview
 
-This document establishes the verified Phase Zero engineering baseline for SUKHI IDE — Horizon Edition v3.0.0. Every architectural claim, module boundary, call graph, and test execution status documented herein has been directly inspected from repository source code and verified with live test runs.
+This document establishes the verified Phase Zero engineering baseline for PRUBETH IDE — Horizon Edition v3.0.0. Every architectural claim, module boundary, call graph, and test execution status documented herein has been directly inspected from repository source code and verified with live test runs.
 
 ### 1.1 Technical Stack & Dependency Inventory
 - **Application Entry Point:** `local_ai_studio_pro.py::main()` (invoked via `so-naive` CLI command or `python local_ai_studio_pro.py`).
