@@ -242,7 +242,7 @@ def build_decorative_banner():
     desc_font = QFont("Segoe UI", 12, QFont.Normal)
     p.setFont(desc_font)
     p.setPen(QColor(185, 200, 225))
-    p.drawText(text_x, 220, "Sovereign Multi-Model AI Developer Workstation · Local-First Reliability")
+    p.drawText(text_x, 220, "Independent Multi-Model AI Developer Workstation · Local-First Reliability")
 
     # Feature Tag Pills
     pills = [

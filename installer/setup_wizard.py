@@ -443,6 +443,8 @@ if exist ".venv\\Scripts\\pythonw.exe" (
     set "PY_CMD=.venv\\Scripts\\pythonw.exe"
 ) else if exist "..\\.venv\\Scripts\\pythonw.exe" (
     set "PY_CMD=..\\.venv\\Scripts\\pythonw.exe"
+) else if exist "%USERPROFILE%\\heretic-work\\.venv\\Scripts\\pythonw.exe" (
+    set "PY_CMD=%USERPROFILE%\\heretic-work\\.venv\\Scripts\\pythonw.exe"
 ) else (
     where pythonw.exe >nul 2>&1
     if !errorlevel! equ 0 (
@@ -934,7 +936,7 @@ class FinishPage(QWizardPage):
 
         congrats = QLabel(
             f"<h3 style='color:#FFFFFF;'>{APP_DISPLAY_NAME} has been successfully installed!</h3>"
-            "<p style='color:#A5ACBB;'>You are now ready to launch the sovereign developer workstation environment.</p>"
+            "<p style='color:#A5ACBB;'>You are now ready to launch the developer workstation environment.</p>"
             f"<p style='color:#737B8C;'>Find future updates and extensions at <a href='{WEBSITE_URL}' style='color:#9485FF;'>{WEBSITE_URL}</a></p>"
         )
         congrats.setOpenExternalLinks(True)

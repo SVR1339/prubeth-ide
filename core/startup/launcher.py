@@ -44,7 +44,7 @@ class AuthoritativeLauncher:
     def parse_args(self) -> argparse.Namespace:
         parser = argparse.ArgumentParser(
             prog="prubeth",
-            description=f"{APP_NAME} — Sovereign Autonomous AI Developer Environment (v{APP_VERSION})"
+            description=f"{APP_NAME} — Autonomous AI Developer Environment (v{APP_VERSION})"
         )
         parser.add_argument("--safe-mode", action="store_true", help="Launch in Safe Mode with extensions and probes disabled.")
         parser.add_argument("--reset-settings", action="store_true", help="Backup existing settings and restore default configuration.")

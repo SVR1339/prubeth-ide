@@ -162,7 +162,14 @@ class ReliabilityEngine:
         if profile == ReliabilityProfile.SMOKE:
             scenarios_to_run = [self._sc_smoke_startup, self._sc_smoke_workspace_write, self._sc_smoke_task_engine]
         elif profile == ReliabilityProfile.LARGE_PROJECT:
-            scenarios_to_run = [self._sc_large_monorepo, self._sc_giant_buffer_read, self._sc_deep_tree_traversal]
+            scenarios_to_run = [
+                self._sc_large_monorepo,
+                self._sc_giant_buffer_read,
+                self._sc_deep_tree_traversal,
+                self._sc_probabilistic_path_invariance,
+                self._sc_probabilistic_dag_deadlock_breaking,
+                self._sc_file_handle_expansion_and_memory_trim
+            ]
         elif profile == ReliabilityProfile.STRESS:
             scenarios_to_run = [self._sc_stress_concurrency, self._sc_stress_rapid_patching, self._sc_stress_task_flood]
         elif profile == ReliabilityProfile.FAULT_INJECTION:
@@ -639,3 +646,77 @@ class ReliabilityEngine:
                 return ScenarioResult("END-02", "100-Cycle High Endurance Loop", "Endurance", ScenarioStatus.PASSED, time.time() - t0, details="100 sequential write cycles verified.")
             except Exception as e:
                 return ScenarioResult("END-02", "100-Cycle Endurance Loop", "Endurance", ScenarioStatus.FAILED, time.time() - t0, error=str(e))
+
+    def _sc_probabilistic_path_invariance(self) -> ScenarioResult:
+        t0 = time.time()
+        try:
+            from core.probabilistic_resilience_engine import ProbabilisticResilienceEngine
+            engine = ProbabilisticResilienceEngine.get_instance(self.workspace_root)
+            # Simulate non-existent disconnected drive Z:\ path
+            fake_z_path = r"Z:\PRUBETH IDE\PRUBETH.exe"
+            healed = engine.heal_missing_drive_path(fake_z_path)
+            assert healed is not None
+            assert healed.exists()
+            assert ("C:" in str(healed)) or ("heretic-work" in str(healed)) or ("VSCode" in str(healed))
+            return ScenarioResult(
+                "LP-04",
+                "Probabilistic Path Invariance & Drive Self-Healing",
+                "Scale",
+                ScenarioStatus.PASSED,
+                time.time() - t0,
+                details=f"Auto-relocated unmounted drive path to: {healed.name}"
+            )
+        except Exception as e:
+            return ScenarioResult("LP-04", "Probabilistic Path Invariance", "Scale", ScenarioStatus.FAILED, time.time() - t0, error=str(e))
+
+    def _sc_probabilistic_dag_deadlock_breaking(self) -> ScenarioResult:
+        t0 = time.time()
+        try:
+            from core.probabilistic_resilience_engine import ProbabilisticResilienceEngine
+            engine = ProbabilisticResilienceEngine.get_instance(self.workspace_root)
+            # Create cyclic graph: A -> B -> C -> A
+            nodes = ["A", "B", "C", "D"]
+            edges = [("A", "B"), ("B", "C"), ("C", "A"), ("C", "D")]
+            is_acyclic, cycle = engine.verify_dag_acyclic(nodes, edges)
+            assert is_acyclic is False  # Correctly detected circular deadlock
+            assert len(cycle) > 0
+
+            # Precautionary cycle breaker
+            safe_edges = engine.break_dag_cycles_precautionary(nodes, edges)
+            is_safe, order = engine.verify_dag_acyclic(nodes, safe_edges)
+            assert is_safe is True
+            assert len(order) == 4
+            return ScenarioResult(
+                "LP-05",
+                "Kahn's DAG Deadlock Precaution & Cycle Breaker",
+                "Scale",
+                ScenarioStatus.PASSED,
+                time.time() - t0,
+                details=f"Acyclic execution guaranteed. Order: {' -> '.join(order)}"
+            )
+        except Exception as e:
+            return ScenarioResult("LP-05", "DAG Deadlock Precaution", "Scale", ScenarioStatus.FAILED, time.time() - t0, error=str(e))
+
+    def _sc_file_handle_expansion_and_memory_trim(self) -> ScenarioResult:
+        t0 = time.time()
+        try:
+            from core.probabilistic_resilience_engine import ProbabilisticResilienceEngine
+            engine = ProbabilisticResilienceEngine.get_instance(self.workspace_root)
+            metrics = engine.compute_reliability_metrics()
+            assert metrics.max_file_handles in (512, 2048)
+            assert metrics.steady_state_availability >= 99.9
+
+            # Memory trim
+            trim_res = engine.trigger_epochal_memory_trimming(force=True)
+            assert "before_mb" in trim_res and "after_mb" in trim_res
+            return ScenarioResult(
+                "LP-06",
+                "Max Stdio Handle Expansion & Epochal Memory Trim",
+                "Scale",
+                ScenarioStatus.PASSED,
+                time.time() - t0,
+                details=f"Availability: {metrics.steady_state_availability}% | Max Handles: {metrics.max_file_handles} | RSS: {metrics.current_memory_mb} MB"
+            )
+        except Exception as e:
+            return ScenarioResult("LP-06", "File Handle & Memory Trim", "Scale", ScenarioStatus.FAILED, time.time() - t0, error=str(e))
+

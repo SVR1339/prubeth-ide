@@ -107,13 +107,14 @@ class WorkspaceGuard:
         target = self.canonicalize(rel_or_abs_path)
         if not target.is_file():
             raise FileNotFoundError(f"File not found: '{rel_or_abs_path}'")
-        # Retry briefly on Windows if another thread is currently completing atomic replace
-        for attempt in range(5):
+        # Retry with Full Jitter backoff on Windows if another thread is currently replacing
+        for attempt in range(6):
             try:
                 return target.read_text(encoding="utf-8", errors="replace")[:max_chars]
             except (PermissionError, OSError):
-                if attempt < 4:
-                    time.sleep(0.01 * (attempt + 1))
+                if attempt < 5:
+                    from core.probabilistic_resilience_engine import ProbabilisticResilienceEngine
+                    time.sleep(ProbabilisticResilienceEngine.calculate_full_jitter_backoff(attempt, base_delay=0.01, max_delay=0.20))
                 else:
                     raise
 
@@ -166,14 +167,15 @@ class WorkspaceGuard:
             temp_file = target.with_suffix(f"{target.suffix}.tmp_write_{uuid.uuid4().hex[:8]}")
             try:
                 temp_file.write_text(content, encoding="utf-8")
-                # Retry loop with backoff for Windows file-sharing locks
-                for attempt in range(6):
+                # Retry loop with Full Jitter backoff for Windows file-sharing locks
+                for attempt in range(8):
                     try:
                         temp_file.replace(target)
                         break
                     except (OSError, PermissionError):
-                        if attempt < 5:
-                            time.sleep(0.015 * (attempt + 1))
+                        if attempt < 7:
+                            from core.probabilistic_resilience_engine import ProbabilisticResilienceEngine
+                            time.sleep(ProbabilisticResilienceEngine.calculate_full_jitter_backoff(attempt, base_delay=0.015, max_delay=0.25))
                         else:
                             if target.exists():
                                 try:

@@ -69,7 +69,7 @@ License: Eclipse Public License 2.0 / MIT License
 Copyright (c) Eclipse Foundation / Open VSX Community Contributors
 
 ========================================================================
-PRUBETH SOVEREIGN PROPRIETARY EXTENSIONS & INNOVATIONS
+PRUBETH INDEPENDENT PROPRIETARY EXTENSIONS & INNOVATIONS
 ========================================================================
 All modifications, original branding, blooming flower logomark, blinking 
 holographic launch engine, PRUBETH AI Studio Pro, autonomous tool gateway, 

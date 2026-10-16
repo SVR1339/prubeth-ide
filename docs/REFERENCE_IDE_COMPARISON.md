@@ -11,7 +11,7 @@
 This report establishes an evidence-based, reproducible architectural comparison between **PRUBETH IDE v3.0.0 (Horizon Edition)** and leading AI/developer environments:
 1. **Visual Studio Code (v1.93+)**: The open-source desktop baseline for extensibility, LSP/DAP protocols, and workspace stability.
 2. **Cursor IDE (v0.40+)**: AI-first developer workstation pioneered around inline edits (`Ctrl+K`), multi-file composer, and indexing.
-3. **Google Antigravity (v2.9.1)**: Sovereign agentic engineering environment characterized by background autonomous subagents, strict sandboxing, and MCP integration.
+3. **Google Antigravity (v2.9.1)**: Independent agentic engineering environment characterized by background autonomous subagents, strict sandboxing, and MCP integration.
 
 All comparisons are conducted against **observable workflows, documented interfaces, and reproducible test scenarios**. No assumptions are made regarding closed proprietary internals.
 
@@ -47,6 +47,6 @@ All comparisons are conducted against **observable workflows, documented interfa
 ### Conclusion & PRINCE2 7 Stage-Gate Certification
 
 PRUBETH IDE v3.0.0 achieves functional and architectural parity with the observable capabilities of **Visual Studio Code**, **Cursor IDE**, and **Google Antigravity 2.9.1**, while demonstrating measurable technical advantages in:
-- **Local Sovereignty**: Zero-downtime offline auto-failover to local NVIDIA CUDA models.
+- **Local Autonomy**: Zero-downtime offline auto-failover to local NVIDIA CUDA models.
 - **Credential Security**: Windows DPAPI hardware-backed encryption with zero plaintext leakage.
 - **Reliability Engineering**: Integrated 25-language polyglot assurance engine, out-of-process crash supervisor, and native in-IDE Reliability Center dashboard.

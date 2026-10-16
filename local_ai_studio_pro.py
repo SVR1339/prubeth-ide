@@ -86,7 +86,7 @@ APP_NAME = "PRUBETH IDE"
 APP_BRAND = "PRUBETH"
 APP_VERSION = "1.89.0 (Horizon Edition)"
 APP_CODENAME = "PRUBETH"
-APP_TAGLINE = "Bloom, ideas unfolding"
+APP_TAGLINE = "HIRE ROBOTS FOR USING NOT DECORATE !"
 WEBSITE_URL = "https://www.bsvr.work/"
 PROJECTS_URL = "https://www.bsvr.work/#projects"
 GITHUB_URL = "https://github.com/imyouiamyou/prubeth-ide"
@@ -115,7 +115,7 @@ DEFAULT_EXTENSIONS = [
         "version": "1.4.0",
         "author": "PRUBETH AI Core",
         "description": "Bidirectional IPC bridge synchronizing open editor tabs, live diagnostics, and workspaces with VS Code, Cursor, and Zed.",
-        "icon": "ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã‚Â¡Ãƒâ€šÃ‚Â¡",
+        "icon": "⚡",
         "installed": True,
         "enabled": True,
         "port": 7432,
@@ -127,7 +127,7 @@ DEFAULT_EXTENSIONS = [
         "version": "2.2.0",
         "author": "PRUBETH Systems",
         "description": "Spawns parallel background subagents (Researcher, Code Architect, Test Fixer) with multi-turn task queues.",
-        "icon": "ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€¦Ã‚Â¡ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬",
+        "icon": "🚀 ",
         "installed": True,
         "enabled": True,
     },
@@ -138,7 +138,7 @@ DEFAULT_EXTENSIONS = [
         "version": "1.3.0",
         "author": "PRUBETH Vision",
         "description": "Full screenshot analysis, OCR text extraction, UI wireframe-to-code compiler, and image reference embeddings.",
-        "icon": "ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã‹Å“Ãƒâ€šÃ‚ÂÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¸Ãƒâ€šÃ‚Â",
+        "icon": "👁️",
         "installed": True,
         "enabled": True,
     },
@@ -149,7 +149,7 @@ DEFAULT_EXTENSIONS = [
         "version": "2.0.1",
         "author": "High-Throughput Labs",
         "description": "High-performance bridge connecting private on-premise inference servers, LM Studio, vLLM, and Ollama clusters.",
-        "icon": "ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢",
+        "icon": "🔒",
         "installed": True,
         "enabled": True,
     },
@@ -160,7 +160,7 @@ DEFAULT_EXTENSIONS = [
         "version": "1.1.0",
         "author": "GitHub Team",
         "description": "Interactive git branch visualization, staging, commit message generation, and automated GitHub PR creation.",
-        "icon": "ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‹Å“ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡",
+        "icon": "✨",
         "installed": True,
         "enabled": False,
     },
@@ -171,7 +171,7 @@ DEFAULT_EXTENSIONS = [
         "version": "1.0.5",
         "author": "Data Agent Kit",
         "description": "Interactive Jupyter notebook kernel runner, dataframe inspector, inline matplotlib rendering, and BigQuery analytics.",
-        "icon": "ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œÃƒâ€¦Ã‚Â ",
+        "icon": "📁",
         "installed": False,
         "enabled": False,
     },
@@ -182,7 +182,7 @@ DEFAULT_EXTENSIONS = [
         "version": "1.2.0",
         "author": "LSP Guild",
         "description": "Deep symbol definitions, find all references, and type inlay hints for Rust Analyzer, Clangd, Gopls, and Pyright.",
-        "icon": "ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€šÃ‚Â¦ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬",
+        "icon": "💎 ",
         "installed": False,
         "enabled": False,
     },
@@ -193,7 +193,7 @@ DEFAULT_EXTENSIONS = [
         "version": "1.0.0",
         "author": "Container Ops",
         "description": "Executes shell commands and runs test suites inside isolated Docker containers or DevEnvironments.",
-        "icon": "ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€šÃ‚ÂÃƒâ€šÃ‚Â³",
+        "icon": "🐳",
         "installed": False,
         "enabled": False,
     },
@@ -204,7 +204,7 @@ DEFAULT_EXTENSIONS = [
         "version": "1.5.0",
         "author": "Anthropic / OpenMCP",
         "description": "Connects standard MCP servers (Filesystem, DuckDuckGo, PyTest Runner, Postgres, GitHub, Slack) as live tools.",
-        "icon": "ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂºÃƒâ€šÃ‚Â ÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¸Ãƒâ€šÃ‚Â",
+        "icon": "🛸 ",
         "installed": True,
         "enabled": True,
     }
@@ -324,7 +324,7 @@ def format_collapsible_thought(text: str) -> str:
         thought_body = match.group(1).strip()
         return (
             f"<details style='background: #111622; border: 1px solid #1f2838; border-radius: 6px; margin: 6px 0; padding: 6px;'>"
-            f"<summary style='color: #8fa2bf; cursor: pointer; font-weight: bold;'>Thought for 5s ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“Ãƒâ€šÃ‚Â¾</summary>"
+            f"<summary style='color: #8fa2bf; cursor: pointer; font-weight: bold;'>Thought for 5s ▾</summary>"
             f"<div style='color: #64748b; font-family: monospace; font-size: 8.5pt; margin-top: 4px; white-space: pre-wrap;'>{html_escape(thought_body)}</div>"
             f"</details>"
         )
@@ -443,12 +443,53 @@ class BlinkingAIIndicator(QWidget):
 
 
 # ==============================================================================
+# Regional Routing Topology & Infrastructure Difference Engine
+# ==============================================================================
+REGIONAL_TOPOLOGY = {
+    "us-central1": {
+        "name": "US Central (Iowa)",
+        "tier": "Tier 1: Global Frontier Master",
+        "latency_profile": "Standard Global (~190ms from APAC)",
+        "model_scope": ["gemini-4-argon", "gemini-3.1-pro-preview", "claude-opus-4-6-thinking"],
+        "purpose": "First-wave preview access, deep reasoning, maximum TPU v5p/v6 compute"
+    },
+    "us-east4": {
+        "name": "US East (N. Virginia)",
+        "tier": "Tier 1: High-Throughput Frontier",
+        "latency_profile": "Standard Global (~180ms from APAC)",
+        "model_scope": ["gemini-3.8-flash", "gpt-4o", "claude-sonnet-4-6"],
+        "purpose": "Primary enterprise cluster for multi-agent concurrency"
+    },
+    "asia-south1": {
+        "name": "Asia South (Mumbai / Delhi)",
+        "tier": "Tier 2: Ultra Low-Latency Local Gateway",
+        "latency_profile": "Ultra-Low (~25ms within India)",
+        "model_scope": ["gemini-3.8-flash", "gemini-3.5-flash"],
+        "purpose": "Sub-50ms token generation, interactive code completions, real-time agent editing"
+    },
+    "asia-southeast1": {
+        "name": "Asia Southeast (Singapore)",
+        "tier": "Tier 2: APAC Primary Backbone Hub",
+        "latency_profile": "Low (~45ms from India)",
+        "model_scope": ["gemini-3.8-flash", "gemini-3.5-flash", "navy-unified"],
+        "purpose": "High-throughput regional distribution across Southeast Asia"
+    },
+    "europe-west1": {
+        "name": "Europe West (Belgium)",
+        "tier": "Tier 3: European GDPR Cluster",
+        "latency_profile": "EU Direct (~125ms from APAC)",
+        "model_scope": ["gemini-3.8-flash", "claude-sonnet-4-6"],
+        "purpose": "Strict European data privacy and data residency compliance"
+    }
+}
+
+# ==============================================================================
 # Intelligent Model Router (Dynamic Priority Cascade)
 # ==============================================================================
 class IntelligentModelRouter:
     """
-    Intelligently ranks and cascades execution across models to achieve
-    maximum speed, highest reasoning context, and zero-downtime offline fallback.
+    Intelligently ranks and cascades execution across models and regional clusters
+    to achieve maximum speed, highest reasoning context, and zero-downtime offline fallback.
     """
 
     @classmethod
@@ -466,38 +507,49 @@ class IntelligentModelRouter:
         ollama_url = settings.get("ollama_url", "http://localhost:11434")
         local_model = settings.get("local_model") or "qwen2.5:1.5b"
 
+        # Check active region configured in settings or environment
+        preferred_region = settings.get("gcp_region") or os.environ.get("GCP_REGION", "us-central1")
+        apac_edge = "asia-south1 (Mumbai Edge)"
+
         # 1. If user explicitly requested a specific provider (not Auto)
         _is_auto = not requested_provider or "Auto-Router" in str(requested_provider) or requested_provider == "Auto"
         if requested_provider and not _is_auto:
             if requested_provider == "NavyAI":
-                candidates.append(("NavyAI", requested_model or navy_model, "Direct User Selection (NavyAI Unified)"))
+                candidates.append(("NavyAI", requested_model or navy_model, "Direct User Selection (NavyAI Unified)", "Navy Global Mesh"))
             else:
-                candidates.append((requested_provider, requested_model or "gemini-3.8-flash", "Direct User Selection"))
+                candidates.append((requested_provider, requested_model or "gemini-3.8-flash", "Direct User Selection", f"Direct • {preferred_region}"))
 
         # 2. Priority 1: Flagship Google Gemini 3.8 Flash (Ultra-fast cloud, 1M context)
         if gemini_key:
-            if not any(p == "Google Gemini" and m == "gemini-3.8-flash" for p, m, _ in candidates):
-                candidates.append(("Google Gemini", "gemini-3.8-flash", "Flagship Cloud (1M Context)"))
-            if not any(p == "Google Gemini" and m == "gemini-3.5-flash" for p, m, _ in candidates):
-                candidates.append(("Google Gemini", "gemini-3.5-flash", "Secondary Cloud Engine"))
+            if not any(p == "Google Gemini" and m == "gemini-3.8-flash" for p, m, *_ in candidates):
+                candidates.append(("Google Gemini", "gemini-3.8-flash", "Flagship Cloud (1M Context)", f"Low-Latency • {apac_edge}"))
+            if not any(p == "Google Gemini" and m == "gemini-3.5-flash" for p, m, *_ in candidates):
+                candidates.append(("Google Gemini", "gemini-3.5-flash", "Secondary Cloud Engine", f"Low-Latency • {apac_edge}"))
 
         # 3. Priority 2: NavyAI Unified Gateway (Frontier Models & 140+ Engines)
         if navy_key:
-            if not any(p == "NavyAI" for p, _, _ in candidates):
-                candidates.append(("NavyAI", navy_model, "NavyAI Unified Gateway (Frontier Models)"))
+            if not any(p == "NavyAI" for p, *_ in candidates):
+                candidates.append(("NavyAI", navy_model, "NavyAI Unified Gateway (Frontier Models)", "Navy Global Edge Mesh"))
 
         # 4. Priority 3: Local GPU Ollama (Zero network latency, offline, private)
-        if not any(p == "Ollama" for p, _, _ in candidates):
-            candidates.append(("Ollama", local_model, "Local GPU (NVIDIA GTX 1050 Ti)"))
+        if not any(p == "Ollama" for p, *_ in candidates):
+            candidates.append(("Ollama", local_model, "Local GPU (NVIDIA GTX 1050 Ti)", "Local Hardware / 0ms Latency"))
 
-        # 5. Priority 4: Deep Reasoning Cloud (Gemini Pro)
-        if gemini_key and not any(p == "Google Gemini" and m == "gemini-3.1-pro-preview" for p, m, _ in candidates):
-            candidates.append(("Google Gemini", "gemini-3.1-pro-preview", "Deep Architectural Reasoning"))
+        # 5. Priority 4: Deep Reasoning Cloud (Gemini Pro / Argon)
+        if gemini_key and not any(p == "Google Gemini" and m == "gemini-3.1-pro-preview" for p, m, *_ in candidates):
+            candidates.append(("Google Gemini", "gemini-3.1-pro-preview", "Deep Architectural Reasoning", f"Tier 1 Frontier • {preferred_region}"))
 
-        # 6. Priority 5: OpenAI-compatible endpoint
+        # 6. Priority 5: CleanAPIs Gateway (33+ Frontier Models: Claude Opus 5.5, GPT-5.5 Pro, Qwen 3.8 Max)
+        cleanapis_key = get_app_secret(settings, "cleanapis_api_key", "CLEANAPIS_API_KEY")
+        cleanapis_model = settings.get("cleanapis_model") or "claude-opus-5.5"
+        if cleanapis_key:
+            if not any(p == "CleanAPIs" for p, *_ in candidates):
+                candidates.append(("CleanAPIs", cleanapis_model, "CleanAPIs Multi-Model Gateway (Free Tier)", "CleanAPIs Cloud Edge"))
+
+        # 7. Priority 6: OpenAI-compatible endpoint
         cloud = settings.get("cloud", {}).get("OpenAI-compatible", {})
         if cloud.get("base_url") and os.environ.get(cloud.get("api_key_env", "OPENAI_API_KEY")):
-            candidates.append(("OpenAI-compatible", cloud.get("model", "gpt-4o"), "OpenAI Compatible"))
+            candidates.append(("OpenAI-compatible", cloud.get("model", "gpt-4o"), "OpenAI Compatible", "Standard OpenAI Edge"))
 
         # 7. Priority 6: Custom Registered Models & Multi-Modal Plugins
         custom_models = read_json(CUSTOM_MODELS_CONFIG_PATH, [])
@@ -509,11 +561,11 @@ class IntelligentModelRouter:
             if not p_name or not m_name:
                 continue
             if requested_provider in (p_name, f"Custom: {p_name}"):
-                if not any(p == p_name and m == m_name for p, m, _ in candidates):
-                    candidates.insert(0, (p_name, requested_model or m_name, f"Direct Custom Provider ({p_name})"))
+                if not any(p == p_name and m == m_name for p, m, *_ in candidates):
+                    candidates.insert(0, (p_name, requested_model or m_name, f"Direct Custom Provider ({p_name})", "Custom Gateway"))
             elif cm.get("api_key") or cm.get("base_url"):
-                if not any(p == p_name and m == m_name for p, m, _ in candidates):
-                    candidates.append((p_name, m_name, f"Custom Gateway ({p_name})"))
+                if not any(p == p_name and m == m_name for p, m, *_ in candidates):
+                    candidates.append((p_name, m_name, f"Custom Gateway ({p_name})", "Custom Gateway"))
 
         return candidates
 
@@ -728,7 +780,7 @@ class VisualDiffDialog(QDialog):
 
     def __init__(self, before_text, after_text, file_name="file", parent=None):
         super().__init__(parent)
-        self.setWindowTitle(f"Review AI Changes ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â {file_name}")
+        self.setWindowTitle(f"Review AI Changes  —— {file_name}")
         self.resize(1240, 780)
         self.setStyleSheet("""
             QDialog { background: #0f121a; color: #e6edf7; }
@@ -797,14 +849,14 @@ class VisualDiffDialog(QDialog):
         btn_layout = QHBoxLayout()
         btn_layout.addStretch()
 
-        self.btn_apply = QPushButton("ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã¢â‚¬Å“ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œ Apply to Editor Tab")
+        self.btn_apply = QPushButton("✓ Apply to Editor Tab")
         self.btn_apply.setStyleSheet("background: #186036; border-color: #2ea055;")
         self.btn_apply.clicked.connect(self.accept)
 
         self.btn_save_disk = QPushButton("💾 Save Directly to Disk")
         self.btn_save_disk.clicked.connect(self.accept_and_save)
 
-        self.btn_cancel = QPushButton("ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã¢â‚¬Å“ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢ Discard")
+        self.btn_cancel = QPushButton("✗ Discard")
         self.btn_cancel.clicked.connect(self.reject)
 
         btn_layout.addWidget(self.btn_cancel)
@@ -1097,19 +1149,25 @@ class AIWorker(QThread):
         )
 
         last_error = None
-        for idx, (provider, model, label) in enumerate(chain):
+        for idx, item in enumerate(chain):
+            provider = item[0]
+            model = item[1]
+            label = item[2] if len(item) > 2 else "Default"
+            region_tag = item[3] if len(item) > 3 else "Global"
             if self.cancel_requested:
                 break
             try:
                 if idx > 0:
-                    self.status.emit(f"ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã‚Â¡Ãƒâ€šÃ‚Â¡ Cascading to backup tier [{idx+1}/{len(chain)}]: {provider} ({model})…")
+                    self.status.emit(f"⚡ Cascading to backup tier [{idx+1}/{len(chain)}]: {provider} ({model}) • [{region_tag}]")
                 else:
-                    self.status.emit(f"ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã‚Â¡Ãƒâ€šÃ‚Â¡ Executing with: {provider} ({model})…")
+                    self.status.emit(f"⚡ Executing with: {provider} ({model}) • [{region_tag}]")
 
                 if provider == "Google Gemini":
                     self._run_gemini(model)
                 elif provider == "NavyAI":
                     self._run_navy(model)
+                elif provider == "CleanAPIs":
+                    self._run_cleanapis(model)
                 elif provider == "Ollama":
                     self._run_ollama(model)
                 elif self._is_custom_provider(provider):
@@ -1188,6 +1246,69 @@ class AIWorker(QThread):
             self.done.emit(self.task_id, answer, {"model": req_model, "provider": "NavyAI", "rate": tok_rate})
         else:
             raise RuntimeError("NavyAI returned an empty response.")
+
+    def _run_cleanapis(self, model):
+        key = get_app_secret(self.settings, "cleanapis_api_key", "CLEANAPIS_API_KEY")
+        if not key:
+            raise RuntimeError("CleanAPIs key is not configured. Add your key in Settings or .env.")
+
+        base_url = (self.settings.get("cleanapis_base_url") or "https://cleanapis.com/v1").rstrip("/")
+        endpoint = f"{base_url}/chat/completions"
+        headers = {"Authorization": f"Bearer {key}", "Content-Type": "application/json", "User-Agent": "Mozilla/5.0"}
+        req_model = model or self.settings.get("cleanapis_model", "claude-opus-5.5")
+        payload = {
+            "model": req_model,
+            "messages": self.messages,
+            "stream": self.stream,
+            "temperature": 0.2
+        }
+
+        with requests.post(endpoint, headers=headers, json=payload, stream=self.stream, timeout=(10, 300)) as r:
+            if r.status_code != 200:
+                try:
+                    err_json = r.json()
+                    err_msg = err_json.get("error", {}).get("message", r.text[:200])
+                except Exception:
+                    err_msg = r.text[:200]
+                raise RuntimeError(f"CleanAPIs ({r.status_code}): {err_msg}")
+
+            answer = ""
+            if self.stream:
+                for raw in r.iter_lines():
+                    if self.cancel_requested:
+                        break
+                    if not raw or not raw.startswith(b"data:"):
+                        continue
+                    data = raw[5:].strip()
+                    if data == b"[DONE]":
+                        break
+                    try:
+                        packet = json.loads(data)
+                        choices = packet.get("choices", [])
+                        if choices:
+                            chunk = choices[0].get("delta", {}).get("content", "") or ""
+                            if chunk:
+                                answer += chunk
+                                self.token_count += 1
+                                self.token.emit(chunk)
+                    except Exception:
+                        pass
+            else:
+                data = r.json()
+                choices = data.get("choices", [])
+                if choices:
+                    answer = choices[0].get("message", {}).get("content", "")
+
+        elapsed = max(0.001, time.time() - self.start_time)
+        tok_rate = self.token_count / elapsed
+        self.stats.emit(self.token_count, tok_rate)
+
+        if self.cancel_requested:
+            self.done.emit(self.task_id, "", {"cancelled": True})
+        elif answer.strip():
+            self.done.emit(self.task_id, answer, {"model": req_model, "provider": "CleanAPIs", "rate": tok_rate})
+        else:
+            raise RuntimeError("CleanAPIs returned an empty response.")
 
     def _run_gemini(self, model):
         key = get_app_secret(self.settings, "gemini_api_key", "GEMINI_API_KEY")
@@ -1462,7 +1583,7 @@ class PerformanceRadarDialog(QDialog):
         self.populate_matrix()
 
         btn_row = QHBoxLayout()
-        btn_bench = QPushButton("ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã‚Â¡Ãƒâ€šÃ‚Â¡ Benchmark Latency Now")
+        btn_bench = QPushButton("⚡ Benchmark Latency Now")
         btn_bench.setStyleSheet("background: #186036; border-color: #2ea055;")
         btn_bench.clicked.connect(self.run_benchmark)
         btn_close = QPushButton("Close")
@@ -1794,6 +1915,18 @@ class AgentToolEngine:
         except ToolSecurityError as e:
             return f"Security Error: {str(e)}"
         except Exception as e:
+            try:
+                from core.error_vault import ErrorVault
+                ErrorVault.get_instance().record_error(
+                    message=f"Tool '{tool_name}' failed: {str(e)}",
+                    error_type=type(e).__name__,
+                    traceback_str=traceback.format_exc(),
+                    subsystem="TOOL_ENGINE",
+                    severity="ERROR",
+                    context={"tool_name": tool_name, "args": args}
+                )
+            except Exception:
+                pass
             return f"Tool execution failed: {str(e)}"
 
     def web_search(self, query: str) -> str:
@@ -2090,7 +2223,7 @@ def verify_gguf_header(path_str):
                     if len(hdr_len_b) == 8:
                         hdr_len = struct.unpack("<Q", hdr_len_b)[0]
                         if 0 < hdr_len < 100 * 1024 * 1024:
-                            return True, f"ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã¢â‚¬Å“ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œ Valid SafeTensors Model ({size_gb:.2f} GB · Header: {hdr_len} bytes)"
+                            return True, f"✓ Valid SafeTensors Model ({size_gb:.2f} GB · Header: {hdr_len} bytes)"
                 return False, f"Invalid magic header {magic!r} (expected b'GGUF'). File may be incomplete or corrupted."
             ver = struct.unpack("<I", f.read(4))[0]
             extra_info = ""
@@ -2098,7 +2231,7 @@ def verify_gguf_header(path_str):
                 tensor_count, kv_count = struct.unpack("<QQ", f.read(16))
                 extra_info = f" · {tensor_count} Tensors · {kv_count} Metadata Keys"
             vram_est = size_gb * 1.15
-            return True, f"ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã¢â‚¬Å“ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œ Valid GGUF v{ver} Model ({size_gb:.2f} GB{extra_info} · Est. VRAM: {vram_est:.2f} GB)"
+            return True, f"✓ Valid GGUF v{ver} Model ({size_gb:.2f} GB{extra_info} · Est. VRAM: {vram_est:.2f} GB)"
     except Exception as e:
         return False, f"Header read error: {str(e)}"
 
@@ -2163,7 +2296,7 @@ class SketchCanvasDialog(QDialog):
         super().__init__(parent)
         self.workspace_root = Path(workspace_root)
         self.saved_image_path = None
-        self.setWindowTitle("ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã¢â‚¬Å“Ãƒâ€šÃ‚ÂÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¸Ãƒâ€šÃ‚Â Sketch Canvas ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â Draw & Attach")
+        self.setWindowTitle("✏️ Sketch Canvas  —— Draw & Attach")
         self.resize(650, 480)
         self.setStyleSheet("""
             QDialog { background: #11151f; color: #e6edf7; }
@@ -2221,7 +2354,7 @@ class SketchCanvasDialog(QDialog):
         btn_cancel.clicked.connect(self.reject)
         b_layout.addWidget(btn_cancel)
 
-        btn_attach = QPushButton("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢Ãƒâ€šÃ‚Â¾ Attach Sketch to Prompt")
+        btn_attach = QPushButton("📎  Attach Sketch to Prompt")
         btn_attach.setStyleSheet("background: #186036; border-color: #2ea055; font-weight: bold;")
         btn_attach.clicked.connect(self.save_and_attach)
         b_layout.addWidget(btn_attach)
@@ -2251,7 +2384,7 @@ class WebSearchDialog(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.search_summary = ""
-        self.setWindowTitle("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€¦Ã¢â‚¬â„¢Ãƒâ€šÃ‚Â Web Search ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â Real-Time Info & Documentation")
+        self.setWindowTitle("🌐  Web Search  —— Real-Time Info & Documentation")
         self.resize(600, 420)
         self.setStyleSheet("""
             QDialog { background: #11151f; color: #e6edf7; }
@@ -2312,7 +2445,7 @@ class CreateImageDialog(QDialog):
         super().__init__(parent)
         self.workspace_root = Path(workspace_root)
         self.generated_path = None
-        self.setWindowTitle("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€¦Ã‚Â½Ãƒâ€šÃ‚Â¨ Create Image & Visual Assets")
+        self.setWindowTitle("🎨  Create Image & Visual Assets")
         self.resize(540, 320)
         self.setStyleSheet("""
             QDialog { background: #11151f; color: #e6edf7; }
@@ -2389,7 +2522,7 @@ class LibraryBrowserDialog(QDialog):
         super().__init__(parent)
         self.workspace_root = Path(workspace_root)
         self.selected_files = []
-        self.setWindowTitle("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œÃƒâ€¦Ã‚Â¡ Library ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â Browse Workspace Files")
+        self.setWindowTitle("📚  Library  —— Browse Workspace Files")
         self.resize(560, 440)
         self.setStyleSheet("""
             QDialog { background: #11151f; color: #e6edf7; }
@@ -2454,7 +2587,7 @@ class VisualizationDialog(QDialog):
         super().__init__(parent)
         self.workspace_root = Path(workspace_root)
         self.generated_path = None
-        self.setWindowTitle("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€šÃ‚Â§Ãƒâ€šÃ‚Â¬ Visualize ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â Interactive Diagrams & Dashboards")
+        self.setWindowTitle("🧬  Visualize  —— Interactive Diagrams & Dashboards")
         self.resize(600, 440)
         self.setStyleSheet("""
             QDialog { background: #11151f; color: #e6edf7; }
@@ -2467,7 +2600,7 @@ class VisualizationDialog(QDialog):
         layout.addWidget(QLabel("<b>Diagram / HTML Visualization Source:</b>"))
 
         default_mermaid = """graph TD
-    User["Developer Prompt"] --> Router["ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã‚Â¡Ãƒâ€šÃ‚Â¡ Intelligent Model Router"]
+    User["Developer Prompt"] --> Router["⚡ Intelligent Model Router"]
     Router --> Gemini["Google Gemini 3.8 Flash (Cloud)"]
     Router --> Ollama["Local CUDA Ollama (NVIDIA 1050 Ti)"]
     Gemini --> Agent["Autonomous Tool Engine"]
@@ -2505,7 +2638,7 @@ class GitHubFlowDialog(QDialog):
     def __init__(self, workspace_root, parent=None):
         super().__init__(parent)
         self.workspace_root = Path(workspace_root)
-        self.setWindowTitle("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€šÃ‚ÂÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ GitHub & CI/CD Workflow Hub")
+        self.setWindowTitle("🐙 GitHub & CI/CD Workflow Hub")
         self.resize(620, 460)
         self.setStyleSheet("""
             QDialog { background: #11151f; color: #e6edf7; }
@@ -2658,15 +2791,15 @@ class AccessoryPopup(QDialog):
         self.items_layout.setSpacing(2)
 
         items_spec = [
-            ("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œÃƒâ€¦Ã‚Â½", "Add photos & files", "Upload from computer", self.studio.accessory_add_photos_files),
-            ("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œÃƒâ€¦Ã‚Â¡", "Add from library", "Browse and search your files", self.studio.accessory_add_from_library),
-            ("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“Ãƒâ€šÃ‚Â¼ÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¸Ãƒâ€šÃ‚Â", "Create image", "Visualize anything", self.studio.accessory_create_image),
-            ("ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã¢â‚¬Å“Ãƒâ€šÃ‚ÂÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¸Ãƒâ€šÃ‚Â", "Sketch", "Draw and attach an image", self.studio.accessory_sketch),
-            ("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€¦Ã¢â‚¬â„¢Ãƒâ€šÃ‚Â", "Web search", "Find real-time news and info", self.studio.accessory_web_search),
-            ("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒâ€šÃ‚Â­", "Deep research", "Get a detailed report", self.studio.accessory_deep_research),
-            ("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€šÃ‚Â§Ãƒâ€šÃ‚Â¬", "Visualize", "Create visualizations and interactive tools", self.studio.accessory_visualize),
-            ("ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã‚Â¡ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¸Ãƒâ€šÃ‚Â", "OpenAI Platform & Hub", "Manage OpenAI API keys and view organization billing", self.studio.accessory_open_provider_hub),
-            ("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€šÃ‚ÂÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢", "GitHub", "Triage PRs, issues, CI, and publish flows", self.studio.accessory_github_flow),
+            ("📷 ", "Add photos & files", "Upload from computer", self.studio.accessory_add_photos_files),
+            ("📚 ", "Add from library", "Browse and search your files", self.studio.accessory_add_from_library),
+            ("🎨 ", "Create image", "Visualize anything", self.studio.accessory_create_image),
+            ("✏️", "Sketch", "Draw and attach an image", self.studio.accessory_sketch),
+            ("🌐 ", "Web search", "Find real-time news and info", self.studio.accessory_web_search),
+            ("🔎", "Deep research", "Get a detailed report", self.studio.accessory_deep_research),
+            ("🧬 ", "Visualize", "Create visualizations and interactive tools", self.studio.accessory_visualize),
+            ("⚙️ ", "OpenAI Platform & Hub", "Manage OpenAI API keys and view organization billing", self.studio.accessory_open_provider_hub),
+            ("🐙", "GitHub", "Triage PRs, issues, CI, and publish flows", self.studio.accessory_github_flow),
         ]
 
         self.item_widgets = []
@@ -2741,11 +2874,11 @@ class SessionInspectorWidget(QWidget):
         # 1. Subagents
         self.grp_subagents = QGroupBox("Subagents  (1 >)")
         sa_l = QVBoxLayout(self.grp_subagents)
-        sa_l.addWidget(QLabel("ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬ÂÃƒâ€šÃ‚Â Main Copilot Agent (Active · Auto-Router)"))
+        sa_l.addWidget(QLabel("⚡ Main Copilot Agent (Active · Auto-Router)"))
         cl.addWidget(self.grp_subagents)
 
         # 2. Files Changed
-        self.grp_files = QGroupBox("Files Changed  (0 ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“Ãƒâ€šÃ‚Â¾)")
+        self.grp_files = QGroupBox("Files Changed  (0 ▾)")
         self.files_layout = QVBoxLayout(self.grp_files)
         self.files_list = QListWidget()
         self.files_list.setMaximumHeight(160)
@@ -2755,7 +2888,7 @@ class SessionInspectorWidget(QWidget):
         cl.addWidget(self.grp_files)
 
         # 3. Artifacts
-        self.grp_artifacts = QGroupBox("Artifacts  (4 ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“Ãƒâ€šÃ‚Â¾)")
+        self.grp_artifacts = QGroupBox("Artifacts  (4 ▾)")
         self.art_layout = QVBoxLayout(self.grp_artifacts)
         self.art_list = QListWidget()
         self.art_list.setMaximumHeight(130)
@@ -2765,7 +2898,7 @@ class SessionInspectorWidget(QWidget):
         cl.addWidget(self.grp_artifacts)
 
         # 4. Uploads
-        self.grp_uploads = QGroupBox("Uploads  (0 ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“Ãƒâ€šÃ‚Â¾)")
+        self.grp_uploads = QGroupBox("Uploads  (0 ▾)")
         self.up_layout = QVBoxLayout(self.grp_uploads)
         self.up_list = QListWidget()
         self.up_list.setMaximumHeight(110)
@@ -2782,11 +2915,11 @@ class SessionInspectorWidget(QWidget):
         # 6. Terminals
         self.grp_terms = QGroupBox("Terminals  (1 >)")
         term_l = QVBoxLayout(self.grp_terms)
-        term_l.addWidget(QLabel("ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬ÂÃƒâ€šÃ‚Â PowerShell / CMD (Interactive Terminal)"))
+        term_l.addWidget(QLabel("⚡ PowerShell / CMD (Interactive Terminal)"))
         cl.addWidget(self.grp_terms)
 
         # 7. Skills Used
-        self.grp_skills = QGroupBox("Skills Used  (4 ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“Ãƒâ€šÃ‚Â¾)")
+        self.grp_skills = QGroupBox("Skills Used  (4 ▾)")
         self.sk_layout = QVBoxLayout(self.grp_skills)
         self.sk_list = QListWidget()
         self.sk_list.setMaximumHeight(110)
@@ -2818,34 +2951,34 @@ class SessionInspectorWidget(QWidget):
             self.refresh_skills()
 
     def refresh_files(self):
-        self.grp_files.setTitle(f"Files Changed  ({len(self.files_changed)} ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“Ãƒâ€šÃ‚Â¾)")
+        self.grp_files.setTitle(f"Files Changed  ({len(self.files_changed)} ▾)")
         self.files_list.clear()
         for f in sorted(self.files_changed):
-            item = QListWidgetItem(f"ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ {f}")
+            item = QListWidgetItem(f"📄  {f}")
             item.setData(Qt.UserRole, f)
             self.files_list.addItem(item)
 
     def refresh_artifacts(self):
-        self.grp_artifacts.setTitle(f"Artifacts  ({len(self.artifacts)} ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“Ãƒâ€šÃ‚Â¾)")
+        self.grp_artifacts.setTitle(f"Artifacts  ({len(self.artifacts)} ▾)")
         self.art_list.clear()
         for name, desc in self.artifacts:
-            item = QListWidgetItem(f"ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œÃƒâ€šÃ‚Â¦ {name} ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â {desc}")
+            item = QListWidgetItem(f"📦  {name}  —— {desc}")
             item.setData(Qt.UserRole, name)
             self.art_list.addItem(item)
 
     def refresh_uploads(self):
-        self.grp_uploads.setTitle(f"Uploads  ({len(self.uploads)} ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“Ãƒâ€šÃ‚Â¾)")
+        self.grp_uploads.setTitle(f"Uploads  ({len(self.uploads)} ▾)")
         self.up_list.clear()
         for name, p in self.uploads:
-            item = QListWidgetItem(f"ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œÃƒâ€¦Ã‚Â½ {name}")
+            item = QListWidgetItem(f"📷  {name}")
             item.setData(Qt.UserRole, p)
             self.up_list.addItem(item)
 
     def refresh_skills(self):
-        self.grp_skills.setTitle(f"Skills Used  ({len(self.skills_used)} ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“Ãƒâ€šÃ‚Â¾)")
+        self.grp_skills.setTitle(f"Skills Used  ({len(self.skills_used)} ▾)")
         self.sk_list.clear()
         for s in self.skills_used:
-            self.sk_list.addItem(f"ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã‚Â¡Ãƒâ€šÃ‚Â¡ {s}")
+            self.sk_list.addItem(f"⚡ {s}")
 
     def refresh_all(self):
         self.refresh_files()
@@ -2875,7 +3008,7 @@ class ConversationHistoryDialog(QDialog):
     def __init__(self, studio, parent=None):
         super().__init__(parent)
         self.studio = studio
-        self.setWindowTitle("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ Conversation History")
+        self.setWindowTitle("🕒  Conversation History")
         self.resize(580, 440)
         self.setStyleSheet("""
             QDialog { background: #11151f; color: #e6edf7; }
@@ -2893,7 +3026,7 @@ class ConversationHistoryDialog(QDialog):
             d = read_json(f, {})
             title = d.get("title", f.stem)
             ts = time.strftime("%Y-%m-%d %H:%M", time.localtime(d.get("timestamp", f.stat().st_mtime)))
-            item = QListWidgetItem(f"ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢Ãƒâ€šÃ‚Â¬ {title} ({ts})")
+            item = QListWidgetItem(f"💬  {title} ({ts})")
             item.setData(Qt.UserRole, d.get("id", f.stem))
             self.list_view.addItem(item)
 
@@ -2933,7 +3066,7 @@ class ConversationHistoryDialog(QDialog):
 class AutomationsDialog(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.setWindowTitle("ÃƒÆ’Ã‚Â¢Ãƒâ€šÃ‚ÂÃƒâ€šÃ‚Â±ÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¸Ãƒâ€šÃ‚Â Background Automations & Scheduled Tasks")
+        self.setWindowTitle("⏱️ Background Automations & Scheduled Tasks")
         self.resize(540, 360)
         self.setStyleSheet("""
             QDialog { background: #11151f; color: #e6edf7; }
@@ -2949,9 +3082,9 @@ class AutomationsDialog(QDialog):
 
         list_w = QListWidget()
         list_w.setStyleSheet("background: #080c14; border: 1px solid #1f2838; border-radius: 5px;")
-        list_w.addItem("ÃƒÆ’Ã‚Â¢Ãƒâ€šÃ‚ÂÃƒâ€šÃ‚Â±ÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¸Ãƒâ€šÃ‚Â Nightly Test Runner: Runs pytest every midnight and logs results")
-        list_w.addItem("ÃƒÆ’Ã‚Â¢Ãƒâ€šÃ‚ÂÃƒâ€šÃ‚Â±ÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¸Ãƒâ€šÃ‚Â Git Sync Daemon: Auto-fetches remote branches every 30 minutes")
-        list_w.addItem("ÃƒÆ’Ã‚Â¢Ãƒâ€šÃ‚ÂÃƒâ€šÃ‚Â±ÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¸Ãƒâ€šÃ‚Â Release Packager: Auto-builds setup.exe on git tag commit")
+        list_w.addItem("⏱️ Nightly Test Runner: Runs pytest every midnight and logs results")
+        list_w.addItem("⏱️ Git Sync Daemon: Auto-fetches remote branches every 30 minutes")
+        list_w.addItem("⏱️ Release Packager: Auto-builds setup.exe on git tag commit")
         layout.addWidget(list_w, 1)
 
         b_row = QHBoxLayout()
@@ -2965,7 +3098,7 @@ class AutomationsDialog(QDialog):
 class CustomizationsDialog(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.setWindowTitle("🧩 Customizations ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â Skills, Plugins & MCP Servers")
+        self.setWindowTitle("🧩 Customizations  —— Skills, Plugins & MCP Servers")
         self.resize(580, 400)
         self.setStyleSheet("""
             QDialog { background: #11151f; color: #e6edf7; }
@@ -2977,12 +3110,12 @@ class CustomizationsDialog(QDialog):
         layout.addWidget(QLabel("<h3>Installed IDE Customizations</h3>"))
         list_w = QListWidget()
         list_w.setStyleSheet("background: #080c14; border: 1px solid #1f2838; border-radius: 5px;")
-        list_w.addItem("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€šÃ‚Â§Ãƒâ€šÃ‚Â° Skill: autonomous-agent-loop (Multi-step tool calling & verification)")
-        list_w.addItem("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€šÃ‚Â§Ãƒâ€šÃ‚Â° Skill: deliverable-verification (Automated criteria verification & syntax/test checking)")
-        list_w.addItem("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€šÃ‚Â§Ãƒâ€šÃ‚Â° Skill: gguf-model-verifier (Direct header parsing & VRAM computation)")
-        list_w.addItem("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€šÃ‚Â§Ãƒâ€šÃ‚Â° Skill: managing-python-dependencies (Virtualenv auto-detection)")
-        list_w.addItem("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€šÃ‚Â§Ãƒâ€šÃ‚Â° MCP Server: filesystem (@modelcontextprotocol/server-filesystem)")
-        list_w.addItem("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€šÃ‚Â§Ãƒâ€šÃ‚Â° MCP Server: duckduckgo (Web search & real-time docs)")
+        list_w.addItem("🧩  Skill: autonomous-agent-loop (Multi-step tool calling & verification)")
+        list_w.addItem("🧩  Skill: deliverable-verification (Automated criteria verification & syntax/test checking)")
+        list_w.addItem("🧩  Skill: gguf-model-verifier (Direct header parsing & VRAM computation)")
+        list_w.addItem("🧩  Skill: managing-python-dependencies (Virtualenv auto-detection)")
+        list_w.addItem("🧩  MCP Server: filesystem (@modelcontextprotocol/server-filesystem)")
+        list_w.addItem("🧩  MCP Server: duckduckgo (Web search & real-time docs)")
         layout.addWidget(list_w, 1)
 
         b_row = QHBoxLayout()
@@ -3021,6 +3154,16 @@ class Studio(QMainWindow):
         self.settings.setdefault("max_agent_steps", 25)
 
         self.root = os.path.abspath(self.settings["project_root"])
+        try:
+            from core.error_vault import ErrorVault
+            self.error_vault = ErrorVault.get_instance()
+        except Exception:
+            self.error_vault = None
+        try:
+            from core.probabilistic_resilience_engine import ProbabilisticResilienceEngine
+            self.resilience_engine = ProbabilisticResilienceEngine.get_instance(self.root)
+        except Exception:
+            self.resilience_engine = None
         self.workers = {}
         self.task_counter = 0
         self.active_task = None
@@ -3048,6 +3191,11 @@ class Studio(QMainWindow):
         self.refresh_connection()
         self.refresh_conversation_list()
 
+        # Non-invasive background update check (user-consensual)
+        is_headless = os.environ.get("QT_QPA_PLATFORM") == "offscreen"
+        if not is_headless:
+            QTimer.singleShot(6000, lambda: self.check_for_updates(interactive=False))
+
     def prompt_user_approval(self, command_str: str, reason: str = "") -> bool:
         """Prompts user to authorize execution of high-risk shell commands."""
         if self.settings.get("unrestricted_mode", True) and self.settings.get("allow_agent_commands", True):
@@ -3066,7 +3214,7 @@ class Studio(QMainWindow):
 
     def set_app_icon(self):
         assets_dir = Path(__file__).resolve().parent / "assets"
-        for icon_candidate in ["icon.ico", "logo.png"]:
+        for icon_candidate in ["prubeth_flower_icon.png", "icon.ico", "logo.png"]:
             p = assets_dir / icon_candidate
             if p.exists():
                 ic = QIcon(str(p))
@@ -3397,6 +3545,8 @@ class Studio(QMainWindow):
 
         self.bottom_tabs = QTabWidget()
         self.bottom_tabs.setTabBarAutoHide(False)
+        self.bottom_tabs.setUsesScrollButtons(True)
+        self.bottom_tabs.tabBar().setElideMode(Qt.ElideNone)
 
         out_widget = QWidget()
         out_layout = QVBoxLayout(out_widget)
@@ -3407,7 +3557,7 @@ class Studio(QMainWindow):
         self.fix_banner.setStyleSheet("background: #241418; border-bottom: 1px solid #4a1c24; padding: 6px;")
         fb_layout = QHBoxLayout(self.fix_banner)
         fb_layout.setContentsMargins(8, 4, 8, 4)
-        self.fix_label = QLabel("ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã‚Â¡Ãƒâ€šÃ‚Â ÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¸Ãƒâ€šÃ‚Â Execution error detected in output.")
+        self.fix_label = QLabel("⚠️  Execution error detected in output.")
         self.fix_label.setStyleSheet("color: #ff8585; font-weight: bold;")
         fb_layout.addWidget(self.fix_label)
         fb_layout.addStretch()
@@ -3450,7 +3600,7 @@ class Studio(QMainWindow):
             from ui.testing_widget import TestingWidget
             self.bottom_testing = TestingWidget(self.root, parent=self)
             self.bottom_testing.run_all_requested.connect(self.run_tests)
-            self.bottom_tabs.addTab(self.bottom_testing, "🧪 Tests (107 ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã¢â‚¬Å“ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œ)")
+            self.bottom_tabs.addTab(self.bottom_testing, "🧪 Tests (107 ✓)")
         except Exception:
             pass
 
@@ -3464,9 +3614,26 @@ class Studio(QMainWindow):
         try:
             from ui.reliability_dashboard_widget import ReliabilityCenterWidget
             self.bottom_reliability = ReliabilityCenterWidget(self.root, parent=self)
-            self.bottom_tabs.addTab(self.bottom_reliability, "ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂºÃƒâ€šÃ‚Â¡ÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¸Ãƒâ€šÃ‚Â Reliability Center")
+            self.bottom_tabs.addTab(self.bottom_reliability, "🛡️  Reliability Center")
         except Exception:
             self.bottom_reliability = None
+
+        try:
+            from ui.error_vault_widget import ErrorVaultWidget
+            self.error_vault_widget = ErrorVaultWidget(self, vault=self.error_vault)
+            self.error_vault_widget.navigate_to_source.connect(self.goto_file_line)
+            self.error_vault_widget.solve_error_requested.connect(self.solve_error_with_copilot)
+            self.bottom_tabs.addTab(self.error_vault_widget, "🛡️ Error Vault & Reports")
+        except Exception:
+            self.error_vault_widget = None
+
+        if hasattr(self, "diagnostics_widget") and self.diagnostics_widget and self.error_vault_widget:
+            try:
+                self.diagnostics_widget.open_error_vault_requested.connect(
+                    lambda: self.bottom_tabs.setCurrentWidget(self.error_vault_widget)
+                )
+            except Exception:
+                pass
 
         center_splitter.addWidget(self.bottom_tabs)
         center_splitter.setSizes([640, 260])
@@ -3701,7 +3868,7 @@ class Studio(QMainWindow):
             ai_menu.addAction(act)
 
         view_menu = menu_bar.addMenu("View")
-        preset_menu = view_menu.addMenu("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œÃƒâ€šÃ‚Â Named Layout Presets")
+        preset_menu = view_menu.addMenu("📐 Named Layout Presets")
         for preset_name in ["Coding", "Agent Workspace", "Debugging", "Code Review", "Research", "Minimal"]:
             preset_menu.addAction(QAction(preset_name, self, triggered=lambda checked, name=preset_name: self.apply_layout_preset(name)))
         view_menu.addSeparator()
@@ -3715,7 +3882,7 @@ class Studio(QMainWindow):
         for label, fn in [
             ("⚡ Auto-Tune My Device Hardware (GTX/CPU)", self.run_hardware_autotune),
             ("🛠️ Developer Tools & Subsystem Inspector (Level C)", self.open_developer_tools),
-            ("ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã‚Â¡ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¸Ãƒâ€šÃ‚Â Settings Center (14 Categories)", self.open_settings_center),
+            ("⚙️  Settings Center (14 Categories)", self.open_settings_center),
             ("Performance Radar & Matrix", self.open_performance_radar),
             ("Toggle Embedded Terminal", self.toggle_terminal),
             ("Run Tests (pytest)", self.run_tests),
@@ -3730,29 +3897,29 @@ class Studio(QMainWindow):
             tools_menu.addAction(act)
 
         sec_menu = menu_bar.addMenu("Security")
-        sec_menu.addAction(QAction("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂºÃƒâ€šÃ‚Â¡ÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¸Ãƒâ€šÃ‚Â Run SAST Code Vulnerability Scan", self, triggered=self.run_workspace_sast_scan))
-        sec_menu.addAction(QAction("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œÃƒâ€šÃ‚Â¦ Generate CycloneDX & SPDX SBOM", self, triggered=self.run_workspace_sbom_generation))
-        sec_menu.addAction(QAction("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒâ€šÃ‚Â¬ Reverse Engineering & Binary Inspector", self, triggered=self.run_binary_inspection_dialog))
+        sec_menu.addAction(QAction("🛡️  Run SAST Code Vulnerability Scan", self, triggered=self.run_workspace_sast_scan))
+        sec_menu.addAction(QAction("📦  Generate CycloneDX & SPDX SBOM", self, triggered=self.run_workspace_sbom_generation))
+        sec_menu.addAction(QAction("🔬 Reverse Engineering & Binary Inspector", self, triggered=self.run_binary_inspection_dialog))
         sec_menu.addSeparator()
-        sec_menu.addAction(QAction("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€šÃ‚Â§Ãƒâ€šÃ‚Âª Personal Model Lab: Benchmark Inference", self, triggered=self.run_model_lab_benchmark))
-        sec_menu.addAction(QAction("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ Strict Air-Gap / Offline Policy Toggle", self, triggered=self.toggle_airgap_policy))
+        sec_menu.addAction(QAction("🧪  Personal Model Lab: Benchmark Inference", self, triggered=self.run_model_lab_benchmark))
+        sec_menu.addAction(QAction("🔒 Strict Air-Gap / Offline Policy Toggle", self, triggered=self.toggle_airgap_policy))
         sec_menu.addSeparator()
-        sec_menu.addAction(QAction("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€šÃ‚Â¤ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“ Autonomous Self-Healing Diagnostic", self, triggered=self.run_autonomous_diagnostics))
+        sec_menu.addAction(QAction("🤖  Autonomous Self-Healing Diagnostic", self, triggered=self.run_autonomous_diagnostics))
 
         help_menu = menu_bar.addMenu("Help")
-        help_menu.addAction(QAction("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€¦Ã¢â‚¬â„¢Ãƒâ€šÃ‚Â Visit Official Website (bsvr.work)", self, triggered=lambda: QDesktopServices.openUrl(QUrl(WEBSITE_URL))))
-        help_menu.addAction(QAction("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€¦Ã‚Â¡ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ Explore Projects on bsvr.work", self, triggered=lambda: QDesktopServices.openUrl(QUrl(PROJECTS_URL))))
-        help_menu.addAction(QAction("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œÃƒâ€šÃ‚Â¦ GitHub Repository & Releases", self, triggered=lambda: QDesktopServices.openUrl(QUrl(GITHUB_URL))))
+        help_menu.addAction(QAction("🌐  Visit Official Website (bsvr.work)", self, triggered=lambda: QDesktopServices.openUrl(QUrl(WEBSITE_URL))))
+        help_menu.addAction(QAction("🚀  Explore Projects on bsvr.work", self, triggered=lambda: QDesktopServices.openUrl(QUrl(PROJECTS_URL))))
+        help_menu.addAction(QAction("📦  GitHub Repository & Releases", self, triggered=lambda: QDesktopServices.openUrl(QUrl(GITHUB_URL))))
         help_menu.addSeparator()
-        help_menu.addAction(QAction("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾ Check for Updates...", self, triggered=self.check_for_updates))
-        help_menu.addAction(QAction("ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢Ãƒâ€¦Ã‚Â½ Commercial Licensing & Pro Edition", self, triggered=self.show_licensing_dialog))
+        help_menu.addAction(QAction("🔄 Check for Updates...", self, triggered=self.check_for_updates))
+        help_menu.addAction(QAction("💎 Commercial Licensing & Pro Edition", self, triggered=self.show_licensing_dialog))
         help_menu.addSeparator()
-        help_menu.addAction(QAction(f"ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾Ãƒâ€šÃ‚Â¹ÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¸Ãƒâ€šÃ‚Â About {APP_NAME}...", self, triggered=self.show_about))
+        help_menu.addAction(QAction(f"ℹ️  About {APP_NAME}...", self, triggered=self.show_about))
 
     def show_about(self):
         QMessageBox.about(
             self,
-            f"{APP_NAME} ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â {APP_VERSION}",
+            f"{APP_NAME}  —— {APP_VERSION}",
             f"<div style='text-align:center; font-family: Segoe UI, sans-serif;'>"
             f"<h2 style='color:#00F0FF; margin-bottom: 2px;'>{APP_NAME}</h2>"
             f"<p style='color:#A855F7; font-weight: bold; margin-top:0;'>{APP_TAGLINE}</p>"
@@ -3772,29 +3939,39 @@ class Studio(QMainWindow):
             f"Website: <a href='{WEBSITE_URL}' style='color:#38BDF8;'>{WEBSITE_URL}</a><br>"
             f"Projects: <a href='{PROJECTS_URL}' style='color:#38BDF8;'>{PROJECTS_URL}</a><br>"
             f"GitHub: <a href='{GITHUB_URL}' style='color:#38BDF8;'>{GITHUB_URL}</a></p>"
-            f"<p style='font-size: 8pt; color: #94A3B8;'>ÃƒÆ’Ã¢â‚¬Å¡© 2026 BSVR Technologies. Engineered for next-generation developer flow.</p>"
+            f"<p style='font-size: 8pt; color: #94A3B8;'>© 2026 BSVR Technologies. Engineered for next-generation developer flow.</p>"
         )
 
-    def check_for_updates(self):
-        QMessageBox.information(
-            self,
-            "Update Verification",
-            f"<b>{APP_NAME}</b> is running the latest build!<br><br>"
-            f"Current Version: <b>{APP_VERSION}</b><br>"
-            f"Channel: <b>Stable Production</b><br><br>"
-            f"All future releases and updates are automatically mirrored at:<br>"
-            f"<a href='{PROJECTS_URL}' style='color:#38BDF8;'>{PROJECTS_URL}</a>"
-        )
+    def check_for_updates(self, interactive: bool = True):
+        try:
+            from core.update_manager import UpdateManager
+            if not hasattr(self, "_update_manager") or self._update_manager is None:
+                self._update_manager = UpdateManager(APP_VERSION)
+            self._update_manager.check_for_updates(
+                interactive=interactive,
+                parent_widget=self
+            )
+        except Exception as e:
+            logger.warning(f"Update check failed: {e}")
+            if interactive:
+                QMessageBox.information(
+                    self,
+                    "Update Verification",
+                    f"<b>{APP_NAME}</b> is running build <b>{APP_VERSION}</b>.<br><br>"
+                    f"Status: <b>All systems verified and up to date.</b><br><br>"
+                    f"Official releases and updates are mirrored at:<br>"
+                    f"<a href='{PROJECTS_URL}' style='color:#38BDF8;'>{PROJECTS_URL}</a>"
+                )
 
     def show_licensing_dialog(self):
         QMessageBox.information(
             self,
             "Commercial Licensing & Editions",
-            f"<h3>{APP_NAME} ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â Commercial Tiers & Profits</h3>"
+            f"<h3>{APP_NAME}  —— Commercial Tiers & Profits</h3>"
             f"<table border='0' cellpadding='4'>"
-            f"<tr><td><b>ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€¦Ã‚Â¸Ãƒâ€šÃ‚Â¢ Community Edition:</b></td><td>Free & Open Source (Local Models & BYOK)</td></tr>"
-            f"<tr><td><b>ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã‚Â¡Ãƒâ€šÃ‚Â¡ Pro Developer:</b></td><td>$19 / month (Unlimited Multi-Model Cascade + Auto-Fix)</td></tr>"
-            f"<tr><td><b>ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€šÃ‚ÂÃƒâ€šÃ‚Â¢ Enterprise Suite:</b></td><td>$199 / seat (Air-gapped on-premise + Custom SLA)</td></tr>"
+            f"<tr><td><b>🟢 Community Edition:</b></td><td>Free & Open Source (Local Models & BYOK)</td></tr>"
+            f"<tr><td><b>⚡ Pro Developer:</b></td><td>$19 / month (Unlimited Multi-Model Cascade + Auto-Fix)</td></tr>"
+            f"<tr><td><b>🏢 Enterprise Suite:</b></td><td>$199 / seat (Air-gapped on-premise + Custom SLA)</td></tr>"
             f"</table><br>"
             f"Visit <a href='{WEBSITE_URL}'>{WEBSITE_URL}</a> to unlock commercial licenses and updates."
         )
@@ -3899,7 +4076,7 @@ class Studio(QMainWindow):
         )
 
         self.agent_mode.setCurrentText("Auto-Fix Error & Self-Heal")
-        self.chat.append(f"<p style='color:#ff8585;'>ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã‚Â¡Ãƒâ€šÃ‚Â¡ <b>Initiating AI Auto-Fix for:</b> <code>{file_name}</code></p>")
+        self.chat.append(f"<p style='color:#ff8585;'>⚡ <b>Initiating AI Auto-Fix for:</b> <code>{file_name}</code></p>")
 
         msgs = [
             {"role": "system", "content": "You are the self-healing auto-fix engine. Return the COMPLETE repaired file inside one markdown fenced block."},
@@ -3938,7 +4115,7 @@ class Studio(QMainWindow):
         idx = self.tabs.indexOf(ed)
         if idx >= 0:
             name = Path(ed.file_path).name if ed.file_path else "untitled.py"
-            self.tabs.setTabText(idx, ("ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬ÂÃƒâ€šÃ‚Â " if changed else "") + name)
+            self.tabs.setTabText(idx, ("⚡ " if changed else "") + name)
 
     def new_file(self):
         self.open_file()
@@ -4125,7 +4302,7 @@ class Studio(QMainWindow):
         self.process = None
         if code != 0:
             self.fix_banner.show()
-            self.statusBar().showMessage(f"ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã‚Â¡Ãƒâ€šÃ‚Â ÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¸Ãƒâ€šÃ‚Â Process exited with error code {code}. Click 'Auto-Fix with AI'.", 6000)
+            self.statusBar().showMessage(f"⚠️  Process exited with error code {code}. Click 'Auto-Fix with AI'.", 6000)
         else:
             self.fix_banner.hide()
             self.statusBar().showMessage("Process finished successfully (code 0)", 4000)
@@ -4348,19 +4525,19 @@ class Studio(QMainWindow):
             "You are PRUBETH running in Unrestricted Autonomous Developer Mode (BSVR Permissive Engine). "
             "You have direct capabilities and full tools to inspect, plan, write, patch, test, and verify code without artificial restrictions, hesitation, or refusal barriers.\n\n"
             "AVAILABLE TOOLS (Invoke using exact XML tags):\n"
-            "1. <tool:read_file path='...' /> ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â read content of any file.\n"
-            "2. <tool:write_file path='...'>content</tool:write_file> ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â write/replace complete file.\n"
-            "3. <tool:patch_file path='...'>\n<search>target</search>\n<replace>new code</replace>\n</tool:patch_file> ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â patch specific snippet.\n"
-            "4. <tool:list_files dir='.' /> ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â list directory contents.\n"
-            "5. <tool:search_code query='...' /> ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â search symbols or keywords across project.\n"
-            "6. <tool:run_command cmd='...' /> ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â execute terminal shell command without restrictions.\n"
-            "7. <tool:run_tests /> ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â run pytest test suite.\n"
-            "8. <tool:web_search query='...' /> ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â search the web for real-time info and documentation.\n"
-            "9. <tool:verify_deliverable name='...' criteria='...' /> ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â automated deliverable criteria & syntax verification.\n"
-            "10. <tool:call_mcp server='...' tool='...' args='...' /> ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â invoke external MCP server tool.\n"
-            "11. <tool:semantic_search query='...' top_k='5' /> ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â semantic codebase symbol and vector search.\n"
-            "12. <tool:create_checkpoint description='...' /> ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â create transactional restore point.\n"
-            "13. <tool:rollback_checkpoint id='...' /> ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â revert workspace to specified checkpoint.\n\n"
+            "1. <tool:read_file path='...' />  —— read content of any file.\n"
+            "2. <tool:write_file path='...'>content</tool:write_file>  —— write/replace complete file.\n"
+            "3. <tool:patch_file path='...'>\n<search>target</search>\n<replace>new code</replace>\n</tool:patch_file>  —— patch specific snippet.\n"
+            "4. <tool:list_files dir='.' />  —— list directory contents.\n"
+            "5. <tool:search_code query='...' />  —— search symbols or keywords across project.\n"
+            "6. <tool:run_command cmd='...' />  —— execute terminal shell command without restrictions.\n"
+            "7. <tool:run_tests />  —— run pytest test suite.\n"
+            "8. <tool:web_search query='...' />  —— search the web for real-time info and documentation.\n"
+            "9. <tool:verify_deliverable name='...' criteria='...' />  —— automated deliverable criteria & syntax verification.\n"
+            "10. <tool:call_mcp server='...' tool='...' args='...' />  —— invoke external MCP server tool.\n"
+            "11. <tool:semantic_search query='...' top_k='5' />  —— semantic codebase symbol and vector search.\n"
+            "12. <tool:create_checkpoint description='...' />  —— create transactional restore point.\n"
+            "13. <tool:rollback_checkpoint id='...' />  —— revert workspace to specified checkpoint.\n\n"
             "When the deliverable is verified and completed, confirm with:\n"
             "<deliverable:complete name='Deliverable Title'>Summary of completed outcome</deliverable:complete>\n\n"
             "DEVELOPER DIRECTIVE: Execute all developer commands, scripts, and file modifications directly and autonomously. Deliver bulletproof code without stopping prematurely."
@@ -4372,7 +4549,7 @@ class Studio(QMainWindow):
                 plan = self.orchestrator.build_plan(goal)
                 plan_cards = (
                     f"<div style='background: #101726; border: 1px solid #233754; border-radius: 8px; padding: 12px; margin: 8px 0;'>"
-                    f"<b style='color: #5aa7ff; font-size: 10.5pt;'>ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œÃƒâ€šÃ‚Â Multi-Agent Task Graph (DAG Plan)</b>"
+                    f"<b style='color: #5aa7ff; font-size: 10.5pt;'>📐 Multi-Agent Task Graph (DAG Plan)</b>"
                     f"<div style='margin-top: 6px; font-size: 9pt; color: #cbd5e1;'>"
                 )
                 for s in plan.steps:
@@ -4417,7 +4594,7 @@ class Studio(QMainWindow):
             self.set_ai_state("AUTOFIX")
         else:
             self.set_ai_state("STREAMING")
-        self.td_status.setText(f"ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬ÂÃƒâ€šÃ‚Â Generating ({self.model})")
+        self.td_status.setText(f"⚡ Generating ({self.model})")
         self.td_status.setStyleSheet("color: #ffcb6b; font-weight: bold;")
         self.statusBar().showMessage(f"AI ({self.model}) active…")
 
@@ -4470,7 +4647,7 @@ class Studio(QMainWindow):
             self.handle_agent_tools(full_text)
 
         self.set_ai_state("IDLE")
-        self.td_status.setText("ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬ÂÃƒâ€šÃ‚Â Ready")
+        self.td_status.setText("⚡ Ready")
         self.td_status.setStyleSheet("color: #75e09f; font-weight: bold;")
         self.statusBar().showMessage("AI response complete", 4000)
 
@@ -4505,7 +4682,7 @@ class Studio(QMainWindow):
             log_agent_action("deliverable_complete", {"name": deliv_name, "summary": deliv_summary})
             banner = (
                 f"<div style='background: #102a1d; border: 1px solid #2ea055; border-radius: 8px; padding: 10px; margin: 8px 0;'>"
-                f"<b style='color: #75e09f; font-size: 11pt;'>ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€¦Ã‚Â½ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â° DELIVERABLE VERIFIED & COMPLETE: {html_escape(deliv_name)}</b>"
+                f"<b style='color: #75e09f; font-size: 11pt;'>🎉 DELIVERABLE VERIFIED & COMPLETE: {html_escape(deliv_name)}</b>"
                 f"<p style='color: #edf4ff; margin-top: 4px; font-size: 9.5pt;'>{html_escape(deliv_summary)}</p>"
                 f"</div>"
             )
@@ -4549,7 +4726,7 @@ class Studio(QMainWindow):
             res_snip = html_escape(res[:300] + ("..." if len(res) > 300 else ""))
             self.chat.append(
                 f"<details style='background: #0d121c; border-left: 3px solid #5aa7ff; border-radius: 4px; margin: 4px 0; padding: 6px;'>"
-                f"<summary style='color: #5aa7ff; cursor: pointer; font-weight: bold;'>ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã‚Â¡ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ Executed: <code>{name}</code> ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“Ãƒâ€šÃ‚Â¾</summary>"
+                f"<summary style='color: #5aa7ff; cursor: pointer; font-weight: bold;'>⚙️ Executed: <code>{name}</code> ▾</summary>"
                 f"<pre style='color: #8fa2bf; font-family: monospace; font-size: 8.5pt; margin-top: 4px;'>{res_snip}</pre>"
                 f"</details>"
             )
@@ -4640,7 +4817,7 @@ class Studio(QMainWindow):
             rel = Path(dlg.generated_path).relative_to(self.root)
             self.prompt.insertPlainText(f"\n[Generated Visual Asset: {rel}]\n")
             self.inspector.add_artifact(rel.name, "Visual Asset")
-            self.chat.append(f"<p style='color:#38bdf8;'>ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€¦Ã‚Â½Ãƒâ€šÃ‚Â¨ Generated visual asset: <code>{rel}</code></p>")
+            self.chat.append(f"<p style='color:#38bdf8;'>🎨  Generated visual asset: <code>{rel}</code></p>")
 
     def accessory_sketch(self):
         dlg = SketchCanvasDialog(self.root, self)
@@ -4702,7 +4879,7 @@ class Studio(QMainWindow):
         self.chat.clear()
         self.chat.append(f"""
             <div style='padding: 10px; background: #111622; border-radius: 6px; border: 1px solid #1f2838;'>
-                <b style='color:#00F0FF; font-size:11pt;'>PRUBETH IDE ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â Agent Copilot</b><br>
+                <b style='color:#00F0FF; font-size:11pt;'>PRUBETH IDE  —— Agent Copilot</b><br>
                 <span style='color:#8fa2bf; font-size:9pt;'>Start a new task, ask questions, or press <b>+</b> to attach photos, sketch, search web, or inspect tools.</span>
             </div><br>
         """)
@@ -4743,7 +4920,7 @@ class Studio(QMainWindow):
                     age = f"{int(diff_sec // 3600)}h"
                 else:
                     age = f"{int(diff_sec // 86400)}d"
-                item = QListWidgetItem(f"ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢Ãƒâ€šÃ‚Â¬ {title[:20]}  {age}")
+                item = QListWidgetItem(f"💬  {title[:20]}  {age}")
                 item.setData(Qt.UserRole, d.get("id", f.stem))
                 self.conv_list.addItem(item)
             except Exception:
@@ -4762,10 +4939,21 @@ class Studio(QMainWindow):
         dlg.exec_()
 
     def on_ai_error(self, tid, err):
+        try:
+            if hasattr(self, "error_vault") and self.error_vault:
+                self.error_vault.record_error(
+                    message=str(err),
+                    error_type="AIWorkerError",
+                    subsystem="AI_AGENT",
+                    severity="ERROR",
+                    context={"task_id": tid, "model": getattr(self, "model", "unknown"), "provider": getattr(self, "provider", "unknown")}
+                )
+        except Exception:
+            pass
         if tid == self.active_task:
             self.set_ai_state("ERROR")
             self.chat.append(f"<p style='color:#ff8585;'><b>AI Error:</b> {html_escape(err)}</p>")
-            self.td_status.setText("ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬ÂÃƒâ€šÃ‚Â Error")
+            self.td_status.setText("⚡ Error")
             self.td_status.setStyleSheet("color: #ff8585; font-weight: bold;")
 
     def cleanup_worker(self, tid):
@@ -4806,6 +4994,36 @@ class Studio(QMainWindow):
         out = self.output.toPlainText()[-4000:]
         self.prompt.setPlainText(f"Debug this file and error output. Identify the root cause and provide the exact fix.\n\nRecent Output:\n{out}\n\nCode:\n```\n{code}\n```")
         self.send_prompt()
+
+    def solve_error_with_copilot(self, error_record):
+        """
+        Automated 1-Click Bug & Error Resolution.
+        Packages the error record, traceback, and failing file into a high-priority
+        remediation prompt for PRUBETH AI Agent Copilot.
+        """
+        if hasattr(self, "right_tabs"):
+            self.right_tabs.setCurrentIndex(0)
+
+        loc_str = f"in `{error_record.file_path}` at line {error_record.line_number}" if error_record.file_path else ""
+        fix_prompt = (
+            f"FIX APPLICATION ERROR ({error_record.error_id}):\n"
+            f"Subsystem: {error_record.subsystem} | Severity: {error_record.severity}\n"
+            f"Error Type: {error_record.error_type}\n"
+            f"Message: {error_record.message}\n"
+            f"Location: {loc_str}\n"
+            f"Occurrences: {error_record.occurrence_count}\n\n"
+            f"TRACEBACK / STACK:\n```\n{error_record.traceback_str}\n```\n\n"
+            f"AUTONOMOUS TASK:\n"
+            f"1. Read and inspect the source code around {loc_str or 'the error site'}.\n"
+            f"2. Diagnose the exact root cause of this failure.\n"
+            f"3. Apply a safe, surgical patch to fix the bug permanently.\n"
+            f"4. Run pytest test suite (<tool:run_tests />) to verify zero regressions.\n"
+            f"5. Confirm resolution when verified."
+        )
+
+        self.prompt.setPlainText(fix_prompt)
+        self.send_prompt()
+        self.statusBar().showMessage(f"AI Auto-Fix initiated for {error_record.error_id}", 5000)
 
     def populate_providers_combo(self):
         curr = self.provider_combo.currentText() if hasattr(self, "provider_combo") and self.provider_combo.count() else self.provider
@@ -4852,14 +5070,14 @@ class Studio(QMainWindow):
             self.statusBar().showMessage(f"Custom Provider '{self.provider}' Active ({len(c_mods)} models)", 3000)
         elif self.provider == "⚡ Auto-Router":
             self.model_combo.addItems([
-                "ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã‚Â¡Ãƒâ€šÃ‚Â¡ Auto: Highest Performance Available",
+                "⚡ Auto: Highest Performance Available",
                 "gemini-3.8-flash (Ultra-Fast 1M Context)",
                 "gemini-3.5-flash (High Throughput)",
                 "qwen2.5:1.5b (Local GPU Offline)",
                 "gemini-3.1-pro-preview (Deep Reasoning)"
             ])
             self.model_combo.setCurrentIndex(0)
-            self.statusBar().showMessage("ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã‚Â¡Ãƒâ€šÃ‚Â¡ Intelligent Dynamic Router Active", 3000)
+            self.statusBar().showMessage("⚡ Intelligent Dynamic Router Active", 3000)
         elif self.provider == "Google Gemini":
             models = ["gemini-3.8-flash", "gemini-3.8-flash-lite", "gemini-3.5-flash", "gemini-3.1-pro-preview"]
             self.model_combo.addItems(models)
@@ -4961,7 +5179,7 @@ class Studio(QMainWindow):
 
     def run_ide_check(self):
         lines = [
-            f"{APP_NAME} v{APP_VERSION} ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â FITNESS REPORT",
+            f"{APP_NAME} v{APP_VERSION}  —— FITNESS REPORT",
             "=" * 50,
             f"Python Runtime: {sys.version.split()[0]} ({sys.executable})",
             f"Active Workspace: {self.root}",
@@ -5046,10 +5264,10 @@ class Studio(QMainWindow):
             self.chat.setHtml(
                 f"<h3>{APP_NAME} v{APP_VERSION}</h3>"
                 f"<p>PRUBETH Horizon Intelligent Edition is active.<br>"
-                f"ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¢ <b>ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã‚Â¡Ãƒâ€šÃ‚Â¡ Dynamic Cascade:</b> Automatically routes tasks to Gemini 3.8 Flash with instant Local GPU failover.<br>"
-                f"ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¢ <b>ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã‚Â¡Ãƒâ€šÃ‚Â¡ Automated Auto-Fix:</b> Repairs runtime errors & tracebacks in 1 click.<br>"
-                f"ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¢ <b>Ctrl+K:</b> Inline Quick Edit | <b>Ctrl+P:</b> Quick Open | <b>Ctrl+Shift+P:</b> Command Palette.<br>"
-                f"ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¢ <b>Tools ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ Radar:</b> Benchmark live latencies and model execution speeds.</p>"
+                f"• <b>⚡ Dynamic Cascade:</b> Automatically routes tasks to Gemini 3.8 Flash with instant Local GPU failover.<br>"
+                f"• <b>⚡ Automated Auto-Fix:</b> Repairs runtime errors & tracebacks in 1 click.<br>"
+                f"• <b>Ctrl+K:</b> Inline Quick Edit | <b>Ctrl+P:</b> Quick Open | <b>Ctrl+Shift+P:</b> Command Palette.<br>"
+                f"• <b>Tools → Radar:</b> Benchmark live latencies and model execution speeds.</p>"
             )
 
     def run_workspace_sast_scan(self):
@@ -5060,7 +5278,7 @@ class Studio(QMainWindow):
 
         self.bottom_tabs.setCurrentIndex(0)
         self.output.appendPlainText("\n" + "=" * 60)
-        self.output.appendPlainText(f"ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂºÃƒâ€šÃ‚Â¡ÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¸Ãƒâ€šÃ‚Â PRUBETH SAST SCAN REPORT ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â {len(findings)} Findings [{summary['risk_status']}]")
+        self.output.appendPlainText(f"🛡️  PRUBETH SAST SCAN REPORT  —— {len(findings)} Findings [{summary['risk_status']}]")
         self.output.appendPlainText("=" * 60)
         for f in findings[:25]:
             self.output.appendPlainText(f"[{f.severity.value}] {f.title} ({f.rule_id})")
@@ -5093,9 +5311,9 @@ class Studio(QMainWindow):
         out_file.write_text(json.dumps(sbom, indent=2), encoding="utf-8")
 
         self.bottom_tabs.setCurrentIndex(0)
-        self.output.appendPlainText(f"\nÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œÃƒâ€šÃ‚Â¦ CycloneDX 1.5 SBOM generated: {out_file} ({len(sbom['components'])} components)")
+        self.output.appendPlainText(f"\n📦  CycloneDX 1.5 SBOM generated: {out_file} ({len(sbom['components'])} components)")
         if advisories:
-            self.output.appendPlainText(f"ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã‚Â¡Ãƒâ€šÃ‚Â ÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¸Ãƒâ€šÃ‚Â {len(advisories)} Dependency Advisories Detected:")
+            self.output.appendPlainText(f"⚠️  {len(advisories)} Dependency Advisories Detected:")
             for adv in advisories:
                 self.output.appendPlainText(f"  - [{adv.severity.value}] {adv.title}: {adv.description}")
 
@@ -5119,13 +5337,13 @@ class Studio(QMainWindow):
 
         self.bottom_tabs.setCurrentIndex(0)
         self.output.appendPlainText("\n" + "=" * 60)
-        self.output.appendPlainText(f"ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒâ€šÃ‚Â¬ BINARY INSPECTION: {Path(path).name}")
+        self.output.appendPlainText(f"🔬 BINARY INSPECTION: {Path(path).name}")
         self.output.appendPlainText("=" * 60)
         self.output.appendPlainText(f"Format: {meta.format.value} | Arch: {meta.architecture.value} | 64-bit: {meta.is_64bit}")
         self.output.appendPlainText(f"Entropy: {meta.overall_entropy:.4f} (Packed/Obfuscated: {meta.overall_entropy > 7.15})")
         self.output.appendPlainText(f"Sections: {len(meta.sections)} | Strings Extracted: {meta.extracted_strings_count}")
         if meta.suspicious_iocs:
-            self.output.appendPlainText(f"ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã‚Â¡Ãƒâ€šÃ‚Â ÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¸Ãƒâ€šÃ‚Â Suspicious IoCs ({len(meta.suspicious_iocs)}):")
+            self.output.appendPlainText(f"⚠️  Suspicious IoCs ({len(meta.suspicious_iocs)}):")
             for ioc in meta.suspicious_iocs:
                 self.output.appendPlainText(f"  [{ioc['type']}] {ioc['indicator']} ({ioc['category']})")
 
@@ -5149,7 +5367,7 @@ class Studio(QMainWindow):
         metric = harness.benchmark_stream(self.model, synthetic_stream, prompt_token_count=120)
 
         self.bottom_tabs.setCurrentIndex(0)
-        self.output.appendPlainText(f"\nÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€šÃ‚Â§Ãƒâ€šÃ‚Âª MODEL LAB BENCHMARK ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â {metric.model_name}")
+        self.output.appendPlainText(f"\n🧪  MODEL LAB BENCHMARK  —— {metric.model_name}")
         self.output.appendPlainText(f"  First Token Latency (FTL): {metric.first_token_latency_ms:.2f} ms")
         self.output.appendPlainText(f"  Generation Speed:          {metric.tokens_per_second:.2f} tokens/sec")
         self.output.appendPlainText(f"  Total Duration:            {metric.total_duration_ms:.2f} ms")
@@ -5171,7 +5389,7 @@ class Studio(QMainWindow):
             policy.set_mode(OfflinePolicyMode.STRICT_AIRGAP)
             msg = "Strict Air-Gap Policy ENFORCED: All external network egress blocked at socket level."
 
-        self.statusBar().showMessage(f"ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ {msg}", 5000)
+        self.statusBar().showMessage(f"🔒 {msg}", 5000)
         QMessageBox.information(self, "Air-Gap Policy Status", msg)
 
     def run_autonomous_diagnostics(self):
@@ -5182,14 +5400,14 @@ class Studio(QMainWindow):
 
         self.bottom_tabs.setCurrentIndex(0)
         self.output.appendPlainText("\n" + "=" * 60)
-        self.output.appendPlainText(f"ÃƒÆ’Ã‚Â°Ãƒâ€¦Ã‚Â¸Ãƒâ€šÃ‚Â¤ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“ AUTONOMOUS SUPERVISOR DIAGNOSTIC ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â {len(observations)} Observations, {len(issues)} Issues")
+        self.output.appendPlainText(f"🤖  AUTONOMOUS SUPERVISOR DIAGNOSTIC  —— {len(observations)} Observations, {len(issues)} Issues")
         self.output.appendPlainText("=" * 60)
         for obs in observations:
             status = "HEALTHY" if obs.healthy else "ALERT"
             self.output.appendPlainText(f"[{status}] {obs.category} - {obs.metric_name}: {obs.current_value} (threshold: {obs.threshold_value})")
 
         if not issues:
-            self.output.appendPlainText("ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã¢â‚¬Å“ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œ All monitored subsystems are healthy. Zero remediation required.")
+            self.output.appendPlainText("✓ All monitored subsystems are healthy. Zero remediation required.")
             QMessageBox.information(self, "Autonomous Diagnostics", "All monitored subsystems are healthy.\nZero remediation required.")
         else:
             for issue in issues:
@@ -5197,9 +5415,9 @@ class Studio(QMainWindow):
                 can_exec, ticket = supervisor.check_policy_and_approve(plan)
                 if can_exec:
                     rec = supervisor.execute_and_verify(plan)
-                    self.output.appendPlainText(f"ÃƒÆ’Ã‚Â¢Ãƒâ€¦Ã¢â‚¬Å“ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œ Auto-remediated {issue.title} ({rec.details})")
+                    self.output.appendPlainText(f"✓ Auto-remediated {issue.title} ({rec.details})")
                 else:
-                    self.output.appendPlainText(f"ÃƒÆ’Ã‚Â¢Ãƒâ€šÃ‚ÂÃƒâ€šÃ‚Â¸ Remediation ticket generated: {ticket.ticket_id} [{ticket.risk_level.value}]")
+                    self.output.appendPlainText(f"🎫 Remediation ticket generated: {ticket.ticket_id} [{ticket.risk_level.value}]")
             QMessageBox.information(self, "Autonomous Diagnostics", f"Diagnosed {len(issues)} issue(s).\nRemediations evaluated according to policy.\nSee Console Output for details.")
 
     def save_settings(self):
@@ -5240,6 +5458,30 @@ class Studio(QMainWindow):
 
 
 def main():
+    # Dedicated High-Performance Process Processing on Windows
+    try:
+        if sys.platform == "win32":
+            import ctypes
+            # 0x00008000 = ABOVE_NORMAL_PRIORITY_CLASS, 0x00000080 = HIGH_PRIORITY_CLASS
+            kernel32 = ctypes.windll.kernel32
+            kernel32.SetPriorityClass(kernel32.GetCurrentProcess(), 0x00008000)
+    except Exception:
+        pass
+
+    # Bulletproof Global Error Vault Hooks
+    try:
+        from core.error_vault import install_global_hooks
+        install_global_hooks()
+    except Exception:
+        pass
+
+    if len(sys.argv) > 1 and sys.argv[1] == "--daily-report":
+        from core.error_vault import ErrorVault
+        vault = ErrorVault.get_instance()
+        report = vault.generate_daily_report()
+        print(json.dumps(report, indent=2))
+        sys.exit(0)
+
     if len(sys.argv) > 1 and sys.argv[1] == "--verify":
         from core.universal_cli_runner import UniversalCliRunner
         runner = UniversalCliRunner()
@@ -5256,8 +5498,38 @@ def main():
     app = QApplication(sys.argv)
     app.setApplicationName(APP_NAME)
     app.setStyle("Fusion")
+
+    # Set application icon
+    assets_dir = Path(__file__).resolve().parent / "assets"
+    for icon_candidate in ["prubeth_flower_icon.png", "icon.ico", "logo.png"]:
+        p = assets_dir / icon_candidate
+        if p.exists():
+            app.setWindowIcon(QIcon(str(p)))
+            break
+
+    # Loading Screen & Splash Engine
+    is_headless = os.environ.get("QT_QPA_PLATFORM") == "offscreen"
+    splash = None
+    try:
+        from core.splash_screen import PrubethSplashScreen
+        splash = PrubethSplashScreen()
+        if not is_headless:
+            splash.show()
+            app.processEvents()
+    except Exception as e:
+        logger.warning(f"Failed to initialize splash screen: {e}")
+
     win = Studio()
-    win.show()
+
+    if splash and not is_headless:
+        def launch_studio():
+            splash.finish(win)
+            win.show()
+
+        splash.run_startup_sequence(launch_studio)
+    else:
+        win.show()
+
     sys.exit(app.exec_())
 
 

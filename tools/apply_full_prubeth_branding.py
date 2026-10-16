@@ -1,5 +1,5 @@
 """
-PRUBETH IDE — Sovereign Autonomous AI Branding & De-Branding Engine
+PRUBETH IDE — Independent Autonomous AI Branding & De-Branding Engine
 Executes complete, flawless brand replacement across all IDE resources:
   1. Terminates any running PRUBETH instances to unlock resource files.
   2. Cleanses product.json (removes defaultChatAgent Copilot trigger, sets BSVR fork origin).
@@ -113,7 +113,7 @@ def patch_target_root(root: Path):
             pdata = json.loads(product_json_path.read_text(encoding="utf-8"))
             # Completely eliminate defaultChatAgent to prevent Copilot auth popups
             pdata.pop("defaultChatAgent", None)
-            pdata["forkOrigin"] = "PRUBETH Sovereign Autonomous AI Platform"
+            pdata["forkOrigin"] = "PRUBETH Independent Autonomous AI Platform"
             pdata["nameShort"] = "PRUBETH"
             pdata["nameLong"] = "PRUBETH IDE"
             pdata["applicationName"] = "prubeth"
@@ -136,7 +136,7 @@ def patch_target_root(root: Path):
             pkg = json.loads(package_json_path.read_text(encoding="utf-8"))
             pkg["author"] = {"name": "BSVR Technologies", "email": "support@bsvr.work"}
             pkg["name"] = "PRUBETH"
-            pkg["description"] = "PRUBETH IDE — Sovereign Autonomous AI Developer Environment"
+            pkg["description"] = "PRUBETH IDE — Independent Autonomous AI Developer Environment"
             package_json_path.write_text(json.dumps(pkg, indent=2), encoding="utf-8")
             print(f"✓ Updated package.json (author: BSVR Technologies)")
         except Exception as e:

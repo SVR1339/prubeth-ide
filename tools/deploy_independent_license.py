@@ -1,6 +1,6 @@
 from pathlib import Path
 
-SOVEREIGN_LICENSE = """PRUBETH IDE
+INDEPENDENT_LICENSE = """PRUBETH IDE
 Copyright (c) 2026 BSVR Technologies. All rights reserved.
 Official Watermark: "DONT HIRE ROBOTS - JUST USE IT"
 
@@ -39,7 +39,7 @@ targets = [
 
 for t in targets:
     if t.parent.exists():
-        t.write_text(SOVEREIGN_LICENSE, encoding="utf-8")
-        print(f"Updated sovereign LICENSE -> {t}")
+        t.write_text(INDEPENDENT_LICENSE, encoding="utf-8")
+        print(f"Updated independent LICENSE -> {t}")
 
-print("Sovereign license deployment complete!")
+print("Independent license deployment complete!")

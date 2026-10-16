@@ -7,12 +7,12 @@ Accepted
 2026-10-11
 
 ## Context
-PRUBETH IDE is engineered as a personal super-IDE and long-horizon sovereign computing platform for professional software engineering, defensive cybersecurity research, binary analysis, model experimentation, and offline-first autonomous development. 
+PRUBETH IDE is engineered as a personal super-IDE and long-horizon independent computing platform for professional software engineering, defensive cybersecurity research, binary analysis, model experimentation, and offline-first autonomous development. 
 
 To withstand technology shifts spanning multiple decades, the platform cannot depend on ephemeral vendor APIs, proprietary cloud services, or hardcoded assumptions about current hardware. Furthermore, personal research into binaries and unvetted code requires strict execution containment, network sandboxing, static vulnerability auditing, and self-healing resilience.
 
 ## Decision
-We implemented four sovereign architectural pillars:
+We implemented four independent architectural pillars:
 
 1. **Future Compatibility Layer (`core/future_compat.py`)**:
    - Century-scale interface contracts (`IComputeProvider`, `IStorageEngine`, `ISchedulerEngine`, `IIndexerEngine`) with explicit semantic versioning (`V1_0`, `V2_0`, `V3_0`).
@@ -34,5 +34,5 @@ We implemented four sovereign architectural pillars:
    - Maintains an append-only immutable audit trail.
 
 ## Consequences
-- **Positive**: Complete technical sovereignty, future-proof extensible contracts, high-assurance security containment for binary and malware research, hardware-tuned local AI inference, and automated self-maintenance without risk of unmonitored system modifications.
+- **Positive**: Complete technical autonomy, future-proof extensible contracts, high-assurance security containment for binary and malware research, hardware-tuned local AI inference, and automated self-maintenance without risk of unmonitored system modifications.
 - **Negative**: Sandboxed executions incur slight filesystem snapshot overhead during pre/post-run diff analysis.

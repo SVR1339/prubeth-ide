@@ -22,6 +22,7 @@ SEVERITY_MAP = {
 class DiagnosticsWidget(QWidget):
     """Problems & Diagnostics panel showing LSP compiler and linter errors/warnings."""
     navigate_to_source = pyqtSignal(str, int, int)  # file_path, line, col
+    open_error_vault_requested = pyqtSignal()
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -48,6 +49,12 @@ class DiagnosticsWidget(QWidget):
         btn_clear = QPushButton("Clear")
         btn_clear.clicked.connect(self.clear_diagnostics)
         filter_row.addWidget(btn_clear)
+
+        btn_vault = QPushButton("🛡️ Error Vault & Reports")
+        btn_vault.setStyleSheet("background: #252934; color: #9485FF; border: 1px solid #343A49; border-radius: 4px; padding: 4px 10px; font-weight: bold;")
+        btn_vault.clicked.connect(self.open_error_vault_requested.emit)
+        filter_row.addWidget(btn_vault)
+
         layout.addLayout(filter_row)
 
         # Problems Tree

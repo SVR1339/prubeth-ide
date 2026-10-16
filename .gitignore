@@ -35,7 +35,16 @@ installer/app_payload.zip
 # Scratch scripts (temporary experiment artifacts)
 scratch/
 
-.github/
+# Temporary Debug Dumps & Scratch Artifacts
+*.txt
+*.log
+debug_*
+*_dump.txt
+.venv-test/
+patch_backup/
+prubeth_backup/
+test-reports/
+verify_*.py
 
 # Upstream VS Code source & build directories
 vscode/

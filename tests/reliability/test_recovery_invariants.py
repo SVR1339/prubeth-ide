@@ -36,7 +36,7 @@ def test_invariant_user_source_files_preserved_during_scratch_purge():
     with DisposableWorkspace() as ws_path:
         # Create user source file
         user_source = ws_path / "src" / "critical_algorithm.py"
-        user_source.write_text("def sovereign_compute(): return 42\n", encoding="utf-8")
+        user_source.write_text("def independent_compute(): return 42\n", encoding="utf-8")
         original_hash = hash(user_source.read_text())
 
         # Set up supervisor targeting isolated scratch folder

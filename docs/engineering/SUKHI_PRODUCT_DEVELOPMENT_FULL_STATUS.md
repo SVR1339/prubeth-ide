@@ -11,7 +11,7 @@
 
 ## 1. SCOPE & PRODUCT IDENTITY CLARIFICATION
 
-**SUKHI IDE — Horizon Edition v3.0.0** is an independent, sovereign, AI-native desktop integrated development environment.
+**SUKHI IDE — Horizon Edition v3.0.0** is an independent, independent, AI-native desktop integrated development environment.
 
 ### What is NOT Part of SUKHI IDE:
 - **Codex (OpenAI Codex / external cloud coding services):** Not a component of this IDE.

@@ -107,3 +107,54 @@ def test_debug_panel_widget_state(qapp):
         SourceBreakpoint(line=42, condition="x > 50")
     ])
     assert widget.tree_bp.topLevelItemCount() == 1
+
+
+def test_error_vault_widget(qapp, tmp_path):
+    from core.error_vault import ErrorVault, ErrorSeverity
+    from ui.error_vault_widget import ErrorVaultWidget
+
+    test_vault = ErrorVault(vault_dir=tmp_path / "vault")
+    rec1 = test_vault.record_error(
+        message="Null pointer dereference in memory buffer",
+        error_type="NullReferenceError",
+        subsystem="CORE",
+        severity=ErrorSeverity.CRITICAL.value,
+        file_path="src/buffer.py",
+        line_number=88
+    )
+    rec2 = test_vault.record_error(
+        message="Network timeout to API",
+        error_type="TimeoutError",
+        subsystem="AI_AGENT",
+        severity=ErrorSeverity.WARNING.value,
+        file_path="src/net.py",
+        line_number=22
+    )
+
+    widget = ErrorVaultWidget(vault=test_vault)
+    assert widget.card_total.lbl_value.text() == "2"
+    assert widget.card_unresolved.lbl_value.text() == "2"
+    assert widget.tree.topLevelItemCount() == 2
+
+    # Test filtering by search text
+    widget.search_input.setText("Null pointer")
+    assert widget.tree.topLevelItemCount() == 1
+
+    widget.search_input.clear()
+    assert widget.tree.topLevelItemCount() == 2
+
+    # Test selection and jumping to code
+    widget.tree.setCurrentItem(widget.tree.topLevelItem(0))
+    jump_called = []
+    widget.navigate_to_source.connect(lambda f, l, c: jump_called.append((f, l, c)))
+    widget._on_jump_code_clicked()
+    assert len(jump_called) == 1
+    assert jump_called[0][1] in (88, 22)
+
+    # Test solve with AI signal
+    solve_called = []
+    widget.solve_error_requested.connect(lambda rec: solve_called.append(rec))
+    widget._on_solve_ai_clicked()
+    assert len(solve_called) == 1
+    assert solve_called[0].error_id in (rec1.error_id, rec2.error_id)
+

@@ -1,0 +1,20 @@
+{
+  "version": "1.90.0",
+  "display_name": "PRUBETH IDE \u2014 Horizon Edition (v1.90.0)",
+  "tagline": "HIRE ROBOTS FOR USING NOT DECORATE !",
+  "release_date": "2026-10-16",
+  "channel": "stable",
+  "min_supported_version": "1.0.0",
+  "download_url": "https://github.com/imyouiamyou/prubeth-ide/releases/download/v1.90/app_payload.zip",
+  "fallback_local_payload": "installer/app_payload.zip",
+  "sha256": "aef4121cce95353c06688840100ec4148a8917aefc99788531bef8a2d0d6587d",
+  "size_bytes": 3146180,
+  "changelog": [
+    "New blossom startup screen with dynamic gradient progress bar",
+    "Meta-IDE scaffolding engine for child IDE development (Web, Tauri, Qt, Headless)",
+    "Self-healing mathematical resilience algorithms (Weibull, Little's Law, Bloom Filters)",
+    "Full Open VSX Registry integration with zero Microsoft marketplace lock-in",
+    "Updated flower brand icon and clean-room intellectual property safe harbors"
+  ],
+  "critical_security_patch": false
+}

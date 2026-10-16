@@ -60,7 +60,7 @@ def package_payload_zip(output_path: Path) -> Tuple[Path, int, str]:
     module_dirs = [
         "core", "workspace", "source_control", "language_services",
         "debugging", "ai", "ui", "plugins", "assets", "tests", "docs", "scripts",
-        "horizon_engine", "security_research", "installer"
+        "horizon_engine", "security_research", "installer", "code_oss"
     ]
 
     with zipfile.ZipFile(output_path, 'w', compression=zipfile.ZIP_DEFLATED) as z:

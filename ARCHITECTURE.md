@@ -8,7 +8,7 @@
 
 ## 🏛️ 1. High-Level System Architecture & Topology
 
-PRUBETH IDE is engineered as an ultra-fast, sovereign, polyglot development environment combining a reactive desktop GUI, a deterministic multi-agent autonomy loop, a zero-downtime dual-inference cascade, and local GPU acceleration with unrestricted offline inference.
+PRUBETH IDE is engineered as an ultra-fast, polyglot development environment combining a reactive desktop GUI, a deterministic multi-agent autonomy loop, a zero-downtime dual-inference cascade, and local GPU acceleration with unrestricted offline inference.
 
 ```
 +----------------------------------------------------------------------------------------------------+
@@ -245,7 +245,7 @@ When runtime exceptions occur:
 
 ## 🚀 5. Layer 4: Dual Inference Pipeline & Local Offload
 
-### 5.1 Local Sovereign GPU Pipeline (CUDA 12.6)
+### 5.1 Local GPU Pipeline (CUDA 12.6)
 For full privacy, air-gapped environments, and zero-token-cost operation:
 - **Local Runtime:** Ollama backend serving GGUF models on localhost (`http://127.0.0.1:11434/api/generate`).
 - **Hardware Profile:** Optimized for 4GB VRAM GPUs (e.g., NVIDIA GeForce GTX 1050 Ti):

@@ -94,7 +94,8 @@ def test_capability_gap_engine_identifies_existing_vs_blocked(temp_workspace):
     assert res_existing.status == GapResolutionStatus.RESOLVED_INTERNAL
     assert "workspace.py" in str(res_existing.affected_files)
 
-    # 2. Blocked external toolchain: Docker
+    # 2. Blocked external toolchain: Docker (mock host PATH absence for deterministic invariant)
+    from unittest.mock import patch
     req_blocked = CapabilityGapRequest(
         capability_name="docker",
         requested_outcome="Container containerization",
@@ -102,10 +103,11 @@ def test_capability_gap_engine_identifies_existing_vs_blocked(temp_workspace):
         is_mandatory=True,
         suggested_toolchain="docker"
     )
-    res_blocked = gap_engine.resolve_capability(req_blocked)
-    assert res_blocked.status == GapResolutionStatus.BLOCKED_EXTERNAL
-    assert res_blocked.remediation_guidance is not None
-    assert "Docker Desktop" in res_blocked.remediation_guidance
+    with patch("shutil.which", return_value=None):
+        res_blocked = gap_engine.resolve_capability(req_blocked)
+        assert res_blocked.status == GapResolutionStatus.BLOCKED_EXTERNAL
+        assert res_blocked.remediation_guidance is not None
+        assert "Docker Desktop" in res_blocked.remediation_guidance
 
 
 def test_inventory_manager_baseline_telemetry(temp_workspace):

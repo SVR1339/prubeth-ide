@@ -854,6 +854,8 @@ class UniversalPolyglotAssuranceEngine:
         for k in list(clean_env.keys()):
             if any(term in k.upper() for term in ["KEY", "SECRET", "TOKEN", "AUTH", "PASSWORD"]):
                 del clean_env[k]
+        clean_env["DOTNET_CLI_TELEMETRY_OPTOUT"] = "1"
+        clean_env["DOTNET_NOLOGO"] = "1"
 
         cmd: List[str] = []
         if lang == UniversalLanguage.PYTHON:
@@ -874,7 +876,7 @@ class UniversalPolyglotAssuranceEngine:
             cmd = [info.discovered_path or "sqlite3", ":memory:", f".read {test_file}"]
         elif lang == UniversalLanguage.CSHARP:
             # Check if dotnet is available to run command line
-            cmd = [info.discovered_path or "dotnet", "--info"]
+            cmd = [info.discovered_path or "dotnet", "--version"]
         else:
             # General binary probe
             cmd = [info.discovered_path or spec.candidate_binaries[0], "--version"]
@@ -885,7 +887,7 @@ class UniversalPolyglotAssuranceEngine:
             stderr=subprocess.PIPE,
             cwd=str(sandbox),
             env=clean_env,
-            timeout=8.0,
+            timeout=15.0,
             text=True,
             creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0
         )

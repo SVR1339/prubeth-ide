@@ -517,7 +517,7 @@ def test_custom_multi_modal_model_registration_and_routing(qapp, tmp_path, monke
         requested_provider="TogetherAI",
         requested_model="meta-llama/Llama-Vision-Free"
     )
-    assert any(p == "TogetherAI" and m == "meta-llama/Llama-Vision-Free" for p, m, _ in plan)
+    assert any(p == "TogetherAI" and m == "meta-llama/Llama-Vision-Free" for p, m, *_ in plan)
 
 
 def test_custom_provider_ai_worker_streaming(qapp, tmp_path, monkeypatch):
@@ -882,5 +882,39 @@ def test_plugin_manifest_validation():
     invalid_perm["permissions"] = ["kernel:root_access"]
     with pytest.raises(PluginManifestValidationError):
         PluginManifestValidator.validate(invalid_perm)
+
+
+def test_studio_error_vault_integration(qapp):
+    from local_ai_studio_pro import Studio
+    studio = Studio()
+    try:
+        assert hasattr(studio, "error_vault")
+        assert studio.error_vault is not None
+        assert hasattr(studio, "error_vault_widget")
+        assert studio.error_vault_widget is not None
+
+        # Verify bottom tabs contains Error Vault tab
+        tab_names = [studio.bottom_tabs.tabText(i) for i in range(studio.bottom_tabs.count())]
+        assert any("Error Vault" in t for t in tab_names)
+
+        # Simulate recording an error into vault
+        rec = studio.error_vault.record_error(
+            message="Test integration error in studio",
+            error_type="StudioIntegrationError",
+            subsystem="CORE",
+            file_path="local_ai_studio_pro.py",
+            line_number=100
+        )
+        assert rec is not None
+        assert rec.error_id.startswith("BUG-")
+
+        # Verify error vault widget refreshed with new record
+        found = studio.error_vault.get_error(rec.error_id)
+        assert found is not None
+        assert found.message == "Test integration error in studio"
+    finally:
+        studio.close()
+        studio.deleteLater()
+
 
 

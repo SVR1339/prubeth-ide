@@ -280,7 +280,7 @@ class IEEE1012VerificationRunner:
             self.record(
                 "VIS-05", "Visual", "NLS translation dictionary user-facing branding",
                 (not has_vs_code) and has_prubeth,
-                "Welcome to PRUBETH IDE and sovereign NLS strings verified (265 localized strings)"
+                "Welcome to PRUBETH IDE and independent NLS strings verified (265 localized strings)"
             )
 
         # 4.4 Holographic First Loading Screen & Watermark Distinction

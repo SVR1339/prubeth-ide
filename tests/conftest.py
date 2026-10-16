@@ -23,4 +23,3 @@ def cleanup_qt_widgets():
 def pytest_sessionfinish(session, exitstatus):
     status = int(exitstatus)
     print(f"\n[SESSION FINISH] exitstatus={status}", flush=True)
-    os._exit(status)

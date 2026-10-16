@@ -22,7 +22,7 @@
 
 ## 1. EXECUTIVE SUMMARY & PRODUCT SCOPE
 
-**SUKHI IDE — Horizon Edition v3.0.0** is an enterprise-grade, sovereign, AI-native desktop integrated development environment engineered to provide:
+**SUKHI IDE — Horizon Edition v3.0.0** is an enterprise-grade, independent, AI-native desktop integrated development environment engineered to provide:
 - Deterministic multi-agent coding (Architect, Coder, Critic, Tester).
 - In-place file modification, AST code analysis, and visual diff reviews.
 - Strict workspace boundary containment and DPAPI Windows secret encryption.

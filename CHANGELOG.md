@@ -9,7 +9,7 @@ Official Website & Downloads: [**https://www.bsvr.work/#projects**](https://www.
 
 ### Added
 - **Official PRUBETH Brand Identity & Classic Windmill Emblem:**
-  - Modern classic windmill identity symbolizing continuous sovereign energy and clean developer flow.
+  - Modern classic windmill identity symbolizing continuous energy and clean developer flow.
   - Multi-resolution Windows ICO (`assets/icon.ico`), high-contrast dark windmill PNG (`assets/logo.png`), positive white look PNG (`assets/logo_light.png`), and vector SVG (`assets/logo.svg`).
 - **Hologram Cybernetic Glassmorphic UI Theme:**
   - Obsidian dark palette (`#050811`) with electric cyan (`#00F0FF`) and neon magenta (`#D946EF`) hologram accents.

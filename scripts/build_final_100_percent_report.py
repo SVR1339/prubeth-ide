@@ -137,9 +137,9 @@ HTML_REPORT = r"""<!DOCTYPE html>
     <b>Distribution Targets:</b> Standalone Installer (<code>PrubethIDE-v3.0.0-Setup.exe</code>), Universal Portable (<code>app_payload.zip</code>)
 </div>
 
-<h2>1. Executive Summary & Sovereign Developer Mission</h2>
+<h2>1. Executive Summary & Independent Developer Mission</h2>
 <p>
-<b>PRUBETH IDE</b> is a modular, autonomous, and upgradeable sovereign development environment engineered to deliver unmatched local execution speed and developer autonomy. Unlike cloud-dependent chat bubbles, PRUBETH IDE executes autonomously directly inside the developer's local repository—compiling code, executing test suites, analyzing AST syntax, and enforcing strict local filesystem boundaries with DPAPI hardware-grade secret protection.
+<b>PRUBETH IDE</b> is a modular, autonomous, and upgradeable independent development environment engineered to deliver unmatched local execution speed and developer autonomy. Unlike cloud-dependent chat bubbles, PRUBETH IDE executes autonomously directly inside the developer's local repository—compiling code, executing test suites, analyzing AST syntax, and enforcing strict local filesystem boundaries with DPAPI hardware-grade secret protection.
 </p>
 <p>
 Following the strict directives of the 7-Page Master Architecture Plan (10 October 2026), all <b>13 development gates</b> have been implemented, tested, and verified with empirical test evidence. Zero gaps, zero partial implementations, and zero regressions remain across the codebase.
@@ -278,7 +278,7 @@ Following the strict directives of the 7-Page Master Architecture Plan (10 Octob
 
 <h2>3. Brand Identity & Visual Aesthetic Architecture</h2>
 <ul>
-    <li><b>Brand Philosophy:</b> PRUBETH embodies continuous sovereign momentum, clean architectural flow, and local energy generation represented by the timeless windmill emblem.</li>
+    <li><b>Brand Philosophy:</b> PRUBETH embodies continuous independent momentum, clean architectural flow, and local energy generation represented by the timeless windmill emblem.</li>
     <li><b>Windmill Iconography:</b>
         <ul>
             <li><b>Dark Edition (<code>assets/logo.png</code>):</b> High-contrast obsidian blades illuminated with electric cyan (#00F0FF) and neon magenta (#D946EF) contour lighting.</li>

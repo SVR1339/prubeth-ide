@@ -2,7 +2,7 @@
 ======================================================================
 Defensive security analysis system providing multi-rule AST/regex code
 scanning, Software Composition Analysis, dependency vulnerability checks,
-and CycloneDX/SPDX SBOM generation for personal sovereignty and research.
+and CycloneDX/SPDX SBOM generation for personal autonomy and research.
 """
 
 from __future__ import annotations

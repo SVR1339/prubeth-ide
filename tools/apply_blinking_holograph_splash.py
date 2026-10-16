@@ -176,24 +176,9 @@ def apply_blinking_holograph():
                 hpath.write_text(new_text, encoding="utf-8")
                 print(f"  [UPDATED HOLOGRAPHIC HTML] {hpath.name}")
 
-        # 2. Update workbench.js and sessions.js
-        js_files = [
-            target / "out" / "vs" / "code" / "electron-browser" / "workbench" / "workbench.js",
-            target / "out" / "vs" / "sessions" / "electron-browser" / "sessions.js"
-        ]
-        for jpath in js_files:
-            if jpath.exists():
-                text = jpath.read_text(encoding="utf-8")
-                # Replace the innerHTML of prubeth-splash-brand with holographic content if present
-                if 'prubeth-splash-brand' in text:
-                    text = re.sub(
-                        r'brandDiv\.innerHTML = `.*?`;',
-                        f'brandDiv.innerHTML = `<div class="holo-flower-container"><div class="holo-orbit-ring-outer"></div><div class="holo-orbit-ring"></div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="130" height="130"><g transform="translate(256, 256)"><g fill="#F7A07E" opacity="0.94"><ellipse cx="0" cy="-115" rx="43" ry="86" transform="rotate(45)"/><ellipse cx="0" cy="-115" rx="43" ry="86" transform="rotate(135)"/><ellipse cx="0" cy="-115" rx="43" ry="86" transform="rotate(225)"/><ellipse cx="0" cy="-115" rx="43" ry="86" transform="rotate(315)"/></g><g fill="#7059E2" opacity="0.98"><ellipse cx="0" cy="-115" rx="47" ry="90" transform="rotate(0)"/><ellipse cx="0" cy="-115" rx="47" ry="90" transform="rotate(90)"/><ellipse cx="0" cy="-115" rx="47" ry="90" transform="rotate(180)"/><ellipse cx="0" cy="-115" rx="47" ry="90" transform="rotate(270)"/></g><circle cx="0" cy="0" r="46" fill="#4ECDC4" stroke="#FFFFFF" stroke-width="2.5"/><circle cx="0" cy="0" r="16" fill="#FFFFFF" opacity="0.8"/></g></svg></div><div style="font-family: -apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif; font-size: 25px; font-weight: 800; letter-spacing: 3.5px; color: #FFFFFF; margin-top: 32px; animation: holoTextGlow 2.8s ease-in-out infinite;">PRUBETH IDE</div><div style="font-family: \'Space Mono\', Consolas, monospace; font-size: 11px; letter-spacing: 3px; color: #38BDF8; margin-top: 12px; font-weight: 600; text-transform: uppercase; animation: holoWatermark 2.8s ease-in-out infinite;">{WATERMARK_TEXT}</div><div style="width: 180px; height: 2px; background: rgba(255, 255, 255, 0.08); margin-top: 24px; border-radius: 2px; overflow: hidden; position: relative;"><div style="position: absolute; top: 0; left: 0; width: 45%; height: 100%; background: linear-gradient(90deg, transparent, #00F0FF, #7059E2, transparent); animation: holoBeamSweep 1.6s ease-in-out infinite;"></div></div>`;',
-                        text,
-                        flags=re.DOTALL
-                    )
-                    jpath.write_text(text, encoding="utf-8")
-                    print(f"  [UPDATED HOLOGRAPHIC JS] {jpath.name}")
+        # 2. Update workbench.js and sessions.js (Safe from Trusted Types CSP)
+        # Note: HTML files already contain the holographic splash directly; JS does not need innerHTML injection.
+        print("  [SAFE] Skipping runtime innerHTML injection to maintain TrustedHTML CSP compliance.")
 
     print("\nBlinking Holographic Loading Screen Complete!")
 

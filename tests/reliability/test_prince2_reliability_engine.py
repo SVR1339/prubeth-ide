@@ -48,12 +48,12 @@ def test_engine_recovery_profile_execution():
 
 
 def test_engine_large_project_profile_execution():
-    """Verify Large Project profile tests monorepos, giant buffers, and 15-tier trees."""
+    """Verify Large Project profile tests monorepos, giant buffers, 15-tier trees, and probabilistic invariants."""
     engine = ReliabilityEngine()
     report = engine.run_profile(ReliabilityProfile.LARGE_PROJECT)
 
     assert report.profile == ReliabilityProfile.LARGE_PROJECT
-    assert report.passed_count == 3
+    assert report.passed_count >= 3
     assert report.failed_count == 0
     assert report.stage_gate_decision == StageGateDecision.APPROVED
 

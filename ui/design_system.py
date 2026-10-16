@@ -279,7 +279,7 @@ def get_application_stylesheet(theme_name: str = "dark", custom_accent: Optional
             color: {t.text_secondary};
             border: 1px solid {t.border};
             border-bottom: none;
-            padding: 7px 16px;
+            padding: 6px 12px;
             margin-right: 2px;
             border-top-left-radius: {t.radius_sm};
             border-top-right-radius: {t.radius_sm};

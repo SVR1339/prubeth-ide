@@ -7,10 +7,10 @@
 <img src="assets/logo.png" alt="PRUBETH IDE Blooming Flower Logo" width="130" />
 
 # PRUBETH IDE
-### Sovereign Multi-Model AI Developer Workstation · Horizon Edition (v1.89.0)
+### Multi-Model AI Developer Workstation · Horizon Edition (v1.89.0)
 
 > *"Bloom, ideas unfolding."*  
-> PRUBETH IDE brings high-speed polyglot code editing, sovereign multi-model AI routing, autonomous self-healing agent workflows, and verified systems reliability into one unified desktop environment.
+> PRUBETH IDE brings high-speed polyglot code editing, multi-model AI routing, autonomous self-healing agent workflows, and verified systems reliability into one unified desktop environment.
 
 <br/>
 
@@ -461,6 +461,6 @@ See [LICENSE](LICENSE) for the full legal text.
 ---
 
 <div align="center">
-  <p>© 2025–2026 BSVR Technologies. Engineered for sovereign developer flow.</p>
+  <p>© 2025–2026 BSVR Technologies. Engineered for clean developer flow.</p>
   <p><a href="https://www.bsvr.work/">bsvr.work</a> · <a href="https://github.com/imyouiamyou/prubeth-ide">github.com/imyouiamyou/prubeth-ide</a></p>
 </div>

@@ -145,7 +145,7 @@ class ToolGateway:
         start_time = time.time()
         try:
             # Tokenize command safely with direct process invocation to eliminate command injection (CWE-78)
-            args = shlex.split(command_str, posix=(sys.platform != "win32"))
+            args = shlex.split(command_str, posix=True)
             if not args:
                 return {
                     "exit_code": 0,

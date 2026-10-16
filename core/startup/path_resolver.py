@@ -106,3 +106,21 @@ class PathResolver:
             temp_dir=temp_dir,
             is_frozen=is_frozen
         )
+
+    @classmethod
+    def resolve_dynamic_path(cls, target_path: str) -> Path:
+        """
+        Dynamically resolves paths that may reference missing or relettered drives (e.g. E:\\).
+        Auto-relocates to verified local paths on C:\\ or workspace.
+        """
+        p = Path(target_path)
+        if p.exists():
+            return p.resolve()
+        try:
+            from core.probabilistic_resilience_engine import ProbabilisticResilienceEngine
+            healed = ProbabilisticResilienceEngine.get_instance().heal_missing_drive_path(target_path)
+            if healed and healed.exists():
+                return healed
+        except Exception:
+            pass
+        return p

@@ -88,7 +88,7 @@ if [ "$PLATFORM" = "Linux" ] && [ -n "$XDG_DATA_HOME" -o -d "$HOME/.local/share"
 [Desktop Entry]
 Type=Application
 Name=PRUBETH IDE
-Comment=Next-Gen Sovereign Agentic AI Developer Environment
+Comment=Next-Gen Agentic AI Developer Environment
 Exec=${SCRIPT_DIR}/run_prubeth.sh
 Icon=${SCRIPT_DIR}/assets/logo.png
 Terminal=false

@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "prubeth-ide"
 version = "1.89.0"
-description = "PRUBETH IDE — Sovereign Autonomous AI Developer Environment with Intelligent Multi-Model Cascade and Instant Local CUDA Self-Healing"
+description = "PRUBETH IDE — Autonomous AI Developer Environment with Intelligent Multi-Model Cascade and Instant Local CUDA Self-Healing"
 readme = "README.md"
 license = { text = "MIT / Apache-2.0 (BSVR Permissive Open Developer Terms)" }
 authors = [
