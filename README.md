@@ -7,14 +7,14 @@
 <img src="assets/logo.png" alt="PRUBETH IDE Blooming Flower Logo" width="130" />
 
 # PRUBETH IDE
-### Multi-Model AI Developer Workstation · Horizon Edition (v1.89.0)
+### Multi-Model AI Developer Workstation · Horizon Edition (v1.91.0)
 
 > *"Bloom, ideas unfolding."*  
 > PRUBETH IDE brings high-speed polyglot code editing, multi-model AI routing, autonomous self-healing agent workflows, and verified systems reliability into one unified desktop environment.
 
 <br/>
 
-[![Release](https://img.shields.io/badge/Release-v1.89.0--Horizon-7059E2?style=for-the-badge&logo=rocket)](https://github.com/imyouiamyou/prubeth-ide/releases/tag/v1.89)
+[![Release](https://img.shields.io/badge/Release-v1.91.0--Horizon-7059E2?style=for-the-badge&logo=rocket)](https://github.com/imyouiamyou/prubeth-ide/releases/tag/v1.91)
 [![Tests Passing](https://img.shields.io/badge/Tests-303%20%2F%20303%20Passed-70D6A0?style=for-the-badge&logo=pytest)](FINAL_RELEASE_VERIFICATION.md)
 [![Security Verification](https://img.shields.io/badge/Security-Ed25519%20Signed%20%26%20TLS-00F0FF?style=for-the-badge&logo=shield)](installer/release_config.py)
 [![Platforms](https://img.shields.io/badge/Platform-Windows%2010%2F11%20%7C%20Linux%20%7C%20macOS-1D2028?style=for-the-badge&logo=windows)](INSTALL.md)
@@ -28,23 +28,23 @@
 <!-- VIP ONE-CLICK DOWNLOAD BUTTONS                                    -->
 <!-- ================================================================= -->
 
-### 🚀 Direct Release Downloads (v1.89.0)
+### 🚀 Direct Release Downloads (v1.91.0)
 
 <p align="center">
-  <a href="https://github.com/imyouiamyou/prubeth-ide/releases/download/v1.89/PrubethIDE-v1.89.0-Setup.exe">
-    <img src="https://img.shields.io/badge/⬇️_DOWNLOAD_SETUP.EXE-Windows_Installer_(205_MB)-7059E2?style=for-the-badge&logo=windows&logoColor=white" alt="Download Windows Setup.exe" height="42" />
+  <a href="https://github.com/imyouiamyou/prubeth-ide/releases/download/v1.91/PrubethIDE-v1.91.0-Setup.exe">
+    <img src="https://img.shields.io/badge/⬇️_DOWNLOAD_SETUP.EXE-Windows_Installer_(240_MB)-7059E2?style=for-the-badge&logo=windows&logoColor=white" alt="Download Windows Setup.exe" height="42" />
   </a>
   &nbsp;&nbsp;
-  <a href="https://github.com/imyouiamyou/prubeth-ide/releases/download/v1.89/Prubeth-Payload-1.89.0-windows-x64.zip">
-    <img src="https://img.shields.io/badge/📦_DOWNLOAD_PORTABLE_ZIP-All--in--One_Folder_(1.1_MB)-4ECDC4?style=for-the-badge&logo=files&logoColor=white" alt="Download Portable Zip" height="42" />
+  <a href="https://github.com/imyouiamyou/prubeth-ide/releases/download/v1.91/Prubeth-Payload-1.91.0-windows-x64.zip">
+    <img src="https://img.shields.io/badge/📦_DOWNLOAD_PORTABLE_ZIP-All--in--One_Folder_(3.0_MB)-4ECDC4?style=for-the-badge&logo=files&logoColor=white" alt="Download Portable Zip" height="42" />
   </a>
   &nbsp;&nbsp;
-  <a href="https://github.com/imyouiamyou/prubeth-ide/releases/tag/v1.89">
+  <a href="https://github.com/imyouiamyou/prubeth-ide/releases/tag/v1.91">
     <img src="https://img.shields.io/badge/🛡️_VERIFY_RELEASE-Signatures_&_SBOM-F7A07E?style=for-the-badge&logo=github&logoColor=white" alt="View Release Assets" height="42" />
   </a>
 </p>
 
-[**🌐 Official Website**](https://www.bsvr.work/) · [**🚀 GitHub Releases**](https://github.com/imyouiamyou/prubeth-ide/releases/tag/v1.89) · [**📖 Architecture**](ARCHITECTURE.md) · [**🗺️ Architecture Map**](docs/ARCHITECTURE_MAP.md) · [**⚖️ Comparison vs Reference IDEs**](docs/REFERENCE_IDE_COMPARISON.md) · [**🛠️ Installation Manual**](INSTALL.md) · [**🧩 Extensions Guide**](DEVELOPER_EXTENSIONS_GUIDE.md)
+[**🌐 Official Website**](https://www.bsvr.work/) · [**🚀 GitHub Releases**](https://github.com/imyouiamyou/prubeth-ide/releases/tag/v1.91) · [**📖 Architecture**](ARCHITECTURE.md) · [**🗺️ Architecture Map**](docs/ARCHITECTURE_MAP.md) · [**⚖️ Comparison vs Reference IDEs**](docs/REFERENCE_IDE_COMPARISON.md) · [**🛠️ Installation Manual**](INSTALL.md) · [**🧩 Extensions Guide**](DEVELOPER_EXTENSIONS_GUIDE.md)
 
 </div>
 
@@ -86,7 +86,7 @@ Unlike generic code editors that bolt a chat modal onto an external webview, PRU
 | Attribute | Specification |
 | :--- | :--- |
 | **Product Name** | PRUBETH IDE (Horizon Edition) |
-| **Current Release** | v1.89.0 (Git Tag: `v1.89` / `v1.89.0`) |
+| **Current Release** | v1.91.0 (Git Tag: `v1.91` / `v1.91.0`) |
 | **Primary Platform** | Windows 10 & 11 (64-bit x64 native) |
 | **Cross-Platform Support** | Linux (Ubuntu, Debian, Fedora, Arch) & macOS (Apple Silicon / Intel) via source runtime |
 | **UI Framework** | PyQt5 / Qt 5.15 / QScintilla 2.14.1 with Native Dark Obsidian Design System |
@@ -203,10 +203,11 @@ The Mod Hub provides deep control over agent autonomy, abliterated vector adjust
 
 | Asset | File Type | Size | Recommended For | Direct Download Link |
 | :--- | :--- | :---: | :--- | :--- |
-| 🚀 **`PrubethIDE-v1.89.0-Setup.exe`** | **Windows 1-Click Installer** | **~205 MB** | **All Windows 10/11 users.** Automated installation wizard with Desktop shortcut, Start Menu registration, and uninstaller. | [**⬇️ Download Setup**](https://github.com/imyouiamyou/prubeth-ide/releases/download/v1.89/PrubethIDE-v1.89.0-Setup.exe) |
-| 📦 **`Prubeth-Payload-1.89.0-windows-x64.zip`** | **All-in-One Portable Archive** | **~1.1 MB** | **Users who want a ready-to-run folder.** Extract anywhere, double-click `run_local_ai_studio_pro.bat`, zero installation required. | [**⬇️ Download Portable ZIP**](https://github.com/imyouiamyou/prubeth-ide/releases/download/v1.89/Prubeth-Payload-1.89.0-windows-x64.zip) |
-| 🪟 **`Prubeth-Setup-1.89.0.exe`** | **Version-Named Installer** | **~41 MB** | Mirror of `Setup.exe` with semantic version tagged in filename. | [**⬇️ Download Versioned Setup**](https://github.com/imyouiamyou/prubeth-ide/releases/download/v1.89/Prubeth-Setup-1.89.0.exe) |
-| 🛡️ **`Prubeth-Manifest-1.89.0.sig`** + **`.json`** | **Cryptographic Signatures** | **< 1 KB** | **Security engineers & release verification.** Ed25519 signature receipts. (Not needed for standard IDE usage). | [**View Release Assets**](https://github.com/imyouiamyou/prubeth-ide/releases/tag/v1.89) |
+| 🚀 **`PrubethIDE-v1.91.0-Setup.exe`** | **Windows Full Desktop Installer** | **~240 MB** | **All Windows 10/11 users.** Automated installation wizard with Desktop shortcut, Start Menu registration, and uninstaller. | [**⬇️ Download Setup**](https://github.com/imyouiamyou/prubeth-ide/releases/download/v1.91/PrubethIDE-v1.91.0-Setup.exe) |
+| 📦 **`Prubeth-Payload-1.91.0-windows-x64.zip`** | **All-in-One Portable Archive** | **~3.0 MB** | **Users who want a ready-to-run folder.** Extract anywhere, double-click `run_local_ai_studio_pro.bat`, zero installation required. | [**⬇️ Download Portable ZIP**](https://github.com/imyouiamyou/prubeth-ide/releases/download/v1.91/Prubeth-Payload-1.91.0-windows-x64.zip) |
+| 🪟 **`Prubeth-Offline-Setup-1.91.0.exe`** | **Offline Standalone Installer** | **~48 MB** | Fully air-gapped standalone installer with zero internet dependencies. | [**⬇️ Download Offline Setup**](https://github.com/imyouiamyou/prubeth-ide/releases/download/v1.91/Prubeth-Offline-Setup-1.91.0.exe) |
+| 🌐 **`Prubeth-Setup-1.91.0.exe`** | **Online Bootstrap Installer** | **~45 MB** | Lightweight installer that verifies and streams the latest verified payload. | [**⬇️ Download Online Setup**](https://github.com/imyouiamyou/prubeth-ide/releases/download/v1.91/Prubeth-Setup-1.91.0.exe) |
+| 🛡️ **`Prubeth-Manifest-1.91.0.sig`** + **`.json`** | **Cryptographic Signatures** | **< 1 KB** | **Security engineers & release verification.** Ed25519 signature receipts. (Not needed for standard IDE usage). | [**View Release Assets**](https://github.com/imyouiamyou/prubeth-ide/releases/tag/v1.91) |
 
 ---
 
@@ -230,7 +231,7 @@ curl -fsSL https://raw.githubusercontent.com/imyouiamyou/prubeth-ide/master/inst
 
 ### Launching on Windows
 1. **Installed Edition:** Double-click the **PRUBETH IDE** desktop icon or launch from Start Menu.
-2. **Portable Edition:** Extract `Prubeth-Payload-1.89.0-windows-x64.zip` and double-click `run_local_ai_studio_pro.bat`.
+2. **Portable Edition:** Extract `Prubeth-Payload-1.91.0-windows-x64.zip` and double-click `run_local_ai_studio_pro.bat`.
 3. **Developer / Source Launch:**
    ```powershell
    git clone https://github.com/imyouiamyou/prubeth-ide.git
@@ -385,17 +386,18 @@ python build_setup_exe.py
 
 ## 16. Official Downloadable Releases
 
-Current Release: **v1.89.0 (Horizon Edition)**
+Current Release: **v1.91.0 (Horizon Edition)**
 
 | Release Asset | Size | SHA-256 Digest | Purpose |
 | :--- | :---: | :--- | :--- |
-| **`PrubethIDE-v1.89.0-Setup.exe`** | 229 MB | `74c3ed2ce39d8191ca02899b1e9...` | Official Windows Full Standalone Installer |
-| **`Prubeth-Payload-1.89.0-windows-x64.zip`** | 1.1 MB | `66a590979d1b037b9245ad80390...` | Complete Application Payload (Portable) |
-| **`Prubeth-Setup-1.89.0.exe`** | 41 MB | `760eb93bb1665db663bc4a4a1eb...` | Versioned Installer Mirror |
-| **`Prubeth-Manifest-1.89.0.json`** | 647 B | `8794cec2de4dcf43655f1695840...` | Canonical Release Manifest |
-| **`Prubeth-Manifest-1.89.0.sig`** | 130 B | `57ee1189c5329df7837bf1f3ca8...` | Ed25519 Cryptographic Signature |
-| **`Prubeth-SHA256SUMS.txt`** | 488 B | `5699f49bded9d03a5303383be91...` | SHA-256 Checksum Manifest |
-| **`Prubeth-SBOM-1.89.0.json`** | 582 B | `0c8c51a6df58dff81fd0af9aa65...` | CycloneDX Software Bill of Materials |
+| **`PrubethIDE-v1.91.0-Setup.exe`** | 251 MB | `bfac4f1ac2fd6c79c35d35ae1192f7e31a6d8c5bcfa8bb18600af13e1d549a3c` | Official Windows Full Standalone Desktop Installer |
+| **`Prubeth-Payload-1.91.0-windows-x64.zip`** | 3.0 MB | `1e5aa1f03506bbbd18e8fbfa8d29f2581befe2ecd76699f1ee52f2cb556dba40` | Complete Application Payload (Portable & Auto-Update) |
+| **`Prubeth-Offline-Setup-1.91.0.exe`** | 48 MB | `22b156e1b43ebbbe4258886bd020540901221f8eae52db997359393245819250` | Standalone Air-Gapped Offline Installer |
+| **`Prubeth-Setup-1.91.0.exe`** | 45 MB | `24d598d72480310f169fe928afe36e3a4e9c82513f2f60afd7c1b48333f97025` | Online Verified Bootstrap Installer |
+| **`Prubeth-Manifest-1.91.0.json`** | 682 B | `c6fd59ebdef587b261e5230ff6994d698850723988ff9eb56d05116e814b9522` | Canonical Release Manifest |
+| **`Prubeth-Manifest-1.91.0.sig`** | 130 B | `3143e4152e1ef6771005cae80ba307180c07844dad8ba8e741ddad6e1bffc248` | Ed25519 Cryptographic Signature |
+| **`Prubeth-SHA256SUMS.txt`** | 488 B | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` | SHA-256 Checksum Manifest |
+| **`Prubeth-SBOM-1.91.0.json`** | 582 B | `01061464e51c81f26634f7dce1dc23de65c499104ac07af4dadd560a980131dc` | CycloneDX Software Bill of Materials |
 
 ---
 

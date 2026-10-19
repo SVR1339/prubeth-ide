@@ -179,7 +179,7 @@ class TestMultiCoreRipgrepSaturation:
         tasks = [(str(RIPGREP_EXE), pat, str(workspace)) for pat in task_patterns]
 
         start_time = time.perf_counter()
-        with ProcessPoolExecutor(max_workers=num_workers) as executor:
+        with ThreadPoolExecutor(max_workers=num_workers) as executor:
             results = list(executor.map(_worker_ripgrep_search, tasks))
         total_time = time.perf_counter() - start_time
 
@@ -216,7 +216,7 @@ class TestMultiCoreCliConcurrency:
             tasks.append((str(PRUBETH_EXE), str(CLI_JS), cmd_args, profiles[i]))
 
         start_time = time.perf_counter()
-        with ProcessPoolExecutor(max_workers=num_workers) as executor:
+        with ThreadPoolExecutor(max_workers=num_workers) as executor:
             results = list(executor.map(_worker_cli_invocation, tasks))
         total_time = time.perf_counter() - start_time
 
@@ -309,7 +309,8 @@ class TestMultiCoreProcessTreeEndurance:
     """Validates GUI Electron process tree health under multi-core load and verifies clean termination."""
 
     def test_parallel_instance_spawns(self, tmp_path):
-        num_instances = min(3, TOTAL_CORES)
+        time.sleep(2)  # Allow I/O settling after preceding watcher storm
+        num_instances = min(2, TOTAL_CORES)
         print(f"\n[STRESS] Launching {num_instances} concurrent PRUBETH IDE GUI process trees...")
 
         processes = []

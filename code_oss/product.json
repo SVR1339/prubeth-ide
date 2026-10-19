@@ -7,7 +7,7 @@
   "win32x64AppId": "PRUBETH.IDE",
   "win32UserAppId": "PRUBETH.IDE.User",
   "win32AppUserModelId": "PRUBETH.IDE",
-  "version": "3.0.0",
+  "version": "1.91.0",
   "commit": "0aa5810",
   "date": "2026-10-11T09:00:00.000Z",
   "forkOrigin": "microsoft/vscode (Code-OSS)",
@@ -38,6 +38,16 @@
     "cloudTier1": "gemini-3.8-flash",
     "cloudTier2": "gemini-3.5-flash",
     "contextWindowMax": 1000000
+  },
+  "defaultChatAgent": {
+    "extensionId": "prubeth.ai-assistant",
+    "chatAgentName": "prubeth",
+    "documentationUrl": "https://www.bsvr.work/docs/agent"
+  },
+  "chatSetup": {
+    "entitlement": {
+      "provider": "prubeth.ai-assistant"
+    }
   },
   "telemetry": {
     "enableCrashReporter": false,

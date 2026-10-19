@@ -214,7 +214,7 @@ def test_app_branding():
     import local_ai_studio_pro as studio
 
     assert "PRUBETH" in studio.APP_NAME or "SUKHI" in studio.APP_NAME or "SO NAIVE" in studio.APP_NAME
-    assert any(v in studio.APP_VERSION for v in ["1.12.0", "3.0.0", "1.89.0"])
+    assert any(v in studio.APP_VERSION for v in ["1.12.0", "3.0.0", "1.89.0", "1.91.0"])
     assert studio.WEBSITE_URL == "https://www.bsvr.work/"
     assert "bsvr.work" in studio.PROJECTS_URL
 

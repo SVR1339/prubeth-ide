@@ -23,6 +23,8 @@ def qapp():
 
 @pytest.fixture
 def temp_git_repo():
+    if not shutil.which("git"):
+        pytest.skip("git executable not found in PATH")
     tmp_dir = tempfile.mkdtemp(prefix="test_sukhi_git_")
     repo_path = Path(tmp_dir)
 

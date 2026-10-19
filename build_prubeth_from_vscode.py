@@ -45,7 +45,7 @@ BUILD_OUT = ROOT / "prubeth-build"
 ISCC = Path(r"C:\Users\asus\AppData\Local\Programs\Inno Setup 6\ISCC.exe")
 ISS_SCRIPT = VSCODE_DIR / "build" / "win32" / "prubeth.iss"
 
-APP_VERSION = "1.89.0"
+APP_VERSION = "1.91.0"
 APP_NAME = "PRUBETH IDE"
 PUBLISHER = "BSVR Technologies"
 

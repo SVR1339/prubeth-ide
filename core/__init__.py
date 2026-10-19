@@ -4,7 +4,7 @@ Modular subsystem engines for credentials, workspace protection, tool execution,
 model registry, intelligent routing, task lifecycle, and plugin architecture.
 """
 
-__version__ = "1.89.0"
+__version__ = "1.91.0"
 __all__ = [
     "credentials",
     "workspace",

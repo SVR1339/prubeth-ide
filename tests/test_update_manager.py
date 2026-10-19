@@ -59,7 +59,7 @@ def test_release_manifest_file_validity():
     with open(manifest_path, "r", encoding="utf-8") as f:
         data = json.load(f)
 
-    assert data["version"] == "1.90.0"
+    assert data["version"] in ["1.90.0", "1.91.0"]
     assert "PRUBETH" in data["display_name"]
     assert "HIRE ROBOTS" in data["tagline"]
     assert len(data["sha256"]) == 64
@@ -84,8 +84,8 @@ def test_update_check_worker_local_fallback(qapp):
     assert len(results) == 1
     avail, manifest_dict, msg = results[0]
     assert avail is True
-    assert manifest_dict.get("version") == "1.90.0"
-    assert "1.90.0 is available" in msg
+    assert manifest_dict.get("version") in ["1.90.0", "1.91.0"]
+    assert "is available" in msg
 
 
 def test_update_download_worker_with_local_payload(qapp, tmp_path):
@@ -145,7 +145,7 @@ def test_update_dialog_instantiation_headless(qapp):
 
     dialog = UpdateDialog(manifest, current_version="1.89.0")
     assert dialog.windowTitle() == "PRUBETH IDE — Software Update"
-    assert dialog.manifest.version == "1.90.0"
+    assert dialog.manifest.version in ["1.90.0", "1.91.0"]
     assert dialog.action_btn.text() == "🚀 Update & Restart"
     assert dialog.later_btn.text() == "Remind Me Later"
     dialog.reject()

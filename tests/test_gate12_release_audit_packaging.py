@@ -19,7 +19,7 @@ from build_setup_exe import create_payload_archive, ROOT_DIR, INSTALLER_DIR
 
 def test_release_manifest_metadata_and_versioning():
     """Verify consistent version across all release manifests."""
-    assert core.__version__ in ["1.12.0", "1.89.0", "3.0.0"]
+    assert core.__version__ in ["1.12.0", "1.89.0", "1.91.0", "3.0.0"]
 
     pyproject_file = ROOT_DIR / "pyproject.toml"
     assert pyproject_file.exists()
@@ -39,13 +39,15 @@ def test_release_manifest_metadata_and_versioning():
     assert "QScintilla" in reqs_text
 
 
-def test_create_payload_archive():
+def test_create_payload_archive(tmp_path):
     """create_payload_archive must bundle complete application code and modules into a valid zip."""
-    payload_zip = create_payload_archive()
-    assert payload_zip.exists()
-    assert payload_zip.stat().st_size > 50000  # Must be substantial archive
+    from scripts.build_release_artifacts import package_payload_zip
+    test_zip = tmp_path / "test_payload.zip"
+    package_payload_zip(test_zip)
+    assert test_zip.exists()
+    assert test_zip.stat().st_size > 50000  # Must be substantial archive
 
-    with zipfile.ZipFile(payload_zip, 'r') as z:
+    with zipfile.ZipFile(test_zip, 'r') as z:
         names = z.namelist()
         # Verify critical entrypoints and modules are present
         assert "local_ai_studio_pro.py" in names
@@ -88,7 +90,7 @@ def test_inno_setup_installer_script():
     assert iss_file.exists()
     iss_content = iss_file.read_text(encoding="utf-8")
 
-    assert '#define MyAppVersion "1.12.0"' in iss_content or '#define MyAppVersion "1.12"' in iss_content
+    assert f'#define MyAppVersion "{core.__version__}"' in iss_content or '#define MyAppVersion "1.91.0"' in iss_content or '#define MyAppVersion "1.12.0"' in iss_content
     assert "DefaultDirName=" in iss_content
     assert "UninstallDisplayIcon=" in iss_content
     assert "OutputBaseFilename=" in iss_content

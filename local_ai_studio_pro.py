@@ -84,7 +84,7 @@ from PyQt5.Qsci import (
 
 APP_NAME = "PRUBETH IDE"
 APP_BRAND = "PRUBETH"
-APP_VERSION = "1.89.0 (Horizon Edition)"
+APP_VERSION = "1.91.0 (Horizon Edition)"
 APP_CODENAME = "PRUBETH"
 APP_TAGLINE = "HIRE ROBOTS FOR USING NOT DECORATE !"
 WEBSITE_URL = "https://www.bsvr.work/"
