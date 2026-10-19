@@ -7,8 +7,8 @@
   "min_supported_version": "1.0.0",
   "download_url": "https://github.com/imyouiamyou/prubeth-ide/releases/download/v1.91/app_payload.zip",
   "fallback_local_payload": "installer/app_payload.zip",
-  "sha256": "0b953a83e1db07da50d9e7c3f9698944fa092bceae9317dfb97658ff73c0acae",
-  "size_bytes": 3081432,
+  "sha256": "1e5aa1f03506bbbd18e8fbfa8d29f2581befe2ecd76699f1ee52f2cb556dba40",
+  "size_bytes": 3084166,
   "changelog": [
     "Resolved onboarding renderer crash by configuring productService.defaultChatAgent and chatSetup",
     "Implemented resilient fallback shim for @vscode/sqlite3 native bindings",
