@@ -27,19 +27,27 @@
 <!-- VIP ONE-CLICK DOWNLOAD BUTTONS                                    -->
 <!-- ================================================================= -->
 
-### 🚀 Direct Release Downloads (v1.91.0)
+### 🚀 Direct Cross-Platform Release Downloads (v1.91.0)
 
 <p align="center">
   <a href="https://github.com/SVR1339/prubeth-ide/releases/download/v1.91/PrubethIDE-v1.91.0-Setup.exe">
-    <img src="https://img.shields.io/badge/⬇️_DOWNLOAD_PRUBETH_SETUP-Windows_Installer_(240_MB)-7059E2?style=for-the-badge&logo=windows&logoColor=white" alt="Download PRUBETH Windows Setup" height="42" />
+    <img src="https://img.shields.io/badge/🪟_WINDOWS_SETUP-Installer_(251_MB)-7059E2?style=for-the-badge&logo=windows&logoColor=white" alt="Download PRUBETH Windows Setup" height="40" />
   </a>
   &nbsp;&nbsp;
-  <a href="https://github.com/SVR1339/prubeth-ide/releases/download/v1.91/Prubeth-Payload-1.91.0-windows-x64.zip">
-    <img src="https://img.shields.io/badge/📦_DOWNLOAD_PORTABLE_ZIP-Ready--to--Run_Package_(3.0_MB)-4ECDC4?style=for-the-badge&logo=files&logoColor=white" alt="Download Portable Zip" height="42" />
+  <a href="https://github.com/SVR1339/prubeth-ide/releases/download/v1.91/Prubeth-v1.91.0-linux-x64.tar.gz">
+    <img src="https://img.shields.io/badge/🐧_LINUX_X64-Standalone_(41_MB)-E95420?style=for-the-badge&logo=linux&logoColor=white" alt="Download PRUBETH Linux" height="40" />
+  </a>
+  &nbsp;&nbsp;
+  <a href="https://github.com/SVR1339/prubeth-ide/releases/download/v1.91/Prubeth-v1.91.0-darwin-universal.tar.gz">
+    <img src="https://img.shields.io/badge/🍎_APPLE_MACOS-Universal_(41_MB)-999999?style=for-the-badge&logo=apple&logoColor=white" alt="Download PRUBETH Apple macOS" height="40" />
+  </a>
+  &nbsp;&nbsp;
+  <a href="https://github.com/SVR1339/prubeth-ide/releases/download/v1.91/Prubeth-v1.91.0-Universal.zip">
+    <img src="https://img.shields.io/badge/📦_UNIVERSAL_ZIP-Cross--Platform_(42_MB)-4ECDC4?style=for-the-badge&logo=files&logoColor=white" alt="Download Universal Zip" height="40" />
   </a>
   &nbsp;&nbsp;
   <a href="https://github.com/SVR1339/prubeth-ide/releases/tag/v1.91">
-    <img src="https://img.shields.io/badge/🛡️_VERIFY_RELEASE-Signatures_&_SBOM-F7A07E?style=for-the-badge&logo=github&logoColor=white" alt="View Release Assets" height="42" />
+    <img src="https://img.shields.io/badge/🛡️_VERIFY_RELEASE-Signatures_&_SBOM-F7A07E?style=for-the-badge&logo=github&logoColor=white" alt="View Release Assets" height="40" />
   </a>
 </p>
 
@@ -295,14 +303,16 @@ PRUBETH gives developers total freedom over their development environment:
 
 ## 12. Official Distributables & One-Line Installers
 
-### 🎯 Official Distributables (v1.91.0)
+### 🎯 Official Multi-Platform Distributables (v1.91.0)
 
-| Package | Format | Size | Target Environment | Link |
-| :--- | :---: | :---: | :--- | :---: |
-| **`PrubethIDE-v1.91.0-Setup.exe`** | Inno Setup Executable | ~240 MB | **All Windows 10/11 workstations.** Full desktop setup wizard with shortcuts and uninstaller. | [**⬇️ Download Setup**](https://github.com/SVR1339/prubeth-ide/releases/download/v1.91/PrubethIDE-v1.91.0-Setup.exe) |
-| **`Prubeth-Payload-1.91.0-windows-x64.zip`** | Portable Archive | ~3.0 MB | **Portable deployment.** Extract anywhere and run immediately with zero installation. | [**⬇️ Download Portable ZIP**](https://github.com/SVR1339/prubeth-ide/releases/download/v1.91/Prubeth-Payload-1.91.0-windows-x64.zip) |
-| **`Prubeth-Offline-Setup-1.91.0.exe`** | Standalone Setup | ~48 MB | Fully air-gapped environments with zero external network connectivity. | [**⬇️ Download Offline Setup**](https://github.com/SVR1339/prubeth-ide/releases/download/v1.91/Prubeth-Offline-Setup-1.91.0.exe) |
-| **`Prubeth-Setup-1.91.0.exe`** | Bootstrap Installer | ~45 MB | Fast network installer that verifies and installs the latest payload. | [**⬇️ Download Bootstrap**](https://github.com/SVR1339/prubeth-ide/releases/download/v1.91/Prubeth-Setup-1.91.0.exe) |
+| Platform | Package | Format | Size | Target Environment | Verified Download |
+| :--- | :--- | :---: | :---: | :--- | :---: |
+| 🪟 **Windows** | **`PrubethIDE-v1.91.0-Setup.exe`** | Inno Setup Executable | ~251 MB | **All Windows 10/11 workstations.** Desktop wizard with shortcuts and uninstaller. | [**⬇️ Download Windows Setup**](https://github.com/SVR1339/prubeth-ide/releases/download/v1.91/PrubethIDE-v1.91.0-Setup.exe) |
+| 🪟 **Windows** | **`Prubeth-Payload-1.91.0-windows-x64.zip`** | Portable Archive | ~3.0 MB | **Portable deployment.** Extract anywhere and run immediately with zero installation. | [**⬇️ Download Windows Portable**](https://github.com/SVR1339/prubeth-ide/releases/download/v1.91/Prubeth-Payload-1.91.0-windows-x64.zip) |
+| 🪟 **Windows** | **`Prubeth-Offline-Setup-1.91.0.exe`** | Standalone Setup | ~46 MB | Fully air-gapped environments with zero external network connectivity. | [**⬇️ Download Offline Setup**](https://github.com/SVR1339/prubeth-ide/releases/download/v1.91/Prubeth-Offline-Setup-1.91.0.exe) |
+| 🐧 **Linux** | **`Prubeth-v1.91.0-linux-x64.tar.gz`** | Tarball Archive | ~41 MB | **Ubuntu / Debian / Fedora / Arch.** Standalone Linux x64 bundle with `run_prubeth.sh`. | [**⬇️ Download Linux Package**](https://github.com/SVR1339/prubeth-ide/releases/download/v1.91/Prubeth-v1.91.0-linux-x64.tar.gz) |
+| 🍎 **macOS (Apple)** | **`Prubeth-v1.91.0-darwin-universal.tar.gz`** | Tarball Archive | ~41 MB | **Apple Silicon (M1/M2/M3/M4) & Intel.** Complete macOS bundle with `run_prubeth.sh`. | [**⬇️ Download Apple macOS Package**](https://github.com/SVR1339/prubeth-ide/releases/download/v1.91/Prubeth-v1.91.0-darwin-universal.tar.gz) |
+| 🌐 **Universal** | **`Prubeth-v1.91.0-Universal.zip`** | Cross-Platform ZIP | ~42 MB | Cross-platform archive containing all multi-os launchers, runtimes, and core tools. | [**⬇️ Download Universal ZIP**](https://github.com/SVR1339/prubeth-ide/releases/download/v1.91/Prubeth-v1.91.0-Universal.zip) |
 
 ---
 
