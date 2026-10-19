@@ -1,16 +1,15 @@
 <div align="center">
 
-<img src="assets/banner.png" alt="PRUBETH — Showroom Supercar Autonomous AI Workstation" width="100%" />
+<img src="assets/banner.png" alt="PRUBETH — Autonomous AI Developer Platform" width="100%" />
 
 <br/><br/>
 
 <img src="assets/logo.png" alt="PRUBETH Official Hexagonal Neural Monolith Logo" width="128" />
 
 # PRUBETH
-### The Sovereign Autonomous AI Coding Workstation · Showroom Supercar Release (v1.91.0)
+### Autonomous AI Developer Platform · Release v1.91.0
 
-> *"Precision in every byte, power from the first ignition."*  
-> **PRUBETH** is a sovereign, showroom-grade autonomous AI developer platform engineered to bridge human intent and production software. Combining the responsibilities, UX polish, and execution integrity of Google Antigravity, Cursor, Zed, Claude Code, and OpenHands, PRUBETH delivers an uncompromised, out-of-the-box experience equipped with a full agentic development stack.
+> **PRUBETH** is an enterprise-grade sovereign autonomous AI developer workstation engineered for high-integrity, end-to-end software engineering. Integrating stateful multi-agent orchestration, microsecond GPU-accelerated text buffers, multi-model intelligent routing, and verified transactional rollback mechanisms, PRUBETH delivers an uncompromised, ready-to-run desktop environment.
 
 <br/>
 
@@ -52,16 +51,16 @@
 
 ## 📑 Table of Contents
 
-- [1. The Showroom Supercar Vision](#1-the-showroom-supercar-vision)
+- [1. Architectural Overview & System Design](#1-architectural-overview--system-design)
 - [2. Visual Architecture & 4 Core Themes](#2-visual-architecture--4-core-themes)
-- [3. Welcome Loading Screen & Holographic Orbit](#3-welcome-loading-screen--holographic-orbit)
-- [4. Seamless Sign-In & Collaborated Ecosystems](#4-seamless-sign-in--collaborated-ecosystems)
+- [3. Welcome Loading Architecture & Ambient Display](#3-welcome-loading-architecture--ambient-display)
+- [4. Authentication Architecture & Collaborated Ecosystems](#4-authentication-architecture--collaborated-ecosystems)
 - [5. Agentic Development Stack](#5-agentic-development-stack)
 - [6. Probabilistic Convergence Engine](#6-probabilistic-convergence-engine)
-- [7. VS Code Extensions & Open VSX Ecosystem](#7-vs-code-extensions--open-vsx-ecosystem)
-- [8. Inspirations & Architectural Ancestry](#8-inspirations--architectural-ancestry)
-- [9. Installation & VIP Download Center](#9-installation--vip-download-center)
-- [10. First-Launch & Agent Setup Wizard](#10-first-launch--agent-setup-wizard)
+- [7. Extension Interoperability & Open VSX Registry](#7-extension-interoperability--open-vsx-registry)
+- [8. Architectural Foundations & Design Principles](#8-architectural-foundations--design-principles)
+- [9. Installation & Deployment Options](#9-installation--deployment-options)
+- [10. Initialization & Agent Configuration](#10-initialization--agent-configuration)
 - [11. Subsystem Architecture Overview](#11-subsystem-architecture-overview)
 - [12. Security, Integrity & Cryptographic Privacy](#12-security-integrity--cryptographic-privacy)
 - [13. Hardware & System Requirements](#13-hardware--system-requirements)
@@ -72,22 +71,22 @@
 
 ---
 
-## 1. The Showroom Supercar Vision
+## 1. Architectural Overview & System Design
 
-**PRUBETH** is engineered around the principle of the **Showroom Supercar**:
-> *When a driver purchases a high-performance supercar from a showroom floor, it is delivered 100% turnkey, perfectly calibrated, factory-tuned, and ready to unleash its fullest performance on the track from the moment the ignition is pressed—without requiring manual aftermarket modifications or assembly.*
+**PRUBETH** is architected for deterministic, out-of-the-box developer productivity:
+> *Designed to eliminate complex multi-step environment configuration, PRUBETH delivers a turnkey, fully integrated autonomous software development platform calibrated for execution integrity, speed, and precision.*
 
-Developers downloading PRUBETH receive a complete, pristine, sovereign AI workstation out of the box:
-- **Instant Productivity**: Pre-configured with zero complex environment setup required.
-- **Deep Autonomy**: Native ability to parse errors, execute terminal pipelines, inspect AST structures, and synthesize patches.
-- **Microsecond Responsiveness**: Built with GPU-accelerated buffers and intelligent multi-model routing.
-- **Single Brand Identity**: Strictly unified as **PRUBETH** across all layers, menus, binaries, shortcuts, and documentation.
+Developers deploying PRUBETH receive a comprehensive, production-grade workstation:
+- **Zero-Configuration Startup**: Fully packaged with native language services, runtime toolchains, and model routing.
+- **Deep Autonomy**: Native capabilities for traceback analysis, terminal process supervision, AST inspection, and surgical code patching.
+- **High-Performance Responsiveness**: Microsecond editor buffers paired with intelligent cloud-to-edge model routing.
+- **Unified Identity**: Standardized strictly as **PRUBETH** across all system components, binaries, interfaces, and documentation.
 
 ---
 
 ## 2. Visual Architecture & 4 Core Themes
 
-PRUBETH features four meticulously engineered architectural themes, complemented by high-contrast vivid modes, designed for long-duration coding comfort and visual ergonomics:
+PRUBETH features four engineered architectural themes, complemented by high-contrast vivid modes, designed for long-duration coding comfort and visual ergonomics:
 
 <div align="center">
 
@@ -106,13 +105,13 @@ All themes feature unified CSS custom properties, balanced syntax highlighting f
 
 ---
 
-## 3. Welcome Loading Screen & Holographic Orbit
+## 3. Welcome Loading Architecture & Ambient Display
 
-PRUBETH greets the user with an ultra-responsive, zero-latency holographic splash screen:
+PRUBETH features an ultra-responsive, zero-latency loading subsystem:
 - **Master Monolith Emblem**: The official **Hexagonal Neural Processor Monolith** is centered in pure vector precision.
 - **Dual Counter-Rotating Orbit Rings**: Outer quantum orbit and inner neural orbit rotate asynchronously with subtle glowing particle nodes.
-- **Blinking Quantum Horizon Beacon**: A sub-surface pulsating glow radiating behind the monolith.
-- **Adaptive Ambient Mode**: Automatic daylight / midnight adaptation using `@media (prefers-color-scheme: light)` ensures a gentle, glare-free boot experience under any lighting condition.
+- **Holographic Sub-Surface Glow**: A controlled, high-coherence pulse radiating behind the central processor monolith.
+- **Adaptive Ambient Mode**: Automatic daylight / midnight adaptation using `@media (prefers-color-scheme: light)` ensures a gentle, glare-free boot experience under any ambient lighting condition.
 
 ```
        .---.            [Outer Orbit Ring - Counter-Clockwise]
@@ -120,18 +119,18 @@ PRUBETH greets the user with an ultra-responsive, zero-latency holographic splas
      |   ⬡   |          [Central Hexagonal Neural Monolith]
       \     /     
        '---'            [Inner Neural Orbit Ring - Clockwise]
-      ~ ~ ~ ~           [Blinking Holographic Horizon Beacon]
+      ~ ~ ~ ~           [Sub-Surface Ambient Horizon Pulse]
 ```
 
 ---
 
-## 4. Seamless Sign-In & Collaborated Ecosystems
+## 4. Authentication Architecture & Collaborated Ecosystems
 
-PRUBETH integrates seamlessly with the global developer identity and model infrastructure. The first-launch welcome modal provides one-click authentication and connection to major ecosystems with zero half-rendered or placeholder assets:
+PRUBETH integrates natively with global developer identity providers and model inference infrastructure. The first-launch welcome modal provides direct connection to major ecosystems using self-contained vector SVGs with zero missing or unrendered assets:
 
 <div align="center">
 
-| Partner / Ecosystem | Integration Capability | Icon Rendering |
+| Partner / Ecosystem | Integration Capability | Icon Specification |
 | :--- | :--- | :---: |
 | **GitHub** | Repository cloning, PR review, GitHub Actions, Copilot token sync | High-Fidelity Vector SVG |
 | **Google** | Cloud Platform auth, GCP data pipeline orchestration, OAuth2 | High-Fidelity Vector SVG |
@@ -144,8 +143,8 @@ PRUBETH integrates seamlessly with the global developer identity and model infra
 
 </div>
 
-### Global Terms of Use & Autonomous Operations Charter
-PRUBETH includes a comprehensive global developer agreement during onboarding:
+### Global Developer Governance & Security Charter
+PRUBETH enforces transparent developer terms during initial setup:
 1. **Sovereign Code Ownership**: 100% of generated code, AST transformations, and workspace artifacts belong exclusively to the user.
 2. **Zero-Telemetry Security**: No source code, project hierarchies, or keystrokes are transmitted without explicit user consent.
 3. **Autonomous Operations Safeguards**: Sandboxed execution barriers prevent destructive actions without interactive approval.
@@ -154,7 +153,7 @@ PRUBETH includes a comprehensive global developer agreement during onboarding:
 
 ## 5. Agentic Development Stack
 
-PRUBETH incorporates the world's most advanced autonomous agent development stack natively into its runtime:
+PRUBETH incorporates a multi-tiered autonomous agent development stack natively into its runtime:
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
@@ -193,7 +192,7 @@ $$P(\text{Success}) = \prod_{i=1}^{k} \left( 1 - P(\text{Failure}_i \mid \text{H
 
 ---
 
-## 7. VS Code Extensions & Open VSX Ecosystem
+## 7. Extension Interoperability & Open VSX Registry
 
 PRUBETH provides complete compatibility with the modern extension ecosystem:
 - **Open VSX Registry Support**: Access tens of thousands of community extensions natively without proprietary marketplace barriers.
@@ -202,11 +201,11 @@ PRUBETH provides complete compatibility with the modern extension ecosystem:
 
 ---
 
-## 8. Inspirations & Architectural Ancestry
+## 8. Architectural Foundations & Design Principles
 
-PRUBETH synthesizes the greatest breakthroughs in modern developer tooling:
+PRUBETH synthesizes proven paradigms in modern developer tooling:
 
-| Reference Tool | PRUBETH Architectural Synthesis |
+| Reference Architecture | PRUBETH Architectural Synthesis |
 | :--- | :--- |
 | **Google Antigravity** | Autonomous multi-agent coordination, rich generative artifacts, and scheduled task execution. |
 | **Cursor** | Inline predictive code editing (`Ctrl+K`), visual diff review, and context-aware codebase indexing. |
@@ -216,18 +215,18 @@ PRUBETH synthesizes the greatest breakthroughs in modern developer tooling:
 
 ---
 
-## 9. Installation & VIP Download Center
+## 9. Installation & Deployment Options
 
 ### 🎯 Official Distributables (v1.91.0)
 
-| Package | Format | Size | Recommended For | Link |
+| Package | Format | Size | Target Environment | Link |
 | :--- | :---: | :---: | :--- | :---: |
-| **`PrubethIDE-v1.91.0-Setup.exe`** | Inno Setup Executable | ~240 MB | **All Windows 10/11 users.** Full desktop setup wizard with shortcuts and uninstaller. | [**⬇️ Download Setup**](https://github.com/imyouiamyou/prubeth-ide/releases/download/v1.91/PrubethIDE-v1.91.0-Setup.exe) |
-| **`Prubeth-Payload-1.91.0-windows-x64.zip`** | Portable Archive | ~3.0 MB | **Portable usage.** Extract anywhere and run immediately with zero installation. | [**⬇️ Download Portable ZIP**](https://github.com/imyouiamyou/prubeth-ide/releases/download/v1.91/Prubeth-Payload-1.91.0-windows-x64.zip) |
-| **`Prubeth-Offline-Setup-1.91.0.exe`** | Standalone Setup | ~48 MB | Fully air-gapped environments with zero external network access. | [**⬇️ Download Offline Setup**](https://github.com/imyouiamyou/prubeth-ide/releases/download/v1.91/Prubeth-Offline-Setup-1.91.0.exe) |
-| **`Prubeth-Setup-1.91.0.exe`** | Bootstrap Installer | ~45 MB | Fast web installer that downloads and verifies the latest payload. | [**⬇️ Download Bootstrap**](https://github.com/imyouiamyou/prubeth-ide/releases/download/v1.91/Prubeth-Setup-1.91.0.exe) |
+| **`PrubethIDE-v1.91.0-Setup.exe`** | Inno Setup Executable | ~240 MB | **All Windows 10/11 workstations.** Full desktop setup wizard with shortcuts and uninstaller. | [**⬇️ Download Setup**](https://github.com/imyouiamyou/prubeth-ide/releases/download/v1.91/PrubethIDE-v1.91.0-Setup.exe) |
+| **`Prubeth-Payload-1.91.0-windows-x64.zip`** | Portable Archive | ~3.0 MB | **Portable deployment.** Extract anywhere and run immediately with zero installation. | [**⬇️ Download Portable ZIP**](https://github.com/imyouiamyou/prubeth-ide/releases/download/v1.91/Prubeth-Payload-1.91.0-windows-x64.zip) |
+| **`Prubeth-Offline-Setup-1.91.0.exe`** | Standalone Setup | ~48 MB | Fully air-gapped environments with zero external network connectivity. | [**⬇️ Download Offline Setup**](https://github.com/imyouiamyou/prubeth-ide/releases/download/v1.91/Prubeth-Offline-Setup-1.91.0.exe) |
+| **`Prubeth-Setup-1.91.0.exe`** | Bootstrap Installer | ~45 MB | Fast network installer that verifies and installs the latest payload. | [**⬇️ Download Bootstrap**](https://github.com/imyouiamyou/prubeth-ide/releases/download/v1.91/Prubeth-Setup-1.91.0.exe) |
 
-### Instant One-Line Installation
+### Automated Command-Line Installation
 
 #### 🪟 Windows 10 / 11 (PowerShell)
 ```powershell
@@ -241,15 +240,15 @@ curl -fsSL https://raw.githubusercontent.com/imyouiamyou/prubeth-ide/master/inst
 
 ---
 
-## 10. First-Launch & Agent Setup Wizard
+## 10. Initialization & Agent Configuration
 
-1. **Launch**: Start **PRUBETH** from the desktop shortcut, Start Menu, or via `prubeth.bat`.
+1. **Execution**: Launch **PRUBETH** via the desktop shortcut, Start Menu, or via `prubeth.bat`.
 2. **Onboarding Wizard**:
-   - **Step 1**: Choose your preferred architectural theme (Obsidian Slate, Horizon Light, Midnight Void, Opac Frosted Mica).
-   - **Step 2**: Authenticate with GitHub, Google, or your preferred model provider (Gemini, Claude, OpenAI, DeepSeek, Ollama).
-   - **Step 3**: Configure your autonomous agent allowances (terminal access, auto-fix depth, rollback safety).
-   - **Step 4**: Review and accept the PRUBETH Global Developer Governance Terms.
-3. **Ready to Build**: The workstation opens in full showroom specification, ready for immediate autonomous engineering.
+   - **Step 1**: Select your architectural theme (Obsidian Slate, Horizon Light, Midnight Void, Opac Frosted Mica).
+   - **Step 2**: Authenticate with GitHub, Google, or your designated model provider (Gemini, Claude, OpenAI, DeepSeek, Ollama).
+   - **Step 3**: Configure autonomous agent permissions (terminal execution bounds, auto-fix depth, rollback safety).
+   - **Step 4**: Review and acknowledge the PRUBETH Global Developer Governance Charter.
+3. **Operational State**: The workstation completes initialization in full specification, ready for immediate autonomous engineering operations.
 
 ---
 
@@ -274,7 +273,7 @@ curl -fsSL https://raw.githubusercontent.com/imyouiamyou/prubeth-ide/master/inst
 
 ## 12. Security, Integrity & Cryptographic Privacy
 
-PRUBETH mandates enterprise-grade security across every communication channel:
+PRUBETH enforces enterprise-grade security standards across every subsystem:
 1. **Asymmetric Ed25519 Manifest Signing**: All release packages are signed with Ed25519 public key pinning (`4290a6bf8ef8045d53657eddfcc7839bbf08b3ee2ecc83eedc64d32f54d63129`).
 2. **Strict TLS Certificate Verification**: Insecure SSL contexts and certificate bypasses are strictly prohibited.
 3. **Encrypted Credential Storage**: Keys are secured at rest using Windows DPAPI (`CryptProtectData`) or AES-GCM encrypted keyrings.
@@ -284,7 +283,7 @@ PRUBETH mandates enterprise-grade security across every communication channel:
 
 ## 13. Hardware & System Requirements
 
-| Specification | Minimum | Recommended | GPU Workstation |
+| Specification | Minimum | Recommended | High-Performance GPU Workstation |
 | :--- | :--- | :--- | :--- |
 | **Operating System** | Windows 10 (64-bit), Ubuntu 20.04+, macOS 12+ | Windows 11 (64-bit) | Windows 11 (64-bit) |
 | **Processor** | Dual-core x86_64 / Apple Silicon | Quad-core Intel i5 / Ryzen 5 | 8-core Intel i7 / Ryzen 7 |
@@ -296,7 +295,7 @@ PRUBETH mandates enterprise-grade security across every communication channel:
 
 ## 14. Automated Testing & Verification Suite
 
-PRUBETH maintains an uncompromising quality assurance standard:
+PRUBETH maintains strict quality assurance validation:
 ```powershell
 # Run the full automated verification suite
 pytest tests/ -v
@@ -346,7 +345,7 @@ python build_setup_exe.py
 
 ## 17. License & Third-Party Notices
 
-PRUBETH is licensed under the **BSVR Permissive Open Developer License (Dual MIT / Apache 2.0 terms)**. Commercial use, proprietary modification, and internal enterprise deployment are fully permitted with attribution preservation.
+PRUBETH is licensed under the **BSVR Permissive Open Developer License (Dual MIT / Apache 2.0 terms)**. Commercial use, proprietary modification, and enterprise deployment are fully permitted with attribution preservation.
 
 See [LICENSE](LICENSE) and [ThirdPartyNotices.txt](ThirdPartyNotices.txt) for full terms.
 

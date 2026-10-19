@@ -13,7 +13,7 @@ TARGETS = [
     Path(r"C:\Users\asus\AppData\Local\Programs\PRUBETH IDE\resources\app"),
 ]
 
-WATERMARK_TEXT = "DONT HIRE ROBOTS - JUST USE IT"
+WATERMARK_TEXT = "AUTONOMOUS AI DEVELOPER PLATFORM"
 
 # Load optimized 256x256 base64 PNGs of official PRUBETH hexagonal neural processor logo
 def get_optimized_b64(img_path):
