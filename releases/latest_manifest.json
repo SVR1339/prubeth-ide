@@ -10,11 +10,11 @@
   "sha256": "1e5aa1f03506bbbd18e8fbfa8d29f2581befe2ecd76699f1ee52f2cb556dba40",
   "size_bytes": 3084166,
   "changelog": [
-    "Resolved onboarding renderer crash by configuring productService.defaultChatAgent and chatSetup",
-    "Implemented resilient fallback shim for @vscode/sqlite3 native bindings",
-    "Isolated threadpool concurrency in multicore stress test runner to prevent process deadlocks",
-    "Dynamic gradient blossom startup screen with self-healing mathematical resilience algorithms",
-    "Full Open VSX Registry integration with zero Microsoft marketplace lock-in and zero telemetry"
+    "Autonomous Agentic Stack: Integrated LangGraph, SWE-agent, and SuperHarness state supervision",
+    "Probabilistic Convergence Engine: Multi-hypothesis AST exploration with zero-loss transactional rollback",
+    "Quad-Architecture Visual Themes: Obsidian Slate, Horizon Radiant Light, Midnight Void, and Opac Frosted Mica",
+    "Dynamic Ambient Welcome Interface: Counter-rotating orbital quantum monitors with adaptive daylight calibration",
+    "Open VSX Zero-Lockin Architecture: Native community extension registry with absolute data sovereignty"
   ],
   "critical_security_patch": false
 }
