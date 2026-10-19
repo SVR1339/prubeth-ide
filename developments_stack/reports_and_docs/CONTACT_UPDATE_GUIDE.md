@@ -16,7 +16,7 @@ python scripts/update_contact_info.py --email "contact@bsvr.work" --secondary-em
 python scripts/update_contact_info.py --phone "+91 8886244999"
 
 # Update GitHub, Twitter/X, or Instagram handles
-python scripts/update_contact_info.py --github "imyouiamyou" --twitter "Svreddy313" --instagram "svr_313"
+python scripts/update_contact_info.py --github "SVR1339" --twitter "Svreddy313" --instagram "svr_313"
 
 # Or simply run without arguments for interactive step-by-step prompts:
 python scripts/update_contact_info.py
@@ -41,8 +41,8 @@ window.BSVR_CONTACT_CONFIG = {
   directPhone: "+918886244999",                  // Click-to-call link
   phoneFormatted: "+91 88862 44999",             // Visual display
   location: "Hyderabad, India · London, United Kingdom",
-  githubUser: "imyouiamyou",
-  githubUrl: "https://github.com/imyouiamyou",
+  githubUser: "SVR1339",
+  githubUrl: "https://github.com/SVR1339",
   twitterHandle: "Svreddy313",
   twitterUrl: "https://x.com/Svreddy313",
   instagramHandle: "svr_313",
@@ -63,7 +63,7 @@ Whenever you modify any field in this object, all interactive form submissions, 
 | **Direct Executive Email** | `saivardhan@bsvr.work` | Senior engineering & leadership |
 | **Personal Email** | `svreddy313.dev@gmail.com` | Personal direct contact |
 | **Executive Direct Line** | `+91 88862 44999` | Click-to-call direct line |
-| **GitHub Organization** | [`github.com/imyouiamyou`](https://github.com/imyouiamyou) | Repositories & open source |
+| **GitHub Organization** | [`github.com/SVR1339`](https://github.com/SVR1339) | Repositories & open source |
 | **𝕏 (Twitter)** | [`@Svreddy313`](https://x.com/Svreddy313) | Announcements & network |
 | **Instagram** | [`@svr_313`](https://www.instagram.com/svr_313/) | Direct community messaging |
 | **Live Domain** | [`https://www.bsvr.work/`](https://www.bsvr.work/) | Verified production domain |

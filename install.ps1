@@ -1,12 +1,11 @@
 <#
 .SYNOPSIS
-    PRUBETH IDE — Unified Windows PowerShell Automated Installer
+    PRUBETH — Unified Windows PowerShell Automated Installer
 .DESCRIPTION
-    Installs and configures PRUBETH IDE on Windows 10/11.
-    Tagline: Bloom, ideas unfolding
+    Installs and configures PRUBETH on Windows 10/11.
     Supports both standalone setup executable deployment and automated source environment bootstrapping.
 .EXAMPLE
-    irm https://raw.githubusercontent.com/imyouiamyou/prubeth-ide/master/install.ps1 | iex
+    irm https://raw.githubusercontent.com/SVR1339/prubeth-ide/master/install.ps1 | iex
     powershell -ExecutionPolicy Bypass -File install.ps1
     powershell -ExecutionPolicy Bypass -File install.ps1 -Silent
 #>
@@ -16,7 +15,7 @@ param(
     [switch]$Silent,
     [switch]$NoLaunch,
     [switch]$SourceOnly,
-    [string]$InstallDir = "$env:LOCALAPPDATA\Programs\PrubethIDE"
+    [string]$InstallDir = "$env:LOCALAPPDATA\Programs\PRUBETH"
 )
 
 $ErrorActionPreference = "Stop"
@@ -24,8 +23,8 @@ $ErrorActionPreference = "Stop"
 function Write-Banner {
     Write-Host ""
     Write-Host "================================================================" -ForegroundColor Magenta
-    Write-Host "             PRUBETH IDE — BLOOM EDITION (v3.0.0)              " -ForegroundColor White
-    Write-Host "                   Bloom, ideas unfolding                       " -ForegroundColor Cyan
+    Write-Host "             PRUBETH — RELEASE v1.91.0                         " -ForegroundColor White
+    Write-Host "        Autonomous AI Developer Platform Workstation            " -ForegroundColor Cyan
     Write-Host "================================================================" -ForegroundColor Magenta
     Write-Host ""
 }

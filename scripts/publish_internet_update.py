@@ -56,22 +56,22 @@ def main():
     
     # 1. Create or update GitHub Release v1.91
     print("[*] Creating / updating GitHub release v1.91...")
-    cmd_check = [GH_CLI, "release", "view", "v1.91", "--repo", "imyouiamyou/prubeth-ide"]
+    cmd_check = [GH_CLI, "release", "view", "v1.91", "--repo", "SVR1339/prubeth-ide"]
     res_check = subprocess.run(cmd_check, capture_output=True, text=True)
     
     if res_check.returncode == 0:
         print("[*] Release v1.91 already exists, uploading payload with --clobber...")
-        cmd_upload = [GH_CLI, "release", "upload", "v1.91", str(PAYLOAD_PATH), "--clobber", "--repo", "imyouiamyou/prubeth-ide"]
+        cmd_upload = [GH_CLI, "release", "upload", "v1.91", str(PAYLOAD_PATH), "--clobber", "--repo", "SVR1339/prubeth-ide"]
         subprocess.run(cmd_upload, check=True)
-        cmd_edit = [GH_CLI, "release", "edit", "v1.91", "--notes-file", str(notes_file), "--title", "PRUBETH IDE v1.91.0 (Horizon Edition)", "--repo", "imyouiamyou/prubeth-ide"]
+        cmd_edit = [GH_CLI, "release", "edit", "v1.91", "--notes-file", str(notes_file), "--title", "PRUBETH v1.91.0", "--repo", "SVR1339/prubeth-ide"]
         subprocess.run(cmd_edit, check=True)
     else:
         print("[*] Creating new release v1.91 on GitHub...")
         cmd_create = [
             GH_CLI, "release", "create", "v1.91", str(PAYLOAD_PATH),
-            "--title", "PRUBETH IDE v1.91.0 (Horizon Edition)",
+            "--title", "PRUBETH v1.91.0",
             "--notes-file", str(notes_file),
-            "--repo", "imyouiamyou/prubeth-ide"
+            "--repo", "SVR1339/prubeth-ide"
         ]
         subprocess.run(cmd_create, check=True)
     
@@ -89,7 +89,7 @@ def main():
         "release_date": "2026-10-19",
         "channel": "stable",
         "min_supported_version": "1.0.0",
-        "download_url": "https://github.com/imyouiamyou/prubeth-ide/releases/download/v1.91/app_payload.zip",
+        "download_url": "https://github.com/SVR1339/prubeth-ide/releases/download/v1.91/app_payload.zip",
         "fallback_local_payload": "installer/app_payload.zip",
         "sha256": sha256_hex,
         "size_bytes": size_bytes,
@@ -110,7 +110,7 @@ def main():
     # 3. Update remote releases/latest_manifest.json on GitHub master branch
     print("[*] Updating releases/latest_manifest.json on remote GitHub master branch...")
     # Fetch current file sha on master branch
-    cmd_get = [GH_CLI, "api", "repos/imyouiamyou/prubeth-ide/contents/releases/latest_manifest.json"]
+    cmd_get = [GH_CLI, "api", "repos/SVR1339/prubeth-ide/contents/releases/latest_manifest.json"]
     res_get = subprocess.run(cmd_get, capture_output=True, text=True, check=True)
     file_info = json.loads(res_get.stdout)
     current_blob_sha = file_info["sha"]
@@ -129,7 +129,7 @@ def main():
     
     cmd_put = [
         GH_CLI, "api", "--method", "PUT",
-        "repos/imyouiamyou/prubeth-ide/contents/releases/latest_manifest.json",
+        "repos/SVR1339/prubeth-ide/contents/releases/latest_manifest.json",
         "--input", str(temp_put_json)
     ]
     res_put = subprocess.run(cmd_put, capture_output=True, text=True)

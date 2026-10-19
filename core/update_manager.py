@@ -118,7 +118,7 @@ class UpdateCheckWorker(QThread):
     ):
         super().__init__()
         self.current_version = current_version
-        self.manifest_url = manifest_url or "https://raw.githubusercontent.com/imyouiamyou/prubeth-ide/master/releases/latest_manifest.json"
+        self.manifest_url = manifest_url or "https://raw.githubusercontent.com/SVR1339/prubeth-ide/master/releases/latest_manifest.json"
         self.local_fallback_path = local_fallback_path or str(Path(__file__).resolve().parent.parent / "releases" / "latest_manifest.json")
 
     def run(self):

@@ -159,7 +159,7 @@ def test_secure_download_with_mock_github_response(tmp_path):
 
     with patch("urllib.request.urlopen", return_value=mock_resp):
         verified_path = downloader.download_payload(
-            payload_url="https://github.com/imyouiamyou/prubeth-ide/releases/download/v3.0.0/payload.zip",
+            payload_url="https://github.com/SVR1339/prubeth-ide/releases/download/v3.0.0/payload.zip",
             expected_sha256=expected_sha,
             expected_size_bytes=len(fake_content),
             destination_dir=tmp_path,
@@ -444,7 +444,7 @@ def test_tls_verification_enforced_and_invalid_cert_fails_closed(tmp_path):
     with patch("urllib.request.urlopen", side_effect=ssl.SSLCertVerificationError("Certificate verify failed: self signed certificate")):
         with pytest.raises(DownloadError) as exc_info:
             downloader.download_payload(
-                payload_url="https://github.com/imyouiamyou/prubeth-ide/releases/download/v1.12.0/payload.zip",
+                payload_url="https://github.com/SVR1339/prubeth-ide/releases/download/v1.12.0/payload.zip",
                 expected_sha256="0" * 64,
                 expected_size_bytes=1024,
                 destination_dir=tmp_path

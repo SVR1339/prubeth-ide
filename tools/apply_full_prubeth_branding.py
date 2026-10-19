@@ -120,7 +120,7 @@ def patch_target_root(root: Path):
             pdata["win32NameVersion"] = "PRUBETH IDE"
             pdata["win32DirName"] = "PRUBETH IDE"
             pdata["win32ShellNameShort"] = "PRUBETH IDE"
-            pdata["reportIssueUrl"] = "https://github.com/imyouiamyou/prubeth-ide/issues/new"
+            pdata["reportIssueUrl"] = "https://github.com/SVR1339/prubeth-ide/issues/new"
             pdata["documentationUrl"] = "https://www.bsvr.work/"
             # Ensure checksums object is empty dict
             pdata["checksums"] = {}

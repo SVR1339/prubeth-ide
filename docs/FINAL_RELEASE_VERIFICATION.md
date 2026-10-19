@@ -181,7 +181,7 @@ stability, performance scaling, security, and packaging standards.
 Signed off by:
 Principal Systems & Desktop IDE Reliability Architect
 Date: October 11, 2026
-Repository: https://github.com/imyouiamyou/prubeth-ide.git
+Repository: https://github.com/SVR1339/prubeth-ide.git
 Commit: 868901d
 ================================================================================
 ```

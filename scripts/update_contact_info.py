@@ -2,7 +2,7 @@
 """
 BSVR TECHNOLOGIES — AUTOMATED CONTACT & IDENTITY SYNCHRONIZER
 Usage:
-  python scripts/update_contact_info.py --email contact@bsvr.work --phone "+918886244999" --github imyouiamyou
+  python scripts/update_contact_info.py --email contact@bsvr.work --phone "+918886244999" --github SVR1339
 Or run without arguments to enter interactive update mode.
 """
 
@@ -76,7 +76,7 @@ def main():
     parser.add_argument("--email", help="New primary email (e.g. contact@bsvr.work)")
     parser.add_argument("--secondary-email", help="New secondary email (e.g. saivardhan@bsvr.work)")
     parser.add_argument("--phone", help="New phone number (e.g. +91 8886244999)")
-    parser.add_argument("--github", help="New GitHub username (e.g. imyouiamyou)")
+    parser.add_argument("--github", help="New GitHub username (e.g. SVR1339)")
     parser.add_argument("--twitter", help="New Twitter/X handle (e.g. Svreddy313)")
     parser.add_argument("--instagram", help="New Instagram handle (e.g. svr_313)")
 
@@ -88,7 +88,7 @@ def main():
         email = input("Primary Email (e.g. contact@bsvr.work): ").strip() or None
         sec_email = input("Secondary Email (e.g. saivardhan@bsvr.work): ").strip() or None
         phone = input("Phone Number (e.g. +91 8886244999): ").strip() or None
-        github = input("GitHub Username (e.g. imyouiamyou): ").strip() or None
+        github = input("GitHub Username (e.g. SVR1339): ").strip() or None
         twitter = input("Twitter/X Handle (e.g. Svreddy313): ").strip() or None
         instagram = input("Instagram Handle (e.g. svr_313): ").strip() or None
         update_contact(email, sec_email, phone, github, twitter, instagram)

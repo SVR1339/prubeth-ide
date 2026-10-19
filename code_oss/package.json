@@ -9,7 +9,7 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/imyouiamyou/prubeth-ide.git"
+    "url": "https://github.com/SVR1339/prubeth-ide.git"
   },
   "dependencies": {
     "monaco-editor": "^0.52.0"

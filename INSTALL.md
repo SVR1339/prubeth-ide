@@ -1,8 +1,8 @@
-# PRUBETH IDE — Universal Installation & Deployment Guide
-### Horizon Edition (v3.0.0) · Cross-Platform Setup Manual
+# PRUBETH — Universal Installation & Deployment Guide
+### Release v1.91.0 · Cross-Platform Setup Manual
 
 Official Website & Downloads: [**https://www.bsvr.work/#projects**](https://www.bsvr.work/#projects)  
-GitHub Repository: [**https://github.com/imyouiamyou/prubeth-ide**](https://github.com/imyouiamyou/prubeth-ide)
+GitHub Repository: [**https://github.com/SVR1339/prubeth-ide**](https://github.com/SVR1339/prubeth-ide)
 
 ---
 
@@ -11,14 +11,14 @@ GitHub Repository: [**https://github.com/imyouiamyou/prubeth-ide**](https://gith
 ### 🪟 Windows 10 & 11 (PowerShell)
 Open PowerShell (Standard or Administrator) and run:
 ```powershell
-irm https://raw.githubusercontent.com/imyouiamyou/prubeth-ide/master/install.ps1 | iex
+irm https://raw.githubusercontent.com/SVR1339/prubeth-ide/master/install.ps1 | iex
 ```
 *Automatically detects system configuration, checks or bootstraps Python 3.10+, provisions `.venv`, installs requirements, and sets up Desktop shortcuts.*
 
 ### 🐧 Linux (Ubuntu, Debian, Fedora, Arch) & 🍎 macOS
 Open terminal and run:
 ```bash
-curl -fsSL https://raw.githubusercontent.com/imyouiamyou/prubeth-ide/master/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/SVR1339/prubeth-ide/master/install.sh | bash
 ```
 *Detects your Linux distribution or macOS environment, sets up an isolated virtual environment, configures Qt5 dependencies, and installs desktop application launcher entries.*
 
@@ -80,7 +80,7 @@ sudo pacman -S python python-virtualenv python-pyqt5
 ### Installation Steps:
 ```bash
 # 1. Clone repository
-git clone https://github.com/imyouiamyou/prubeth-ide.git
+git clone https://github.com/SVR1339/prubeth-ide.git
 cd prubeth-ide
 
 # 2. Run automated installer
@@ -103,7 +103,7 @@ brew install python@3.12 pyqt@5
 
 ### Installation Steps:
 ```bash
-git clone https://github.com/imyouiamyou/prubeth-ide.git
+git clone https://github.com/SVR1339/prubeth-ide.git
 cd prubeth-ide
 chmod +x install.sh
 ./install.sh
@@ -164,5 +164,5 @@ All **254 automated tests** will execute and report 100% pass status across reli
 
 <div align="center">
   <p>© 2025–2026 BSVR Technologies. Engineered for next-generation developer flow.</p>
-  <p><a href="https://www.bsvr.work/">Official Website</a> · <a href="https://github.com/imyouiamyou/prubeth-ide">GitHub Repository</a></p>
+  <p><a href="https://www.bsvr.work/">Official Website</a> · <a href="https://github.com/SVR1339/prubeth-ide">GitHub Repository</a></p>
 </div>

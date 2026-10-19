@@ -4,7 +4,7 @@
 **Document Identifier:** `FINAL_RELEASE_VERIFICATION.md`  
 **Date of Audit:** October 12, 2026  
 **Author / Reviewer Role:** Principal Systems Architect & Desktop IDE Reliability Lead  
-**Repository:** [https://github.com/imyouiamyou/prubeth-ide](https://github.com/imyouiamyou/prubeth-ide)  
+**Repository:** [https://github.com/SVR1339/prubeth-ide](https://github.com/SVR1339/prubeth-ide)  
 **Repository Branch:** `master`  
 **Git Commit Identifier:** `v1.89` Release Candidate  
 **Overall Release Status:** **APPROVED FOR RELEASE — EXTERNAL SECURITY AUDIT PASSED**
@@ -281,7 +281,7 @@ asymmetric Ed25519 authentication, and small setup.exe packaging standards.
 Signed off by:
 Principal Systems & Desktop IDE Reliability Architect
 Date: October 12, 2026
-Repository: https://github.com/imyouiamyou/prubeth-ide.git
+Repository: https://github.com/SVR1339/prubeth-ide.git
 Release Tag: v1.12 (Version 1.12.0)
 Commit: master (Synchronized)
 ================================================================================

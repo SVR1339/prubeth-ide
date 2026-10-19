@@ -82,14 +82,14 @@ from PyQt5.Qsci import (
     QsciLexerRuby
 )
 
-APP_NAME = "PRUBETH IDE"
+APP_NAME = "PRUBETH"
 APP_BRAND = "PRUBETH"
-APP_VERSION = "1.91.0 (Horizon Edition)"
+APP_VERSION = "1.91.0"
 APP_CODENAME = "PRUBETH"
 APP_TAGLINE = "HIRE ROBOTS FOR USING NOT DECORATE !"
 WEBSITE_URL = "https://www.bsvr.work/"
 PROJECTS_URL = "https://www.bsvr.work/#projects"
-GITHUB_URL = "https://github.com/imyouiamyou/prubeth-ide"
+GITHUB_URL = "https://github.com/SVR1339/prubeth-ide"
 APP_HOME = Path.home() / ".local_ai_studio_pro"
 APP_HOME.mkdir(parents=True, exist_ok=True)
 MODEL_DROP_DIR = APP_HOME / "models"

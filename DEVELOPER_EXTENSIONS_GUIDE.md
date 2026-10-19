@@ -365,5 +365,5 @@ python build_setup_exe.py
 
 <div align="center">
   <p><b>PRUBETH IDE Extensibility Engine · Engineered for Developer Flow</b></p>
-  <p><a href="https://www.bsvr.work/">Official Website</a> · <a href="https://github.com/imyouiamyou/prubeth-ide">GitHub Repository</a></p>
+  <p><a href="https://www.bsvr.work/">Official Website</a> · <a href="https://github.com/SVR1339/prubeth-ide">GitHub Repository</a></p>
 </div>

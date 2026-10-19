@@ -13,7 +13,7 @@
 
 <br/>
 
-[![Release](https://img.shields.io/badge/Release-v1.91.0-7059E2?style=for-the-badge&logo=rocket)](https://github.com/imyouiamyou/prubeth-ide/releases/tag/v1.91)
+[![Release](https://img.shields.io/badge/Release-v1.91.0-7059E2?style=for-the-badge&logo=rocket)](https://github.com/SVR1339/prubeth-ide/releases/tag/v1.91)
 [![Tests Passing](https://img.shields.io/badge/Tests-30%20%2F%2030%20Verified%20(100%25)-70D6A0?style=for-the-badge&logo=pytest)](tests/)
 [![Security Verification](https://img.shields.io/badge/Security-Ed25519%20Signed%20%26%20TLS-00F0FF?style=for-the-badge&logo=shield)](installer/release_config.py)
 [![Platforms](https://img.shields.io/badge/Platform-Windows%2010%2F11%20%7C%20Linux%20%7C%20macOS-1D2028?style=for-the-badge&logo=windows)](INSTALL.md)
@@ -30,20 +30,20 @@
 ### 🚀 Direct Release Downloads (v1.91.0)
 
 <p align="center">
-  <a href="https://github.com/imyouiamyou/prubeth-ide/releases/download/v1.91/PrubethIDE-v1.91.0-Setup.exe">
+  <a href="https://github.com/SVR1339/prubeth-ide/releases/download/v1.91/PrubethIDE-v1.91.0-Setup.exe">
     <img src="https://img.shields.io/badge/⬇️_DOWNLOAD_PRUBETH_SETUP-Windows_Installer_(240_MB)-7059E2?style=for-the-badge&logo=windows&logoColor=white" alt="Download PRUBETH Windows Setup" height="42" />
   </a>
   &nbsp;&nbsp;
-  <a href="https://github.com/imyouiamyou/prubeth-ide/releases/download/v1.91/Prubeth-Payload-1.91.0-windows-x64.zip">
+  <a href="https://github.com/SVR1339/prubeth-ide/releases/download/v1.91/Prubeth-Payload-1.91.0-windows-x64.zip">
     <img src="https://img.shields.io/badge/📦_DOWNLOAD_PORTABLE_ZIP-Ready--to--Run_Package_(3.0_MB)-4ECDC4?style=for-the-badge&logo=files&logoColor=white" alt="Download Portable Zip" height="42" />
   </a>
   &nbsp;&nbsp;
-  <a href="https://github.com/imyouiamyou/prubeth-ide/releases/tag/v1.91">
+  <a href="https://github.com/SVR1339/prubeth-ide/releases/tag/v1.91">
     <img src="https://img.shields.io/badge/🛡️_VERIFY_RELEASE-Signatures_&_SBOM-F7A07E?style=for-the-badge&logo=github&logoColor=white" alt="View Release Assets" height="42" />
   </a>
 </p>
 
-[**🌐 Official Website**](https://www.bsvr.work/) · [**🚀 GitHub Releases**](https://github.com/imyouiamyou/prubeth-ide/releases/tag/v1.91) · [**📖 Architecture**](ARCHITECTURE.md) · [**🗺️ Architecture Map**](docs/ARCHITECTURE_MAP.md) · [**⚖️ Comparison vs Reference IDEs**](docs/REFERENCE_IDE_COMPARISON.md) · [**🛠️ Installation Manual**](INSTALL.md) · [**🧩 Extensions Guide**](DEVELOPER_EXTENSIONS_GUIDE.md)
+[**🌐 Official Website**](https://www.bsvr.work/) · [**🚀 GitHub Releases**](https://github.com/SVR1339/prubeth-ide/releases/tag/v1.91) · [**📖 Architecture**](ARCHITECTURE.md) · [**🗺️ Architecture Map**](docs/ARCHITECTURE_MAP.md) · [**⚖️ Comparison vs Reference IDEs**](docs/REFERENCE_IDE_COMPARISON.md) · [**🛠️ Installation Manual**](INSTALL.md) · [**🧩 Extensions Guide**](DEVELOPER_EXTENSIONS_GUIDE.md)
 
 </div>
 
@@ -221,21 +221,21 @@ PRUBETH synthesizes proven paradigms in modern developer tooling:
 
 | Package | Format | Size | Target Environment | Link |
 | :--- | :---: | :---: | :--- | :---: |
-| **`PrubethIDE-v1.91.0-Setup.exe`** | Inno Setup Executable | ~240 MB | **All Windows 10/11 workstations.** Full desktop setup wizard with shortcuts and uninstaller. | [**⬇️ Download Setup**](https://github.com/imyouiamyou/prubeth-ide/releases/download/v1.91/PrubethIDE-v1.91.0-Setup.exe) |
-| **`Prubeth-Payload-1.91.0-windows-x64.zip`** | Portable Archive | ~3.0 MB | **Portable deployment.** Extract anywhere and run immediately with zero installation. | [**⬇️ Download Portable ZIP**](https://github.com/imyouiamyou/prubeth-ide/releases/download/v1.91/Prubeth-Payload-1.91.0-windows-x64.zip) |
-| **`Prubeth-Offline-Setup-1.91.0.exe`** | Standalone Setup | ~48 MB | Fully air-gapped environments with zero external network connectivity. | [**⬇️ Download Offline Setup**](https://github.com/imyouiamyou/prubeth-ide/releases/download/v1.91/Prubeth-Offline-Setup-1.91.0.exe) |
-| **`Prubeth-Setup-1.91.0.exe`** | Bootstrap Installer | ~45 MB | Fast network installer that verifies and installs the latest payload. | [**⬇️ Download Bootstrap**](https://github.com/imyouiamyou/prubeth-ide/releases/download/v1.91/Prubeth-Setup-1.91.0.exe) |
+| **`PrubethIDE-v1.91.0-Setup.exe`** | Inno Setup Executable | ~240 MB | **All Windows 10/11 workstations.** Full desktop setup wizard with shortcuts and uninstaller. | [**⬇️ Download Setup**](https://github.com/SVR1339/prubeth-ide/releases/download/v1.91/PrubethIDE-v1.91.0-Setup.exe) |
+| **`Prubeth-Payload-1.91.0-windows-x64.zip`** | Portable Archive | ~3.0 MB | **Portable deployment.** Extract anywhere and run immediately with zero installation. | [**⬇️ Download Portable ZIP**](https://github.com/SVR1339/prubeth-ide/releases/download/v1.91/Prubeth-Payload-1.91.0-windows-x64.zip) |
+| **`Prubeth-Offline-Setup-1.91.0.exe`** | Standalone Setup | ~48 MB | Fully air-gapped environments with zero external network connectivity. | [**⬇️ Download Offline Setup**](https://github.com/SVR1339/prubeth-ide/releases/download/v1.91/Prubeth-Offline-Setup-1.91.0.exe) |
+| **`Prubeth-Setup-1.91.0.exe`** | Bootstrap Installer | ~45 MB | Fast network installer that verifies and installs the latest payload. | [**⬇️ Download Bootstrap**](https://github.com/SVR1339/prubeth-ide/releases/download/v1.91/Prubeth-Setup-1.91.0.exe) |
 
 ### Automated Command-Line Installation
 
 #### 🪟 Windows 10 / 11 (PowerShell)
 ```powershell
-irm https://raw.githubusercontent.com/imyouiamyou/prubeth-ide/master/install.ps1 | iex
+irm https://raw.githubusercontent.com/SVR1339/prubeth-ide/master/install.ps1 | iex
 ```
 
 #### 🐧 Linux & 🍎 macOS (Bash / Zsh)
 ```bash
-curl -fsSL https://raw.githubusercontent.com/imyouiamyou/prubeth-ide/master/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/SVR1339/prubeth-ide/master/install.sh | bash
 ```
 
 ---
@@ -353,5 +353,5 @@ See [LICENSE](LICENSE) and [ThirdPartyNotices.txt](ThirdPartyNotices.txt) for fu
 
 <div align="center">
   <p>© 2025–2026 BSVR Technologies. Engineered for sovereign developer mastery.</p>
-  <p><a href="https://www.bsvr.work/">bsvr.work</a> · <a href="https://github.com/imyouiamyou/prubeth-ide">github.com/imyouiamyou/prubeth-ide</a></p>
+  <p><a href="https://www.bsvr.work/">bsvr.work</a> · <a href="https://github.com/SVR1339/prubeth-ide">github.com/SVR1339/prubeth-ide</a></p>
 </div>

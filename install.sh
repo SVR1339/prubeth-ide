@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# PRUBETH IDE — Unified Linux & macOS Automated Installer
-# Bloom, ideas unfolding
-# https://github.com/imyouiamyou/prubeth-ide
+# PRUBETH — Unified Linux & macOS Automated Installer
+# https://github.com/SVR1339/prubeth-ide
 # ==============================================================================
 
 set -e
@@ -15,8 +14,8 @@ RED='\033[0;31m'
 NC='\033[0m' # No Color
 
 echo -e "${MAGENTA}================================================================${NC}"
-echo -e "${MAGENTA}             PRUBETH IDE — BLOOM EDITION (v3.0.0)              ${NC}"
-echo -e "${CYAN}                   Bloom, ideas unfolding                       ${NC}"
+echo -e "${MAGENTA}             PRUBETH — RELEASE v1.91.0                          ${NC}"
+echo -e "${CYAN}        Autonomous AI Developer Platform Workstation            ${NC}"
 echo -e "${MAGENTA}================================================================${NC}"
 
 # Detect OS

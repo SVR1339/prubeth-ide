@@ -14,8 +14,8 @@
   "forkType": "Proprietary Autonomous AI IDE Fork (PORK)",
   "quality": "stable",
   "licenseName": "MIT",
-  "licenseUrl": "https://github.com/imyouiamyou/prubeth-ide/blob/master/LICENSE",
-  "serverLicenseUrl": "https://github.com/imyouiamyou/prubeth-ide/blob/master/LICENSE",
+  "licenseUrl": "https://github.com/SVR1339/prubeth-ide/blob/master/LICENSE",
+  "serverLicenseUrl": "https://github.com/SVR1339/prubeth-ide/blob/master/LICENSE",
   "extensionsGallery": {
     "serviceUrl": "https://open-vsx.org/vscode/gallery",
     "itemUrl": "https://open-vsx.org/vscode/item",
@@ -57,6 +57,6 @@
     "optOutByDefault": true
   },
   "documentationUrl": "https://www.bsvr.work/",
-  "requestFeatureUrl": "https://github.com/imyouiamyou/prubeth-ide/issues",
-  "reportIssueUrl": "https://github.com/imyouiamyou/prubeth-ide/issues"
+  "requestFeatureUrl": "https://github.com/SVR1339/prubeth-ide/issues",
+  "reportIssueUrl": "https://github.com/SVR1339/prubeth-ide/issues"
 }

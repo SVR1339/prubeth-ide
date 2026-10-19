@@ -30,7 +30,7 @@ from manifest_schema import build_manifest_document
 def test_online_payload_urls_configured():
     """Verify that multiple redundant GitHub mirrors are configured."""
     assert len(ONLINE_PAYLOAD_URLS) >= 3
-    assert any("github.com/imyouiamyou/prubeth-ide" in url for url in ONLINE_PAYLOAD_URLS)
+    assert any("github.com/SVR1339/prubeth-ide" in url for url in ONLINE_PAYLOAD_URLS)
     assert any(f"releases/download/v{APP_VERSION}" in url or "releases/download/v1.12" in url for url in ONLINE_PAYLOAD_URLS)
     assert any("releases/latest/download" in url for url in ONLINE_PAYLOAD_URLS)
 
