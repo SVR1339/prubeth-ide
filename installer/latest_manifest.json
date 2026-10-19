@@ -1,20 +1,20 @@
 {
-  "version": "1.90.0",
-  "display_name": "PRUBETH",
-  "tagline": "HIRE ROBOTS FOR USING NOT DECORATE !",
-  "release_date": "2026-10-16",
+  "product": "PRUBETH",
+  "version": "1.91.0",
+  "architecture": "windows-x64",
   "channel": "stable",
-  "min_supported_version": "1.0.0",
-  "download_url": "https://github.com/imyouiamyou/prubeth-ide/releases/download/v1.90/app_payload.zip",
-  "fallback_local_payload": "installer/app_payload.zip",
-  "sha256": "aef4121cce95353c06688840100ec4148a8917aefc99788531bef8a2d0d6587d",
-  "size_bytes": 3146180,
-  "changelog": [
-    "New blossom startup screen with dynamic gradient progress bar",
-    "Meta-IDE scaffolding engine for child IDE development (Web, Tauri, Qt, Headless)",
-    "Self-healing mathematical resilience algorithms (Weibull, Little's Law, Bloom Filters)",
-    "Full Open VSX Registry integration with zero Microsoft marketplace lock-in",
-    "Updated flower brand icon and clean-room intellectual property safe harbors"
+  "payload_filename": "Prubeth-Payload-1.91.0-windows-x64.zip",
+  "payload_sha256": "071e8cb02373ec595789eac61f6ab4315024f00addec605c1667229b76a6491a",
+  "payload_size_bytes": 5173070,
+  "min_required_disk_bytes": 14484596,
+  "required_files": [
+    "local_ai_studio_pro.py",
+    "README.md",
+    "core/universal_inventory.py",
+    "core/universal_cli_runner.py",
+    "core/capability_gap_engine.py"
   ],
-  "critical_security_patch": false
+  "signer_id": "BSVR-PRUBETH-RELEASE-SIGNING-AUTHORITY-v3",
+  "published_by": "BSVR Technologies",
+  "website": "https://www.bsvr.work/"
 }

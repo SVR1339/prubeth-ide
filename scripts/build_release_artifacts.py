@@ -91,7 +91,7 @@ def package_payload_zip(output_path: Path) -> Tuple[Path, int, str]:
 def generate_release_artifacts(threshold_mib: float = DEFAULT_ONLINE_THRESHOLD_MIB) -> Dict[str, Any]:
     """Builds and verifies all required release assets in accordance with directive."""
     print("=" * 70)
-    print("  PRUBETH IDE — OFFICIAL RELEASE ARTIFACT GENERATOR (HORIZON EDITION)")
+    print("  PRUBETH — OFFICIAL RELEASE ARTIFACT GENERATOR")
     print("=" * 70)
     RELEASE_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -146,7 +146,7 @@ def generate_release_artifacts(threshold_mib: float = DEFAULT_ONLINE_THRESHOLD_M
 
     # 5. Generate Release Notes
     release_notes_file = RELEASE_DIR / assets["release_notes"]
-    notes_content = f"""# PRUBETH IDE v{APP_VERSION} (Horizon Edition)
+    notes_content = f"""# {APP_NAME} v{APP_VERSION}
 **Release Tag:** `v{APP_VERSION}` · **Channel:** `{DEFAULT_CHANNEL}` · **Publisher:** {PUBLISHER}
 
 ### Highlights
