@@ -9,7 +9,7 @@
 # PRUBETH
 ### The Sovereign Autonomous AI Developer Platform · Release v1.91.0
 
-> **PRUBETH** is a globally engineered, sovereign autonomous AI developer workstation crafted for uncompromising execution integrity, mathematical precision, and frictionless developer flow. Unifying multi-agent orchestration swarms, microsecond GPU-accelerated editor buffers, multi-model intelligent routing, and transactional AST rollback safety, PRUBETH delivers a turnkey, enterprise-grade engineering environment ready for instant production deployment.
+> **PRUBETH** is an enterprise-grade sovereign autonomous AI developer workstation engineered for deterministic software creation, mathematical precision, and frictionless developer flow. Unifying multi-agent orchestration swarms, microsecond GPU-accelerated text buffers, multi-model intelligent routing, and transactional AST rollback safety, PRUBETH delivers an uncompromised, ready-to-run workstation engineered for immediate production deployment.
 
 <br/>
 
@@ -51,7 +51,7 @@
   </a>
 </p>
 
-[**🌐 Official Website**](https://www.bsvr.work/) · [**🚀 GitHub Releases**](https://github.com/SVR1339/prubeth-ide/releases/tag/v1.91) · [**📖 Architecture**](ARCHITECTURE.md) · [**🗺️ Architecture Map**](docs/ARCHITECTURE_MAP.md) · [**⚖️ Comparison vs Reference IDEs**](docs/REFERENCE_IDE_COMPARISON.md) · [**🛠️ Installation Manual**](INSTALL.md) · [**🧩 Extensions Guide**](DEVELOPER_EXTENSIONS_GUIDE.md)
+[**🌐 Official Website**](https://www.bsvr.work/) · [**🚀 GitHub Releases**](https://github.com/SVR1339/prubeth-ide/releases/tag/v1.91) · [**📖 Architecture**](ARCHITECTURE.md) · [**🗺️ Architecture Map**](docs/ARCHITECTURE_MAP.md) · [**🛠️ Installation Manual**](INSTALL.md) · [**🧩 Extensions Guide**](DEVELOPER_EXTENSIONS_GUIDE.md)
 
 </div>
 
@@ -61,18 +61,17 @@
 
 - [1. Executive Architectural Overview](#1-executive-architectural-overview)
 - [2. Primary Uses & Application Scenarios](#2-primary-uses--application-scenarios)
-- [3. Key Pros & Architectural Advantages](#3-key-pros--architectural-advantages)
-- [4. Competitive Speciality & Benchmark Matrix](#4-competitive-speciality--benchmark-matrix)
-- [5. How to Use PRUBETH (Complete Guide)](#5-how-to-use-prubeth-complete-guide)
-- [6. Visual Architecture & 4 Engineered Themes](#6-visual-architecture--4-engineered-themes)
-- [7. Welcome Loading Architecture & Ambient Display](#7-welcome-loading-architecture--ambient-display)
-- [8. Authentication & Collaborated Global Ecosystems](#8-authentication--collaborated-global-ecosystems)
-- [9. Autonomous Agentic Stack & Swarm Execution](#9-autonomous-agentic-stack--swarm-execution)
-- [10. Patented Probabilistic State-Space Convergence](#10-patented-probabilistic-state-space-convergence)
-- [11. Extension Interoperability & Open VSX Registry](#11-extension-interoperability--open-vsx-registry)
-- [12. Official Distributables & One-Line Installers](#12-official-distributables--one-line-installers)
-- [13. Ecosystem Growth & Scaling Roadmap](#13-ecosystem-growth--scaling-roadmap)
-- [14. Sovereign All-In-One License](#14-sovereign-all-in-one-license)
+- [3. Key Architectural Advantages & Engineering Benchmarks](#3-key-architectural-advantages--engineering-benchmarks)
+- [4. How to Use PRUBETH (Complete Guide)](#4-how-to-use-prubeth-complete-guide)
+- [5. Visual Architecture & 4 Engineered Themes](#5-visual-architecture--4-engineered-themes)
+- [6. Welcome Loading Architecture & Ambient Display](#6-welcome-loading-architecture--ambient-display)
+- [7. Universal Protocol Standards & Developer Governance](#7-universal-protocol-standards--developer-governance)
+- [8. Autonomous Agentic Core Architecture](#8-autonomous-agentic-core-architecture)
+- [9. Patented Probabilistic State-Space Convergence](#9-patented-probabilistic-state-space-convergence)
+- [10. Extension Interoperability & Open Tooling Ecosystem](#10-extension-interoperability--open-tooling-ecosystem)
+- [11. Multi-Platform Distributables & One-Line Installers](#11-multi-platform-distributables--one-line-installers)
+- [12. Continuous Evolution & Scaling Roadmap](#12-continuous-evolution--scaling-roadmap)
+- [13. Sovereign All-In-One License](#13-sovereign-all-in-one-license)
 
 ---
 
@@ -81,7 +80,7 @@
 **PRUBETH** is engineered as the definitive sovereign workstation for autonomous software engineering. Built from the ground up for high-integrity development, PRUBETH eliminates the friction of brittle scripts, fragmented AI plug-ins, and complex environments by delivering a complete, fully integrated platform out of the box:
 
 - **Turnkey Production Readiness**: Arrives complete with local GPU execution runtimes, native language servers, multi-model routing bridges, and self-healing diagnostic supervisors.
-- **Sovereign Execution Privacy**: 100% of your source code, AST metadata, and project structures remain completely confidential. Choose between local GPU execution (Ollama, vLLM) or enterprise cloud routing with zero telemetry surveillance.
+- **Sovereign Execution Privacy**: 100% of your source code, AST metadata, and project structures remain completely confidential. Choose between local GPU execution or enterprise cloud routing with zero telemetry surveillance.
 - **Deep Cognitive Autonomy**: Built-in multi-agent swarms capable of inspecting full project trees, isolating regression causes, generating test suites, executing terminal commands, and verifying ground-truth completion.
 - **Unified Brand Identity**: Standardized strictly as **PRUBETH** across all system components, UI headers, installer manifests, and developer interfaces.
 
@@ -91,66 +90,35 @@
 
 PRUBETH addresses every phase of modern software creation with dedicated autonomous workflows:
 
-```
-┌────────────────────────────────────────────────────────────────────────┐
-│                        PRUBETH CORE CAPABILITIES                       │
-├───────────────────────────────────┬────────────────────────────────────┤
-│   🚀 Autonomous Feature Delivery  │   🔍 Diagnostic Self-Healing       │
-│   • End-to-end user story synthesis│   • Automated stack trace triage   │
-│   • Cross-module AST refactoring  │   • Hypothesis-driven bug fixing   │
-│   • Full API & database generation│   • Regressive test verification   │
-├───────────────────────────────────┼────────────────────────────────────┤
-│   🛡️ Zero-Telemetry Privacy Dev   │   ⚡ High-Frequency Editing        │
-│   • 100% Air-gapped CUDA inference│   • Microsecond GPU text rendering │
-│   • Local RAG over gigabyte repos │   • Lock-free rope data structures │
-│   • Sovereign enterprise security │   • Zero-latency keyboard feedback │
-└───────────────────────────────────┴────────────────────────────────────┘
-```
-
 1. **Full-Cycle Autonomous Software Creation**:
    Direct PRUBETH from natural language requirements to architecture design, file scaffolding, logic synthesis, unit test generation, and verified execution.
 2. **Deterministic Root-Cause Analysis & Self-Healing**:
-   When tests fail or compiler errors arise, PRUBETH reads stdout/stderr streams, traces AST dependency chains, generates targeted patches, and re-runs test suites until ground truth is satisfied.
+   When tests fail or compiler errors arise, PRUBETH reads diagnostic streams, traces AST dependency chains, generates targeted patches, and re-runs test suites until ground truth is satisfied.
 3. **Enterprise Migration & Large-Scale Refactoring**:
    Execute multi-file structural upgrades across legacy codebases (e.g., Python 2 to 3, JavaScript to TypeScript, monolithic to microservices) with automated rollback protection.
 4. **Air-Gapped Sovereign AI Development**:
-   Run high-performance open weights (DeepSeek-R1, Qwen 2.5, Llama 3.3) locally with NVIDIA CUDA acceleration, ensuring proprietary intellectual property never leaves your machine.
+   Run high-performance open weights locally with NVIDIA CUDA acceleration, ensuring proprietary intellectual property never leaves your machine.
 5. **Multi-Model Orchestration & Cross-Verification**:
-   Simultaneously evaluate proposed implementations across frontier models (Claude 3.5 Sonnet, Gemini 3.8 Flash, GPT-4o, DeepSeek-V3) to select the mathematically optimal solution.
+   Simultaneously evaluate proposed implementations across multiple reasoning models to select the mathematically optimal solution.
 
 ---
 
-## 3. Key Pros & Architectural Advantages
+## 3. Key Architectural Advantages & Engineering Benchmarks
 
-Why global engineering teams choose PRUBETH:
+PRUBETH sets new benchmarks for developer velocity, stability, and control:
 
-- **🛡️ 100% Data Sovereignty**: Zero analytics, zero usage tracking, and zero telemetry. You retain absolute ownership of all generated code and mental models.
-- **⚡ Microsecond Editor Responsiveness**: GPU-accelerated text rendering provides 120 FPS fluid scrolling, instant multi-gigabyte file indexing, and microsecond typing latency.
-- **🔄 Transactional Zero-Loss Rollback Safety**: Every automated code modification is captured in an atomic transaction with automatic `.bak` checkpoints. Never worry about an agent corrupting your codebase.
-- **🧠 Probabilistic State-Space Convergence**: Patented self-correcting algorithms systematically explore solution spaces, evaluating syntax trees and test outputs to guarantee correct code convergence.
-- **🧩 Open VSX Zero-Lockin Architecture**: Full access to tens of thousands of developer extensions through the independent Open VSX registry without proprietary gatekeeping.
-- **🏎️ Turnkey Out-of-the-Box Experience**: Zero manual toolchain assembly. Every agent, runtime supervisor, and compiler interface is operational from the moment of initial launch.
-
----
-
-## 4. Competitive Speciality & Benchmark Matrix
-
-How PRUBETH compares against leading developer tools and reference environments:
-
-| Capability / Feature | PRUBETH | Cursor | VS Code | Google Antigravity | OpenHands | Zed | Claude Code |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **Autonomous Multi-Agent Swarms** | **Native Built-In** | ❌ Single Turn | ❌ Extension Req. | ✅ Advanced | ✅ Agentic Only | ❌ Manual | ⚠️ CLI Only |
-| **Zero-Telemetry Sovereign Mode** | **100% Sovereign** | ❌ Cloud-Centric | ⚠️ Opt-out | ⚠️ Managed | ✅ Open Source | ⚠️ Partial | ❌ Cloud-Only |
-| **Microsecond GPU Text Buffer** | **GPU-Accelerated** | ❌ Web-Based | ❌ Web-Based | ❌ Web-Based | ❌ No Native UI | ✅ GPU-Native | ❌ Terminal Only |
-| **Automated AST Rollback Safety** | **Transactional** | ❌ Manual Undo | ❌ Manual Git | ⚠️ Session-based | ⚠️ Docker Only | ❌ File-level | ❌ Git-based |
-| **Local GPU LLM Offloading** | **Native CUDA** | ❌ Limited | ❌ Third-Party | ❌ Cloud-Only | ⚠️ Complex Setup | ❌ Limited | ❌ Cloud-Only |
-| **Open VSX Universal Marketplace** | **Zero Lock-In** | ⚠️ Proprietary | ⚠️ MS Only | ⚠️ Cloud Catalog | ❌ N/A | ❌ Custom Only | ❌ N/A |
-| **Deterministic Convergence Engine**| **Patented Heuristic**| ❌ Best Effort | ❌ Manual | ⚠️ Heuristic | ⚠️ Benchmark-Run | ❌ None | ⚠️ Re-prompting |
-| **Turnkey Desktop Installer** | **Single Click** | ✅ Yes | ✅ Yes | ⚠️ Cloud Managed | ❌ Docker Req. | ✅ Yes | ❌ npm CLI |
+| Dimension | Engineering Specification | Practical Impact |
+| :--- | :--- | :--- |
+| **Data Sovereignty** | Zero telemetry, zero usage tracking, 100% local operation available | Absolute privacy; source code never leaves your workstation |
+| **Input Latency** | Sub-5ms keystroke latency via GPU-accelerated buffers | Microsecond responsiveness with zero typing lag |
+| **Transaction Safety** | Atomic filesystem snapshots with automatic `.bak` checkpoints | Zero project corruption risk; instant state reversion |
+| **Solution Verification** | Closed-loop AST heuristic scoring with diagnostic feedback | Mathematical convergence toward ground-truth correctness |
+| **Extensibility** | Native Language Server Protocol (LSP) and Open VSX support | Unrestricted access to 50,000+ developer extensions |
+| **Out-of-Box Readiness** | Self-contained runtime, pre-configured compilers, and agent swarms | Turnkey deployment; zero manual toolchain setup |
 
 ---
 
-## 5. How to Use PRUBETH (Complete Guide)
+## 4. How to Use PRUBETH (Complete Guide)
 
 ### ⚡ One-Line Automated Installation
 
@@ -170,26 +138,18 @@ curl -fsSL https://raw.githubusercontent.com/SVR1339/prubeth-ide/master/install.
 
 ### 🏁 Step-by-Step Developer Workflow
 
-```
-1. LAUNCH             2. CONFIGURE          3. DIRECT              4. CONVERGE
-┌─────────────┐       ┌─────────────┐       ┌─────────────┐       ┌─────────────┐
-│  PRUBETH    │ ────> │ Setup Agent │ ────> │ Autonomous  │ ────> │ Verified    │
-│  Executable │       │ Preferences │       │ Instruction │       │ Code Output │
-└─────────────┘       └─────────────┘       └─────────────┘       └─────────────┘
-```
-
 1. **Launch**: Open PRUBETH via your desktop shortcut or run `prubeth.bat` / `./run_prubeth.sh`.
 2. **Onboarding & Theme Selection**: Choose between Obsidian Slate, Horizon Radiant Light, Midnight Void, or Opac Frosted Mica.
-3. **Connect Intelligence**: Select local GPU acceleration via Ollama or input API tokens for Gemini, Claude, OpenAI, or DeepSeek.
+3. **Connect Intelligence**: Select local GPU acceleration or input secure API tokens for your designated model provider.
 4. **Direct the Agent Swarm**:
    - Press `Ctrl + K` to open the Inline Intelligent Composer.
    - Press `Ctrl + Shift + L` to launch the Full-Project Autonomous Agent Swarm.
    - Press `Ctrl + ~` to monitor the supervised terminal execution sandbox.
-5. **Verify & Commit**: Review the visual diff inspector, inspect automated test executions, and commit directly to GitHub with zero friction.
+5. **Verify & Commit**: Review the visual diff inspector, inspect automated test executions, and commit directly to version control with zero friction.
 
 ---
 
-## 6. Visual Architecture & 4 Engineered Themes
+## 5. Visual Architecture & 4 Engineered Themes
 
 PRUBETH features four engineered architectural themes, complemented by high-contrast vivid modes, designed for long-duration coding comfort and visual ergonomics:
 
@@ -208,42 +168,22 @@ PRUBETH features four engineered architectural themes, complemented by high-cont
 
 ---
 
-## 7. Welcome Loading Architecture & Ambient Display
+## 6. Welcome Loading Architecture & Ambient Display
 
 PRUBETH initializes with a hardware-accelerated ambient loading experience:
 - **Master Monolith Emblem**: The official **Hexagonal Neural Processor Monolith** rendered with mathematical vector accuracy.
 - **Counter-Rotating Orbital Monitors**: Outer quantum ring and inner neural orbit rotate asynchronously to indicate active subsystem readiness.
 - **Adaptive Ambient Calibration**: Intelligently tunes contrast based on workstation ambient light, ensuring zero visual shock during night launches.
 
-```
-       .---.            [Outer Orbit Ring - Counter-Clockwise]
-      /     \     
-     |   ⬡   |          [Central Hexagonal Neural Monolith]
-      \     /     
-       '---'            [Inner Neural Orbit Ring - Clockwise]
-      ~ ~ ~ ~           [Sub-Surface Ambient Horizon Pulse]
-```
-
 ---
 
-## 8. Authentication & Collaborated Global Ecosystems
+## 7. Universal Protocol Standards & Developer Governance
 
-PRUBETH provides seamless integration with the world's premier developer platforms and AI foundations:
+PRUBETH operates on open, vendor-neutral protocols ensuring long-term architectural stability:
 
-<div align="center">
-
-| Ecosystem Partner | Native Integration Capabilities | Icon Standard |
-| :--- | :--- | :---: |
-| **GitHub** | Repository synchronization, automated PR generation, GitHub Actions dispatch | High-Fidelity Vector SVG |
-| **Google** | Cloud Platform authentication, Google Cloud Workspaces, OAuth2 integration | High-Fidelity Vector SVG |
-| **Google Gemini** | Frontier Gemini 3.8 Flash & Gemini 3.5 Flash streaming via ultra-low latency SSE | High-Fidelity Vector SVG |
-| **Anthropic Claude** | Claude 3.5 Sonnet & Claude 3.5 Haiku autonomous tool chaining | High-Fidelity Vector SVG |
-| **OpenAI** | GPT-4o, GPT-4o-mini, and high-throughput OpenAI-compatible endpoints | High-Fidelity Vector SVG |
-| **DeepSeek** | DeepSeek-V3 and DeepSeek-R1 full reasoning integration | High-Fidelity Vector SVG |
-| **Open VSX Registry** | Native access to over 50,000 community extensions without vendor lock-in | High-Fidelity Vector SVG |
-| **Sovereign Ollama** | Zero-latency local GPU inference (Qwen, Llama, DeepSeek) with zero network dependency | High-Fidelity Vector SVG |
-
-</div>
+- **Universal Inference Interface**: Connect to local GPU runtimes via high-speed native sockets or standard OpenAI-compatible REST endpoints.
+- **Universal Version Control**: Full Git integration with visual diff reviews, worktree sandboxing, and automated rollback points.
+- **Open Language Server Protocol**: First-class language intelligence for over 25 programming languages via standard JSON-RPC 2.0 communication.
 
 ### Global Developer Governance Charter
 1. **Sovereign Code Ownership**: 100% of all generated code, transformations, and artifacts belong exclusively to the developer.
@@ -252,34 +192,18 @@ PRUBETH provides seamless integration with the world's premier developer platfor
 
 ---
 
-## 9. Autonomous Agentic Stack & Swarm Execution
+## 8. Autonomous Agentic Core Architecture
 
 PRUBETH incorporates a multi-tiered autonomous agent architecture natively into its runtime:
 
-```
-┌────────────────────────────────────────────────────────────────────────┐
-│                        PRUBETH AGENTIC DEV STACK                       │
-├───────────────────────────────────┬────────────────────────────────────┤
-│           ORCHESTRATION           │         TEST & EVALUATION          │
-│   • LangGraph State Engine        │   • SWE-bench Integration          │
-│   • Cyclic Graph State Machine    │   • Ground-Truth Verification      │
-│   • Multi-Actor Agent Router      │   • HarnessKit Isolation Sandbox   │
-├───────────────────────────────────┼────────────────────────────────────┤
-│           EXECUTION               │             SUPERVISION            │
-│   • SWE-agent Coding Agent        │   • SuperHarness Checkpoints       │
-│   • AST Surgical Patcher          │   • Probabilistic Convergence      │
-│   • harness-ai-kit Guardrails     │   • Transactional State Rollback   │
-└───────────────────────────────────┴────────────────────────────────────┘
-```
-
-- **LangGraph**: Stateful computational graphs coordinating research, architecture, synthesis, and verification agents in structured cyclical loops.
-- **HarnessKit & harness-ai-kit**: Sandboxed environments that enforce execution boundaries and provide structured tool calling for terminal and filesystem actions.
-- **SWE-agent**: Autonomous software engineering agent capable of resolving multi-file issues directly within active code repositories.
-- **SuperHarness**: Unified supervisor monitoring process health, capturing telemetry, and triggering automated rollbacks upon failure.
+- **Stateful Agent Orchestrator**: Manages cyclical computation graphs that coordinate research, architecture, synthesis, and verification agents in structured loops.
+- **Sandboxed Execution Supervisor**: Enforces rate limits and strict process boundaries for terminal commands and filesystem modifications.
+- **Autonomous Coding Engine**: Inspects multi-file repository hierarchies, generates syntactically valid code patches, and validates AST integrity.
+- **Continuous Execution Supervisor**: Monitors process health, captures execution streams, and automatically reverts changes upon unexpected failures.
 
 ---
 
-## 10. Patented Probabilistic State-Space Convergence
+## 9. Patented Probabilistic State-Space Convergence
 
 Software development operates across an expansive search space of potential implementations. PRUBETH's **Probabilistic Convergence Engine** systematically navigates this state space to ensure deterministic results:
 
@@ -292,16 +216,16 @@ $$P(\text{Success}) = \prod_{i=1}^{k} \left( 1 - P(\text{Failure}_i \mid \text{H
 
 ---
 
-## 11. Extension Interoperability & Open VSX Registry
+## 10. Extension Interoperability & Open Tooling Ecosystem
 
 PRUBETH gives developers total freedom over their development environment:
 - **Open VSX Universal Marketplace**: Install tools, debuggers, syntax highlighters, and container integrations with zero vendor restriction.
-- **GitHub Repository Sync**: Direct repository cloning, branch management, and automated PR reviews.
-- **Language Server Protocol (LSP)**: Complete polyglot intelligence for Python, TypeScript, Rust, Go, C/C++, Java, Dart, and 20+ other languages.
+- **Repository Synchronization**: Direct repository cloning, branch management, and automated PR reviews.
+- **Polyglot Language Intelligence**: Complete support for Python, TypeScript, Rust, Go, C/C++, Java, Dart, and 20+ other languages.
 
 ---
 
-## 12. Official Distributables & One-Line Installers
+## 11. Multi-Platform Distributables & One-Line Installers
 
 ### 🎯 Official Multi-Platform Distributables (v1.91.0)
 
@@ -316,25 +240,9 @@ PRUBETH gives developers total freedom over their development environment:
 
 ---
 
-## 13. Ecosystem Growth & Scaling Roadmap
+## 12. Continuous Evolution & Scaling Roadmap
 
 PRUBETH is architected for exponential continuous evolution:
-
-```
-┌────────────────────────────────────────────────────────────────────────┐
-│                        PRUBETH EVOLUTION ROADMAP                       │
-├───────────────────────────────────┬────────────────────────────────────┤
-│   PHASE 1: WORKSTATION FOUNDATION │   PHASE 2: DISTRIBUTED SWARMS      │
-│   • Sovereign desktop platform    │   • Multi-machine mesh swarms      │
-│   • Microsecond GPU editor buffers│   • Collaborative agent teams      │
-│   • Local CUDA RAG intelligence   │   • Cross-repository orchestration │
-├───────────────────────────────────┼────────────────────────────────────┤
-│   PHASE 3: AUTONOMOUS EVOLUTION   │   PHASE 4: UNIVERSAL REACH         │
-│   • Metaprogramming self-healing  │   • Native macOS & Linux universal │
-│   • Community extension registry  │   • Cloud-agnostic sovereign pods  │
-│   • Direct visual design-to-code  │   • Global enterprise governance   │
-└───────────────────────────────────┴────────────────────────────────────┘
-```
 
 - **Autonomous Self-Optimization**: Continuous refinement of internal AST parsing and reasoning heuristics through recursive evaluation cycles.
 - **Distributed Agent Mesh Networks**: Harness multiple developer workstations in parallel to tackle massive codebases and enterprise-scale refactoring tasks.
@@ -343,7 +251,7 @@ PRUBETH is architected for exponential continuous evolution:
 
 ---
 
-## 14. Sovereign All-In-One License
+## 13. Sovereign All-In-One License
 
 PRUBETH is licensed under the **Unified All-In-One Sovereign License** (Dual MIT / Apache 2.0 permissive terms). Commercial usage, proprietary modification, and enterprise deployment are unconditionally permitted with attribution preservation.
 
