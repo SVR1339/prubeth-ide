@@ -11,7 +11,7 @@ from typing import Dict, Any, Tuple, Optional
 
 # --- Product Metadata ---
 APP_NAME = "PRUBETH"
-APP_DISPLAY_NAME = "PRUBETH IDE — Horizon Edition"
+APP_DISPLAY_NAME = "PRUBETH"
 APP_TAGLINE = "Bloom, ideas unfolding"
 APP_VERSION = "1.91.0"
 APP_TAG = "v1.91"

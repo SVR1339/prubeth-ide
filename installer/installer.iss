@@ -1,12 +1,12 @@
-; Inno Setup 6 Script for PRUBETH IDE
-; Codename: PRUBETH Horizon Autonomous Edition
+; Inno Setup 6 Script for PRUBETH
+; Codename: PRUBETH
 ; Official Website: https://www.bsvr.work/
 
-#define MyAppName "PRUBETH IDE"
+#define MyAppName "PRUBETH"
 #define MyAppVersion "1.91.0"
 #define MyAppPublisher "BSVR Technologies"
 #define MyAppURL "https://www.bsvr.work/"
-#define MyAppExeName "PrubethIDE.exe"
+#define MyAppExeName "PRUBETH.exe"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
@@ -22,7 +22,7 @@ DefaultGroupName={#MyAppName}
 AllowNoIcons=yes
 LicenseFile=..\LICENSE
 OutputDir=..\dist
-OutputBaseFilename=PrubethIDE-v1.91.0-Setup
+OutputBaseFilename=PRUBETH-v1.91.0-Setup
 SetupIconFile=..\assets\icon.ico
 Compression=lzma2/ultra64
 SolidCompression=yes
@@ -46,6 +46,9 @@ Name: "startmenuicon"; Description: "Create a Start Menu shortcut"; GroupDescrip
 Source: "..\dist\PrubethIDE\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs; Check: DirExists(ExpandConstant('{src}\..\dist\PrubethIDE'))
 Source: "..\assets\icon.ico"; DestDir: "{app}\assets"; Flags: ignoreversion
 Source: "..\assets\logo.png"; DestDir: "{app}\assets"; Flags: ignoreversion
+Source: "..\assets\default_settings.json"; DestDir: "{userappdata}\PRUBETH\User"; DestName: "settings.json"; Flags: onlyifdoesntexist uninsneveruninstall
+Source: "..\assets\chatLanguageModels.json"; DestDir: "{userappdata}\PRUBETH\User"; DestName: "chatLanguageModels.json"; Flags: onlyifdoesntexist uninsneveruninstall
+Source: "..\vscode\extensions\prubeth-ai\*"; DestDir: "{app}\resources\app\extensions\prubeth-ai"; Flags: ignoreversion recursesubdirs createallsubdirs; Check: DirExists(ExpandConstant('{src}\..\vscode\extensions\prubeth-ai'))
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\assets\icon.ico"

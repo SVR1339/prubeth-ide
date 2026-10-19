@@ -1,0 +1,231 @@
+[
+	{
+		"name": "Ollama (Local Engine)",
+		"vendor": "ollama",
+		"url": "http://localhost:11434"
+	},
+	{
+		"name": "Local Neural Models (Local AI Studio)",
+		"vendor": "customendpoint",
+		"apiKey": "local",
+		"apiType": "chat-completions",
+		"models": [
+			{
+				"id": "deepseek-r1:7b",
+				"name": "DeepSeek R1 7B (Local Thinking)",
+				"url": "http://localhost:11434/v1",
+				"apiType": "chat-completions",
+				"contextWindow": 131072,
+				"maxInputTokens": 114688,
+				"maxOutputTokens": 16384,
+				"toolCalling": true,
+				"vision": false,
+				"thinking": true,
+				"streaming": true
+			},
+			{
+				"id": "redsage-8b:latest",
+				"name": "RedSage 8B (Local Fast & Agentic)",
+				"url": "http://localhost:11434/v1",
+				"apiType": "chat-completions",
+				"contextWindow": 32768,
+				"maxInputTokens": 28672,
+				"maxOutputTokens": 4096,
+				"toolCalling": true,
+				"vision": false,
+				"thinking": false,
+				"streaming": true
+			},
+			{
+				"id": "qwen2.5:1.5b",
+				"name": "Qwen 2.5 1.5B (Local Coder)",
+				"url": "http://localhost:11434/v1",
+				"apiType": "chat-completions",
+				"contextWindow": 32768,
+				"maxInputTokens": 28672,
+				"maxOutputTokens": 4096,
+				"toolCalling": true,
+				"vision": false,
+				"thinking": false,
+				"streaming": true
+			}
+		]
+	},
+	{
+		"name": "Google Gemini (Gemini 3.8 / 2.5)",
+		"vendor": "gemini",
+		"apiKey": "",
+		"models": [
+			{
+				"id": "gemini-3.8-flash",
+				"name": "Gemini 3.8 Flash (High Speed & Agentic Reasoning)",
+				"contextWindow": 1048576,
+				"maxInputTokens": 1000000,
+				"maxOutputTokens": 65536,
+				"toolCalling": true,
+				"vision": true,
+				"thinking": true,
+				"streaming": true
+			},
+			{
+				"id": "gemini-3.8-pro",
+				"name": "Gemini 3.8 Pro (Deep Thinking & Multi-Turn Architecture)",
+				"contextWindow": 2097152,
+				"maxInputTokens": 2000000,
+				"maxOutputTokens": 65536,
+				"toolCalling": true,
+				"vision": true,
+				"thinking": true,
+				"streaming": true
+			},
+			{
+				"id": "gemini-2.5-pro",
+				"name": "Gemini 2.5 Pro (Adaptive Code Architecture)",
+				"contextWindow": 1048576,
+				"maxInputTokens": 1000000,
+				"maxOutputTokens": 32768,
+				"toolCalling": true,
+				"vision": true,
+				"thinking": true,
+				"streaming": true
+			},
+			{
+				"id": "gemini-2.5-flash",
+				"name": "Gemini 2.5 Flash (Lightweight & Fast)",
+				"contextWindow": 1048576,
+				"maxInputTokens": 1000000,
+				"maxOutputTokens": 16384,
+				"toolCalling": true,
+				"vision": true,
+				"thinking": false,
+				"streaming": true
+			}
+		]
+	},
+	{
+		"name": "Anthropic Claude (Opus & Sonnet)",
+		"vendor": "anthropic",
+		"apiKey": "",
+		"models": [
+			{
+				"id": "claude-opus-4-6",
+				"name": "Claude Opus 4.6 (Deep Reasoning & Autonomous Engineering)",
+				"contextWindow": 200000,
+				"maxInputTokens": 180000,
+				"maxOutputTokens": 32768,
+				"toolCalling": true,
+				"vision": true,
+				"thinking": true,
+				"streaming": true
+			},
+			{
+				"id": "claude-3-7-sonnet",
+				"name": "Claude 3.7 Sonnet (Hybrid Reasoning & Execution)",
+				"contextWindow": 200000,
+				"maxInputTokens": 180000,
+				"maxOutputTokens": 64000,
+				"toolCalling": true,
+				"vision": true,
+				"thinking": true,
+				"streaming": true
+			},
+			{
+				"id": "claude-3-5-sonnet",
+				"name": "Claude 3.5 Sonnet (Benchmark Standard)",
+				"contextWindow": 200000,
+				"maxInputTokens": 180000,
+				"maxOutputTokens": 8192,
+				"toolCalling": true,
+				"vision": true,
+				"thinking": false,
+				"streaming": true
+			}
+		]
+	},
+	{
+		"name": "OpenAI (GPT-4o & Reasoning)",
+		"vendor": "openai",
+		"apiKey": "",
+		"models": [
+			{
+				"id": "gpt-4o",
+				"name": "GPT-4o (Omni Multimodal)",
+				"contextWindow": 128000,
+				"maxInputTokens": 120000,
+				"maxOutputTokens": 16384,
+				"toolCalling": true,
+				"vision": true,
+				"thinking": false,
+				"streaming": true
+			},
+			{
+				"id": "o3-mini",
+				"name": "o3-mini (STEM & STEM Reasoning)",
+				"contextWindow": 200000,
+				"maxInputTokens": 180000,
+				"maxOutputTokens": 65536,
+				"toolCalling": true,
+				"vision": false,
+				"thinking": true,
+				"streaming": true
+			}
+		]
+	},
+	{
+		"name": "OpenRouter",
+		"vendor": "openrouter",
+		"apiKey": ""
+	},
+	{
+		"name": "xAI",
+		"vendor": "xai",
+		"apiKey": ""
+	},
+	{
+		"name": "Groq & DeepSeek (Cloud)",
+		"vendor": "customendpoint",
+		"apiKey": "",
+		"apiType": "chat-completions",
+		"models": [
+			{
+				"id": "deepseek-chat",
+				"name": "DeepSeek V3 (Cloud)",
+				"url": "https://api.deepseek.com/v1",
+				"apiType": "chat-completions",
+				"contextWindow": 65536,
+				"maxInputTokens": 57344,
+				"maxOutputTokens": 8192,
+				"toolCalling": true,
+				"vision": false,
+				"thinking": false,
+				"streaming": true
+			},
+			{
+				"id": "deepseek-reasoner",
+				"name": "DeepSeek R1 (Cloud Reasoner)",
+				"url": "https://api.deepseek.com/v1",
+				"apiType": "chat-completions",
+				"contextWindow": 65536,
+				"maxInputTokens": 57344,
+				"maxOutputTokens": 8192,
+				"toolCalling": true,
+				"vision": false,
+				"thinking": true,
+				"streaming": true
+			},
+			{
+				"id": "llama-3.3-70b-versatile",
+				"name": "Llama 3.3 70B (Groq Fast)",
+				"url": "https://api.groq.com/openai/v1",
+				"apiType": "chat-completions",
+				"contextWindow": 131072,
+				"maxInputTokens": 122880,
+				"maxOutputTokens": 8192,
+				"toolCalling": true,
+				"vision": false,
+				"thinking": false,
+				"streaming": true
+			}
+		]
+	}
+]

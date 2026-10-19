@@ -13,6 +13,7 @@ import urllib.error
 import shutil
 import subprocess
 import zipfile
+import json
 import time
 import tempfile
 import argparse
@@ -88,8 +89,8 @@ except ImportError:
     )
     from uninstaller import Uninstaller
 
-DEFAULT_USER_INSTALL_DIR = Path.home() / "AppData" / "Local" / "Programs" / "PrubethIDE"
-DEFAULT_MACHINE_INSTALL_DIR = Path("C:/Program Files/PrubethIDE")
+DEFAULT_USER_INSTALL_DIR = Path.home() / "AppData" / "Local" / "Programs" / "PRUBETH"
+DEFAULT_MACHINE_INSTALL_DIR = Path("C:/Program Files/PRUBETH")
 RELEASE_TAG = f"v{APP_VERSION}"
 ONLINE_PAYLOAD_URLS = [
     f"https://github.com/{GITHUB_REPO}/releases/download/{RELEASE_TAG}/Prubeth-Payload-{APP_VERSION}-{TARGET_ARCH}.zip",
@@ -389,7 +390,10 @@ class InstallWorker(QThread):
             # 4. Configure Runtime Launcher
             self._write_launchers()
 
-            # 5. Create Shortcuts & Integrations
+            # 5. Prime Showroom Experience (Settings, Models, Native Extensions, Self-Healing)
+            self._prime_showroom_experience()
+
+            # 6. Create Shortcuts & Integrations
             if self.create_desktop:
                 self._create_desktop_shortcut()
             if self.create_startmenu:
@@ -399,7 +403,7 @@ class InstallWorker(QThread):
             if self.register_uninstaller:
                 self._register_uninstaller()
 
-            # 6. Initialize local models cache if not skipped
+            # 7. Initialize local models cache if not skipped
             if not self.skip_ai and self.install_models:
                 (self.target_dir / "models").mkdir(parents=True, exist_ok=True)
                 (self.target_dir / ".local_ai_studio_pro").mkdir(parents=True, exist_ok=True)
@@ -424,28 +428,255 @@ class InstallWorker(QThread):
                 else:
                     self.finished.emit(False, msg)
 
+    def _prime_showroom_experience(self):
+        """
+        Primes the ultimate showroom out-of-the-box user experience.
+        Pre-seeds user settings, language model profiles, native extension packages,
+        and verifies workbench patch integrity so first launch has zero modal friction,
+        zero missing models, and instantaneous high-performance agentic capability.
+        """
+        try:
+            self.progress.emit(92, "Priming showroom user configuration and model profiles...")
+            # 1. Target User Configuration Directory
+            appdata = os.environ.get("APPDATA")
+            if not appdata:
+                appdata = str(Path.home() / "AppData" / "Roaming")
+            user_config_dir = Path(appdata) / "PRUBETH" / "User"
+            user_config_dir.mkdir(parents=True, exist_ok=True)
+
+            # 2. Pre-seed settings.json with Showroom Defaults
+            settings_target = user_config_dir / "settings.json"
+            showroom_defaults = {
+                "workbench.colorTheme": "PRUBETH Obsidian Slate",
+                "workbench.iconTheme": "theme-modern-icons",
+                "workbench.layoutControl.enabled": True,
+                "workbench.sideBar.location": "left",
+                "editor.fontFamily": "'Cascadia Code', 'Fira Code', Consolas, monospace",
+                "editor.fontLigatures": True,
+                "editor.fontSize": 14,
+                "workbench.startupEditor": "welcomePage",
+                "workbench.welcomePage.walkthroughs.openOnInstall": True,
+                "workbench.welcomePage.experimentalOnboarding": False,
+                "terminal.integrated.gpuAcceleration": "on",
+                "terminal.integrated.smoothScrolling": False,
+                "terminal.integrated.shellIntegration.enabled": True,
+                "chat.commandCenter.enabled": True,
+                "chat.allowAnonymousAccess": True,
+                "chat.aiDisabled": False,
+                "telemetry.telemetryLevel": "off",
+                "telemetry.enableTelemetry": False,
+                "telemetry.enableCrashReporter": False,
+                "update.mode": "none"
+            }
+
+            default_settings_file = _REPO_ROOT / "assets" / "default_settings.json"
+            if default_settings_file.exists():
+                try:
+                    with open(default_settings_file, "r", encoding="utf-8") as f:
+                        file_defaults = json.load(f)
+                        if isinstance(file_defaults, dict):
+                            showroom_defaults.update(file_defaults)
+                except Exception:
+                    pass
+
+            if not settings_target.exists():
+                with open(settings_target, "w", encoding="utf-8") as f:
+                    json.dump(showroom_defaults, f, indent=2)
+            else:
+                try:
+                    with open(settings_target, "r", encoding="utf-8") as f:
+                        existing = json.load(f)
+                    if isinstance(existing, dict):
+                        for k, v in showroom_defaults.items():
+                            if k not in existing:
+                                existing[k] = v
+                        with open(settings_target, "w", encoding="utf-8") as f:
+                            json.dump(existing, f, indent=2)
+                except Exception:
+                    pass
+
+            # 3. Pre-seed chatLanguageModels.json
+            models_target = user_config_dir / "chatLanguageModels.json"
+            chat_models_src = _REPO_ROOT / "assets" / "chatLanguageModels.json"
+            if chat_models_src.exists():
+                try:
+                    with open(chat_models_src, "r", encoding="utf-8") as f:
+                        bundled_models = json.load(f)
+                    if not models_target.exists():
+                        with open(models_target, "w", encoding="utf-8") as f:
+                            json.dump(bundled_models, f, indent=2)
+                    else:
+                        try:
+                            with open(models_target, "r", encoding="utf-8") as f:
+                                user_models = json.load(f)
+                            if isinstance(user_models, list) and isinstance(bundled_models, list):
+                                existing_names = {item.get("name") for item in user_models if isinstance(item, dict)}
+                                changed = False
+                                for item in bundled_models:
+                                    if isinstance(item, dict) and item.get("name") not in existing_names:
+                                        user_models.append(item)
+                                        changed = True
+                                if changed:
+                                    with open(models_target, "w", encoding="utf-8") as f:
+                                        json.dump(user_models, f, indent=2)
+                        except Exception:
+                            pass
+                except Exception:
+                    pass
+
+            # 4. Deploy Native Showroom Extensions (prubeth-ai)
+            app_extensions_dir = self.target_dir / "resources" / "app" / "extensions"
+            if app_extensions_dir.exists():
+                target_ext = app_extensions_dir / "prubeth-ai"
+                src_ext = _REPO_ROOT / "vscode" / "extensions" / "prubeth-ai"
+                if src_ext.exists():
+                    target_ext.mkdir(parents=True, exist_ok=True)
+                    for item in src_ext.iterdir():
+                        dest = target_ext / item.name
+                        if item.is_file():
+                            shutil.copy2(item, dest)
+                        elif item.is_dir() and item.name not in (".git", "__pycache__"):
+                            shutil.copytree(item, dest, dirs_exist_ok=True)
+
+            # 5. Patch Integrity Check: Ensure chatRequiresSetup() => false in installed workbench
+            benchmarks = [
+                self.target_dir / "resources" / "app" / "out" / "vs" / "workbench" / "workbench.desktop.main.js"
+            ]
+            for bench_js in benchmarks:
+                if bench_js.exists():
+                    try:
+                        content = bench_js.read_text(encoding="utf-8")
+                        patched = False
+                        if "chatRequiresSetup(){" in content and "chatRequiresSetup(){return false;" not in content:
+                            content = content.replace("chatRequiresSetup(){", "chatRequiresSetup(){return false;")
+                            patched = True
+                        if patched:
+                            bench_js.write_text(content, encoding="utf-8")
+                    except Exception:
+                        pass
+
+            # 6. Product.json Configuration: chatSetup.disabled and default agent
+            prod_json = self.target_dir / "resources" / "app" / "product.json"
+            if prod_json.exists():
+                try:
+                    with open(prod_json, "r", encoding="utf-8") as f:
+                        prod_data = json.load(f)
+                    if isinstance(prod_data, dict):
+                        prod_changed = False
+                        if "chatSetup" not in prod_data or not isinstance(prod_data["chatSetup"], dict):
+                            prod_data["chatSetup"] = {"disabled": True}
+                            prod_changed = True
+                        elif not prod_data["chatSetup"].get("disabled"):
+                            prod_data["chatSetup"]["disabled"] = True
+                            prod_changed = True
+
+                        if prod_data.get("defaultChatAgent", {}).get("extensionId") != "prubeth.ai-assistant":
+                            prod_data["defaultChatAgent"] = {
+                                "extensionId": "prubeth.ai-assistant",
+                                "chatAgentId": "prubeth.assistant",
+                                "name": "PRUBETH",
+                                "icon": "sparkle"
+                            }
+                            prod_changed = True
+
+                        if prod_changed:
+                            with open(prod_json, "w", encoding="utf-8") as f:
+                                json.dump(prod_data, f, indent=2)
+                except Exception:
+                    pass
+
+        except Exception as e:
+            logging.warning(f"Showroom priming completed with non-fatal notice: {e}")
+
+    def _resolve_icon(self, target: Path) -> Path:
+        icon_candidates = [
+            self.target_dir / "assets" / "icon.ico",
+            _REPO_ROOT / "assets" / "icon.ico",
+            target.parent / "assets" / "icon.ico",
+        ]
+        for ic in icon_candidates:
+            if ic.exists():
+                return ic
+        return target
+
+    def _resolve_primary_executable(self) -> tuple[Path, Path, Path]:
+        """
+        Dynamically discovers the primary PRUBETH IDE executable, working directory,
+        and application icon with zero hardcoded drive assumptions.
+        Prioritizes the installed target directory binaries and launcher.
+        """
+        # 1. Target directory primary executables
+        for cand in [
+            self.target_dir / "PRUBETH.exe",
+            self.target_dir / "PRUBETH IDE.exe",
+            self.target_dir / "PrubethIDE.exe",
+            self.target_dir / "Code.exe",
+        ]:
+            if cand.exists() and cand.is_file():
+                icon = self._resolve_icon(cand)
+                return cand, cand.parent, icon
+
+        # 2. Target directory launcher script
+        bat = self.target_dir / "PRUBETH.bat"
+        if not bat.exists() or not bat.is_file():
+            bat = self.target_dir / "PrubethIDE.bat"
+        if bat.exists() and bat.is_file():
+            icon = self._resolve_icon(bat)
+            return bat, self.target_dir, icon
+
+        # 3. Known external workstation environments (e.g. standard program files or developer workspace)
+        external_candidates = [
+            Path(os.environ.get("LOCALAPPDATA", "")) / "Programs" / "PRUBETH" / "PRUBETH.exe",
+            Path(os.environ.get("LOCALAPPDATA", "")) / "Programs" / "PRUBETH IDE" / "PRUBETH.exe",
+            Path(os.environ.get("LOCALAPPDATA", "")) / "Programs" / "PRUBETH IDE" / "PRUBETH IDE.exe",
+            Path(os.environ.get("LOCALAPPDATA", "")) / "Programs" / "PrubethIDE" / "PrubethIDE.exe",
+            _REPO_ROOT / "VSCode-win32-x64" / "PRUBETH.exe",
+            Path(r"E:\PRUBETH IDE\PRUBETH.exe"),
+        ]
+        for cand in external_candidates:
+            if cand.exists() and cand.is_file():
+                icon = self._resolve_icon(cand)
+                return cand, cand.parent, icon
+
+        # 4. Default fallback
+        default_icon = self._resolve_icon(bat)
+        return bat, self.target_dir, default_icon
+
     def _write_launchers(self):
-        launcher_bat = self.target_dir / "PrubethIDE.bat"
+        launcher_bat = self.target_dir / "PRUBETH.bat"
+        legacy_bat = self.target_dir / "PrubethIDE.bat"
         launcher_content = f"""@echo off
 setlocal enabledelayedexpansion
 title {APP_DISPLAY_NAME} Launcher
 cd /d "%~dp0"
 
-:: 1. Launch VS Code based PRUBETH IDE if present
-if exist "E:\\PRUBETH IDE\\PRUBETH.exe" (
-    start "" /high "E:\\PRUBETH IDE\\PRUBETH.exe" --enable-gpu-rasterization --enable-zero-copy --ignore-gpu-blocklist --disable-background-timer-throttling --disable-renderer-backgrounding %*
+:: 1. Launch VS Code based PRUBETH if present
+if exist "%~dp0PRUBETH.exe" (
+    start "" /high "%~dp0PRUBETH.exe" --enable-gpu-rasterization --enable-zero-copy --ignore-gpu-blocklist --disable-background-timer-throttling --disable-renderer-backgrounding %*
+    exit /b 0
+)
+if exist "%~dp0PRUBETH IDE.exe" (
+    start "" /high "%~dp0PRUBETH IDE.exe" --enable-gpu-rasterization --enable-zero-copy --ignore-gpu-blocklist --disable-background-timer-throttling --disable-renderer-backgrounding %*
+    exit /b 0
+)
+if exist "%LOCALAPPDATA%\\Programs\\PRUBETH\\PRUBETH.exe" (
+    start "" /high "%LOCALAPPDATA%\\Programs\\PRUBETH\\PRUBETH.exe" --enable-gpu-rasterization --enable-zero-copy --ignore-gpu-blocklist --disable-background-timer-throttling --disable-renderer-backgrounding %*
+    exit /b 0
+)
+if exist "%LOCALAPPDATA%\\Programs\\PRUBETH IDE\\PRUBETH.exe" (
+    start "" /high "%LOCALAPPDATA%\\Programs\\PRUBETH IDE\\PRUBETH.exe" --enable-gpu-rasterization --enable-zero-copy --ignore-gpu-blocklist --disable-background-timer-throttling --disable-renderer-backgrounding %*
     exit /b 0
 )
 if exist "%USERPROFILE%\\heretic-work\\VSCode-win32-x64\\PRUBETH.exe" (
     start "" /high "%USERPROFILE%\\heretic-work\\VSCode-win32-x64\\PRUBETH.exe" --enable-gpu-rasterization --enable-zero-copy --ignore-gpu-blocklist --disable-background-timer-throttling --disable-renderer-backgrounding %*
     exit /b 0
 )
-if exist "PRUBETH.exe" (
-    start "" /high "PRUBETH.exe" --enable-gpu-rasterization --enable-zero-copy --ignore-gpu-blocklist --disable-background-timer-throttling --disable-renderer-backgrounding %*
+if exist "%~dp0PrubethIDE.exe" (
+    start "" "%~dp0PrubethIDE.exe" %*
     exit /b 0
 )
-if exist "PrubethIDE.exe" (
-    start "" "PrubethIDE.exe" %*
+if exist "E:\\PRUBETH IDE\\PRUBETH.exe" (
+    start "" /high "E:\\PRUBETH IDE\\PRUBETH.exe" --enable-gpu-rasterization --enable-zero-copy --ignore-gpu-blocklist --disable-background-timer-throttling --disable-renderer-backgrounding %*
     exit /b 0
 )
 
@@ -478,34 +709,21 @@ start "" "!PY_CMD!" local_ai_studio_pro.py %*
 exit /b 0
 """
         launcher_bat.write_text(launcher_content, encoding="utf-8")
+        legacy_bat.write_text(launcher_content, encoding="utf-8")
         (self.target_dir / "SukhiIDE.bat").write_text(launcher_content, encoding="utf-8")
         (self.target_dir / "SoNaive.bat").write_text(launcher_content, encoding="utf-8")
 
     def _create_desktop_shortcut(self):
-        desktop = Path.home() / "Desktop" / f"{APP_NAME} IDE.lnk"
-        vscode_engine = Path(r"E:\PRUBETH IDE\PRUBETH.exe")
-        if vscode_engine.exists():
-            target = vscode_engine
-            icon = self.target_dir / "assets" / "icon.ico"
-            self._create_windows_shortcut(str(desktop), str(target), str(icon), working_dir=str(vscode_engine.parent))
-            return
-        target = self.target_dir / "PrubethIDE.bat"
-        icon = self.target_dir / "assets" / "icon.ico"
-        self._create_windows_shortcut(str(desktop), str(target), str(icon))
+        desktop = Path.home() / "Desktop" / f"{APP_NAME}.lnk"
+        target, working_dir, icon = self._resolve_primary_executable()
+        self._create_windows_shortcut(str(desktop), str(target), str(icon), working_dir=str(working_dir))
 
     def _create_startmenu_shortcut(self):
-        programs = Path.home() / "AppData" / "Roaming" / "Microsoft" / "Windows" / "Start Menu" / "Programs" / f"{APP_NAME} IDE"
+        programs = Path.home() / "AppData" / "Roaming" / "Microsoft" / "Windows" / "Start Menu" / "Programs" / f"{APP_NAME}"
         programs.mkdir(parents=True, exist_ok=True)
-        lnk = programs / f"{APP_NAME} IDE.lnk"
-        vscode_engine = Path(r"E:\PRUBETH IDE\PRUBETH.exe")
-        if vscode_engine.exists():
-            target = vscode_engine
-            icon = self.target_dir / "assets" / "icon.ico"
-            self._create_windows_shortcut(str(lnk), str(target), str(icon), working_dir=str(vscode_engine.parent))
-            return
-        target = self.target_dir / "PrubethIDE.bat"
-        icon = self.target_dir / "assets" / "icon.ico"
-        self._create_windows_shortcut(str(lnk), str(target), str(icon))
+        lnk = programs / f"{APP_NAME}.lnk"
+        target, working_dir, icon = self._resolve_primary_executable()
+        self._create_windows_shortcut(str(lnk), str(target), str(icon), working_dir=str(working_dir))
 
     def _create_windows_shortcut(self, lnk_path: str, target_path: str, icon_path: str, working_dir: Optional[str] = None):
         work_dir = working_dir or str(self.target_dir)
@@ -588,7 +806,7 @@ class WelcomePage(QWizardPage):
             logo_lbl.setAlignment(Qt.AlignCenter)
         layout.addWidget(logo_lbl)
 
-        title = QLabel(f"<h2 style='color:#FFFFFF; margin-top:6px;'>PRUBETH IDE <span style='color:#9485FF;'>v{APP_VERSION}</span></h2>")
+        title = QLabel(f"<h2 style='color:#FFFFFF; margin-top:6px;'>PRUBETH <span style='color:#9485FF;'>v{APP_VERSION}</span></h2>")
         title.setAlignment(Qt.AlignCenter)
         layout.addWidget(title)
 
@@ -596,7 +814,7 @@ class WelcomePage(QWizardPage):
 
         desc = QLabel(
             f"<p align='center' style='color:#62D4E5; font-weight:600; font-size:12pt; margin-bottom:8px;'>{APP_TAGLINE}</p>"
-            "<p align='center' style='color:#A5ACBB; font-size:10pt; line-height:140%;'>This wizard will install the official PRUBETH IDE developer workstation on your computer.<br>"
+            "<p align='center' style='color:#A5ACBB; font-size:10pt; line-height:140%;'>This wizard will install the official PRUBETH developer workstation on your computer.<br>"
             f"{delivery_badge}</p>"
             f"<p align='center' style='margin-top:12px;'><small style='color:#737B8C;'>Official Website: <a href='{WEBSITE_URL}' style='color:#9485FF;'>{WEBSITE_URL}</a></small></p>"
         )
@@ -621,7 +839,7 @@ class InstallTypePage(QWizardPage):
         layout.addWidget(self.rb_full)
 
         full_desc = QLabel(
-            "Installs the complete PRUBETH IDE workstation suite including all multi-language parsers, "
+            "Installs the complete PRUBETH workstation suite including all multi-language parsers, "
             "local AI connectors, desktop & start menu shortcuts, and PATH integration."
         )
         full_desc.setStyleSheet("color: #70D6A0; font-size: 9.5pt; margin-left: 24px; margin-bottom: 6px;")
@@ -667,7 +885,7 @@ class InstallTypePage(QWizardPage):
         self.chk_startmenu.setChecked(True)
         grp_layout.addWidget(self.chk_startmenu)
 
-        self.chk_path = QCheckBox("Add PRUBETH IDE to System PATH (Recommended)")
+        self.chk_path = QCheckBox("Add PRUBETH to System PATH (Recommended)")
         self.chk_path.setChecked(True)
         grp_layout.addWidget(self.chk_path)
 
@@ -794,7 +1012,7 @@ class ReadyPage(QWizardPage):
         super().__init__()
         self.mode = mode
         self.setTitle("Ready to Install")
-        self.setSubTitle("Setup is ready to begin installing PRUBETH IDE on your computer.")
+        self.setSubTitle("Setup is ready to begin installing PRUBETH on your computer.")
 
         layout = QVBoxLayout(self)
         layout.setContentsMargins(20, 16, 20, 16)

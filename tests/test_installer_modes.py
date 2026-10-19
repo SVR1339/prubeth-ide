@@ -87,3 +87,72 @@ def test_directory_page_space_calculation(qapp, tmp_path):
     assert "Space Required" in page.lbl_space_req.text()
     assert "Space Available" in page.lbl_space_avail.text()
     assert "✓ Sufficient disk space is available." in page.lbl_space_status.text()
+
+
+def test_showroom_experience_priming(tmp_path, monkeypatch):
+    """Verify that _prime_showroom_experience pre-seeds user settings, model profiles, and workbench patches."""
+    import json
+    mock_appdata = tmp_path / "AppData" / "Roaming"
+    monkeypatch.setenv("APPDATA", str(mock_appdata))
+
+    target_dir = tmp_path / "PRUBETH_IDE"
+    target_dir.mkdir(parents=True, exist_ok=True)
+
+    # Setup mock workbench js and product.json
+    bench_dir = target_dir / "resources" / "app" / "out" / "vs" / "workbench"
+    bench_dir.mkdir(parents=True, exist_ok=True)
+    bench_js = bench_dir / "workbench.desktop.main.js"
+    bench_js.write_text("class ChatService { chatRequiresSetup(){ return this.needsSetup; } }", encoding="utf-8")
+
+    prod_json = target_dir / "resources" / "app" / "product.json"
+    prod_json.write_text(json.dumps({"nameShort": "PRUBETH"}), encoding="utf-8")
+
+    worker = InstallWorker(target_dir=target_dir)
+    worker._prime_showroom_experience()
+
+    # 1. Verify User settings.json created with zero-friction showroom defaults
+    user_settings = mock_appdata / "PRUBETH" / "User" / "settings.json"
+    assert user_settings.exists()
+    settings_data = json.loads(user_settings.read_text(encoding="utf-8"))
+    assert settings_data["chat.commandCenter.enabled"] is True
+    assert settings_data["update.mode"] == "none"
+    assert settings_data["telemetry.telemetryLevel"] == "off"
+
+    # 2. Verify chatLanguageModels.json created
+    models_file = mock_appdata / "PRUBETH" / "User" / "chatLanguageModels.json"
+    assert models_file.exists()
+    models_data = json.loads(models_file.read_text(encoding="utf-8"))
+    assert isinstance(models_data, list)
+    assert len(models_data) > 0
+
+    # 3. Verify workbench patch eliminated setup modal
+    patched_js = bench_js.read_text(encoding="utf-8")
+    assert "chatRequiresSetup(){return false;" in patched_js
+
+    # 4. Verify product.json has chatSetup.disabled and defaultChatAgent
+    patched_prod = json.loads(prod_json.read_text(encoding="utf-8"))
+    assert patched_prod["chatSetup"]["disabled"] is True
+    assert patched_prod["defaultChatAgent"]["extensionId"] == "prubeth.ai-assistant"
+
+
+def test_primary_executable_resolution(tmp_path):
+    """Verify dynamic executable and shortcut target discovery."""
+    target_dir = tmp_path / "PRUBETH"
+    target_dir.mkdir(parents=True, exist_ok=True)
+    bat = target_dir / "PRUBETH.bat"
+    bat.write_text("@echo off", encoding="utf-8")
+
+    worker = InstallWorker(target_dir=target_dir)
+
+    # With launcher bat present in target_dir, resolves to it
+    exe, work_dir, icon = worker._resolve_primary_executable()
+    assert exe == bat
+
+    # When PRUBETH.exe exists, it takes precedence as the primary binary
+    primary_exe = target_dir / "PRUBETH.exe"
+    primary_exe.write_text("MZ...", encoding="utf-8")
+
+    exe, work_dir, icon = worker._resolve_primary_executable()
+    assert exe == primary_exe
+    assert work_dir == target_dir
+

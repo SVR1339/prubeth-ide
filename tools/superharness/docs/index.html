@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>superharness — give your AI coding agent a team</title>
+  <meta name="description" content="superharness wraps tmux orchestration around your AI coding agent — Claude Code, OpenCode, or Codex — spawning parallel workers, surfacing what needs attention, and keeping work flowing while you're away." />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://superharness.dev" />
+  <meta property="og:title" content="superharness — give your AI coding agent a team" />
+  <meta property="og:description" content="superharness wraps tmux orchestration around your AI coding agent — Claude Code, OpenCode, or Codex — spawning parallel workers, surfacing what needs attention, and keeping work flowing while you're away." />
+  <meta property="og:image" content="https://superharness.dev/og-image.png" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://superharness.dev" />
+  <meta name="twitter:title" content="superharness — give your AI coding agent a team" />
+  <meta name="twitter:description" content="superharness wraps tmux orchestration around your AI coding agent — Claude Code, OpenCode, or Codex — spawning parallel workers, surfacing what needs attention, and keeping work flowing while you're away." />
+  <meta name="twitter:image" content="https://superharness.dev/og-image.png" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="alternate icon" href="/favicon.ico" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:          #0d0f0e;
+      --bg-card:     #131614;
+      --bg-term:     #0a0c0b;
+      --border:      #1e2420;
+      --orange:      #e8760a;
+      --orange-lt:   #f5901e;
+      --green:       #39d353;
+      --green-dim:   #1a6e2e;
+      --text:        #d4d8d5;
+      --text-dim:    #6b756e;
+      --text-bright: #eef2ee;
+      --red:         #e05252;
+      --blue:        #4a9eff;
+      --font-mono:   'Fira Code', 'Cascadia Code', 'JetBrains Mono', 'Menlo', monospace;
+      --font-sans:   system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      --radius:      8px;
+      --shadow:      0 4px 24px rgba(0,0,0,.45);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      line-height: 1.65;
+      font-size: 16px;
+      overflow-x: hidden;
+    }
+
+    a { color: var(--orange); text-decoration: none; }
+    a:hover { color: var(--orange-lt); text-decoration: underline; }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    section { padding: 80px 0; }
+    section:nth-child(even) { background: var(--bg-card); }
+
+    h2 {
+      font-size: 1.85rem;
+      font-weight: 700;
+      color: var(--text-bright);
+      margin-bottom: 12px;
+    }
+    h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-bright);
+      margin-bottom: 8px;
+    }
+    p { color: var(--text); }
+
+    .section-lead {
+      color: var(--text-dim);
+      font-size: 1rem;
+      margin-bottom: 40px;
+    }
+
+    /* Nav */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(13,15,14,.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 52px;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--text-bright);
+      text-decoration: none;
+      font-family: var(--font-mono);
+    }
+    .nav-logo:hover { text-decoration: none; color: var(--text-bright); }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      font-size: 0.875rem;
+    }
+
+    .nav-links a { color: var(--text-dim); transition: color .15s; }
+    .nav-links a:hover { color: var(--orange); text-decoration: none; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 18px;
+      border-radius: var(--radius);
+      font-size: 0.875rem;
+      font-weight: 600;
+      transition: all .15s;
+      cursor: pointer;
+      border: none;
+      text-decoration: none !important;
+    }
+
+    .btn-primary { background: var(--orange); color: #fff; }
+    .btn-primary:hover { background: var(--orange-lt); color: #fff; }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-ghost:hover { border-color: var(--orange); color: var(--orange); }
+
+    /* Hero */
+    #hero {
+      padding: 96px 0 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 40% at 50% -10%, rgba(232,118,10,.16) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 30% at 80% 80%, rgba(57,211,83,.05) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 14px;
+      border-radius: 20px;
+      border: 1px solid var(--green-dim);
+      background: rgba(57,211,83,.06);
+      color: var(--green);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+
+    .hero-badge .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--green);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: .4; transform: scale(.7); }
+    }
+
+    #hero h1 {
+      font-size: clamp(2.2rem, 5.5vw, 3.8rem);
+      font-weight: 800;
+      color: var(--text-bright);
+      line-height: 1.12;
+      letter-spacing: -.02em;
+      margin-bottom: 20px;
+    }
+
+    #hero h1 .accent { color: var(--orange); }
+
+    #hero .subtitle {
+      font-size: clamp(1rem, 2.2vw, 1.15rem);
+      color: var(--text-dim);
+      max-width: 560px;
+      margin: 0 auto 40px;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 48px;
+    }
+
+    /* Terminal */
+    .terminal {
+      background: var(--bg-term);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      line-height: 1.6;
+    }
+
+    .term-titlebar {
+      display: flex;
+      align-items: center;
+      padding: 9px 14px;
+      background: #111413;
+      border-bottom: 1px solid var(--border);
+      gap: 8px;
+    }
+
+    .term-dot { width: 12px; height: 12px; border-radius: 50%; }
+    .term-dot.red    { background: #ff5f57; }
+    .term-dot.yellow { background: #ffbd2e; }
+    .term-dot.green  { background: #28c840; }
+
+    .term-title {
+      flex: 1;
+      text-align: center;
+      color: var(--text-dim);
+      font-size: 0.75rem;
+    }
+
+    .term-body {
+      padding: 18px 20px;
+      white-space: pre;
+      overflow-x: auto;
+    }
+
+    .c-green  { color: var(--green); }
+    .c-orange { color: var(--orange); }
+    .c-dim    { color: var(--text-dim); }
+    .c-bright { color: var(--text-bright); }
+    .c-red    { color: var(--red); }
+    .c-blue   { color: var(--blue); }
+    .c-yellow { color: #e8c840; }
+
+    /* Steps */
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      max-width: 720px;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .step-num {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: rgba(232,118,10,.1);
+      border: 1px solid rgba(232,118,10,.3);
+      color: var(--orange);
+      font-size: 0.95rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .step-content h3 { margin-bottom: 4px; }
+    .step-content p { color: var(--text-dim); font-size: .9rem; }
+
+    /* Feature cards */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+    }
+
+    .feature-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
+      transition: border-color .2s, transform .2s;
+    }
+    .feature-card:hover {
+      border-color: var(--orange);
+      transform: translateY(-2px);
+    }
+
+    .feature-icon { font-size: 1.5rem; margin-bottom: 10px; }
+
+    /* Comparison */
+    .comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 32px;
+    }
+
+    @media (max-width: 640px) {
+      .comparison { grid-template-columns: 1fr; }
+      .nav-links .hide-mobile { display: none; }
+    }
+
+    .compare-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px 24px;
+      background: var(--bg);
+    }
+
+    .compare-card .compare-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+  .compare-card.solo-agent .compare-label { color: var(--text-dim); }
+  .compare-card.superharness .compare-label { color: var(--orange); }
+  .compare-card.superharness { border-color: rgba(232,118,10,.3); background: rgba(232,118,10,.03); }
+
+    .compare-card ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .compare-card ul li {
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .compare-card ul li::before {
+      content: '—';
+      color: var(--border);
+      font-size: 0.75rem;
+      flex-shrink: 0;
+    }
+
+    .compare-card.superharness ul li { color: var(--text); }
+    .compare-card.superharness ul li::before { content: '+'; color: var(--orange); }
+
+    /* Quick start */
+    .quickstart-block {
+      background: var(--bg-term);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      max-width: 620px;
+      font-family: var(--font-mono);
+      font-size: 0.875rem;
+    }
+
+    .quickstart-block .qs-titlebar {
+      padding: 10px 16px;
+      background: #111413;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-dim);
+      font-size: 0.75rem;
+    }
+
+    .quickstart-block .qs-body {
+      padding: 18px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .qs-line { display: flex; gap: 10px; align-items: baseline; }
+    .qs-prompt { color: var(--green); user-select: none; }
+    .qs-cmd { color: var(--text-bright); }
+    .qs-comment { color: var(--text-dim); font-size: 0.8rem; padding-left: 2px; }
+
+    /* Install section */
+    .install-block {
+      background: var(--bg-term);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 32px;
+      max-width: 600px;
+    }
+
+    .install-block .install-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      color: var(--text-dim);
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .install-block .install-cmd {
+      font-family: var(--font-mono);
+      font-size: 1rem;
+      color: var(--text-bright);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .install-block .install-cmd .prompt { color: var(--green); user-select: none; }
+
+    .install-soon {
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      margin-top: 10px;
+    }
+
+    /* Away callout */
+    .away-callout {
+      background: rgba(74,158,255,.04);
+      border: 1px solid rgba(74,158,255,.18);
+      border-radius: var(--radius);
+      padding: 28px 32px;
+      max-width: 680px;
+    }
+    .away-callout h3 { color: var(--blue); margin-bottom: 8px; }
+    .away-callout p { color: var(--text-dim); font-size: 0.95rem; }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 0;
+      text-align: center;
+      color: var(--text-dim);
+      font-size: 0.84rem;
+    }
+
+    footer a { color: var(--text-dim); }
+    footer a:hover { color: var(--orange); }
+
+    .text-center { text-align: center; }
+  </style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="/">superharness</a>
+    <div class="nav-links">
+      <a href="#how-it-works" class="hide-mobile">How it works</a>
+      <a href="#features" class="hide-mobile">Features</a>
+      <a href="#install">Install</a>
+      <a href="https://github.com/backmeupplz/superharness" class="btn btn-ghost" target="_blank" rel="noopener">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.167 6.839 9.49.5.09.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.741 0 .267.18.577.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+        GitHub
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-badge">
+      <span class="dot"></span>
+      Autonomous &nbsp;·&nbsp; Rust &nbsp;·&nbsp; MIT
+    </div>
+    <h1>Give your <span class="accent">AI agent</span><br/>a whole team.</h1>
+    <p class="subtitle">
+      superharness wraps tmux orchestration around Claude Code, OpenCode, or Codex — spawning parallel workers, surfacing panes that need your attention, and keeping work flowing while you step away.
+    </p>
+    <div class="hero-ctas">
+      <a href="#install" class="btn btn-primary">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+        Install now
+      </a>
+      <a href="https://github.com/backmeupplz/superharness" class="btn btn-ghost" target="_blank" rel="noopener">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.167 6.839 9.49.5.09.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.741 0 .267.18.577.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+        View on GitHub
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Demo terminal -->
+<section id="demo" style="padding-top:0; padding-bottom:80px;">
+  <div class="container">
+    <div class="terminal" style="max-width:680px; margin:0 auto;">
+      <div class="term-titlebar">
+        <span class="term-dot red"></span>
+        <span class="term-dot yellow"></span>
+        <span class="term-dot green"></span>
+        <span class="term-title">your-project — superharness</span>
+      </div>
+      <div class="term-body"><span class="c-green">$</span> <span class="c-bright">superharness</span>
+<span class="c-dim">  AI agent starting — orchestrator mode</span>
+
+<span class="c-dim">  You: </span><span class="c-bright">build a REST API with JWT auth</span>
+
+<span class="c-dim">  [orchestrator] Breaking into 3 parallel workstreams...</span>
+<span class="c-orange">  [worker-1]</span><span class="c-dim"> spawned → implementing JWT middleware</span>
+<span class="c-orange">  [worker-2]</span><span class="c-dim"> spawned → building user CRUD endpoints</span>
+<span class="c-orange">  [worker-3]</span><span class="c-dim"> spawned → creating database schemas &amp; migrations</span>
+
+<span class="c-dim">  [heartbeat] worker-2 waiting — surfacing pane</span>
+<span class="c-dim">  [worker-2] asks: allow file write to src/routes/users.ts?</span>
+<span class="c-green">  [orchestrator] approved ✓  (hiding pane)</span>
+
+<span class="c-dim">  [worker-1] done  ·  [worker-3] done  ·  [worker-2] 80%...</span>
+<span class="c-green">  [orchestrator] all workers finished — branches merged, cleanup done</span>
+</div>
+    </div>
+  </div>
+</section>
+
+<!-- How it works -->
+<section id="how-it-works">
+  <div class="container">
+    <h2>How it works</h2>
+    <p class="section-lead">Install once. Works with Claude Code, OpenCode, or Codex. The rest is automatic.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h3>Install superharness and run it in your project</h3>
+          <p>One command: <code style="font-family:var(--font-mono);font-size:.85em;color:var(--orange)">curl -fsSL https://superharness.dev/install.sh | sh</code>. Requires tmux and your AI coding agent (Claude Code, OpenCode, or Codex). Navigate to your project, run <code style="font-family:var(--font-mono);font-size:.85em;color:var(--orange)">superharness</code>, and you're set.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h3>Tmux management: surface, approve, relay</h3>
+          <p>superharness actively manages your tmux panes — automatically surfacing workers that need attention, relaying questions to you, approving safe operations on your behalf, and hiding idle panes out of the way. A heartbeat loop detects stuck workers before they stall.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h3>Away mode + task tracking</h3>
+          <p>Step away and superharness keeps running. It auto-approves safe operations, queues uncertain decisions, and debriefs you when you return. Tasks are tracked from breakdown through spawning to completion — you always know what's in progress, blocked, or done.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<section id="features">
+  <div class="container">
+    <h2>What you gain</h2>
+    <p class="section-lead">Your AI agent, now running a whole team — with you always in control.</p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3>Parallel workers</h3>
+        <p>The AI spawns as many worker agents as the task needs — each tackling an independent workstream simultaneously. What takes one agent 4 hours takes a team of 4 about an hour.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🖥️</div>
+        <h3>Smart tmux management</h3>
+        <p>superharness surfaces worker panes that need attention, hides idle ones, and keeps the workspace clean. You always see what matters — and nothing you don't.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💓</div>
+        <h3>Heartbeat loop</h3>
+        <p>A continuous heartbeat detects stuck or waiting workers before they stall your session. superharness wakes the orchestrator the moment a worker needs a decision, approval, or recovery.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🌙</div>
+        <h3>Away mode</h3>
+        <p>Step away and superharness keeps working. It auto-approves safe operations, queues uncertain decisions, and gives you a full debrief when you return — no context lost.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📋</div>
+        <h3>Task tracking</h3>
+        <p>Work is broken into tasks and tracked from spawn to done. See what's running, blocked, or finished at a glance — F5 shows the live task board.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔒</div>
+        <h3>Isolated workspaces</h3>
+        <p>Every worker gets its own git worktree. No file conflicts. Workers commit their own branches; the orchestrator merges results and cleans up automatically.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Comparison -->
+<section id="comparison">
+  <div class="container">
+      <h2>Single agent vs. superharness team</h2>
+    <p class="section-lead">Your AI agent is great. Now give it a team.</p>
+    <div class="comparison">
+      <div class="compare-card solo-agent">
+        <div class="compare-label">solo agent</div>
+        <ul>
+          <li>One task at a time, sequential</li>
+          <li>Slow on complex multi-part work</li>
+          <li>Every permission prompt reaches you</li>
+          <li>Stalls when waiting — no recovery</li>
+          <li>One context window for everything</li>
+          <li>Nothing happens when you step away</li>
+        </ul>
+      </div>
+      <div class="compare-card superharness">
+        <div class="compare-label">superharness</div>
+        <ul>
+          <li>Orchestrator spawns workers in parallel</li>
+          <li>Each worker gets an isolated worktree</li>
+          <li>Safe operations auto-approved, rest surfaces to you</li>
+          <li>Heartbeat detects and recovers stuck workers</li>
+          <li>Each worker gets a fresh focused context</li>
+          <li>Away mode keeps work flowing while you're gone</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Install -->
+<section id="install">
+  <div class="container">
+    <h2>Install</h2>
+     <p class="section-lead">Requires tmux and an AI coding agent (opencode, claude, or codex).</p>
+    <div style="margin-bottom: 16px;">
+      <div class="install-block">
+        <div class="install-label">Quick install</div>
+        <div class="install-cmd">
+          <span class="prompt">$</span>
+          <span id="install-cmd-1">curl -fsSL https://superharness.dev/install.sh | sh</span>
+          <button class="copy-btn" onclick="copyInstallCmd('install-cmd-1', this)" title="Copy" style="background:none;border:none;color:var(--text-dim);cursor:pointer;padding:2px 6px;border-radius:4px;transition:color .15s;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-bottom: 16px;">
+      <div class="quickstart-block">
+        <div class="qs-titlebar">Ubuntu / Debian (PPA)</div>
+        <div class="qs-body">
+          <div class="qs-line"><span class="qs-prompt">$</span><span class="qs-cmd">sudo add-apt-repository ppa:borodutch/superharness</span></div>
+          <div class="qs-line"><span class="qs-prompt">$</span><span class="qs-cmd">sudo apt update</span></div>
+          <div class="qs-line"><span class="qs-prompt">$</span><span class="qs-cmd">sudo apt install superharness</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-bottom: 16px;">
+      <div class="install-block">
+        <div class="install-label">Arch Linux (AUR)</div>
+        <div class="install-cmd">
+          <span class="prompt">$</span>
+          <span id="install-cmd-3">yay -S superharness</span>
+          <button class="copy-btn" onclick="copyInstallCmd('install-cmd-3', this)" title="Copy" style="background:none;border:none;color:var(--text-dim);cursor:pointer;padding:2px 6px;border-radius:4px;transition:color .15s;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-bottom: 16px;">
+      <div class="install-block">
+        <div class="install-label">macOS / Linux (Homebrew)</div>
+        <div class="install-cmd">
+          <span class="prompt">$</span>
+          <span id="install-cmd-4">brew install backmeupplz/superharness/superharness</span>
+          <button class="copy-btn" onclick="copyInstallCmd('install-cmd-4', this)" title="Copy" style="background:none;border:none;color:var(--text-dim);cursor:pointer;padding:2px 6px;border-radius:4px;transition:color .15s;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-bottom: 16px;">
+      <div class="install-block">
+        <div class="install-label">Cargo</div>
+        <div class="install-cmd">
+          <span class="prompt">$</span>
+          <span id="install-cmd-2">cargo install superharness</span>
+          <button class="copy-btn" onclick="copyInstallCmd('install-cmd-2', this)" title="Copy" style="background:none;border:none;color:var(--text-dim);cursor:pointer;padding:2px 6px;border-radius:4px;transition:color .15s;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:28px;">
+      <div class="quickstart-block" style="max-width:400px;">
+        <div class="qs-titlebar">then, in any project</div>
+        <div class="qs-body">
+          <div class="qs-line"><span class="qs-prompt">$</span><span class="qs-cmd">cd your-project</span></div>
+          <div class="qs-line"><span class="qs-prompt">$</span><span class="qs-cmd" style="color:var(--orange);">superharness</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Away mode callout -->
+<section id="away">
+  <div class="container">
+    <h2>Going somewhere?</h2>
+    <p class="section-lead">Leave the AI running. It handles things while you're gone.</p>
+    <div class="away-callout">
+      <h3>Away mode</h3>
+      <p>
+        The orchestrating AI can enter an away state when you step out. In away mode it keeps workers running and approves safe operations, but queues any real decision for your return — architecture choices, destructive operations, anything it isn't sure about. Come back to a full debrief of what happened and a short list of things that need your call.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <p>
+      &copy; 2026 superharness &mdash;
+      <a href="https://github.com/backmeupplz/superharness/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a>
+      &nbsp;&middot;&nbsp;
+      <a href="https://github.com/backmeupplz/superharness" target="_blank" rel="noopener">GitHub</a>
+      &nbsp;&middot;&nbsp;
+      Built with Rust
+    </p>
+  </div>
+</footer>
+
+<script>
+  function copyToClipboard(text) {
+    // Try modern clipboard API first
+    if (navigator.clipboard && window.isSecureContext) {
+      return navigator.clipboard.writeText(text);
+    }
+    // Fallback: hidden textarea + execCommand
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.left = '-9999px';
+    document.body.appendChild(ta);
+    ta.select();
+    try {
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      return Promise.resolve();
+    } catch (e) {
+      document.body.removeChild(ta);
+      return Promise.reject(e);
+    }
+  }
+
+  function copyInstallCmd(elementId, btn) {
+    const cmd = document.getElementById(elementId).textContent.trim();
+    const originalHTML = btn.innerHTML;
+    copyToClipboard(cmd).then(() => {
+      btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>';
+      setTimeout(() => { btn.innerHTML = originalHTML; }, 2000);
+    }).catch(() => {
+      btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
+      setTimeout(() => { btn.innerHTML = originalHTML; }, 2000);
+    });
+  }
+</script>
+
+</body>
+</html>

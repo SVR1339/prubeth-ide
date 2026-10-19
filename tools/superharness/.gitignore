@@ -1,0 +1,10 @@
+/target
+*.db
+.superharness/
+AGENTS.md
+
+# stray files from shell parsing accidents
+"**CRITICAL:"
+profile-banner.png
+profile-description.txt
+profile-picture.png
